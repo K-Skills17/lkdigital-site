@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* LK Digital Brand Colors */
+  --brand-primary: 18 45 74; /* #122d4a - LK Navy */
+  --brand-accent: 220 109 37; /* #dc6d25 - LK Gold */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* Brand color tokens */
+  --color-brand-primary: rgb(var(--brand-primary));
+  --color-brand-accent: rgb(var(--brand-accent));
+}
+
+/* Make brand colors available as Tailwind utilities */
+@theme {
+  --color-brand-primary: rgb(var(--brand-primary));
+  --color-brand-accent: rgb(var(--brand-accent));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
