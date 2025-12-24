@@ -1,3 +1,6 @@
+# lkdigital-site
+The main life line for the LK Digital system. the one source from which all other products take their life
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
