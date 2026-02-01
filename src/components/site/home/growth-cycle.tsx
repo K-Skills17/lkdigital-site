@@ -112,17 +112,17 @@ export function GrowthCycle() {
 
         {/* Flywheel Visual - Desktop */}
         <div className="hidden lg:block relative mb-20">
-          {/* Center Flywheel */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="relative">
+          {/* Center Flywheel - Background decorative element */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
+            <div className="relative blur-sm opacity-20">
               {/* Outer glow ring */}
-              <div className="absolute inset-0 w-36 h-36 rounded-full bg-accent/10 blur-xl" />
+              <div className="absolute inset-0 w-64 h-64 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 rounded-full bg-accent/30 blur-3xl" />
               {/* Outer ring */}
-              <div className="relative w-36 h-36 rounded-full border-2 border-accent/30 flex items-center justify-center">
+              <div className="relative w-48 h-48 rounded-full border-2 border-accent/40 flex items-center justify-center">
                 {/* Inner circle */}
-                <div className="w-24 h-24 rounded-full bg-accent flex items-center justify-center shadow-lg shadow-accent/30">
+                <div className="w-32 h-32 rounded-full bg-accent/60 flex items-center justify-center">
                   <svg
-                    className="w-10 h-10 text-foreground"
+                    className="w-14 h-14 text-foreground/80"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
