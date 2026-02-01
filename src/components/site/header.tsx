@@ -4,12 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -17,21 +11,12 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { TopNotice } from "./top-notice";
-import { Separator } from "@/components/ui/separator";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Como funciona", href: "/como-funciona" },
-    {
-      label: "Soluções",
-      href: "#",
-      dropdown: [
-        { label: "Dentista OS™", href: "/solucoes/dentista-os" },
-      ],
-    },
-    { label: "Para quem", href: "/para-quem" },
+    { label: "Soluções", href: "/solucoes" },
     { label: "Insights", href: "/insights" },
   ];
 
@@ -50,35 +35,15 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            {navItems.map((item) => {
-              if (item.dropdown) {
-                return (
-                  <DropdownMenu key={item.label}>
-                    <DropdownMenuTrigger className="text-sm font-medium text-foreground hover:text-accent transition-colors outline-none">
-                      {item.label}
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start">
-                      {item.dropdown.map((dropdownItem) => (
-                        <DropdownMenuItem key={dropdownItem.href} asChild>
-                          <Link href={dropdownItem.href}>
-                            {dropdownItem.label}
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                );
-              }
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium text-foreground hover:text-accent transition-colors"
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
           {/* Mobile Menu */}
@@ -96,38 +61,16 @@ export function Header() {
                 <SheetTitle>Menu</SheetTitle>
               </SheetHeader>
               <div className="mt-6 flex flex-col gap-4">
-                {navItems.map((item) => {
-                  if (item.dropdown) {
-                    return (
-                      <div key={item.label} className="flex flex-col gap-2">
-                        <div className="text-sm font-medium text-foreground">
-                          {item.label}
-                        </div>
-                        <Separator />
-                        {item.dropdown.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.href}
-                            href={dropdownItem.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="text-sm text-muted-foreground hover:text-accent transition-colors pl-4"
-                          >
-                            {dropdownItem.label}
-                          </Link>
-                        ))}
-                      </div>
-                    );
-                  }
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-sm font-medium text-foreground hover:text-accent transition-colors"
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
             </SheetContent>
           </Sheet>
@@ -136,4 +79,3 @@ export function Header() {
     </header>
   );
 }
-
