@@ -4,26 +4,26 @@ import { Button } from "@/components/ui/button";
 export function ValueProp() {
   return (
     <section className="section-premium">
-      {/* 60/40 Split Layout */}
-      <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
-        {/* Left: Copy (60%) */}
-        <div className="lg:col-span-3 space-y-8">
+      {/* 60/40 Split Layout - Stacked on mobile */}
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-16 items-center">
+        {/* Copy (60% on desktop) */}
+        <div className="lg:col-span-3 space-y-6 md:space-y-8">
           {/* Section eyebrow */}
-          <p className="text-sm font-medium text-accent uppercase tracking-widest">
+          <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest">
             Nossa Proposta
           </p>
 
           {/* Section title */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
             Sua Especialidade é a Odontologia.{" "}
             <span className="text-accent">A Nossa é o Seu Resultado.</span>
           </h2>
 
           {/* Decorative divider */}
-          <div className="w-16 h-px bg-accent" aria-hidden="true" />
+          <div className="w-12 md:w-16 h-px bg-accent" aria-hidden="true" />
 
           {/* Body copy */}
-          <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+          <div className="space-y-4 md:space-y-6 text-base md:text-lg text-muted-foreground leading-relaxed">
             <p>
               Você não deveria ter que escolher entre ser um excelente cirurgião
               e um gestor de marketing. A LK Digital assume{" "}
@@ -43,56 +43,56 @@ export function ValueProp() {
             </p>
           </div>
 
-          {/* Stats row */}
-          <div className="flex flex-wrap gap-8 pt-4">
-            <div>
-              <div className="text-3xl md:text-4xl font-heading text-accent">
+          {/* Stats row - Responsive grid */}
+          <div className="grid grid-cols-3 gap-4 md:gap-8 pt-2 md:pt-4">
+            <div className="text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-heading text-accent">
                 0%
               </div>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 Seu tempo em marketing
               </p>
             </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-heading text-accent">
+            <div className="text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-heading text-accent">
                 100%
               </div>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 Foco na clínica
               </p>
             </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-heading text-accent">
+            <div className="text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-heading text-accent">
                 ∞
               </div>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 Potencial de escala
               </p>
             </div>
           </div>
 
           {/* CTA */}
-          <div className="pt-4">
+          <div className="pt-2 md:pt-4">
             <Button
               asChild
               size="lg"
-              className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
+              className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
               <Link href="/solucoes">Descobrir Como Funciona</Link>
             </Button>
           </div>
         </div>
 
-        {/* Right: Image Placeholder (40%) */}
-        <div className="lg:col-span-2">
+        {/* Image Placeholder (40% on desktop) - Hidden on small mobile */}
+        <div className="lg:col-span-2 hidden sm:block">
           <div className="relative">
-            <div className="aspect-[3/4] bg-muted rounded-sm overflow-hidden">
+            <div className="aspect-[4/3] lg:aspect-[3/4] bg-muted rounded-sm overflow-hidden">
               {/* Placeholder for image */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center space-y-4 p-6">
-                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                  <div className="w-12 md:w-14 h-12 md:h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
                     <svg
-                      className="w-7 h-7 text-accent"
+                      className="w-6 md:w-7 h-6 md:h-7 text-accent"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -105,16 +105,16 @@ export function ValueProp() {
                       />
                     </svg>
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Dentista focado no atendimento enquanto gráficos de
                     crescimento aparecem ao fundo
                   </p>
                 </div>
               </div>
             </div>
-            {/* Decorative accent */}
+            {/* Decorative accent - hidden on mobile */}
             <div
-              className="absolute -top-4 -left-4 w-20 h-20 border-l-2 border-t-2 border-accent/30"
+              className="absolute -top-4 -left-4 w-16 md:w-20 h-16 md:h-20 border-l-2 border-t-2 border-accent/30 hidden md:block"
               aria-hidden="true"
             />
           </div>

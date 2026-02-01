@@ -35,10 +35,10 @@ export default function ContatoPage() {
     return (
       <section className="section-premium">
         <div className="max-w-2xl mx-auto text-center">
-          {/* Success Icon */}
-          <div className="w-24 h-24 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-8">
+          {/* Success Icon - Responsive sizing */}
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6 md:mb-8">
             <svg
-              className="w-12 h-12 text-accent"
+              className="w-10 h-10 md:w-12 md:h-12 text-accent"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -52,25 +52,25 @@ export default function ContatoPage() {
             </svg>
           </div>
 
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-4 md:mb-6">
             Solicitação Recebida com Sucesso.
           </h1>
 
-          <div className="w-16 h-px bg-accent mx-auto my-8" aria-hidden="true" />
+          <div className="w-12 md:w-16 h-px bg-accent mx-auto my-6 md:my-8" aria-hidden="true" />
 
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8">
             Seus dados estão sendo analisados por nossos especialistas. Em até{" "}
             <span className="text-foreground font-medium">24 horas úteis</span>,
             nossa equipe entrará em contato para agendar sua consultoria
             estratégica privada.
           </p>
 
-          <div className="bg-trust-bg p-8 rounded-sm text-left space-y-4">
-            <p className="text-sm font-medium text-accent uppercase tracking-widest">
+          <div className="bg-trust-bg p-4 sm:p-6 md:p-8 rounded-sm text-left space-y-3 md:space-y-4">
+            <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest">
               O que acontece agora:
             </p>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-muted-foreground">
+              <li className="flex items-start gap-3 text-sm md:text-base text-muted-foreground">
                 <span className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
                   <span className="text-xs font-medium text-accent">1</span>
                 </span>
@@ -78,7 +78,7 @@ export default function ContatoPage() {
                   Análise completa da sua presença digital atual
                 </span>
               </li>
-              <li className="flex items-start gap-3 text-muted-foreground">
+              <li className="flex items-start gap-3 text-sm md:text-base text-muted-foreground">
                 <span className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
                   <span className="text-xs font-medium text-accent">2</span>
                 </span>
@@ -86,7 +86,7 @@ export default function ContatoPage() {
                   Contato para agendar reunião estratégica de 15 minutos
                 </span>
               </li>
-              <li className="flex items-start gap-3 text-muted-foreground">
+              <li className="flex items-start gap-3 text-sm md:text-base text-muted-foreground">
                 <span className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
                   <span className="text-xs font-medium text-accent">3</span>
                 </span>
@@ -97,7 +97,7 @@ export default function ContatoPage() {
             </ul>
           </div>
 
-          <p className="mt-8 text-sm text-muted-foreground">
+          <p className="mt-6 md:mt-8 text-xs sm:text-sm text-muted-foreground">
             Enquanto isso, sinta-se à vontade para explorar nossos{" "}
             <a href="/insights" className="text-accent hover:underline">
               Insights
@@ -113,16 +113,16 @@ export default function ContatoPage() {
     <>
       {/* Header Section */}
       <section className="section-premium pb-0">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
           {/* Left: Copy */}
-          <div className="space-y-8">
-            <div className="w-12 h-px bg-accent" aria-hidden="true" />
+          <div className="space-y-6 md:space-y-8">
+            <div className="w-10 md:w-12 h-px bg-accent" aria-hidden="true" />
 
-            <h1 className="text-4xl md:text-5xl lg:text-5xl font-semibold text-foreground leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground leading-tight">
               Inicie sua Ascensão ao Topo do Mercado.
             </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               Estamos prontos para assumir o peso do seu crescimento. Por favor,
               preencha os detalhes abaixo para que nossa equipe possa realizar
               uma{" "}
@@ -132,14 +132,14 @@ export default function ContatoPage() {
               antes da nossa consultoria privada.
             </p>
 
-            <div className="w-16 h-px bg-border" aria-hidden="true" />
+            <div className="w-12 md:w-16 h-px bg-border" aria-hidden="true" />
 
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Todas as informações são tratadas com confidencialidade absoluta.
             </p>
           </div>
 
-          {/* Right: Visual Placeholder */}
+          {/* Right: Visual Placeholder - Hidden on mobile */}
           <div className="relative hidden lg:block">
             <div className="aspect-[4/3] bg-muted rounded-sm flex items-center justify-center">
               <div className="text-center space-y-4 p-8">
@@ -176,21 +176,21 @@ export default function ContatoPage() {
       <section className="section-premium">
         <div className="max-w-2xl mx-auto">
           {/* Form Header */}
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium text-accent uppercase tracking-widest mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-3 md:mb-4">
               Formulário de Aplicação
             </p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
               Conte-nos sobre sua Clínica
             </h2>
           </div>
 
-          <div className="w-16 h-px bg-accent mx-auto mb-12" aria-hidden="true" />
+          <div className="w-12 md:w-16 h-px bg-accent mx-auto mb-8 md:mb-12" aria-hidden="true" />
 
           {/* The Form */}
-          <form onSubmit={handleSubmit} className="space-y-10">
+          <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
             {/* Field 1: Director Name */}
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               <label
                 htmlFor="director-name"
                 className="block text-sm font-medium text-foreground"
@@ -202,13 +202,13 @@ export default function ContatoPage() {
                 id="director-name"
                 name="director-name"
                 required
-                className="w-full px-5 py-4 border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors text-base"
+                className="w-full px-4 md:px-5 py-3 md:py-4 border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors text-base"
                 placeholder="Dr. João Silva"
               />
             </div>
 
             {/* Field 2: Clinic Name & Location */}
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               <label
                 htmlFor="clinic-info"
                 className="block text-sm font-medium text-foreground"
@@ -220,19 +220,19 @@ export default function ContatoPage() {
                 id="clinic-info"
                 name="clinic-info"
                 required
-                className="w-full px-5 py-4 border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors text-base"
+                className="w-full px-4 md:px-5 py-3 md:py-4 border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors text-base"
                 placeholder="Clínica Odontológica Premium — São Paulo, SP"
               />
             </div>
 
             {/* Field 3: Website or Instagram */}
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               <label
                 htmlFor="digital-presence"
                 className="block text-sm font-medium text-foreground"
               >
                 Website Atual ou Perfil de Instagram
-                <span className="text-muted-foreground font-normal ml-2">
+                <span className="text-muted-foreground font-normal block sm:inline sm:ml-2 text-xs sm:text-sm mt-1 sm:mt-0">
                   (Para análise prévia)
                 </span>
               </label>
@@ -241,40 +241,40 @@ export default function ContatoPage() {
                 id="digital-presence"
                 name="digital-presence"
                 required
-                className="w-full px-5 py-4 border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors text-base"
+                className="w-full px-4 md:px-5 py-3 md:py-4 border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors text-base"
                 placeholder="www.suaclinica.com.br ou @suaclinica"
               />
             </div>
 
             {/* Field 4: Objective (The Filter) */}
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               <label
                 htmlFor="objective"
                 className="block text-sm font-medium text-foreground"
               >
                 Qual é o seu objetivo principal nos próximos 12 meses?
               </label>
-              <div className="space-y-3">
+              <div className="space-y-2 md:space-y-3">
                 {objectives.map((option) => (
                   <label
                     key={option.value}
-                    className="flex items-center gap-4 p-4 border border-border bg-background cursor-pointer hover:border-accent/50 transition-colors has-[:checked]:border-accent has-[:checked]:bg-accent/5"
+                    className="flex items-center gap-3 md:gap-4 p-3 md:p-4 border border-border bg-background cursor-pointer hover:border-accent/50 transition-colors has-[:checked]:border-accent has-[:checked]:bg-accent/5"
                   >
                     <input
                       type="radio"
                       name="objective"
                       value={option.value}
                       required
-                      className="w-5 h-5 text-accent border-border focus:ring-accent"
+                      className="w-5 h-5 text-accent border-border focus:ring-accent shrink-0"
                     />
-                    <span className="text-foreground">{option.label}</span>
+                    <span className="text-sm md:text-base text-foreground">{option.label}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             {/* Field 5: Patient Volume (The Authority Drop) */}
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               <label
                 htmlFor="patient-volume"
                 className="block text-sm font-medium text-foreground"
@@ -285,7 +285,7 @@ export default function ContatoPage() {
                 id="patient-volume"
                 name="patient-volume"
                 required
-                className="w-full px-5 py-4 border border-border bg-background text-foreground focus:outline-none focus:border-accent transition-colors text-base appearance-none cursor-pointer"
+                className="w-full px-4 md:px-5 py-3 md:py-4 border border-border bg-background text-foreground focus:outline-none focus:border-accent transition-colors text-base appearance-none cursor-pointer"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -307,7 +307,7 @@ export default function ContatoPage() {
               type="submit"
               disabled={isSubmitting}
               size="lg"
-              className="w-full bg-accent text-white hover:bg-accent-dark py-6 text-base disabled:opacity-50"
+              className="w-full bg-accent text-white hover:bg-accent-dark py-5 md:py-6 text-base disabled:opacity-50"
             >
               {isSubmitting
                 ? "Processando sua solicitação..."
@@ -315,7 +315,7 @@ export default function ContatoPage() {
             </Button>
 
             {/* Privacy Note */}
-            <p className="text-center text-sm text-muted-foreground">
+            <p className="text-center text-xs sm:text-sm text-muted-foreground">
               Ao enviar, você concorda com nossa{" "}
               <a href="/privacidade" className="text-accent hover:underline">
                 Política de Privacidade
@@ -329,53 +329,53 @@ export default function ContatoPage() {
       {/* Reassurance Block */}
       <section className="section-premium bg-trust-bg">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium text-accent uppercase tracking-widest mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-3 md:mb-4">
               Processo Transparente
             </p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
               O que acontece a seguir?
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
             {/* Step 1 */}
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                <span className="text-2xl font-heading text-accent">1</span>
+            <div className="text-center space-y-3 md:space-y-4">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                <span className="text-xl md:text-2xl font-heading text-accent">1</span>
               </div>
-              <h3 className="text-lg font-semibold text-foreground">
+              <h3 className="text-base md:text-lg font-semibold text-foreground">
                 Análise em 24h
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 Nossa equipe analisa sua presença digital atual em até 24 horas
                 úteis.
               </p>
             </div>
 
             {/* Step 2 */}
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                <span className="text-2xl font-heading text-accent">2</span>
+            <div className="text-center space-y-3 md:space-y-4">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                <span className="text-xl md:text-2xl font-heading text-accent">2</span>
               </div>
-              <h3 className="text-lg font-semibold text-foreground">
+              <h3 className="text-base md:text-lg font-semibold text-foreground">
                 Reunião Estratégica
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 Entramos em contato para agendar uma reunião estratégica de 15
                 minutos.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                <span className="text-2xl font-heading text-accent">3</span>
+            <div className="text-center space-y-3 md:space-y-4">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                <span className="text-xl md:text-2xl font-heading text-accent">3</span>
               </div>
-              <h3 className="text-lg font-semibold text-foreground">
+              <h3 className="text-base md:text-lg font-semibold text-foreground">
                 Plano com Garantias
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 Apresentamos o plano de ação com garantias de resultados para
                 sua clínica.
               </p>

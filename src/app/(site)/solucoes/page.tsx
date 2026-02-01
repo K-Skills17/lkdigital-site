@@ -93,14 +93,14 @@ export default function SolucoesPage() {
       {/* Hero Section */}
       <section className="section-premium text-center">
         <div className="max-w-4xl mx-auto">
-          <p className="text-sm font-medium text-accent uppercase tracking-widest mb-6">
+          <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
             Nossas Soluções
           </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
             A Suite de Eficiência para o{" "}
             <span className="text-accent">Crescimento da Sua Clínica</span>
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
             Três eixos estratégicos desenhados para eliminar o trabalho pesado
             do marketing e entregar resultados tangíveis com o mínimo de esforço
             da sua parte.
@@ -110,50 +110,50 @@ export default function SolucoesPage() {
 
       {/* Services Grid */}
       <section className="section-premium pt-0">
-        <div className="space-y-24">
+        <div className="space-y-16 md:space-y-24">
           {services.map((service, index) => (
             <div
               key={service.axis}
-              className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center ${
                 index % 2 === 1 ? "lg:flex-row-reverse" : ""
               }`}
             >
               {/* Content */}
               <div
-                className={`space-y-6 ${index % 2 === 1 ? "lg:order-2" : ""}`}
+                className={`space-y-4 md:space-y-6 ${index % 2 === 1 ? "lg:order-2" : ""}`}
               >
                 {/* Axis number */}
-                <div className="flex items-center gap-4">
-                  <span className="text-5xl font-heading text-accent/30">
+                <div className="flex items-center gap-3 md:gap-4">
+                  <span className="text-4xl md:text-5xl font-heading text-accent/30">
                     {service.axis}
                   </span>
                   <div>
-                    <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
                       {service.title}
                     </h2>
-                    <p className="text-sm text-accent uppercase tracking-wider mt-1">
+                    <p className="text-xs sm:text-sm text-accent uppercase tracking-wider mt-1">
                       {service.subtitle}
                     </p>
                   </div>
                 </div>
 
                 {/* Benefit focus */}
-                <div className="bg-trust-bg border-l-4 border-accent p-6">
-                  <p className="text-lg font-medium text-foreground">
+                <div className="bg-trust-bg border-l-4 border-accent p-4 md:p-6">
+                  <p className="text-base md:text-lg font-medium text-foreground">
                     {service.benefitFocus}
                   </p>
                 </div>
 
                 {/* Description */}
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                   {service.description}
                 </p>
 
                 {/* The Result */}
-                <div className="flex items-start gap-4 pt-4">
-                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-1">
+                <div className="flex items-start gap-3 md:gap-4 pt-2 md:pt-4">
+                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5 md:mt-1">
                     <svg
-                      className="w-5 h-5 text-accent"
+                      className="w-4 h-4 md:w-5 md:h-5 text-accent"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -167,32 +167,32 @@ export default function SolucoesPage() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-accent uppercase tracking-wider mb-2">
+                    <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-wider mb-1 md:mb-2">
                       O Resultado
                     </p>
-                    <p className="text-foreground font-medium">
+                    <p className="text-sm md:text-base text-foreground font-medium">
                       {service.result}
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Visual */}
-              <div className={index % 2 === 1 ? "lg:order-1" : ""}>
+              {/* Visual - Hidden on small mobile */}
+              <div className={`hidden sm:block ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                 <div className="relative">
                   <div className="aspect-square bg-muted rounded-sm flex items-center justify-center">
-                    <div className="text-center space-y-4 p-8">
-                      <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto text-accent">
+                    <div className="text-center space-y-3 md:space-y-4 p-6 md:p-8">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto text-accent">
                         {service.icon}
                       </div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         Ilustração: {service.title}
                       </p>
                     </div>
                   </div>
-                  {/* Decorative corner */}
+                  {/* Decorative corner - Hidden on mobile */}
                   <div
-                    className={`absolute w-16 h-16 border-accent/30 ${
+                    className={`absolute w-12 md:w-16 h-12 md:h-16 border-accent/30 hidden md:block ${
                       index % 2 === 0
                         ? "-bottom-3 -right-3 border-r-2 border-b-2"
                         : "-bottom-3 -left-3 border-l-2 border-b-2"
@@ -209,18 +209,18 @@ export default function SolucoesPage() {
       {/* CTA Section */}
       <section className="section-premium bg-muted">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
             Pronto para Eliminar o Peso do Marketing?
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+          <p className="mt-4 md:mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
             Agende uma consultoria estratégica e descubra qual combinação de
             soluções é ideal para o momento da sua clínica.
           </p>
-          <div className="mt-10">
+          <div className="mt-8 md:mt-10">
             <Button
               asChild
               size="lg"
-              className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
+              className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
               <Link href="/contato">Garantir Meu Crescimento</Link>
             </Button>
