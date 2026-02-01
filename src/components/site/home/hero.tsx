@@ -4,20 +4,20 @@ import { Button } from "@/components/ui/button";
 export function Hero() {
   return (
     <section className="section-premium">
-      <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        {/* Left: Copy */}
-        <div className="space-y-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+        {/* Copy - Always first on mobile */}
+        <div className="space-y-6 md:space-y-8">
           {/* Decorative accent line */}
-          <div className="w-12 h-px bg-accent" aria-hidden="true" />
+          <div className="w-10 md:w-12 h-px bg-accent" aria-hidden="true" />
 
           {/* Main Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-semibold tracking-tight text-foreground leading-[1.1]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-semibold tracking-tight text-foreground leading-[1.15]">
             A Liberdade de Focar na Excelência Clínica.{" "}
             <span className="text-accent">Nós Cuidamos do Seu Crescimento.</span>
           </h1>
 
           {/* Sub-headline */}
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
             Alcance o faturamento ideal e a dominância de mercado sem o peso da
             gestão de marketing. Implementamos sistemas de aquisição de alto
             padrão que trabalham por você, garantindo pacientes qualificados
@@ -25,26 +25,26 @@ export function Hero() {
           </p>
 
           {/* CTA Button */}
-          <div className="pt-4">
+          <div className="pt-2 md:pt-4">
             <Button
               asChild
               size="lg"
-              className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
+              className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
               <Link href="/contato">Garantir Minha Vaga na Consultoria</Link>
             </Button>
           </div>
         </div>
 
-        {/* Right: Visual Placeholder */}
-        <div className="relative">
+        {/* Visual Placeholder - Hidden on small mobile, shown on sm+ */}
+        <div className="relative hidden sm:block">
           <div className="aspect-[4/3] bg-muted rounded-sm overflow-hidden">
             {/* Placeholder for hero image */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center space-y-4 p-8">
-                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+              <div className="text-center space-y-4 p-6 md:p-8">
+                <div className="w-12 md:w-16 h-12 md:h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
                   <svg
-                    className="w-8 h-8 text-accent"
+                    className="w-6 md:w-8 h-6 md:h-8 text-accent"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -57,16 +57,16 @@ export function Hero() {
                     />
                   </svg>
                 </div>
-                <p className="text-sm text-muted-foreground max-w-xs">
+                <p className="text-xs sm:text-sm text-muted-foreground max-w-xs">
                   Consultório odontológico de alto padrão com dentista atendendo
                   paciente satisfeito. Luz natural suave.
                 </p>
               </div>
             </div>
           </div>
-          {/* Decorative accent corner */}
+          {/* Decorative accent corner - hidden on mobile */}
           <div
-            className="absolute -bottom-4 -right-4 w-24 h-24 border-r-2 border-b-2 border-accent/30"
+            className="absolute -bottom-4 -right-4 w-16 md:w-24 h-16 md:h-24 border-r-2 border-b-2 border-accent/30 hidden md:block"
             aria-hidden="true"
           />
         </div>

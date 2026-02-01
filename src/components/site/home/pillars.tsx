@@ -27,41 +27,41 @@ export function Pillars() {
 
   return (
     <section className="section-premium">
-      {/* Section header */}
-      <div className="text-center mb-16">
-        <p className="text-sm font-medium text-accent uppercase tracking-widest mb-6">
+      {/* Section header - Responsive margins */}
+      <div className="text-center mb-10 md:mb-16">
+        <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
           Nossa Expertise
         </p>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">
           Os Três Pilares
         </h2>
       </div>
 
-      {/* Pillars grid */}
-      <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+      {/* Pillars grid - Stack on mobile, 3 cols on tablet+ */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
         {pillars.map((pillar) => (
           <Card
             key={pillar.number}
             className="rounded-none border-0 border-t border-accent/30 bg-transparent shadow-none"
           >
-            <CardContent className="pt-8 px-0 space-y-4">
+            <CardContent className="pt-6 md:pt-8 px-0 space-y-3 md:space-y-4">
               {/* Pillar number */}
-              <span className="text-accent font-heading text-2xl font-medium">
+              <span className="text-accent font-heading text-xl md:text-2xl font-medium">
                 {pillar.number}
               </span>
 
               {/* Pillar title */}
-              <h3 className="text-xl md:text-2xl font-semibold text-foreground leading-tight">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-foreground leading-tight">
                 {pillar.title}
               </h3>
 
               {/* Pillar subtitle */}
-              <p className="text-sm text-accent uppercase tracking-wider">
+              <p className="text-xs sm:text-sm text-accent uppercase tracking-wider">
                 {pillar.subtitle}
               </p>
 
               {/* Pillar description */}
-              <p className="text-base text-muted-foreground leading-relaxed pt-2">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pt-1 md:pt-2">
                 {pillar.description}
               </p>
             </CardContent>

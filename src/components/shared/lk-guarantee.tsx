@@ -9,10 +9,10 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
   return (
     <section className="section-premium bg-trust-bg">
       <div className="max-w-4xl mx-auto text-center">
-        {/* Shield Icon */}
-        <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-8">
+        {/* Shield Icon - Responsive sizing */}
+        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6 md:mb-8">
           <svg
-            className="w-10 h-10 text-accent"
+            className="w-8 h-8 md:w-10 md:h-10 text-accent"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -27,20 +27,20 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
         </div>
 
         {/* Section eyebrow */}
-        <p className="text-sm font-medium text-accent uppercase tracking-widest mb-6">
+        <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
           O Padrão LK
         </p>
 
         {/* Section title */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
           Nossa Promessa de Valor.
         </h2>
 
         {/* Decorative divider */}
-        <div className="w-16 h-px bg-accent mx-auto my-10" aria-hidden="true" />
+        <div className="w-12 md:w-16 h-px bg-accent mx-auto my-6 md:my-10" aria-hidden="true" />
 
         {/* Body copy */}
-        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+        <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
           Se não estivermos aproximando você dos seus objetivos de faturamento e
           escala, nós nos responsabilizamos. Nosso modelo de parceria é
           desenhado para que só tenhamos sucesso quando a sua clínica prosperar.{" "}
@@ -49,10 +49,10 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
           </span>
         </p>
 
-        {/* Trust badges */}
-        <div className="flex flex-wrap justify-center gap-8 mt-12">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+        {/* Trust badges - Stack on mobile, row on tablet+ */}
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mt-8 md:mt-12">
+          <div className="flex items-center justify-center sm:justify-start gap-3">
+            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
               <svg
                 className="w-5 h-5 text-accent"
                 fill="none"
@@ -72,8 +72,8 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+          <div className="flex items-center justify-center sm:justify-start gap-3">
+            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
               <svg
                 className="w-5 h-5 text-accent"
                 fill="none"
@@ -93,8 +93,8 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+          <div className="flex items-center justify-center sm:justify-start gap-3">
+            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
               <svg
                 className="w-5 h-5 text-accent"
                 fill="none"
@@ -113,13 +113,13 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
           </div>
         </div>
 
-        {/* CTA */}
+        {/* CTA - Full width on mobile */}
         {showCTA && (
-          <div className="mt-12">
+          <div className="mt-8 md:mt-12">
             <Button
               asChild
               size="lg"
-              className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
+              className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
               <Link href="/contato">Garantir Meu Crescimento</Link>
             </Button>

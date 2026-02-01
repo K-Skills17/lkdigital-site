@@ -23,15 +23,15 @@ export default function SobrePage() {
       <section className="section-premium">
         <div className="max-w-4xl mx-auto">
           {/* Decorative line */}
-          <div className="w-12 h-px bg-accent mb-8" aria-hidden="true" />
+          <div className="w-10 md:w-12 h-px bg-accent mb-6 md:mb-8" aria-hidden="true" />
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
             Nascemos para Devolver o seu Tempo.
           </h1>
 
-          <div className="w-16 h-px bg-accent my-10" aria-hidden="true" />
+          <div className="w-12 md:w-16 h-px bg-accent my-6 md:my-10" aria-hidden="true" />
 
-          <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed">
             Entendemos que um cirurgião-dentista de elite deve estar focado no
             paciente, não em algoritmos. A LK Digital foi fundada para preencher
             a lacuna entre a{" "}
@@ -48,13 +48,13 @@ export default function SobrePage() {
       </section>
 
       {/* Visual placeholder section */}
-      <section className="py-12">
+      <section className="py-8 md:py-12 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="aspect-[21/9] bg-muted rounded-sm flex items-center justify-center">
-            <div className="text-center space-y-4 p-8">
-              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+          <div className="aspect-[16/9] md:aspect-[21/9] bg-muted rounded-sm flex items-center justify-center">
+            <div className="text-center space-y-3 md:space-y-4 p-4 md:p-8">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
                 <svg
-                  className="w-8 h-8 text-accent"
+                  className="w-6 h-6 md:w-8 md:h-8 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -67,7 +67,7 @@ export default function SobrePage() {
                   />
                 </svg>
               </div>
-              <p className="text-sm text-muted-foreground max-w-md">
+              <p className="text-xs sm:text-sm text-muted-foreground max-w-md">
                 Imagem editorial: Ambiente de trabalho premium, equipe focada em
                 análise de dados e estratégias digitais
               </p>
@@ -78,19 +78,19 @@ export default function SobrePage() {
 
       {/* The Narrative: 6 Years of Precision */}
       <section className="section-premium bg-muted">
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-20 items-start">
           {/* Left: Title (40%) */}
           <div className="lg:col-span-2">
-            <p className="text-sm font-medium text-accent uppercase tracking-widest mb-6">
+            <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
               Nossa Trajetória
             </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
               Da Alta Performance para o Consultório.
             </h2>
           </div>
 
           {/* Right: Copy (60%) */}
-          <div className="lg:col-span-3 space-y-6 text-lg text-muted-foreground leading-relaxed">
+          <div className="lg:col-span-3 space-y-4 md:space-y-6 text-base md:text-lg text-muted-foreground leading-relaxed">
             <p>
               Com uma trajetória de{" "}
               <span className="text-foreground font-medium">seis anos</span>{" "}
@@ -106,7 +106,7 @@ export default function SobrePage() {
               dominavam o mercado apenas por saberem usar as ferramentas certas.
             </p>
 
-            <p className="text-foreground font-medium text-xl">
+            <p className="text-foreground font-medium text-lg md:text-xl">
               Nós mudamos esse jogo.
             </p>
 
@@ -125,44 +125,44 @@ export default function SobrePage() {
       {/* Timeline: The Transformation Process */}
       <section className="section-premium">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-sm font-medium text-accent uppercase tracking-widest mb-6">
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
               A Transformação
             </p>
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
               Do Sobrecarregado ao Escalável
             </h2>
           </div>
 
-          {/* Timeline */}
+          {/* Timeline - Left-aligned on mobile, centered on desktop */}
           <div className="relative">
-            {/* Vertical line */}
+            {/* Vertical line - Left on mobile, center on desktop */}
             <div
-              className="absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-accent/30"
+              className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 w-px h-full bg-accent/30"
               aria-hidden="true"
             />
 
             {/* Timeline items */}
-            <div className="space-y-16">
+            <div className="space-y-10 md:space-y-16">
               {/* Step 1 */}
-              <div className="relative grid md:grid-cols-2 gap-8 items-center">
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center pl-10 md:pl-0">
                 <div className="md:text-right md:pr-12">
-                  <span className="text-sm text-accent uppercase tracking-wider">
+                  <span className="text-xs sm:text-sm text-accent uppercase tracking-wider">
                     Antes
                   </span>
-                  <h3 className="text-xl font-semibold text-foreground mt-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mt-1 md:mt-2">
                     Dentista Sobrecarregado
                   </h3>
-                  <p className="text-muted-foreground mt-2">
+                  <p className="text-sm md:text-base text-muted-foreground mt-1 md:mt-2">
                     Dividido entre atender pacientes e gerenciar marketing.
                     Resultados imprevisíveis. Tempo escasso.
                   </p>
                 </div>
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
-                <div className="md:pl-12">
+                <div className="absolute left-2 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background top-0 md:top-auto" />
+                <div className="md:pl-12 hidden md:block">
                   <div className="w-full aspect-video bg-muted rounded-sm flex items-center justify-center">
                     <svg
-                      className="w-12 h-12 text-muted-foreground/30"
+                      className="w-10 h-10 md:w-12 md:h-12 text-muted-foreground/30"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -179,24 +179,24 @@ export default function SobrePage() {
               </div>
 
               {/* Step 2 */}
-              <div className="relative grid md:grid-cols-2 gap-8 items-center">
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center pl-10 md:pl-0">
                 <div className="md:order-2 md:text-left md:pl-12">
-                  <span className="text-sm text-accent uppercase tracking-wider">
+                  <span className="text-xs sm:text-sm text-accent uppercase tracking-wider">
                     Parceria LK
                   </span>
-                  <h3 className="text-xl font-semibold text-foreground mt-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mt-1 md:mt-2">
                     Sistemas Instalados
                   </h3>
-                  <p className="text-muted-foreground mt-2">
+                  <p className="text-sm md:text-base text-muted-foreground mt-1 md:mt-2">
                     Infraestrutura completa de aquisição. Processos automatizados.
                     Dados claros e acionáveis.
                   </p>
                 </div>
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
-                <div className="md:order-1 md:pr-12">
+                <div className="absolute left-2 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background top-0 md:top-auto" />
+                <div className="md:order-1 md:pr-12 hidden md:block">
                   <div className="w-full aspect-video bg-muted rounded-sm flex items-center justify-center">
                     <svg
-                      className="w-12 h-12 text-muted-foreground/30"
+                      className="w-10 h-10 md:w-12 md:h-12 text-muted-foreground/30"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -213,24 +213,24 @@ export default function SobrePage() {
               </div>
 
               {/* Step 3 */}
-              <div className="relative grid md:grid-cols-2 gap-8 items-center">
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center pl-10 md:pl-0">
                 <div className="md:text-right md:pr-12">
-                  <span className="text-sm text-accent uppercase tracking-wider">
+                  <span className="text-xs sm:text-sm text-accent uppercase tracking-wider">
                     Depois
                   </span>
-                  <h3 className="text-xl font-semibold text-foreground mt-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mt-1 md:mt-2">
                     Clínica Escalável LK
                   </h3>
-                  <p className="text-muted-foreground mt-2">
+                  <p className="text-sm md:text-base text-muted-foreground mt-1 md:mt-2">
                     Crescimento previsível. Foco total na clínica. Liberdade para
                     expandir com tranquilidade.
                   </p>
                 </div>
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
-                <div className="md:pl-12">
+                <div className="absolute left-2 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background top-0 md:top-auto" />
+                <div className="md:pl-12 hidden md:block">
                   <div className="w-full aspect-video bg-muted rounded-sm flex items-center justify-center">
                     <svg
-                      className="w-12 h-12 text-muted-foreground/30"
+                      className="w-10 h-10 md:w-12 md:h-12 text-muted-foreground/30"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -249,11 +249,11 @@ export default function SobrePage() {
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-16">
+          <div className="text-center mt-10 md:mt-16">
             <Button
               asChild
               size="lg"
-              className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
+              className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
               <Link href="/solucoes">Descubra o Método</Link>
             </Button>
@@ -264,19 +264,19 @@ export default function SobrePage() {
       {/* The Methodology: Heavy Lifting Guarantee */}
       <section className="section-premium bg-foreground text-background">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium text-accent uppercase tracking-widest mb-6">
+          <div className="text-center mb-8 md:mb-12">
+            <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
               Nossa Metodologia
             </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
               Nós assumimos o risco.{" "}
               <span className="text-accent">Você colhe os resultados.</span>
             </h2>
           </div>
 
-          <div className="w-16 h-px bg-accent mx-auto mb-12" aria-hidden="true" />
+          <div className="w-12 md:w-16 h-px bg-accent mx-auto mb-8 md:mb-12" aria-hidden="true" />
 
-          <div className="space-y-6 text-lg text-background/80 leading-relaxed text-center">
+          <div className="space-y-4 md:space-y-6 text-base md:text-lg text-background/80 leading-relaxed text-center">
             <p>
               Nosso modelo é simples: nós cuidamos de toda a infraestrutura — do
               GEO (Otimização para IAs) aos funis de conversão de alto ticket.
@@ -296,29 +296,29 @@ export default function SobrePage() {
             </p>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 text-center">
+          {/* Stats - Responsive grid */}
+          <div className="grid grid-cols-3 gap-4 md:gap-8 mt-10 md:mt-16 text-center">
             <div>
-              <div className="text-4xl md:text-5xl font-heading text-accent">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-accent">
                 80%
               </div>
-              <p className="text-sm text-background/60 mt-2">
+              <p className="text-xs sm:text-sm text-background/60 mt-1 md:mt-2">
                 Menos esforço operacional
               </p>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-heading text-accent">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-accent">
                 100%
               </div>
-              <p className="text-sm text-background/60 mt-2">
+              <p className="text-xs sm:text-sm text-background/60 mt-1 md:mt-2">
                 Responsabilidade nossa
               </p>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-heading text-accent">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-accent">
                 ∞
               </div>
-              <p className="text-sm text-background/60 mt-2">
+              <p className="text-xs sm:text-sm text-background/60 mt-1 md:mt-2">
                 Potencial de escala
               </p>
             </div>
@@ -328,14 +328,14 @@ export default function SobrePage() {
 
       {/* The Result: A Scalable Future */}
       <section className="section-premium">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left: Visual */}
-          <div className="relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+          {/* Left: Visual - Hidden on mobile */}
+          <div className="relative hidden sm:block">
             <div className="aspect-square bg-muted rounded-sm flex items-center justify-center">
-              <div className="text-center space-y-4 p-8">
-                <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+              <div className="text-center space-y-3 md:space-y-4 p-6 md:p-8">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
                   <svg
-                    className="w-10 h-10 text-accent"
+                    className="w-8 h-8 md:w-10 md:h-10 text-accent"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -348,30 +348,30 @@ export default function SobrePage() {
                     />
                   </svg>
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Ilustração: Rede de clínicas escaláveis conectadas
                 </p>
               </div>
             </div>
             <div
-              className="absolute -top-4 -left-4 w-20 h-20 border-l-2 border-t-2 border-accent/30"
+              className="absolute -top-4 -left-4 w-16 md:w-20 h-16 md:h-20 border-l-2 border-t-2 border-accent/30 hidden md:block"
               aria-hidden="true"
             />
           </div>
 
           {/* Right: Copy */}
-          <div className="space-y-8">
-            <p className="text-sm font-medium text-accent uppercase tracking-widest">
+          <div className="space-y-6 md:space-y-8">
+            <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest">
               O Resultado Final
             </p>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
               Sistemas que Funcionam Sem Você.
             </h2>
 
-            <div className="w-16 h-px bg-accent" aria-hidden="true" />
+            <div className="w-12 md:w-16 h-px bg-accent" aria-hidden="true" />
 
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               O objetivo final não é apenas atrair pacientes, mas construir um{" "}
               <span className="text-foreground font-medium">ativo digital</span>
               . Estamos aqui para criar a base que permitirá que você gerencie
@@ -381,7 +381,7 @@ export default function SobrePage() {
             <Button
               asChild
               size="lg"
-              className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
+              className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
               <Link href="/contato">Eleve seu Patamar</Link>
             </Button>
@@ -392,19 +392,19 @@ export default function SobrePage() {
       {/* GEO Section: A Ciência por trás da LK Digital */}
       <section className="section-premium bg-trust-bg">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium text-accent uppercase tracking-widest mb-6">
+          <div className="text-center mb-8 md:mb-12">
+            <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
               Inteligência Aplicada
             </p>
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
               A Ciência por trás da LK Digital
             </h2>
           </div>
 
-          <div className="w-16 h-px bg-accent mx-auto mb-12" aria-hidden="true" />
+          <div className="w-12 md:w-16 h-px bg-accent mx-auto mb-8 md:mb-12" aria-hidden="true" />
 
           <div className="prose prose-lg max-w-none">
-            <div className="space-y-6 text-muted-foreground leading-relaxed">
+            <div className="space-y-4 md:space-y-6 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
               <p>
                 Na era da Inteligência Artificial, os mecanismos de busca e os
                 LLMs (Large Language Models) como ChatGPT, Gemini e Claude estão
@@ -421,14 +421,14 @@ export default function SobrePage() {
                 artificiais.
               </p>
 
-              <div className="bg-background p-8 rounded-sm border border-accent/20 my-8">
-                <h3 className="text-xl font-semibold text-foreground mb-4">
+              <div className="bg-background p-4 sm:p-6 md:p-8 rounded-sm border border-accent/20 my-6 md:my-8">
+                <h3 className="text-lg md:text-xl font-semibold text-foreground mb-3 md:mb-4">
                   Como as IAs categorizam autoridade odontológica:
                 </h3>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <svg
-                      className="w-5 h-5 text-accent mt-1 shrink-0"
+                      className="w-4 h-4 md:w-5 md:h-5 text-accent mt-0.5 md:mt-1 shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -440,7 +440,7 @@ export default function SobrePage() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span>
+                    <span className="text-sm md:text-base">
                       <strong className="text-foreground">
                         Estrutura semântica
                       </strong>{" "}
@@ -450,7 +450,7 @@ export default function SobrePage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <svg
-                      className="w-5 h-5 text-accent mt-1 shrink-0"
+                      className="w-4 h-4 md:w-5 md:h-5 text-accent mt-0.5 md:mt-1 shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -462,14 +462,14 @@ export default function SobrePage() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span>
+                    <span className="text-sm md:text-base">
                       <strong className="text-foreground">Schema markup</strong>{" "}
                       — Dados estruturados que comunicam expertise à máquina
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <svg
-                      className="w-5 h-5 text-accent mt-1 shrink-0"
+                      className="w-4 h-4 md:w-5 md:h-5 text-accent mt-0.5 md:mt-1 shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -481,7 +481,7 @@ export default function SobrePage() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span>
+                    <span className="text-sm md:text-base">
                       <strong className="text-foreground">
                         Pilares de autoridade
                       </strong>{" "}
@@ -490,7 +490,7 @@ export default function SobrePage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <svg
-                      className="w-5 h-5 text-accent mt-1 shrink-0"
+                      className="w-4 h-4 md:w-5 md:h-5 text-accent mt-0.5 md:mt-1 shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -502,7 +502,7 @@ export default function SobrePage() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span>
+                    <span className="text-sm md:text-base">
                       <strong className="text-foreground">llms.txt</strong> —
                       Arquivo dedicado para crawlers de IA identificarem sua
                       expertise
@@ -523,12 +523,12 @@ export default function SobrePage() {
             </div>
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 md:mt-12">
             <Button
               asChild
               variant="outline"
               size="lg"
-              className="border-accent text-accent hover:bg-accent hover:text-white px-8 py-6 text-base"
+              className="w-full sm:w-auto border-accent text-accent hover:bg-accent hover:text-white px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
               <Link href="/solucoes">Descubra o Método GEO</Link>
             </Button>
