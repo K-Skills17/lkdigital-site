@@ -17,7 +17,7 @@ export function Header() {
   const navItems = [
     { label: "Sobre", href: "/sobre", description: "Nossa história e metodologia" },
     { label: "Soluções", href: "/solucoes", description: "GEO, Branding e Automação" },
-    { label: "Insights", href: "/insights", description: "Artigos e estudos de caso" },
+    { label: "Jornal", href: "/jornal", description: "Artigos e estudos de caso" },
     { label: "Contato", href: "/contato", description: "Inicie sua transformação" },
   ];
 

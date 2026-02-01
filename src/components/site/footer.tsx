@@ -6,7 +6,7 @@ export function Footer() {
   const quickLinks = [
     { label: "Filosofia", href: "/sobre" },
     { label: "Soluções", href: "/solucoes" },
-    { label: "O Jornal", href: "/insights" },
+    { label: "O Jornal", href: "/jornal" },
     { label: "Inquérito", href: "/contato" },
   ];
 
