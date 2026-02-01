@@ -1,5 +1,6 @@
 import { Hero } from "@/components/site/home/hero";
-import { AuthorityNarrative } from "@/components/site/home/authority-narrative";
+import { ValueProp } from "@/components/site/home/value-prop";
+import { PerformanceGuarantee } from "@/components/site/home/performance-guarantee";
 import { Pillars } from "@/components/site/home/pillars";
 import { Philosophy } from "@/components/site/home/philosophy";
 import { LeadForm } from "@/components/site/home/lead-form";
@@ -10,7 +11,8 @@ export default function Home() {
     <>
       <HomepageStructuredData />
       <Hero />
-      <AuthorityNarrative />
+      <ValueProp />
+      <PerformanceGuarantee />
       <Pillars />
       <Philosophy />
       <LeadForm />
