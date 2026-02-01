@@ -145,7 +145,7 @@ export function LeadForm() {
               size="lg"
               className="w-full bg-accent text-white hover:bg-accent-dark py-6 text-base disabled:opacity-50"
             >
-              {isSubmitting ? "Enviando..." : "Enviar Solicitação de Parceria"}
+              {isSubmitting ? "Processando..." : "Iniciar Minha Transformação"}
             </Button>
 
             {/* Privacy note */}
