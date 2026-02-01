@@ -1,0 +1,17 @@
+# LK Digital - Dental Growth & Infrastructure
+
+## Mission
+LK Digital provides high-end digital marketing and scalable infrastructure for elite dental clinics. We specialize in transitioning boutique practices into multi-clinic powerhouses using data-driven systems and precision patient acquisition.
+
+## Authority Pillars
+- 6 years of cross-industry digital marketing expertise.
+- Specialized in the Dental niche (high-ticket patient acquisition).
+- HIPAA-compliant data structures and future-ready AI analysis tools.
+
+## Key Services (Portugal/Brazil Market)
+- GEO & SEO Odontológico (Generative Engine Optimization).
+- Branding Boutique para Dentistas.
+- Infraestrutura Digital Escalonável.
+
+## Technical Stack
+- Next.js, Tailwind CSS, TypeScript, LLM-optimized semantic HTML.
