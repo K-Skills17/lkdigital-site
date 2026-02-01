@@ -8,13 +8,13 @@ export function Footer() {
           <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             <Link
               href="/privacidade"
-              className="hover:text-[rgb(var(--brand-accent))] transition-colors"
+              className="hover:text-accent transition-colors"
             >
               Privacidade (LGPD)
             </Link>
             <Link
               href="/termos"
-              className="hover:text-[rgb(var(--brand-accent))] transition-colors"
+              className="hover:text-accent transition-colors"
             >
               Termos
             </Link>
