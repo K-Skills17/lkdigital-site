@@ -114,7 +114,7 @@ export function GrowthCycle() {
         <div className="hidden lg:block relative mb-20">
           {/* Center Flywheel - Background decorative element */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
-            <div className="relative blur-sm opacity-20">
+            <div className="relative blur-[2px] opacity-40">
               {/* Outer glow ring */}
               <div className="absolute inset-0 w-64 h-64 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 rounded-full bg-accent/30 blur-3xl" />
               {/* Outer ring */}
@@ -182,7 +182,7 @@ export function GrowthCycle() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-semibold text-background mb-2">
+                    <h3 className="text-xl font-bold text-accent mb-2">
                       {step.title}
                     </h3>
 
@@ -260,7 +260,7 @@ export function GrowthCycle() {
 
                     {/* Right: Content */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-semibold text-background mb-1">
+                      <h3 className="text-lg sm:text-xl font-bold text-accent mb-1">
                         {step.title}
                       </h3>
 
