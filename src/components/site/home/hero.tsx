@@ -3,33 +3,44 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="py-10 md:py-14">
-      <div className="space-y-8 max-w-3xl">
-        <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-foreground leading-tight">
-          LK Digital instala sistemas previsíveis de aquisição e conversão para
-          clínicas odontológicas que não querem depender de sorte.
-        </h1>
-        <div className="space-y-6">
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            Menos improviso. Mais controle.
-            <br />
-            Processos claros do anúncio até o agendamento — com foco em
-            previsibilidade operacional.
-          </p>
-          <div className="space-y-2">
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent text-white hover:opacity-90"
-            >
-              <Link href="/diagnostico">Diagnosticar sua clínica</Link>
-            </Button>
-            <p className="text-sm text-muted-foreground">
-              Avaliação estratégica. Sem propostas. Sem vendas.
-            </p>
-          </div>
-        </div>
+    <section className="section-premium flex flex-col items-center text-center">
+      {/* Decorative accent line */}
+      <div className="w-12 h-px bg-accent mb-8" aria-hidden="true" />
+
+      {/* Main Headline */}
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-tight max-w-4xl">
+        A Nova Era do Crescimento Odontológico de Alto Padrão.
+      </h1>
+
+      {/* Sub-headline */}
+      <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
+        Combinamos seis anos de inteligência digital com a precisão exigida pela
+        odontologia moderna. Criamos ecossistemas de aquisição que transformam
+        clínicas em referências de mercado.
+      </p>
+
+      {/* CTA Buttons */}
+      <div className="mt-12 flex flex-col sm:flex-row gap-4 items-center">
+        <Button
+          asChild
+          size="lg"
+          className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
+        >
+          <Link href="/contato">Solicitar Consultoria Estratégica</Link>
+        </Button>
+
+        <Button
+          asChild
+          variant="outline"
+          size="lg"
+          className="border-foreground/20 text-foreground hover:bg-foreground/5 px-8 py-6 text-base"
+        >
+          <Link href="/filosofia">Conheça nossa Filosofia</Link>
+        </Button>
       </div>
+
+      {/* Bottom decorative element */}
+      <div className="mt-16 w-24 h-px bg-border" aria-hidden="true" />
     </section>
   );
 }
