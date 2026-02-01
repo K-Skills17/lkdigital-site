@@ -16,6 +16,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
+    { label: "Sobre", href: "/sobre" },
     { label: "Soluções", href: "/solucoes" },
     { label: "Insights", href: "/insights" },
   ];
