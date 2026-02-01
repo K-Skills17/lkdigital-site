@@ -114,15 +114,15 @@ export function GrowthCycle() {
         <div className="hidden lg:block relative mb-20">
           {/* Center Flywheel - Background decorative element */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
-            <div className="relative blur-[2px] opacity-40">
+            <div className="relative opacity-60">
               {/* Outer glow ring */}
-              <div className="absolute inset-0 w-64 h-64 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 rounded-full bg-accent/30 blur-3xl" />
+              <div className="absolute inset-0 w-72 h-72 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 rounded-full bg-accent/20 blur-2xl" />
               {/* Outer ring */}
-              <div className="relative w-48 h-48 rounded-full border-2 border-accent/40 flex items-center justify-center">
+              <div className="relative w-56 h-56 rounded-full border-2 border-accent/50 flex items-center justify-center">
                 {/* Inner circle */}
-                <div className="w-32 h-32 rounded-full bg-accent/60 flex items-center justify-center">
+                <div className="w-36 h-36 rounded-full bg-accent flex items-center justify-center">
                   <svg
-                    className="w-14 h-14 text-foreground/80"
+                    className="w-16 h-16 text-foreground"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -182,7 +182,7 @@ export function GrowthCycle() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-accent mb-2">
+                    <h3 className="text-xl font-bold text-[#C5A368] mb-2">
                       {step.title}
                     </h3>
 
@@ -260,7 +260,7 @@ export function GrowthCycle() {
 
                     {/* Right: Content */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-bold text-accent mb-1">
+                      <h3 className="text-lg sm:text-xl font-bold text-[#C5A368] mb-1">
                         {step.title}
                       </h3>
 
