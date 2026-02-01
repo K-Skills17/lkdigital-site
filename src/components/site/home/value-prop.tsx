@@ -10,13 +10,13 @@ export function ValueProp() {
         <div className="lg:col-span-3 space-y-6 md:space-y-8">
           {/* Section eyebrow */}
           <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest">
-            Nossa Proposta
+            Parceria Estratégica
           </p>
 
           {/* Section title */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-            Sua Especialidade é a Odontologia.{" "}
-            <span className="text-accent">A Nossa é o Seu Resultado.</span>
+            Mais que Marketing.{" "}
+            <span className="text-accent">Inteligência de Negócio.</span>
           </h2>
 
           {/* Decorative divider */}
@@ -25,21 +25,21 @@ export function ValueProp() {
           {/* Body copy */}
           <div className="space-y-4 md:space-y-6 text-base md:text-lg text-muted-foreground leading-relaxed">
             <p>
-              Você não deveria ter que escolher entre ser um excelente cirurgião
-              e um gestor de marketing. A LK Digital assume{" "}
+              Marketing isolado não funciona. Para uma clínica prosperar, é
+              necessário alinhar{" "}
               <span className="text-foreground font-medium">
-                todo o trabalho pesado
+                estratégia de marca, funis de conversão agressivos
               </span>{" "}
-              — da estratégia técnica ao monitoramento de dados — para que seus
-              objetivos de expansão sejam alcançados de forma previsível e veloz.
+              e uma experiência de alto padrão para o paciente.
             </p>
 
             <p>
-              Reduzimos seu esforço operacional ao mínimo, entregando uma{" "}
+              Assumimos a gestão completa do seu crescimento — desde a aquisição
+              de leads até a otimização do ticket médio — para que você foque
+              exclusivamente na sua{" "}
               <span className="text-foreground font-medium">
-                estrutura pronta
-              </span>{" "}
-              que atrai o público certo, no momento certo.
+                arte clínica
+              </span>.
             </p>
           </div>
 
@@ -47,26 +47,26 @@ export function ValueProp() {
           <div className="grid grid-cols-3 gap-4 md:gap-8 pt-2 md:pt-4">
             <div className="text-center sm:text-left">
               <div className="text-2xl sm:text-3xl md:text-4xl font-heading text-accent">
-                0%
+                +ROI
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Seu tempo em marketing
+                Retorno mensurável
               </p>
             </div>
             <div className="text-center sm:text-left">
               <div className="text-2xl sm:text-3xl md:text-4xl font-heading text-accent">
-                100%
+                +Ticket
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Foco na clínica
+                Honorários elevados
               </p>
             </div>
             <div className="text-center sm:text-left">
               <div className="text-2xl sm:text-3xl md:text-4xl font-heading text-accent">
-                ∞
+                +Escala
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Potencial de escala
+                Crescimento previsível
               </p>
             </div>
           </div>
@@ -78,7 +78,7 @@ export function ValueProp() {
               size="lg"
               className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
-              <Link href="/solucoes">Descobrir Como Funciona</Link>
+              <Link href="/solucoes">Ver Suite de Negócios</Link>
             </Button>
           </div>
         </div>

@@ -119,17 +119,17 @@ export default function ContatoPage() {
             <div className="w-10 md:w-12 h-px bg-accent" aria-hidden="true" />
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-              Inicie sua Ascensão ao Topo do Mercado.
+              Inicie sua Consultoria de Negócios.
             </h1>
 
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Estamos prontos para assumir o peso do seu crescimento. Por favor,
-              preencha os detalhes abaixo para que nossa equipe possa realizar
-              uma{" "}
+              Não buscamos clientes; buscamos{" "}
               <span className="text-foreground font-medium">
-                análise prévia da sua clínica
-              </span>{" "}
-              antes da nossa consultoria privada.
+                parceiros para uma jornada de expansão
+              </span>
+              . Se você busca um sistema completo de crescimento que envolva
+              desde a estratégia de mercado até o suporte em conversão, sua
+              jornada começa aqui.
             </p>
 
             <div className="w-12 md:w-16 h-px bg-border" aria-hidden="true" />
@@ -178,10 +178,10 @@ export default function ContatoPage() {
           {/* Form Header */}
           <div className="text-center mb-8 md:mb-12">
             <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-3 md:mb-4">
-              Formulário de Aplicação
+              Inquérito de Parceria
             </p>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
-              Conte-nos sobre sua Clínica
+              Conte-nos sobre seu Negócio
             </h2>
           </div>
 
@@ -311,7 +311,7 @@ export default function ContatoPage() {
             >
               {isSubmitting
                 ? "Processando sua solicitação..."
-                : "Solicitar Análise de Viabilidade"}
+                : "Iniciar Consultoria de Negócios"}
             </Button>
 
             {/* Privacy Note */}

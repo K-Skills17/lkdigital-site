@@ -12,16 +12,16 @@ export function Hero() {
 
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-semibold tracking-tight text-foreground leading-[1.15]">
-            A Liberdade de Focar na Excelência Clínica.{" "}
-            <span className="text-accent">Nós Cuidamos do Seu Crescimento.</span>
+            A Maestria em Negócios Odontológicos:{" "}
+            <span className="text-accent">Da Estratégia ao Faturamento.</span>
           </h1>
 
           {/* Sub-headline */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
-            Alcance o faturamento ideal e a dominância de mercado sem o peso da
-            gestão de marketing. Implementamos sistemas de aquisição de alto
-            padrão que trabalham por você, garantindo pacientes qualificados
-            enquanto você exerce a sua vocação.
+            Não somos uma agência de SEO. Somos o seu braço direito em
+            inteligência de mercado. Implementamos sistemas completos de
+            aquisição de leads, conversão de alto ticket e retenção de pacientes
+            para transformar sua clínica em uma operação de elite.
           </p>
 
           {/* CTA Button */}
@@ -31,7 +31,7 @@ export function Hero() {
               size="lg"
               className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
-              <Link href="/contato">Garantir Minha Vaga na Consultoria</Link>
+              <Link href="/contato">Iniciar Consultoria de Negócios</Link>
             </Button>
           </div>
         </div>
@@ -58,8 +58,8 @@ export function Hero() {
                   </svg>
                 </div>
                 <p className="text-xs sm:text-sm text-muted-foreground max-w-xs">
-                  Consultório odontológico de alto padrão com dentista atendendo
-                  paciente satisfeito. Luz natural suave.
+                  Clínica odontológica de alto padrão operando como uma empresa
+                  de excelência.
                 </p>
               </div>
             </div>

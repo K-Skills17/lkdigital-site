@@ -4,15 +4,15 @@ import { LKGuarantee } from "@/components/shared/lk-guarantee";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sobre Nós | A História da LK Digital",
+  title: "Sobre Nós | Parceiros Estratégicos para Expansão Odontológica",
   description:
-    "Conheça a LK Digital: 6 anos de experiência em marketing digital de alta performance aplicados exclusivamente ao setor odontológico. Nascemos para devolver o seu tempo.",
+    "Seis anos de inteligência digital e estratégia de negócios aplicados à expansão de clínicas odontológicas. Da performance global para a liderança do seu consultório.",
   keywords: [
-    "sobre LK Digital",
-    "agência marketing odontológico",
-    "história LK Digital",
-    "marketing para dentistas Brasil",
-    "especialistas marketing dental",
+    "consultoria odontológica",
+    "expansão de clínicas",
+    "estratégia de negócios dental",
+    "parceiros crescimento clínica",
+    "inteligência de mercado odontológico",
   ],
 };
 
@@ -26,21 +26,23 @@ export default function SobrePage() {
           <div className="w-10 md:w-12 h-px bg-accent mb-6 md:mb-8" aria-hidden="true" />
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
-            Nascemos para Devolver o seu Tempo.
+            Seis Anos de Inteligência Digital.{" "}
+            <span className="text-accent">Uma Missão: A Excelência do Seu Negócio.</span>
           </h1>
 
           <div className="w-12 md:w-16 h-px bg-accent my-6 md:my-10" aria-hidden="true" />
 
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed">
-            Entendemos que um cirurgião-dentista de elite deve estar focado no
-            paciente, não em algoritmos. A LK Digital foi fundada para preencher
-            a lacuna entre a{" "}
+            Nossa história não começou na odontologia, mas sim na arena
+            ultra-competitiva do marketing de performance global. Hoje, trazemos
+            essa{" "}
             <span className="text-foreground font-medium">
-              excelência clínica
-            </span>{" "}
-            e o{" "}
+              visão macro para o setor odontológico
+            </span>
+            , alinhando estratégia de marca, funis de conversão agressivos e uma
+            experiência de{" "}
             <span className="text-foreground font-medium">
-              sucesso comercial previsível
+              alto padrão para o paciente
             </span>
             .
           </p>
@@ -82,41 +84,42 @@ export default function SobrePage() {
           {/* Left: Title (40%) */}
           <div className="lg:col-span-2">
             <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
-              Nossa Trajetória
+              Da Performance Global
             </p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-              Da Alta Performance para o Consultório.
+              Para a Liderança do Seu Negócio.
             </h2>
           </div>
 
           {/* Right: Copy (60%) */}
           <div className="lg:col-span-3 space-y-4 md:space-y-6 text-base md:text-lg text-muted-foreground leading-relaxed">
             <p>
-              Com uma trajetória de{" "}
-              <span className="text-foreground font-medium">seis anos</span>{" "}
-              operando nos bastidores de mercados digitais ultra-competitivos,
-              desenvolvemos uma visão analítica que poucos possuem. Recentemente,
-              decidimos aplicar essa inteligência exclusivamente ao setor
-              odontológico.
+              Durante{" "}
+              <span className="text-foreground font-medium">seis anos</span>,
+              dominamos as engrenagens de geração de demanda e estratégia de
+              negócios para grandes players em mercados ultra-competitivos.
+              Desenvolvemos uma visão analítica que poucos possuem.
             </p>
 
             <p>
-              Por quê? Porque percebemos que os melhores dentistas estavam
-              sobrecarregados com o marketing, enquanto clínicas medíocres
-              dominavam o mercado apenas por saberem usar as ferramentas certas.
+              Entendemos que um{" "}
+              <span className="text-foreground font-medium">
+                marketing isolado não funciona
+              </span>
+              . Para uma clínica prosperar, é necessário alinhar estratégia de
+              marca, funis de conversão agressivos e uma experiência de luxo para
+              o paciente.
             </p>
 
             <p className="text-foreground font-medium text-lg md:text-xl">
-              Nós mudamos esse jogo.
+              Nós fazemos o trabalho pesado de gestão e crescimento.
             </p>
 
             <p>
-              Trazemos o peso da nossa experiência para garantir que a sua
-              competência técnica seja recompensada com a{" "}
-              <span className="text-foreground font-medium">
-                liderança de mercado
-              </span>
-              .
+              Para que você foque exclusivamente na sua{" "}
+              <span className="text-foreground font-medium">arte clínica</span>,
+              enquanto construímos a infraestrutura que transforma sua clínica em
+              uma operação de elite.
             </p>
           </div>
         </div>

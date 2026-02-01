@@ -4,21 +4,21 @@ import { LKGuarantee } from "@/components/shared/lk-guarantee";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Soluções | A Suite de Eficiência para Clínicas Odontológicas",
+  title: "Suite 360º de Negócios | Expansão Estratégica para Clínicas",
   description:
-    "Descubra nossas soluções de marketing digital para dentistas: Crescimento Acelerado (GEO/SEO), Branding de Elite e Automação Inteligente. Resultados garantidos.",
+    "Suite completa de crescimento para clínicas odontológicas: Engenharia de Aquisição, Elevação de Ticket e Estratégia de Escala. ROI mensurável e resultados garantidos.",
 };
 
 const services = [
   {
     axis: "I",
-    title: "Crescimento Acelerado",
-    subtitle: "GEO & SEO",
-    benefitFocus: "Apareça onde a decisão é tomada, sem esforço.",
+    title: "Engenharia de Aquisição",
+    subtitle: "Lead Generation",
+    benefitFocus: "Fluxo ininterrupto de pacientes qualificados.",
     description:
-      "Enquanto seus concorrentes lutam por atenção, sua clínica é apresentada como a solução óbvia por IAs e buscadores. Nós fazemos a engenharia semântica completa para que você domine as buscas locais de forma automática.",
+      "Além de SEO e GEO, construímos sistemas de geração de leads que garantem que sua agenda esteja sempre preenchida com pacientes que buscam seus procedimentos mais rentáveis. Captação inteligente que trabalha 24/7.",
     result:
-      "Fluxo constante de leads qualificados sem precisar gravar vídeos diários ou gerenciar redes sociais.",
+      "Agenda preenchida com pacientes de alto ticket, sem depender de indicações ou redes sociais.",
     icon: (
       <svg
         className="w-8 h-8"
@@ -30,20 +30,20 @@ const services = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
         />
       </svg>
     ),
   },
   {
     axis: "II",
-    title: "Valor Percebido Instantâneo",
-    subtitle: "Branding",
-    benefitFocus: "Posicionamento de elite que justifica seus honorários.",
+    title: "Elevação de Ticket",
+    subtitle: "Posicionamento de Marca",
+    benefitFocus: "Cobrar o que você realmente vale.",
     description:
-      "Criamos uma presença digital que comunica autoridade antes mesmo de você abrir a boca. Atraímos pacientes que buscam qualidade, não preço, reduzindo as objeções de vendas e aumentando a aceitação de orçamentos.",
+      "Marketing sem branding é apenas custo. Redesenhamos a percepção de valor da sua clínica, permitindo que você aumente seus honorários enquanto melhora a satisfação do cliente, atraindo um público que prioriza qualidade sobre preço.",
     result:
-      "Uma marca que trabalha como um filtro, atraindo apenas quem valoriza seu trabalho de alto nível.",
+      "Ticket médio elevado com menos objeções de preço e maior aceitação de orçamentos.",
     icon: (
       <svg
         className="w-8 h-8"
@@ -55,20 +55,20 @@ const services = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
     ),
   },
   {
     axis: "III",
-    title: "Automação e Inteligência",
-    subtitle: "Infraestrutura",
-    benefitFocus: "Dados transformados em lucro, sem complicação.",
+    title: "Estratégia de Negócios",
+    subtitle: "Escala e Infraestrutura",
+    benefitFocus: "Uma clínica que funciona como empresa, não como emprego.",
     description:
-      'Você recebe relatórios claros e diretos. Nós monitoramos o "motor" da sua clínica sob o capô, ajustando as velas para garantir que a meta de faturamento seja atingida no menor tempo possível.',
+      "Consultoria em processos de vendas, análise de dados de faturamento e infraestrutura para expansão multiclínica. Preparamos seu negócio para crescer com segurança e previsibilidade, transformando lucro em patrimônio.",
     result:
-      "Visibilidade total do seu ROI sem precisar entender de tecnologia.",
+      "Crescimento previsível com sistemas que funcionam independente da sua presença diária.",
     icon: (
       <svg
         className="w-8 h-8"
@@ -80,7 +80,7 @@ const services = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1.5}
-          d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
         />
       </svg>
     ),
@@ -94,16 +94,16 @@ export default function SolucoesPage() {
       <section className="section-premium text-center">
         <div className="max-w-4xl mx-auto">
           <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
-            Nossas Soluções
+            Suite 360º de Negócios
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
-            A Suite de Eficiência para o{" "}
-            <span className="text-accent">Crescimento da Sua Clínica</span>
+            Resultados de Negócio,{" "}
+            <span className="text-accent">Não Apenas Marketing</span>
           </h1>
           <p className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Três eixos estratégicos desenhados para eliminar o trabalho pesado
-            do marketing e entregar resultados tangíveis com o mínimo de esforço
-            da sua parte.
+            Três eixos estratégicos focados em ROI, aumento de ticket médio e
+            escala previsível. Transformamos sua clínica em uma operação de
+            elite com crescimento mensurável.
           </p>
         </div>
       </section>
@@ -210,11 +210,11 @@ export default function SolucoesPage() {
       <section className="section-premium bg-muted">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground">
-            Pronto para Eliminar o Peso do Marketing?
+            Pronto para Escalar seu Negócio?
           </h2>
           <p className="mt-4 md:mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
-            Agende uma consultoria estratégica e descubra qual combinação de
-            soluções é ideal para o momento da sua clínica.
+            Inicie uma consultoria de negócios e descubra como integrar
+            aquisição, conversão e escala em um sistema único de crescimento.
           </p>
           <div className="mt-8 md:mt-10">
             <Button
@@ -222,7 +222,7 @@ export default function SolucoesPage() {
               size="lg"
               className="w-full sm:w-auto bg-accent text-white hover:bg-accent-dark px-6 sm:px-8 py-5 sm:py-6 text-base"
             >
-              <Link href="/contato">Garantir Meu Crescimento</Link>
+              <Link href="/contato">Iniciar Consultoria de Negócios</Link>
             </Button>
           </div>
         </div>
