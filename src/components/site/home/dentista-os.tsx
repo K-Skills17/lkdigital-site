@@ -13,7 +13,7 @@ export function DentistaOS() {
         <Button
           asChild
           variant="outline"
-          className="hover:text-[rgb(var(--brand-accent))] hover:border-[rgb(var(--brand-accent))]"
+          className="hover:text-accent hover:border-accent"
         >
           <Link href="/solucoes/dentista-os">Ver o sistema</Link>
         </Button>

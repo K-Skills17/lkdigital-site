@@ -17,7 +17,7 @@ export function HowItStarts() {
           {steps.map((step, index) => (
             <div key={index}>
               <div className="py-4 flex items-start">
-                <span className="mr-4 text-[rgb(var(--brand-accent))] font-medium text-base md:text-lg shrink-0">
+                <span className="mr-4 text-accent font-medium text-base md:text-lg shrink-0">
                   {index + 1}.
                 </span>
                 <span className="text-base md:text-lg text-muted-foreground leading-relaxed">
@@ -32,7 +32,7 @@ export function HowItStarts() {
           <Button
             asChild
             size="lg"
-            className="bg-[rgb(var(--brand-accent))] text-white hover:opacity-90"
+            className="bg-accent text-white hover:opacity-90"
           >
             <Link href="/diagnostico">Diagnosticar sua clínica</Link>
           </Button>

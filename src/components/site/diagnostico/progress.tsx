@@ -18,7 +18,7 @@ export function Progress({ current, total }: ProgressProps) {
       {/* Progress bar */}
       <div className="h-1 bg-muted rounded-full overflow-hidden">
         <div
-          className="h-full bg-[rgb(var(--brand-accent))] transition-all duration-300"
+          className="h-full bg-accent transition-all duration-300"
           style={{ width: `${percentage}%` }}
         />
       </div>

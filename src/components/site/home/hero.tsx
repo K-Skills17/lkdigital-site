@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section className="py-10 md:py-14">
       <div className="space-y-8 max-w-3xl">
-        <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-[rgb(var(--brand-primary))] leading-tight">
+        <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-foreground leading-tight">
           LK Digital instala sistemas previsíveis de aquisição e conversão para
           clínicas odontológicas que não querem depender de sorte.
         </h1>
@@ -20,7 +20,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="bg-[rgb(var(--brand-accent))] text-white hover:opacity-90"
+              className="bg-accent text-white hover:opacity-90"
             >
               <Link href="/diagnostico">Diagnosticar sua clínica</Link>
             </Button>

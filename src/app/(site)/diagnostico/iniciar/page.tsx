@@ -42,14 +42,14 @@ export default function IniciarPage() {
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
         <Link
           href="/diagnostico"
-          className="text-sm text-muted-foreground hover:text-[rgb(var(--brand-accent))] transition-colors"
+          className="text-sm text-muted-foreground hover:text-accent transition-colors"
         >
           Voltar ao protocolo
         </Link>
         <Button
           asChild
           size="lg"
-          className="bg-[rgb(var(--brand-accent))] text-white hover:opacity-90"
+          className="bg-accent text-white hover:opacity-90"
         >
           <Link href="/diagnostico/quiz">Começar</Link>
         </Button>

@@ -26,7 +26,7 @@ export function Pillars() {
             className="rounded-2xl border-muted/60 bg-background py-0"
           >
             <CardContent className="p-6 md:p-8 space-y-3">
-              <h3 className="text-lg md:text-xl font-semibold text-[rgb(var(--brand-primary))]">
+              <h3 className="text-lg md:text-xl font-semibold text-foreground">
                 {pillar.title}
               </h3>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">

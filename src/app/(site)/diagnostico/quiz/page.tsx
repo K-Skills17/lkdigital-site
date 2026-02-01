@@ -45,14 +45,14 @@ export default function QuizPage() {
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between pt-6 border-t">
         <Link
           href="/diagnostico/iniciar"
-          className="text-sm text-muted-foreground hover:text-[rgb(var(--brand-accent))] transition-colors"
+          className="text-sm text-muted-foreground hover:text-accent transition-colors"
         >
           Voltar
         </Link>
         <Button
           asChild
           size="lg"
-          className="bg-[rgb(var(--brand-accent))] text-white hover:opacity-90"
+          className="bg-accent text-white hover:opacity-90"
         >
           <Link href="/diagnostico/resultado">Finalizar (placeholder)</Link>
         </Button>

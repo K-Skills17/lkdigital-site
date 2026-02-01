@@ -10,7 +10,7 @@ export function PageHeader({ title, description, metaPill }: PageHeaderProps) {
   return (
     <div className="space-y-4 mb-10 md:mb-12">
       <div className="flex items-center gap-3 flex-wrap">
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-[rgb(var(--brand-primary))]">
+        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
           {title}
         </h1>
         {metaPill && (

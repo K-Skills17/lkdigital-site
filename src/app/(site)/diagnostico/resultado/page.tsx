@@ -42,7 +42,7 @@ export default function ResultadoPage() {
         <Button
           asChild
           size="lg"
-          className="bg-[rgb(var(--brand-accent))] text-white hover:opacity-90 order-1 sm:order-2"
+          className="bg-accent text-white hover:opacity-90 order-1 sm:order-2"
         >
           <Link href="/">Voltar ao início</Link>
         </Button>

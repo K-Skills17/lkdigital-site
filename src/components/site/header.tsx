@@ -43,7 +43,7 @@ export function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl font-semibold text-[rgb(var(--brand-primary))]"
+            className="text-xl font-semibold text-foreground"
           >
             LK Digital
           </Link>
@@ -54,7 +54,7 @@ export function Header() {
               if (item.dropdown) {
                 return (
                   <DropdownMenu key={item.label}>
-                    <DropdownMenuTrigger className="text-sm font-medium text-foreground hover:text-[rgb(var(--brand-accent))] transition-colors outline-none">
+                    <DropdownMenuTrigger className="text-sm font-medium text-foreground hover:text-accent transition-colors outline-none">
                       {item.label}
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start">
@@ -73,7 +73,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium text-foreground hover:text-[rgb(var(--brand-accent))] transition-colors"
+                  className="text-sm font-medium text-foreground hover:text-accent transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -109,7 +109,7 @@ export function Header() {
                             key={dropdownItem.href}
                             href={dropdownItem.href}
                             onClick={() => setMobileMenuOpen(false)}
-                            className="text-sm text-muted-foreground hover:text-[rgb(var(--brand-accent))] transition-colors pl-4"
+                            className="text-sm text-muted-foreground hover:text-accent transition-colors pl-4"
                           >
                             {dropdownItem.label}
                           </Link>
@@ -122,7 +122,7 @@ export function Header() {
                       key={item.href}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-sm font-medium text-foreground hover:text-[rgb(var(--brand-accent))] transition-colors"
+                      className="text-sm font-medium text-foreground hover:text-accent transition-colors"
                     >
                       {item.label}
                     </Link>

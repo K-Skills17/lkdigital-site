@@ -32,7 +32,7 @@ export function QuestionCard({
   return (
     <Card className="rounded-2xl border-muted/60 bg-background hover:shadow-md transition py-0">
       <CardContent className="p-6 md:p-8 space-y-6">
-        <h3 className="text-xl md:text-2xl font-semibold text-[rgb(var(--brand-primary))]">
+        <h3 className="text-xl md:text-2xl font-semibold text-foreground">
           {question}
         </h3>
         <div className="space-y-3">
@@ -43,7 +43,7 @@ export function QuestionCard({
               className={cn(
                 "w-full text-left px-4 py-3 rounded-xl border transition-all",
                 currentSelected === option
-                  ? "border-[rgb(var(--brand-accent))] bg-[rgb(var(--brand-accent))]/5"
+                  ? "border-accent bg-accent/5"
                   : "border-muted/60 hover:bg-muted/30 hover:border-muted"
               )}
             >
