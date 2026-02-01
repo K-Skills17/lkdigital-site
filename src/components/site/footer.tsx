@@ -11,8 +11,9 @@ export function Footer() {
   ];
 
   const legalLinks = [
-    { label: "Política de Privacidade", href: "/privacidade" },
-    { label: "Termos de Serviço", href: "/termos" },
+    { label: "Política de Privacidade", href: "/legal/privacidade" },
+    { label: "Termos de Serviço", href: "/legal/termos" },
+    { label: "Política de Cookies", href: "/legal/cookies" },
   ];
 
   return (
