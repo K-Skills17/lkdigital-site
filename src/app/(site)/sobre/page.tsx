@@ -271,9 +271,9 @@ export default function SobrePage() {
             <p className="text-xs sm:text-sm font-medium text-accent uppercase tracking-widest mb-4 md:mb-6">
               Nossa Metodologia
             </p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight max-w-3xl mx-auto [text-wrap:balance]">
               Nós assumimos o risco.{" "}
-              <span className="text-accent">Você colhe os resultados.</span>
+              <span className="text-accent block sm:inline mt-2 sm:mt-0">Você colhe os resultados.</span>
             </h2>
           </div>
 
