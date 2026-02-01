@@ -19,6 +19,7 @@ export function Header() {
     { label: "Sobre", href: "/sobre" },
     { label: "Soluções", href: "/solucoes" },
     { label: "Insights", href: "/insights" },
+    { label: "Contato", href: "/contato" },
   ];
 
   return (
