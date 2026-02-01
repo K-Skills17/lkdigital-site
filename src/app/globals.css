@@ -20,6 +20,9 @@
   --muted: #F5F5F5;
   --muted-foreground: #6B6B6B;
   --border: #E5E5E5;
+
+  /* Trust/Guarantee Background - Gold Tinted */
+  --trust-bg: #F9F6F0;
 }
 
 @theme inline {
@@ -32,6 +35,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-trust-bg: var(--trust-bg);
 
   /* Typography - Fonts */
   --font-heading: "Cormorant Garamond", Georgia, "Times New Roman", serif;
@@ -49,6 +53,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-trust-bg: var(--trust-bg);
 
   /* Font families */
   --font-heading: "Cormorant Garamond", Georgia, "Times New Roman", serif;
