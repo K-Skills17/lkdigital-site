@@ -182,7 +182,7 @@ export function GrowthCycle() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-[#C5A368] mb-2">
+                    <h3 className="text-xl font-bold mb-2" style={{ color: '#C5A368' }}>
                       {step.title}
                     </h3>
 
@@ -260,7 +260,7 @@ export function GrowthCycle() {
 
                     {/* Right: Content */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-bold text-[#C5A368] mb-1">
+                      <h3 className="text-lg sm:text-xl font-bold mb-1" style={{ color: '#C5A368' }}>
                         {step.title}
                       </h3>
 
