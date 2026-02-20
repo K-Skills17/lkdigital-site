@@ -95,34 +95,75 @@ export default function SobrePage() {
           {/* Right: Copy (60%) */}
           <div className="lg:col-span-3 space-y-6 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Com uma trajetória de{" "}
+              Com{" "}
               <span className="text-foreground font-medium">mais de seis anos</span>{" "}
-              operando nos bastidores de mercados digitais ultra-competitivos,
-              desenvolvemos uma visão analítica que poucos possuem. Decidimos
-              aplicar essa inteligência ao setor que mais impacta a vida das
-              pessoas: a saúde.
+              em mercados digitais competitivos, aplicamos nossa metodologia
+              primeiro às clínicas odontológicas — onde as exigências de
+              posicionamento, ética regulatória e ticket alto criam o ambiente
+              mais desafiador do setor de saúde.
             </p>
 
             <p>
-              Por quê? Porque percebemos que os melhores profissionais de saúde
-              estavam sobrecarregados com marketing, enquanto clínicas medianas
-              dominavam o mercado apenas por saberem usar as ferramentas certas.
-              Médicos, dentistas, dermatologistas e psicólogos de excelência
-              mereciam ter o seu valor reconhecido digitalmente.
+              O método funcionou. E foi replicado. Hoje atendemos{" "}
+              <span className="text-foreground font-medium">
+                dentistas, médicos, dermatologistas, psicólogos, fisioterapeutas
+                e nutricionistas
+              </span>{" "}
+              — qualquer especialidade que constrói sua reputação sobre confiança
+              e excelência técnica.
+            </p>
+
+            <p>
+              Porque percebemos que o problema é o mesmo em todas as
+              especialidades: os melhores profissionais de saúde estão
+              sobrecarregados enquanto clínicas medianas dominam o mercado
+              por saberem usar as ferramentas certas.
             </p>
 
             <p className="text-foreground font-medium text-xl">
-              Nós mudamos esse jogo.
+              Nós mudamos esse jogo — em todas as especialidades.
             </p>
+          </div>
+        </div>
+      </section>
 
-            <p>
-              Trazemos o peso da nossa experiência para garantir que a sua
-              competência técnica seja recompensada com a{" "}
-              <span className="text-foreground font-medium">
-                liderança de mercado
-              </span>{" "}
-              que ela merece — independentemente da especialidade.
+      {/* Specialties: Health Industry Breadth */}
+      <section className="section-premium">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-sm font-medium text-accent uppercase tracking-widest mb-4">
+              Especialidades Atendidas
             </p>
+            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+              Um Método. Todas as Especialidades.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {[
+              { name: "Odontologia", note: "Principal foco" },
+              { name: "Medicina Geral" },
+              { name: "Dermatologia" },
+              { name: "Psicologia" },
+              { name: "Fisioterapia" },
+              { name: "Nutrição" },
+              { name: "Cardiologia" },
+              { name: "Ortopedia" },
+            ].map((specialty) => (
+              <div
+                key={specialty.name}
+                className="relative flex flex-col items-center justify-center text-center p-4 border border-border/60 bg-muted hover:border-accent/40 transition-colors duration-300 rounded-sm"
+              >
+                {specialty.note && (
+                  <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-accent text-white text-[9px] uppercase tracking-widest px-2 py-0.5 whitespace-nowrap">
+                    {specialty.note}
+                  </span>
+                )}
+                <span className="text-sm font-medium text-foreground mt-1">
+                  {specialty.name}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -260,7 +301,7 @@ export default function SobrePage() {
               size="lg"
               className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
             >
-              <Link href="/solucoes">Descubra o Método</Link>
+              <Link href="/contato">Agendar Diagnóstico Gratuito</Link>
             </Button>
           </div>
         </div>
@@ -388,7 +429,7 @@ export default function SobrePage() {
               size="lg"
               className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
             >
-              <Link href="/contato">Eleve seu Patamar</Link>
+              <Link href="/contato">Agendar Diagnóstico Gratuito</Link>
             </Button>
           </div>
         </div>

@@ -33,7 +33,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
 
         {/* Section title */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-          Nossa Promessa de Valor.
+          O Que Você Ganha com a LK Digital
         </h2>
 
         {/* Decorative divider */}
@@ -41,12 +41,14 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
 
         {/* Body copy */}
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-          Se não estivermos aproximando você dos seus objetivos de faturamento e
-          escala, nós nos responsabilizamos. Nosso modelo de parceria é
-          desenhado para que só tenhamos sucesso quando a sua clínica prosperar.{" "}
+          Clínicas parceiras relatam{" "}
           <span className="text-foreground font-medium">
-            É o investimento mais seguro que você fará este ano.
-          </span>
+            47% de aumento no ticket médio
+          </span>{" "}
+          nos primeiros 90 dias e crescimento de{" "}
+          <span className="text-foreground font-medium">3.2× no faturamento</span>{" "}
+          em 12 meses. Se não avançarmos em direção aos seus objetivos, nós nos
+          responsabilizamos — sem letras miúdas.
         </p>
 
         {/* Trust badges */}
@@ -68,7 +70,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
               </svg>
             </div>
             <span className="text-sm text-foreground">
-              Resultados Garantidos
+              +47% Ticket Médio em 90 Dias
             </span>
           </div>
 
@@ -89,7 +91,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
               </svg>
             </div>
             <span className="text-sm text-foreground">
-              Parceria de Confiança
+              Sem Interferir na Sua Rotina
             </span>
           </div>
 
@@ -109,7 +111,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
                 />
               </svg>
             </div>
-            <span className="text-sm text-foreground">ROI Comprovado</span>
+            <span className="text-sm text-foreground">3.2× ROI Médio Comprovado</span>
           </div>
         </div>
 
@@ -121,7 +123,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
               size="lg"
               className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
             >
-              <Link href="/contato">Garantir Meu Crescimento</Link>
+              <Link href="/contato">Agendar Diagnóstico Gratuito</Link>
             </Button>
           </div>
         )}

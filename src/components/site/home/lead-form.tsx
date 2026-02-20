@@ -38,19 +38,24 @@ export function LeadForm() {
           <AnimatedSection animation="fade-up">
             <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-4 flex items-center justify-center gap-3">
               <span className="block w-6 h-px bg-accent" aria-hidden="true" />
-              Próximo Passo
+              Agende Seu Diagnóstico
               <span className="block w-6 h-px bg-accent" aria-hidden="true" />
             </p>
           </AnimatedSection>
           <AnimatedSection animation="fade-up" delay={1}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground">
-              Inicie sua Transformação.
+              Diagnóstico Estratégico Gratuito
             </h2>
           </AnimatedSection>
           <AnimatedSection animation="fade-up" delay={2}>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Selecionamos um número limitado de parceiros para garantir a
-              exclusividade e o rigor técnico que sua clínica ou consultório merece.
+              Em 30 minutos, analisamos o potencial de crescimento da sua clínica
+              e entregamos um plano personalizado — sem custo, sem compromisso.
+              Apenas{" "}
+              <span className="text-foreground font-medium">
+                vagas limitadas por mês
+              </span>
+              .
             </p>
           </AnimatedSection>
         </div>
@@ -196,7 +201,7 @@ export function LeadForm() {
                         </span>
                       ) : (
                         <span className="flex items-center gap-2">
-                          Iniciar Minha Transformação
+                          Agendar Meu Diagnóstico Gratuito
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </span>
                       )}

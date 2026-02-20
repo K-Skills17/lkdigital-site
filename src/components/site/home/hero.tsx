@@ -53,7 +53,7 @@ export function Hero() {
               aria-hidden="true"
             />
             <p className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
-              Marketing de Precisão para o Setor de Saúde
+              40+ Clínicas Crescendo com a LK Digital
             </p>
           </div>
 
@@ -63,11 +63,11 @@ export function Hero() {
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            A Liberdade de Focar{" "}
+            Da Agenda Cheia ao{" "}
             <br className="hidden sm:block" />
-            na Excelência Clínica.{" "}
+            Faturamento que Você Merece.{" "}
             <span className="text-shimmer">
-              Nós Cuidamos do Seu Crescimento.
+              Sem Trabalhar Mais Horas.
             </span>
           </h1>
 
@@ -77,11 +77,10 @@ export function Hero() {
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            Alcance o faturamento ideal e a dominância de mercado sem o peso da
-            gestão de marketing. Implementamos sistemas de aquisição de alto
-            padrão que trabalham por você — seja médico, dentista, dermatologista,
-            psicólogo ou qualquer especialista de saúde — garantindo pacientes
-            qualificados enquanto você exerce sua vocação.
+            Sua agenda está cheia, mas o faturamento não cresceu
+            proporcionalmente? Clínicas parceiras aumentam o ticket médio em{" "}
+            <span className="text-foreground font-semibold">47% nos primeiros 90 dias</span>{" "}
+            — sem contratar mais staff, sem mudar sua rotina clínica.
           </p>
 
           {/* CTA Button */}
@@ -96,7 +95,7 @@ export function Hero() {
               className="relative overflow-hidden bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base group"
             >
               <Link href="/contato">
-                <span className="relative z-10">Garantir Minha Vaga na Consultoria</span>
+                <span className="relative z-10">Agendar Diagnóstico Gratuito</span>
                 <span
                   className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   aria-hidden="true"
@@ -113,8 +112,8 @@ export function Hero() {
           >
             {[
               { icon: Users, label: "Clínicas e Profissionais Parceiros", value: "40+" },
-              { icon: TrendingUp, label: "Crescimento Médio de Receita", value: "3.2×" },
-              { icon: Star, label: "NPS Médio", value: "94" },
+              { icon: TrendingUp, label: "Aumento de Ticket Médio em 90 Dias", value: "47%" },
+              { icon: Star, label: "NPS Médio dos Parceiros", value: "94" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-center gap-2">
                 <Icon className="w-4 h-4 text-accent" strokeWidth={1.5} />
@@ -186,16 +185,16 @@ export function Hero() {
             aria-hidden="true"
           >
             <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
-              Retorno sobre Investimento
+              Aumento de Ticket Médio
             </p>
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-heading font-semibold text-foreground">3.2×</span>
-              <span className="text-xs text-accent font-medium">médio</span>
+              <span className="text-2xl font-heading font-semibold text-foreground">+47%</span>
+              <span className="text-xs text-accent font-medium">em 90 dias</span>
             </div>
             <div className="mt-2 h-1 w-full bg-border rounded-full overflow-hidden">
               <div
                 className="h-full bg-accent rounded-full"
-                style={{ width: "76%", transition: "width 1.5s ease 0.8s" }}
+                style={{ width: "47%", transition: "width 1.5s ease 0.8s" }}
               />
             </div>
           </div>

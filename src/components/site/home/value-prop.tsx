@@ -158,7 +158,7 @@ export function ValueProp() {
           <div className="animate-on-scroll anim-fade-up flex items-center gap-3">
             <span className="gold-line" aria-hidden="true" />
             <p className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
-              Nossa Proposta
+              Por Que Clínicas Escolhem a LK Digital
             </p>
           </div>
 
@@ -174,28 +174,23 @@ export function ValueProp() {
           {/* Body copy */}
           <div className="animate-on-scroll anim-fade-up stagger-2 space-y-5 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Você não deveria ter que escolher entre ser um excelente
-              profissional de saúde e um gestor de marketing. A LK Digital
-              assume{" "}
+              Você passou anos se tornando o melhor no que faz. Marketing não
+              deveria consumir esse tempo. A LK Digital instala{" "}
               <span className="text-foreground font-medium">
-                todo o trabalho pesado
+                sistemas de atração de pacientes
               </span>{" "}
-              — da estratégia técnica ao monitoramento de dados — para que seus
-              objetivos de expansão sejam alcançados de forma previsível e veloz.
+              que funcionam enquanto você atende — sem reuniões intermináveis,
+              sem jargão técnico, sem surpresas.
             </p>
             <p>
-              Reduzimos seu esforço operacional ao mínimo, entregando uma{" "}
-              <span className="text-foreground font-medium">
-                estrutura pronta
-              </span>{" "}
-              que atrai o paciente certo, no momento certo.
+              Você vê os números. Nós cuidamos dos bastidores. Simples assim.
             </p>
           </div>
 
           {/* Animated stats */}
           <div className="animate-on-scroll anim-fade-up stagger-3 grid grid-cols-3 gap-6 pt-6 border-t border-border/60">
-            <AnimatedStat value={0} suffix="%" label="Seu tempo em marketing" delay={0} />
-            <AnimatedStat value={100} suffix="%" label="Foco na clínica" delay={150} />
+            <AnimatedStat value={47} suffix="%" label="Aumento de ticket médio" delay={0} />
+            <AnimatedStat value={90} suffix=" dias" label="Para os primeiros resultados" delay={150} />
             <AnimatedStat value={3.2} suffix="×" label="ROI médio comprovado" delay={300} />
           </div>
 
@@ -206,8 +201,8 @@ export function ValueProp() {
               size="lg"
               className="group bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
             >
-              <Link href="/solucoes" className="flex items-center gap-2">
-                Descobrir Como Funciona
+              <Link href="/contato" className="flex items-center gap-2">
+                Agendar Diagnóstico Gratuito
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
