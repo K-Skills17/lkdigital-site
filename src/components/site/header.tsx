@@ -25,7 +25,10 @@ export function Header() {
   const navItems = [
     { label: "Sobre", href: "/sobre" },
     { label: "Soluções", href: "/solucoes" },
+    { label: "Segmentos", href: "/segmentos" },
+    { label: "Casos", href: "/casos" },
     { label: "Insights", href: "/insights" },
+    { label: "FAQ", href: "/faq" },
   ];
 
   return (

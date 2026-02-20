@@ -53,7 +53,7 @@ export function Hero() {
               aria-hidden="true"
             />
             <p className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
-              Marketing Odontológico de Precisão
+              Marketing de Precisão para o Setor de Saúde
             </p>
           </div>
 
@@ -79,8 +79,9 @@ export function Hero() {
           >
             Alcance o faturamento ideal e a dominância de mercado sem o peso da
             gestão de marketing. Implementamos sistemas de aquisição de alto
-            padrão que trabalham por você, garantindo pacientes qualificados
-            enquanto você exerce a sua vocação.
+            padrão que trabalham por você — seja médico, dentista, dermatologista,
+            psicólogo ou qualquer especialista de saúde — garantindo pacientes
+            qualificados enquanto você exerce sua vocação.
           </p>
 
           {/* CTA Button */}
@@ -111,8 +112,8 @@ export function Hero() {
             }`}
           >
             {[
-              { icon: Users, label: "Clínicas Parceiras", value: "40+" },
-              { icon: TrendingUp, label: "Crescimento Médio", value: "3.2×" },
+              { icon: Users, label: "Clínicas e Profissionais Parceiros", value: "40+" },
+              { icon: TrendingUp, label: "Crescimento Médio de Receita", value: "3.2×" },
               { icon: Star, label: "NPS Médio", value: "94" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-center gap-2">
@@ -148,7 +149,7 @@ export function Hero() {
             {!imgError ? (
               <Image
                 src="/images/hero.jpg"
-                alt="Consultório odontológico de alto padrão com dentista atendendo paciente satisfeito — luxo e precisão clínica"
+                alt="Clínica de saúde premium com profissional atendendo paciente — excelência e precisão no setor de saúde"
                 fill
                 priority
                 className="object-cover object-center"

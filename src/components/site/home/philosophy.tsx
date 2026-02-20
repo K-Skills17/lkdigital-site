@@ -31,8 +31,8 @@ export function Philosophy() {
         {/* Philosophy text */}
         <AnimatedSection animation="fade-up" delay={1}>
           <blockquote className="text-xl md:text-2xl lg:text-3xl font-heading leading-[1.5] text-background/85">
-            Acreditamos que o marketing odontológico deve ser tão indolor e
-            preciso quanto uma cirurgia bem executada. Enquanto o mercado foca em
+            Acreditamos que o marketing para saúde deve ser tão criterioso e
+            preciso quanto um diagnóstico bem executado. Enquanto o mercado foca em
             tendências passageiras, a LK Digital foca em{" "}
             <span className="text-accent">fundamentos sólidos</span>,{" "}
             <span className="text-accent">dados verificáveis</span> e{" "}

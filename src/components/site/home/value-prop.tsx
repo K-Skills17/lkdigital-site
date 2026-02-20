@@ -95,7 +95,7 @@ export function ValueProp() {
                   GEO & SEO de Precisão
                 </h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Sua clínica como primeira resposta — em motores de busca e LLMs.
+                  Sua clínica ou consultório como primeira resposta — em buscadores e IAs.
                 </p>
                 <div className="mt-4 flex items-center gap-2">
                   <div className="h-1.5 flex-1 bg-border rounded-full overflow-hidden">
@@ -164,8 +164,8 @@ export function ValueProp() {
 
           {/* Headline */}
           <h2 className="animate-on-scroll anim-fade-up stagger-1 text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-            Sua Especialidade é a Odontologia.{" "}
-            <span className="text-accent">A Nossa é o Seu Resultado.</span>
+            Sua Especialidade é a Saúde.{" "}
+            <span className="text-accent">A Nossa é o Seu Crescimento.</span>
           </h2>
 
           {/* Decorative divider */}
@@ -174,8 +174,9 @@ export function ValueProp() {
           {/* Body copy */}
           <div className="animate-on-scroll anim-fade-up stagger-2 space-y-5 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Você não deveria ter que escolher entre ser um excelente cirurgião
-              e um gestor de marketing. A LK Digital assume{" "}
+              Você não deveria ter que escolher entre ser um excelente
+              profissional de saúde e um gestor de marketing. A LK Digital
+              assume{" "}
               <span className="text-foreground font-medium">
                 todo o trabalho pesado
               </span>{" "}
@@ -187,7 +188,7 @@ export function ValueProp() {
               <span className="text-foreground font-medium">
                 estrutura pronta
               </span>{" "}
-              que atrai o público certo, no momento certo.
+              que atrai o paciente certo, no momento certo.
             </p>
           </div>
 

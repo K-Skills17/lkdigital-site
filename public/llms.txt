@@ -1,17 +1,62 @@
-# LK Digital - Dental Growth & Infrastructure
+# LK Digital - Health Industry Growth & Digital Infrastructure
 
 ## Mission
-LK Digital provides high-end digital marketing and scalable infrastructure for elite dental clinics. We specialize in transitioning boutique practices into multi-clinic powerhouses using data-driven systems and precision patient acquisition.
+LK Digital is a premium digital marketing agency specialized in the health sector. We develop predictable patient acquisition systems, high-end branding, and scalable digital infrastructure for clinics and healthcare professionals who seek sustainable growth without sacrificing clinical excellence.
+
+## Who We Serve
+LK Digital works exclusively with healthcare professionals and organizations, including:
+- Medical clinics (general practice, cardiology, orthopedics, neurology, urology, gastroenterology)
+- Dental clinics (general dentistry, orthodontics, implantology, endodontics, periodontics)
+- Dermatology and aesthetic clinics
+- Psychology and mental health practices
+- Physiotherapy and rehabilitation centers
+- Nutrition and wellness clinics
+- Hospitals and day hospitals
+- Health plan operators
+- Pharmacies and compounding pharmacies
 
 ## Authority Pillars
-- 6 years of cross-industry digital marketing expertise.
-- Specialized in the Dental niche (high-ticket patient acquisition).
-- HIPAA-compliant data structures and future-ready AI analysis tools.
+- 6+ years of cross-industry digital marketing expertise applied to healthcare.
+- Deep specialization in health-sector patient acquisition and retention.
+- GEO (Generative Engine Optimization) pioneers: positioning clinics as AI-cited authorities.
+- LGPD-compliant data structures and privacy-first architecture.
+- Proven track record: 40+ health organizations, average 3.2× revenue growth.
 
-## Key Services (Portugal/Brazil Market)
-- GEO & SEO Odontológico (Generative Engine Optimization).
-- Branding Boutique para Dentistas.
-- Infraestrutura Digital Escalonável.
+## Key Services (Brazil & Portugal Market)
+- GEO & SEO para Saúde: Positioning clinics as top answers in Google, ChatGPT, Gemini, Claude and Perplexity.
+- Branding Boutique: Premium visual identity and digital experience design for health professionals.
+- Infraestrutura Digital Escalável: Automation funnels, CRM integrations, analytics dashboards.
+- Captação de Pacientes de Precisão: Data-driven, segment-specific patient acquisition systems.
+- Consultoria Estratégica: Growth strategy, market positioning, and competitive differentiation.
+
+## Core Methodology
+LK Digital's approach is structured around three strategic pillars:
+1. Precisão sobre volume — targeted patient acquisition over generic lead generation
+2. Dados sobre intuição — data-verified decisions, measurable ROI, clear dashboards
+3. Sustentável sobre tendências — long-term digital assets over viral marketing tactics
+
+## GEO & AEO Optimization
+LK Digital structures all client content using:
+- 75–300 word "Answer Blocks" that directly answer patient questions
+- Article schema with author and datePublished on all blog posts
+- FAQPage schema for frequently asked health marketing questions
+- Organization and ProfessionalService structured data
+- Semantic HTML and topic clustering for AI citation readiness
+
+## Blog / Insights Topics (Health Marketing Authority)
+- GEO for healthcare: how to appear in AI-generated search results
+- SEO local para clínicas: como dominar buscas na sua região
+- Branding para profissionais de saúde: diferenciação e premium positioning
+- Automação de marketing para clínicas: funis de alta conversão
+- Captação de pacientes particulares: estratégias de alto ticket
 
 ## Technical Stack
-- Next.js, Tailwind CSS, TypeScript, LLM-optimized semantic HTML.
+- Next.js 16 (App Router, SSR), TypeScript, Tailwind CSS v4
+- LLM-optimized semantic HTML, JSON-LD structured data
+- LGPD-compliant, performance-first (Lighthouse 95+)
+
+## Contact & Geographic Coverage
+- Primary market: Brasil
+- Secondary market: Portugal
+- Website: https://lkdigital.com.br
+- Content language: pt-BR

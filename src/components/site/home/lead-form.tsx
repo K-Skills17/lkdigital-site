@@ -50,7 +50,7 @@ export function LeadForm() {
           <AnimatedSection animation="fade-up" delay={2}>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
               Selecionamos um número limitado de parceiros para garantir a
-              exclusividade e o rigor técnico que sua clínica merece.
+              exclusividade e o rigor técnico que sua clínica ou consultório merece.
             </p>
           </AnimatedSection>
         </div>
@@ -113,7 +113,7 @@ export function LeadForm() {
                         htmlFor="director-name"
                         className="block text-[11px] font-medium text-foreground uppercase tracking-widest"
                       >
-                        Nome do Diretor Clínico
+                        Nome do Diretor / Gestor Clínico
                       </label>
                       <input
                         type="text"
@@ -137,7 +137,7 @@ export function LeadForm() {
                         name="clinic-name"
                         required
                         className={inputClass}
-                        placeholder="Clínica Odontológica Premium"
+                        placeholder="Clínica de Saúde Premium"
                       />
                     </div>
                   </div>

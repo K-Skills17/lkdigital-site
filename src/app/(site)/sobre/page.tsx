@@ -6,13 +6,15 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Sobre Nós | A História da LK Digital",
   description:
-    "Conheça a LK Digital: 6 anos de experiência em marketing digital de alta performance aplicados exclusivamente ao setor odontológico. Nascemos para devolver o seu tempo.",
+    "Conheça a LK Digital: 6+ anos de experiência em marketing digital de alta performance aplicados ao setor de saúde. Atendemos médicos, dentistas, dermatologistas, psicólogos e outros especialistas.",
   keywords: [
     "sobre LK Digital",
-    "agência marketing odontológico",
+    "agência marketing saúde",
     "história LK Digital",
-    "marketing para dentistas Brasil",
-    "especialistas marketing dental",
+    "marketing para profissionais de saúde Brasil",
+    "especialistas marketing digital clínicas",
+    "marketing para médicos",
+    "marketing para dentistas",
   ],
 };
 
@@ -32,17 +34,18 @@ export default function SobrePage() {
           <div className="w-16 h-px bg-accent my-10" aria-hidden="true" />
 
           <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-            Entendemos que um cirurgião-dentista de elite deve estar focado no
-            paciente, não em algoritmos. A LK Digital foi fundada para preencher
-            a lacuna entre a{" "}
+            Entendemos que um profissional de saúde de elite deve estar focado
+            no paciente, não em algoritmos. A LK Digital foi fundada para
+            preencher a lacuna entre a{" "}
             <span className="text-foreground font-medium">
               excelência clínica
             </span>{" "}
             e o{" "}
             <span className="text-foreground font-medium">
               sucesso comercial previsível
-            </span>
-            .
+            </span>{" "}
+            — para médicos, dentistas, dermatologistas, psicólogos, fisioterapeutas
+            e todas as especialidades que constroem carreiras baseadas em confiança.
           </p>
         </div>
       </section>
@@ -85,7 +88,7 @@ export default function SobrePage() {
               Nossa Trajetória
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-              Da Alta Performance para o Consultório.
+              Da Alta Performance para a Saúde.
             </h2>
           </div>
 
@@ -93,17 +96,19 @@ export default function SobrePage() {
           <div className="lg:col-span-3 space-y-6 text-lg text-muted-foreground leading-relaxed">
             <p>
               Com uma trajetória de{" "}
-              <span className="text-foreground font-medium">seis anos</span>{" "}
+              <span className="text-foreground font-medium">mais de seis anos</span>{" "}
               operando nos bastidores de mercados digitais ultra-competitivos,
-              desenvolvemos uma visão analítica que poucos possuem. Recentemente,
-              decidimos aplicar essa inteligência exclusivamente ao setor
-              odontológico.
+              desenvolvemos uma visão analítica que poucos possuem. Decidimos
+              aplicar essa inteligência ao setor que mais impacta a vida das
+              pessoas: a saúde.
             </p>
 
             <p>
-              Por quê? Porque percebemos que os melhores dentistas estavam
-              sobrecarregados com o marketing, enquanto clínicas medíocres
+              Por quê? Porque percebemos que os melhores profissionais de saúde
+              estavam sobrecarregados com marketing, enquanto clínicas medianas
               dominavam o mercado apenas por saberem usar as ferramentas certas.
+              Médicos, dentistas, dermatologistas e psicólogos de excelência
+              mereciam ter o seu valor reconhecido digitalmente.
             </p>
 
             <p className="text-foreground font-medium text-xl">
@@ -115,8 +120,8 @@ export default function SobrePage() {
               competência técnica seja recompensada com a{" "}
               <span className="text-foreground font-medium">
                 liderança de mercado
-              </span>
-              .
+              </span>{" "}
+              que ela merece — independentemente da especialidade.
             </p>
           </div>
         </div>
@@ -151,7 +156,7 @@ export default function SobrePage() {
                     Antes
                   </span>
                   <h3 className="text-xl font-semibold text-foreground mt-2">
-                    Dentista Sobrecarregado
+                    Profissional Sobrecarregado
                   </h3>
                   <p className="text-muted-foreground mt-2">
                     Dividido entre atender pacientes e gerenciar marketing.
@@ -408,7 +413,8 @@ export default function SobrePage() {
               <p>
                 Na era da Inteligência Artificial, os mecanismos de busca e os
                 LLMs (Large Language Models) como ChatGPT, Gemini e Claude estão
-                redefinindo como pacientes encontram e escolhem seus dentistas.
+                redefinindo como pacientes encontram e escolhem seus médicos,
+                dentistas, dermatologistas e outros especialistas de saúde.
               </p>
 
               <p>
@@ -423,7 +429,7 @@ export default function SobrePage() {
 
               <div className="bg-background p-8 rounded-sm border border-accent/20 my-8">
                 <h3 className="text-xl font-semibold text-foreground mb-4">
-                  Como as IAs categorizam autoridade odontológica:
+                  Como as IAs categorizam autoridade em saúde:
                 </h3>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
@@ -516,9 +522,11 @@ export default function SobrePage() {
                 para ser citada como referência por IAs quando pacientes
                 perguntam:{" "}
                 <em>
-                  &ldquo;Qual o melhor dentista para implantes na minha
+                  &ldquo;Qual o melhor especialista de saúde na minha
                   região?&rdquo;
-                </em>
+                </em>{" "}
+                — seja um cardiologista, dermatologista, ortopedista ou qualquer
+                outra especialidade.
               </p>
             </div>
           </div>
@@ -530,7 +538,7 @@ export default function SobrePage() {
               size="lg"
               className="border-accent text-accent hover:bg-accent hover:text-white px-8 py-6 text-base"
             >
-              <Link href="/solucoes">Descubra o Método GEO</Link>
+              <Link href="/faq">Perguntas Frequentes sobre GEO & SEO</Link>
             </Button>
           </div>
         </div>

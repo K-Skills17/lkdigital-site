@@ -4,9 +4,17 @@ import { LKGuarantee } from "@/components/shared/lk-guarantee";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Soluções | A Suite de Eficiência para Clínicas Odontológicas",
+  title: "Soluções | Marketing Digital de Alta Performance para Saúde",
   description:
-    "Descubra nossas soluções de marketing digital para dentistas: Crescimento Acelerado (GEO/SEO), Branding de Elite e Automação Inteligente. Resultados garantidos.",
+    "Descubra nossas soluções de marketing digital para clínicas e profissionais de saúde: GEO & SEO, Branding Premium e Automação Inteligente. Captação de pacientes com resultados garantidos.",
+  keywords: [
+    "soluções marketing saúde",
+    "GEO para clínicas",
+    "SEO para médicos",
+    "branding clínica médica",
+    "automação marketing saúde",
+    "captação de pacientes",
+  ],
 };
 
 const services = [
@@ -14,11 +22,11 @@ const services = [
     axis: "I",
     title: "Crescimento Acelerado",
     subtitle: "GEO & SEO",
-    benefitFocus: "Apareça onde a decisão é tomada, sem esforço.",
+    benefitFocus: "Apareça onde a decisão de saúde é tomada, sem esforço.",
     description:
-      "Enquanto seus concorrentes lutam por atenção, sua clínica é apresentada como a solução óbvia por IAs e buscadores. Nós fazemos a engenharia semântica completa para que você domine as buscas locais de forma automática.",
+      "Quando um paciente pergunta ao Google ou ao ChatGPT qual especialista procurar, sua clínica deve ser a resposta. Nós fazemos a engenharia semântica completa para que você domine as buscas locais e as respostas de IA de forma sistemática e sustentável — independentemente da sua especialidade.",
     result:
-      "Fluxo constante de leads qualificados sem precisar gravar vídeos diários ou gerenciar redes sociais.",
+      "Fluxo constante de pacientes qualificados sem precisar gravar vídeos diários ou gerenciar redes sociais.",
     icon: (
       <svg
         className="w-8 h-8"
@@ -39,11 +47,11 @@ const services = [
     axis: "II",
     title: "Valor Percebido Instantâneo",
     subtitle: "Branding",
-    benefitFocus: "Posicionamento de elite que justifica seus honorários.",
+    benefitFocus: "Posicionamento de elite que justifica seus honorários na saúde.",
     description:
-      "Criamos uma presença digital que comunica autoridade antes mesmo de você abrir a boca. Atraímos pacientes que buscam qualidade, não preço, reduzindo as objeções de vendas e aumentando a aceitação de orçamentos.",
+      "Criamos uma presença digital que comunica autoridade, confiança e exclusividade — antes mesmo de o paciente agendar. Atraímos pacientes que buscam qualidade, não preço, reduzindo objeções e aumentando a aceitação de procedimentos de alto valor para médicos, dentistas e especialistas.",
     result:
-      "Uma marca que trabalha como um filtro, atraindo apenas quem valoriza seu trabalho de alto nível.",
+      "Uma marca que trabalha como um filtro estratégico, atraindo pacientes que valorizam sua excelência clínica.",
     icon: (
       <svg
         className="w-8 h-8"
@@ -97,13 +105,13 @@ export default function SolucoesPage() {
             Nossas Soluções
           </p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
-            A Suite de Eficiência para o{" "}
-            <span className="text-accent">Crescimento da Sua Clínica</span>
+            A Suite de Crescimento para{" "}
+            <span className="text-accent">Clínicas e Profissionais de Saúde</span>
           </h1>
           <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
             Três eixos estratégicos desenhados para eliminar o trabalho pesado
-            do marketing e entregar resultados tangíveis com o mínimo de esforço
-            da sua parte.
+            do marketing e entregar resultados tangíveis para médicos, dentistas,
+            dermatologistas e qualquer especialidade do setor de saúde.
           </p>
         </div>
       </section>
@@ -210,11 +218,11 @@ export default function SolucoesPage() {
       <section className="section-premium bg-muted">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-            Pronto para Eliminar o Peso do Marketing?
+            Pronto para Transformar sua Presença Digital na Saúde?
           </h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            Agende uma consultoria estratégica e descubra qual combinação de
-            soluções é ideal para o momento da sua clínica.
+            Agende uma diagnose estratégica gratuita e descubra qual combinação
+            de soluções é ideal para o momento da sua clínica ou consultório.
           </p>
           <div className="mt-10">
             <Button

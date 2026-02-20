@@ -4,30 +4,30 @@ import { Search, Palette, Cpu } from "lucide-react";
 const pillars = [
   {
     number: "I",
-    title: "Aquisição de Precisão",
-    subtitle: "GEO & SEO",
+    title: "Aquisição de Pacientes de Precisão",
+    subtitle: "GEO & SEO para Saúde",
     description:
-      "Onde os pacientes buscam respostas, sua clínica deve ser a autoridade. Otimizamos sua presença para motores de busca e inteligências artificiais (LLMs), garantindo que você seja a primeira escolha.",
+      "Quando um paciente pergunta ao Google ou a uma IA qual especialista procurar na sua região, sua clínica deve ser a resposta. Otimizamos sua presença para buscadores tradicionais e LLMs como ChatGPT, Gemini e Claude, garantindo que você seja a primeira escolha — de forma orgânica e sustentável.",
     icon: Search,
-    detail: "Visibilidade dominante em Google e ChatGPT",
+    detail: "Visibilidade dominante em Google, ChatGPT e Gemini",
   },
   {
     number: "II",
     title: "Branding e Experiência Boutique",
-    subtitle: "Identidade Premium",
+    subtitle: "Identidade Premium para Saúde",
     description:
-      "A percepção de valor começa antes da consulta. Desenhamos identidades visuais e experiências digitais que comunicam luxo, confiança e exclusividade.",
+      "A percepção de valor começa antes da consulta. Desenhamos identidades visuais e experiências digitais que comunicam autoridade, confiança e exclusividade — posicionando sua clínica ou consultório acima da concorrência e atraindo pacientes que valorizam qualidade, não preço.",
     icon: Palette,
     detail: "Da identidade visual ao site de alta conversão",
   },
   {
     number: "III",
     title: "Sistemas de Escala Digital",
-    subtitle: "Infraestrutura",
+    subtitle: "Infraestrutura e Automação",
     description:
-      "Preparando o terreno para o futuro. Estruturamos sua coleta de dados e funis de conversão para suportar a expansão de múltiplas unidades com eficiência operacional.",
+      "Preparamos o terreno para o seu crescimento sustentável. Estruturamos funis de conversão, automações de relacionamento com pacientes e dashboards de inteligência de dados para suportar a expansão de uma ou múltiplas unidades com eficiência operacional máxima.",
     icon: Cpu,
-    detail: "Automações e dashboards prontos para expansão",
+    detail: "Automações, CRM e dashboards prontos para expansão",
   },
 ];
 
@@ -51,7 +51,8 @@ export function Pillars() {
         <AnimatedSection animation="fade-up" delay={2}>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Um ecossistema completo de crescimento — estratégia, identidade e
-            infraestrutura — construído especificamente para clínicas odontológicas de alto padrão.
+            infraestrutura — construído para clínicas, consultórios e profissionais
+            de saúde que buscam excelência e escala sustentável.
           </p>
         </AnimatedSection>
       </div>
@@ -118,17 +119,19 @@ export function Pillars() {
           <div className="marquee-track flex items-center gap-8 text-xs uppercase tracking-[0.3em] text-muted-foreground/50 pr-8">
             {Array.from({ length: 2 }, (_, k) => (
               <span key={k} className="flex items-center gap-8">
-                <span>GEO & SEO</span>
+                <span>GEO & SEO para Saúde</span>
                 <span className="text-accent/40">·</span>
                 <span>Branding Premium</span>
                 <span className="text-accent/40">·</span>
                 <span>Infraestrutura Digital</span>
                 <span className="text-accent/40">·</span>
-                <span>Aquisição de Precisão</span>
+                <span>Captação de Pacientes</span>
                 <span className="text-accent/40">·</span>
                 <span>Escala Sustentável</span>
                 <span className="text-accent/40">·</span>
-                <span>Identidade de Luxo</span>
+                <span>Medicina · Odontologia · Dermatologia</span>
+                <span className="text-accent/40">·</span>
+                <span>Psicologia · Fisioterapia · Nutrição</span>
                 <span className="text-accent/40">·</span>
               </span>
             ))}
