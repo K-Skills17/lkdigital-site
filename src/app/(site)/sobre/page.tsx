@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LKGuarantee } from "@/components/shared/lk-guarantee";
 import type { Metadata } from "next";
@@ -50,31 +51,17 @@ export default function SobrePage() {
         </div>
       </section>
 
-      {/* Visual placeholder section */}
+      {/* Team image — wide banner */}
       <section className="py-12">
         <div className="max-w-5xl mx-auto">
-          <div className="aspect-[21/9] bg-muted rounded-sm flex items-center justify-center">
-            <div className="text-center space-y-4 p-8">
-              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                <svg
-                  className="w-8 h-8 text-accent"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <p className="text-sm text-muted-foreground max-w-md">
-                Imagem editorial: Ambiente de trabalho premium, equipe focada em
-                análise de dados e estratégias digitais
-              </p>
-            </div>
+          <div className="relative aspect-[21/9] overflow-hidden rounded-sm bg-muted">
+            <Image
+              src="/images/sobre-team.jpg"
+              alt="Equipe LK Digital analisando estratégias digitais em ambiente de trabalho premium"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
           </div>
         </div>
       </section>
@@ -197,20 +184,14 @@ export default function SobrePage() {
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
                 <div className="md:pl-12">
-                  <div className="w-full aspect-video bg-muted rounded-sm flex items-center justify-center">
-                    <svg
-                      className="w-12 h-12 text-muted-foreground/30"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-muted">
+                    <Image
+                      src="/images/sobre-step-1.jpg"
+                      alt="Profissional de saúde sobrecarregado antes da parceria LK Digital"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
                 </div>
               </div>
@@ -231,20 +212,14 @@ export default function SobrePage() {
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
                 <div className="md:order-1 md:pr-12">
-                  <div className="w-full aspect-video bg-muted rounded-sm flex items-center justify-center">
-                    <svg
-                      className="w-12 h-12 text-muted-foreground/30"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
-                      />
-                    </svg>
+                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-muted">
+                    <Image
+                      src="/images/sobre-step-2.jpg"
+                      alt="Profissional de saúde monitorando dashboard de pacientes durante parceria LK Digital"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
                 </div>
               </div>
@@ -265,20 +240,14 @@ export default function SobrePage() {
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
                 <div className="md:pl-12">
-                  <div className="w-full aspect-video bg-muted rounded-sm flex items-center justify-center">
-                    <svg
-                      className="w-12 h-12 text-muted-foreground/30"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                      />
-                    </svg>
+                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-muted">
+                    <Image
+                      src="/images/sobre-step-3.jpg"
+                      alt="Clínica escalável com crescimento previsível após parceria LK Digital"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
                 </div>
               </div>
@@ -368,27 +337,14 @@ export default function SobrePage() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left: Visual */}
           <div className="relative">
-            <div className="aspect-square bg-muted rounded-sm flex items-center justify-center">
-              <div className="text-center space-y-4 p-8">
-                <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                  <svg
-                    className="w-10 h-10 text-accent"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Ilustração: Rede de clínicas escaláveis conectadas
-                </p>
-              </div>
+            <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+              <Image
+                src="/images/sobre-step-3.jpg"
+                alt="Especialista de saúde em clínica escalável — resultado final da parceria LK Digital"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
             <div
               className="absolute -top-4 -left-4 w-20 h-20 border-l-2 border-t-2 border-accent/30"
