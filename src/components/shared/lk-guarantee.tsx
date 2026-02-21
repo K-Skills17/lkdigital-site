@@ -41,13 +41,13 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
 
         {/* Body copy */}
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-          Nossa metodologia foi construída ao longo de seis anos em setores de
-          alta competição — e-commerce, educação online e SaaS. Quando chegamos
-          ao setor de saúde, trouxemos um{" "}
+          Você recebe{" "}
           <span className="text-foreground font-medium">
-            rigor analítico que poucos concorrentes possuem
+            visibilidade crescente
           </span>
-          . Se não avançarmos em direção aos seus objetivos, nós nos
+          , um posicionamento que trabalha por você 24h e pacientes que chegam
+          qualificados — sem depender de indicações, sem gerir campanhas, sem
+          burocracia. Se não avançarmos em direção aos seus objetivos, nós nos
           responsabilizamos — sem letras miúdas.
         </p>
 
@@ -70,7 +70,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
               </svg>
             </div>
             <span className="text-sm text-foreground">
-              Metodologia Proprietária
+              Visibilidade Crescente
             </span>
           </div>
 
@@ -111,7 +111,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
                 />
               </svg>
             </div>
-            <span className="text-sm text-foreground">Exclusividade por Seleção</span>
+            <span className="text-sm text-foreground">Resultados Sem Complicação</span>
           </div>
         </div>
 

@@ -158,7 +158,7 @@ export function ValueProp() {
           <div className="animate-on-scroll anim-fade-up flex items-center gap-3">
             <span className="gold-line" aria-hidden="true" />
             <p className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
-              Por Que Clínicas Escolhem a LK Digital
+              O Que Você Ganha
             </p>
           </div>
 
@@ -190,16 +190,16 @@ export function ValueProp() {
           {/* Authority pillars */}
           <div className="animate-on-scroll anim-fade-up stagger-3 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-border/60">
             <div>
-              <p className="text-sm font-semibold text-foreground mb-1">Testado em Alta Competição</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">Metodologia forjada em e-commerce e educação antes de chegar à saúde.</p>
+              <p className="text-sm font-semibold text-foreground mb-1">Você Aparece Onde os Pacientes Buscam</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Google, ChatGPT, Maps — sua clínica como primeira resposta antes mesmo de um clique.</p>
             </div>
             <div>
-              <p className="text-sm font-semibold text-foreground mb-1">Especialização Exclusiva</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">100% focado no setor de saúde. Não somos uma agência generalista.</p>
+              <p className="text-sm font-semibold text-foreground mb-1">Você Não Precisa Gerenciar Nada</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Reuniões mínimas, relatórios claros, execução nossa. Você foca nos pacientes.</p>
             </div>
             <div>
-              <p className="text-sm font-semibold text-foreground mb-1">Parceria Boutique</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">Selecionamos cada parceiro. Atenção irrestrita, não volume.</p>
+              <p className="text-sm font-semibold text-foreground mb-1">Você Tem Atenção Total</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Um parceiro dedicado exclusivamente à sua clínica. Não é mais um cliente numa carteira de 50.</p>
             </div>
           </div>
 

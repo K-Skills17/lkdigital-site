@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Briefcase, Cpu } from "lucide-react";
+import { Eye, UserCheck, Clock } from "lucide-react";
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -53,7 +53,7 @@ export function Hero() {
               aria-hidden="true"
             />
             <p className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
-              Metodologia de Precisão para o Setor de Saúde
+              Mais Pacientes. Menos Esforço. Agenda Sempre Cheia.
             </p>
           </div>
 
@@ -77,10 +77,10 @@ export function Hero() {
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            Forjamos nossa metodologia em e-commerce e educação — dois dos
-            mercados mais competitivos do Brasil. Hoje aplicamos esse{" "}
-            <span className="text-foreground font-semibold">rigor analítico com exclusividade</span>{" "}
-            ao setor de saúde, para que você foque no que sabe fazer melhor.
+            Sua clínica encontrada pelos pacientes certos — no Google, no
+            ChatGPT e nas IAs da sua região.{" "}
+            <span className="text-foreground font-semibold">Você cuida dos pacientes.
+            Nós cuidamos da visibilidade.</span>
           </p>
 
           {/* CTA Button */}
@@ -111,9 +111,9 @@ export function Hero() {
             }`}
           >
             {[
-              { icon: BookOpen, label: "Anos em mercados digitais", value: "6+" },
-              { icon: Briefcase, label: "Setores: e-commerce, educação e saúde", value: "3" },
-              { icon: Cpu, label: "Pioneiros em GEO para saúde", value: "GEO" },
+              { icon: Eye, label: "Visibilidade ativa, 24 horas por dia", value: "24h" },
+              { icon: UserCheck, label: "Pacientes qualificados antes de ligar", value: "100%" },
+              { icon: Clock, label: "Horas de marketing que você não precisa gerir", value: "Zero" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-center gap-2">
                 <Icon className="w-4 h-4 text-accent" strokeWidth={1.5} />
@@ -185,11 +185,11 @@ export function Hero() {
             aria-hidden="true"
           >
             <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
-              Especialização Digital
+              Agenda Cheia
             </p>
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-heading font-semibold text-foreground">6+</span>
-              <span className="text-xs text-accent font-medium">anos</span>
+              <span className="text-2xl font-heading font-semibold text-foreground">Todo</span>
+              <span className="text-xs text-accent font-medium">mês</span>
             </div>
             <div className="mt-2 h-1 w-full bg-border rounded-full overflow-hidden">
               <div
