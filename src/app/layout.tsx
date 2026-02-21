@@ -2,44 +2,45 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 /**
- * SEO Metadata optimized for GEO (Generative Engine Optimization)
- * Focused on Portuguese market for dental clinic marketing
+ * SEO Metadata optimized for GEO (Generative Engine Optimization) and AEO
+ * Focused on the health industry — clinics, hospitals, and healthcare professionals
  */
 export const metadata: Metadata = {
-  // Base URL for resolving relative URLs in metadata
   metadataBase: new URL("https://lkdigital.com.br"),
 
-  // Core metadata
   title: {
-    default: "LK Digital | Marketing Digital para Dentistas e Clínicas Odontológicas",
+    default: "LK Digital | Marketing Digital para Clínicas e Profissionais de Saúde",
     template: "%s | LK Digital",
   },
   description:
-    "A LK Digital é especialista em marketing digital para dentistas e clínicas odontológicas. Desenvolvemos sistemas previsíveis de aquisição de pacientes, estratégias de conversão e posicionamento premium para profissionais da odontologia que buscam crescimento sustentável.",
+    "A LK Digital é especialista em marketing digital para clínicas, hospitais e profissionais de saúde. Desenvolvemos sistemas previsíveis de aquisição de pacientes, estratégias de posicionamento premium e infraestrutura digital escalável para quem busca crescimento sustentável no setor da saúde.",
 
-  // Keywords for search engines and AI crawlers
   keywords: [
+    "marketing digital para clínicas de saúde",
+    "marketing para médicos",
+    "captação de pacientes",
     "marketing digital para dentistas",
-    "marketing odontológico",
-    "captação de pacientes odontologia",
-    "marketing para clínicas odontológicas",
-    "agência de marketing dental",
-    "estratégia digital para dentistas",
-    "geração de leads odontologia",
-    "posicionamento para dentistas",
-    "consultoria marketing odontológico",
-    "gestão de redes sociais dentistas",
-    "SEO para clínicas odontológicas",
-    "tráfego pago odontologia",
+    "marketing para clínicas médicas",
+    "agência de marketing saúde",
+    "SEO para clínicas",
+    "GEO para saúde",
+    "marketing para dermatologistas",
+    "marketing para psicólogos",
+    "marketing para fisioterapeutas",
+    "marketing para nutricionistas",
+    "marketing para ortopedistas",
+    "marketing para cardiologistas",
+    "posicionamento digital para profissionais de saúde",
+    "consultoria marketing saúde",
+    "branding para clínicas",
+    "geração de leads saúde",
     "LK Digital",
   ],
 
-  // Author and creator information
   authors: [{ name: "LK Digital", url: "https://lkdigital.com.br" }],
   creator: "LK Digital",
   publisher: "LK Digital",
 
-  // Robots configuration for search engines and AI crawlers
   robots: {
     index: true,
     follow: true,
@@ -52,44 +53,39 @@ export const metadata: Metadata = {
     },
   },
 
-  // Open Graph for social sharing and AI context
   openGraph: {
     type: "website",
     locale: "pt_BR",
     url: "https://lkdigital.com.br",
     siteName: "LK Digital",
-    title: "LK Digital | Marketing Digital Premium para Dentistas",
+    title: "LK Digital | Marketing Digital Premium para Saúde",
     description:
-      "Sistemas previsíveis de aquisição de pacientes e estratégias de conversão para clínicas odontológicas que buscam crescimento sustentável e posicionamento premium no mercado.",
+      "Sistemas previsíveis de aquisição de pacientes e estratégias de posicionamento para clínicas e profissionais de saúde que buscam crescimento sustentável.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "LK Digital - Marketing Digital para Dentistas",
+        alt: "LK Digital - Marketing Digital para Clínicas e Profissionais de Saúde",
       },
     ],
   },
 
-  // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: "LK Digital | Marketing Digital para Dentistas",
+    title: "LK Digital | Marketing Digital para Saúde",
     description:
-      "Sistemas previsíveis de aquisição de pacientes e conversão para clínicas odontológicas. Posicionamento premium para dentistas.",
+      "Sistemas previsíveis de aquisição de pacientes para clínicas e profissionais de saúde. Posicionamento premium, SEO e GEO aplicados ao setor.",
     images: ["/og-image.jpg"],
     creator: "@lkdigital",
   },
 
-  // Verification for search consoles
   verification: {
     google: "google-site-verification-code",
   },
 
-  // Category for better AI understanding
   category: "Marketing Digital",
 
-  // Alternate languages (for future expansion)
   alternates: {
     canonical: "https://lkdigital.com.br",
     languages: {
@@ -97,13 +93,12 @@ export const metadata: Metadata = {
     },
   },
 
-  // Additional metadata for GEO optimization
   other: {
     "geo.region": "BR",
     "geo.placename": "Brasil",
     "content-language": "pt-BR",
-    "audience": "dentistas, clínicas odontológicas, profissionais de odontologia",
-    "topic": "marketing digital, odontologia, captação de pacientes",
+    "audience": "médicos, dentistas, clínicas de saúde, hospitais, profissionais de saúde",
+    "topic": "marketing digital, saúde, captação de pacientes, SEO, GEO",
     "coverage": "Brasil",
     "distribution": "global",
     "rating": "general",

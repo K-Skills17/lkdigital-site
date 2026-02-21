@@ -1,122 +1,220 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
+function useCountUp(target: number, duration = 1600, decimals = 0) {
+  const [value, setValue] = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [started]);
+
+  useEffect(() => {
+    if (!started) return;
+    const start = performance.now();
+    const raf = requestAnimationFrame(function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(parseFloat((eased * target).toFixed(decimals)));
+      if (progress < 1) requestAnimationFrame(tick);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [started, target, duration, decimals]);
+
+  return { ref, value };
+}
+
+function AnimatedStat({
+  value,
+  suffix,
+  label,
+  delay,
+}: {
+  value: number;
+  suffix: string;
+  label: string;
+  delay: number;
+}) {
+  const decimals = value % 1 !== 0 ? 1 : 0;
+  const { ref, value: count } = useCountUp(value, 1600, decimals);
+
+  return (
+    <div
+      ref={ref}
+      className="flex flex-col"
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div className="text-4xl md:text-5xl font-heading text-accent counter-value">
+        {count.toFixed(decimals)}{suffix}
+      </div>
+      <p className="text-sm text-muted-foreground mt-2 leading-snug">{label}</p>
+    </div>
+  );
+}
 
 export function ValueProp() {
   return (
-    <section className="section-premium">
-      {/* 60/40 Split Layout */}
-      <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
-        {/* Left: Copy (60%) */}
-        <div className="lg:col-span-3 space-y-8">
-          {/* Section eyebrow */}
-          <p className="text-sm font-medium text-accent uppercase tracking-widest">
-            Nossa Proposta
-          </p>
+    <section className="section-premium relative overflow-hidden">
 
-          {/* Section title */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-            Sua Especialidade é a Odontologia.{" "}
-            <span className="text-accent">A Nossa é o Seu Resultado.</span>
-          </h2>
+      {/* Background accent rectangle */}
+      <div
+        className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-transparent via-accent/30 to-transparent pointer-events-none"
+        aria-hidden="true"
+      />
 
-          {/* Decorative divider */}
-          <div className="w-16 h-px bg-accent" aria-hidden="true" />
+      <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+        {/* ── LEFT: Visual panel (40%) */}
+        <div className="lg:col-span-2 order-2 lg:order-1">
+          <div className="relative">
+            {/* Main visual — editorial card stack */}
+            <div className="relative space-y-4">
 
-          {/* Body copy */}
-          <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-            <p>
-              Você não deveria ter que escolher entre ser um excelente cirurgião
-              e um gestor de marketing. A LK Digital assume{" "}
-              <span className="text-foreground font-medium">
-                todo o trabalho pesado
-              </span>{" "}
-              — da estratégia técnica ao monitoramento de dados — para que seus
-              objetivos de expansão sejam alcançados de forma previsível e veloz.
-            </p>
+              {/* Card 1 — Strategy */}
+              <div className="animate-on-scroll anim-fade-right glass-card p-6 rounded-sm">
+                <p className="text-[10px] uppercase tracking-widest text-accent mb-2">
+                  Estratégia
+                </p>
+                <h4 className="text-base font-semibold text-foreground mb-1">
+                  GEO & SEO de Precisão
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Sua clínica ou consultório como primeira resposta — em buscadores e IAs.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <div className="h-1.5 flex-1 bg-border rounded-full overflow-hidden">
+                    <div className="h-full bg-accent rounded-full" style={{ width: "82%" }} />
+                  </div>
+                  <span className="text-xs text-accent font-medium">82%</span>
+                </div>
+              </div>
 
-            <p>
-              Reduzimos seu esforço operacional ao mínimo, entregando uma{" "}
-              <span className="text-foreground font-medium">
-                estrutura pronta
-              </span>{" "}
-              que atrai o público certo, no momento certo.
+              {/* Card 2 — Branding (offset) */}
+              <div className="animate-on-scroll anim-fade-right stagger-2 glass-card p-6 rounded-sm ml-8">
+                <p className="text-[10px] uppercase tracking-widest text-accent mb-2">
+                  Branding
+                </p>
+                <h4 className="text-base font-semibold text-foreground mb-1">
+                  Identidade Premium
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Percepção de valor elevada antes mesmo da primeira consulta.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <div className="h-1.5 flex-1 bg-border rounded-full overflow-hidden">
+                    <div className="h-full bg-accent rounded-full" style={{ width: "91%" }} />
+                  </div>
+                  <span className="text-xs text-accent font-medium">91%</span>
+                </div>
+              </div>
+
+              {/* Card 3 — Infrastructure */}
+              <div className="animate-on-scroll anim-fade-right stagger-3 glass-card p-6 rounded-sm">
+                <p className="text-[10px] uppercase tracking-widest text-accent mb-2">
+                  Infraestrutura
+                </p>
+                <h4 className="text-base font-semibold text-foreground mb-1">
+                  Sistemas de Escala
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Funis e automações preparados para múltiplas unidades.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <div className="h-1.5 flex-1 bg-border rounded-full overflow-hidden">
+                    <div className="h-full bg-accent rounded-full" style={{ width: "74%" }} />
+                  </div>
+                  <span className="text-xs text-accent font-medium">74%</span>
+                </div>
+              </div>
+
+              {/* Decorative dot grid behind cards */}
+              <div
+                className="absolute -z-10 -bottom-8 -left-8 w-40 h-40 dot-grid"
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ── RIGHT: Copy (60%) */}
+        <div className="lg:col-span-3 order-1 lg:order-2 space-y-8">
+          {/* Eyebrow */}
+          <div className="animate-on-scroll anim-fade-up flex items-center gap-3">
+            <span className="gold-line" aria-hidden="true" />
+            <p className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
+              O Que Você Ganha
             </p>
           </div>
 
-          {/* Stats row */}
-          <div className="flex flex-wrap gap-8 pt-4">
+          {/* Headline */}
+          <h2 className="animate-on-scroll anim-fade-up stagger-1 text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
+            Sua Especialidade é a Saúde.{" "}
+            <span className="text-accent">A Nossa é o Seu Crescimento.</span>
+          </h2>
+
+          {/* Decorative divider */}
+          <div className="animate-on-scroll anim-fade-in stagger-2 w-16 h-px bg-accent" aria-hidden="true" />
+
+          {/* Body copy */}
+          <div className="animate-on-scroll anim-fade-up stagger-2 space-y-5 text-lg text-muted-foreground leading-relaxed">
+            <p>
+              Você passou anos se tornando o melhor no que faz. Marketing não
+              deveria consumir esse tempo. A LK Digital instala{" "}
+              <span className="text-foreground font-medium">
+                sistemas de atração de pacientes
+              </span>{" "}
+              que funcionam enquanto você atende — sem reuniões intermináveis,
+              sem jargão técnico, sem surpresas.
+            </p>
+            <p>
+              Você vê os números. Nós cuidamos dos bastidores. Simples assim.
+            </p>
+          </div>
+
+          {/* Authority pillars */}
+          <div className="animate-on-scroll anim-fade-up stagger-3 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-border/60">
             <div>
-              <div className="text-3xl md:text-4xl font-heading text-accent">
-                0%
-              </div>
-              <p className="text-sm text-muted-foreground mt-1">
-                Seu tempo em marketing
-              </p>
+              <p className="text-sm font-semibold text-foreground mb-1">Você Aparece Onde os Pacientes Buscam</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Google, ChatGPT, Maps — sua clínica como primeira resposta antes mesmo de um clique.</p>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-heading text-accent">
-                100%
-              </div>
-              <p className="text-sm text-muted-foreground mt-1">
-                Foco na clínica
-              </p>
+              <p className="text-sm font-semibold text-foreground mb-1">Você Não Precisa Gerenciar Nada</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Reuniões mínimas, relatórios claros, execução nossa. Você foca nos pacientes.</p>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-heading text-accent">
-                ∞
-              </div>
-              <p className="text-sm text-muted-foreground mt-1">
-                Potencial de escala
-              </p>
+              <p className="text-sm font-semibold text-foreground mb-1">Você Tem Atenção Total</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Um parceiro dedicado exclusivamente à sua clínica. Não é mais um cliente numa carteira de 50.</p>
             </div>
           </div>
 
           {/* CTA */}
-          <div className="pt-4">
+          <div className="animate-on-scroll anim-fade-up stagger-4 pt-2">
             <Button
               asChild
               size="lg"
-              className="bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
+              className="group bg-accent text-white hover:bg-accent-dark px-8 py-6 text-base"
             >
-              <Link href="/solucoes">Descobrir Como Funciona</Link>
+              <Link href="/contato" className="flex items-center gap-2">
+                Agendar Diagnóstico Gratuito
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
-          </div>
-        </div>
-
-        {/* Right: Image Placeholder (40%) */}
-        <div className="lg:col-span-2">
-          <div className="relative">
-            <div className="aspect-[3/4] bg-muted rounded-sm overflow-hidden">
-              {/* Placeholder for image */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center space-y-4 p-6">
-                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                    <svg
-                      className="w-7 h-7 text-accent"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Dentista focado no atendimento enquanto gráficos de
-                    crescimento aparecem ao fundo
-                  </p>
-                </div>
-              </div>
-            </div>
-            {/* Decorative accent */}
-            <div
-              className="absolute -top-4 -left-4 w-20 h-20 border-l-2 border-t-2 border-accent/30"
-              aria-hidden="true"
-            />
           </div>
         </div>
       </div>
