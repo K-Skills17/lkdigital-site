@@ -6,11 +6,12 @@ import type { BlogPost } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Insights | LK Digital — Marketing Estratégico para Saúde",
   description:
-    "Artigos especializados em GEO, SEO local e marketing digital para clínicas médicas, odontológicas e profissionais de saúde no Brasil. Conteúdo técnico e atualizado para 2026.",
+    "Artigos especializados em GEO, SEO local, gestão de mídia paga e marketing digital para clínicas médicas e profissionais de saúde no Brasil. Conteúdo técnico sobre o sistema integrado de aquisição de pacientes.",
   keywords: [
     "marketing digital para clínicas",
     "SEO para médicos",
     "GEO para saúde",
+    "Google Ads para clínicas",
     "captação de pacientes",
     "marketing médico",
   ],
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Insights | LK Digital — Marketing Estratégico para Saúde",
     description:
-      "Artigos especializados em GEO, SEO local e marketing digital para clínicas médicas e profissionais de saúde.",
+      "Artigos especializados em GEO, SEO local, mídia paga e marketing de saúde integrado para clínicas e profissionais.",
     url: "https://lkdigital.com.br/insights",
     siteName: "LK Digital",
     locale: "pt_BR",
@@ -29,50 +30,57 @@ export const metadata: Metadata = {
 };
 
 const categoryColors: Record<string, string> = {
-  "GEO & SEO": "bg-indigo-50 text-indigo-700 ring-indigo-600/20",
-  "Marketing de Saúde": "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
-  "SEO Local": "bg-sky-50 text-sky-700 ring-sky-600/20",
+  "GEO & SEO": "bg-amber-50 text-amber-800 ring-amber-600/20",
+  "Marketing de Saúde": "bg-stone-100 text-stone-700 ring-stone-600/20",
+  "SEO Local": "bg-[#F9F6F0] text-[#8B6914] ring-[#C5A368]/30",
+  "Gestão de Mídia Paga": "bg-[#1A1A1A] text-[#C5A368] ring-[#C5A368]/30",
 };
 
 function getCategoryClasses(category: string): string {
   return (
-    categoryColors[category] ?? "bg-slate-50 text-slate-700 ring-slate-600/20"
+    categoryColors[category] ?? "bg-stone-100 text-stone-700 ring-stone-600/20"
   );
 }
 
 export default async function InsightsPage() {
-  const sortedPosts = await getAllPosts(); // already sorted newest-first
+  const sortedPosts = await getAllPosts();
 
   return (
-    <main className="bg-white">
+    <main className="bg-[#FAFAFA]">
       {/* ── Hero Section ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800 py-20 sm:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#1A1A1A] to-[#2C2C2C] py-20 sm:py-28">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 70% 40%, #4f46e5 0%, transparent 60%), radial-gradient(circle at 20% 80%, #0ea5e9 0%, transparent 50%)",
+              "radial-gradient(circle at 70% 40%, #C5A368 0%, transparent 60%), radial-gradient(circle at 20% 80%, #A8894F 0%, transparent 50%)",
           }}
         />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-indigo-400">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[#C5A368]">
               Conhecimento Especializado
             </p>
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
               Insights LK Digital
             </h1>
-            <p className="mt-6 text-lg leading-8 text-slate-300">
-              Estratégias avançadas de marketing digital, GEO e SEO local
-              desenvolvidas especificamente para clínicas e profissionais de
-              saúde no Brasil. Conteúdo técnico, ético e orientado a resultados.
+            <p className="mt-6 text-lg leading-8 text-white/75">
+              Estratégias avançadas de marketing digital para clínicas e
+              profissionais de saúde: GEO, SEO local, gestão de mídia paga e
+              crescimento orgânico. Cada artigo é parte de um sistema integrado
+              de aquisição de pacientes.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              {["GEO & SEO", "Marketing de Saúde", "SEO Local"].map((cat) => (
+              {[
+                "GEO & SEO",
+                "Marketing de Saúde",
+                "SEO Local",
+                "Gestão de Mídia Paga",
+              ].map((cat) => (
                 <span
                   key={cat}
-                  className="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white ring-1 ring-white/20 backdrop-blur-sm"
+                  className="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-[#C5A368] ring-1 ring-[#C5A368]/30 backdrop-blur-sm"
                 >
                   {cat}
                 </span>
@@ -92,16 +100,16 @@ export default async function InsightsPage() {
         </h2>
 
         {/* Stats bar */}
-        <div className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-8">
-          <p className="text-sm text-slate-500">
-            <span className="font-semibold text-slate-900">
+        <div className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#E5E5E5] pb-8">
+          <p className="text-sm text-[#6B6B6B]">
+            <span className="font-semibold text-[#1A1A1A]">
               {sortedPosts.length}
             </span>{" "}
             artigos publicados
           </p>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-[#6B6B6B]">
             Última atualização:{" "}
-            <span className="font-medium text-slate-700">
+            <span className="font-medium text-[#1A1A1A]">
               {formatDate(sortedPosts[0]?.date ?? "")}
             </span>
           </p>
@@ -111,10 +119,10 @@ export default async function InsightsPage() {
           {sortedPosts.map((post: BlogPost) => (
             <article
               key={post.slug}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-[#E5E5E5] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
               {/* Card accent bar */}
-              <div className="h-1 w-full bg-gradient-to-r from-indigo-500 to-sky-400" />
+              <div className="h-1 w-full bg-gradient-to-r from-[#C5A368] to-[#D4B87A]" />
 
               <div className="flex flex-1 flex-col p-6">
                 {/* Category badge */}
@@ -127,28 +135,28 @@ export default async function InsightsPage() {
                 </div>
 
                 {/* Title */}
-                <h2 className="mb-3 text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-indigo-700">
+                <h2 className="mb-3 text-lg font-bold leading-snug text-[#1A1A1A] transition-colors group-hover:text-[#C5A368]">
                   <Link
                     href={`/insights/${post.slug}`}
-                    className="after:absolute after:inset-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                    className="after:absolute after:inset-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A368]"
                   >
                     {post.title}
                   </Link>
                 </h2>
 
                 {/* Description */}
-                <p className="mb-6 flex-1 text-sm leading-relaxed text-slate-600">
+                <p className="mb-6 flex-1 text-sm leading-relaxed text-[#6B6B6B]">
                   {post.description}
                 </p>
 
                 {/* Meta footer */}
-                <div className="flex items-center justify-between border-t border-slate-100 pt-4">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                <div className="flex items-center justify-between border-t border-[#E5E5E5] pt-4">
+                  <div className="flex items-center gap-1.5 text-xs text-[#6B6B6B]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="h-4 w-4 text-slate-400"
+                      className="h-4 w-4 text-[#C5A368]"
                       aria-hidden="true"
                     >
                       <path
@@ -160,12 +168,12 @@ export default async function InsightsPage() {
                     <time dateTime={post.date}>{formatDate(post.date)}</time>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500">
+                  <div className="flex items-center gap-1.5 text-xs font-medium text-[#6B6B6B]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="h-4 w-4 text-slate-400"
+                      className="h-4 w-4 text-[#C5A368]"
                       aria-hidden="true"
                     >
                       <path
@@ -180,10 +188,10 @@ export default async function InsightsPage() {
               </div>
 
               {/* Read more link */}
-              <div className="border-t border-slate-100 px-6 py-4">
+              <div className="border-t border-[#E5E5E5] px-6 py-4">
                 <Link
                   href={`/insights/${post.slug}`}
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 transition-colors hover:text-indigo-800"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#C5A368] transition-colors hover:text-[#A8894F]"
                   aria-label={`Ler artigo completo: ${post.title}`}
                 >
                   Ler artigo completo
@@ -206,27 +214,32 @@ export default async function InsightsPage() {
           ))}
         </div>
 
-        {/* ── Newsletter CTA ── */}
-        <div className="mt-20 rounded-3xl bg-gradient-to-br from-slate-900 to-indigo-950 px-8 py-14 text-center shadow-xl">
-          <h3 className="text-2xl font-bold text-white sm:text-3xl">
-            Receba novos artigos em primeira mão
+        {/* ── System CTA ── */}
+        <div className="mt-20 rounded-3xl bg-[#1A1A1A] px-8 py-14 text-center shadow-xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#C5A368]">
+            O Sistema LK Digital
+          </p>
+          <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-bold text-white sm:text-3xl">
+            Orgânico e Pago. Um Sistema. Um Resultado.
           </h3>
-          <p className="mx-auto mt-4 max-w-xl text-base text-slate-300">
-            Análises sobre GEO, SEO e marketing de saúde diretamente na sua
-            caixa de entrada. Conteúdo técnico, sem spam.
+          <p className="mx-auto mt-4 max-w-2xl text-base text-white/75">
+            GEO, SEO, Google Ads e Meta Ads não são serviços isolados — são
+            camadas de um ecossistema estruturado que a LK Digital implementa na
+            sua clínica para atrair pacientes qualificados com previsibilidade e
+            consistência.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/contato"
-              className="rounded-full bg-indigo-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              className="rounded-full bg-[#C5A368] px-8 py-3.5 text-sm font-semibold text-[#1A1A1A] shadow-lg transition-colors hover:bg-[#D4B87A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A368]"
             >
-              Falar com um especialista
+              Solicitar Diagnóstico Gratuito
             </Link>
             <Link
               href="/solucoes"
-              className="text-sm font-semibold leading-6 text-slate-300 transition-colors hover:text-white"
+              className="text-sm font-semibold leading-6 text-white/60 transition-colors hover:text-white"
             >
-              Ver nossas soluções <span aria-hidden="true">→</span>
+              Conhecer o Sistema LK <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
