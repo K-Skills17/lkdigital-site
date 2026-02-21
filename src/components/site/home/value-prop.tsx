@@ -187,11 +187,20 @@ export function ValueProp() {
             </p>
           </div>
 
-          {/* Animated stats */}
-          <div className="animate-on-scroll anim-fade-up stagger-3 grid grid-cols-3 gap-6 pt-6 border-t border-border/60">
-            <AnimatedStat value={47} suffix="%" label="Aumento de ticket médio" delay={0} />
-            <AnimatedStat value={90} suffix=" dias" label="Para os primeiros resultados" delay={150} />
-            <AnimatedStat value={3.2} suffix="×" label="ROI médio comprovado" delay={300} />
+          {/* Authority pillars */}
+          <div className="animate-on-scroll anim-fade-up stagger-3 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-border/60">
+            <div>
+              <p className="text-sm font-semibold text-foreground mb-1">Testado em Alta Competição</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Metodologia forjada em e-commerce e educação antes de chegar à saúde.</p>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground mb-1">Especialização Exclusiva</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">100% focado no setor de saúde. Não somos uma agência generalista.</p>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground mb-1">Parceria Boutique</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Selecionamos cada parceiro. Atenção irrestrita, não volume.</p>
+            </div>
           </div>
 
           {/* CTA */}

@@ -1,3 +1,15 @@
+/**
+ * Blog data-access layer.
+ * Uses Contentful CMS when CONTENTFUL_SPACE_ID + CONTENTFUL_ACCESS_TOKEN are set.
+ * Falls back to local static data for development / builds without CMS credentials.
+ */
+
+import {
+  isContentfulConfigured,
+  fetchAllPostsFromCMS,
+  fetchPostBySlugFromCMS,
+} from "./contentful";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -7,9 +19,14 @@ export interface BlogPost {
   date: string;
   tags: string[];
   content: string;
+  coverImage?: string; // CMS asset URL or undefined for local posts
 }
 
-export const blogPosts: BlogPost[] = [
+// ---------------------------------------------------------------------------
+// Local fallback data — used when Contentful is not configured
+// ---------------------------------------------------------------------------
+
+export const localBlogPosts: BlogPost[] = [
   {
     slug: "geo-para-clinicas-de-saude",
     title:
@@ -311,14 +328,42 @@ O SEO local é um investimento de médio e longo prazo, mas os resultados são d
   },
 ];
 
-export function getBlogPost(slug: string): BlogPost | undefined {
-  return blogPosts.find((post) => post.slug === slug);
+// ---------------------------------------------------------------------------
+// Public async API — always async to support CMS data fetching
+// ---------------------------------------------------------------------------
+
+/** Returns all blog posts, sorted newest first. */
+export async function getAllPosts(): Promise<BlogPost[]> {
+  if (isContentfulConfigured()) {
+    const posts = await fetchAllPostsFromCMS();
+    if (posts) return posts;
+  }
+  return [...localBlogPosts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 }
 
-export function getAllSlugs(): string[] {
-  return blogPosts.map((post) => post.slug);
+/** Returns a single post by slug, or undefined if not found. */
+export async function getBlogPost(
+  slug: string
+): Promise<BlogPost | undefined> {
+  if (isContentfulConfigured()) {
+    const post = await fetchPostBySlugFromCMS(slug);
+    if (post) return post;
+  }
+  return localBlogPosts.find((post) => post.slug === slug);
 }
 
+/** Returns all slugs for static generation. */
+export async function getAllSlugs(): Promise<string[]> {
+  if (isContentfulConfigured()) {
+    const posts = await fetchAllPostsFromCMS();
+    if (posts) return posts.map((p) => p.slug);
+  }
+  return localBlogPosts.map((post) => post.slug);
+}
+
+/** Formats a date string into Brazilian Portuguese. */
 export function formatDate(dateString: string): string {
   const date = new Date(dateString + "T12:00:00");
   return date.toLocaleDateString("pt-BR", {

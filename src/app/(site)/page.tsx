@@ -3,7 +3,6 @@ import { ValueProp } from "@/components/site/home/value-prop";
 import { Pillars } from "@/components/site/home/pillars";
 import { Philosophy } from "@/components/site/home/philosophy";
 import { LeadForm } from "@/components/site/home/lead-form";
-import { SocialProof } from "@/components/site/home/social-proof";
 import { ObjectionHandler } from "@/components/site/home/objection-handler";
 import { LKGuarantee } from "@/components/shared/lk-guarantee";
 import { HomepageStructuredData } from "@/components/shared/structured-data";
@@ -16,7 +15,6 @@ export default function Home() {
       <ValueProp />
       <LKGuarantee />
       <Pillars />
-      <SocialProof />
       <Philosophy />
       <ObjectionHandler />
       <LeadForm />

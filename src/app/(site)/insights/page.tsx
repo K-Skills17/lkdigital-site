@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { blogPosts, formatDate } from "@/lib/blog";
+import { getAllPosts, formatDate } from "@/lib/blog";
 import type { BlogPost } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -40,10 +40,8 @@ function getCategoryClasses(category: string): string {
   );
 }
 
-export default function InsightsPage() {
-  const sortedPosts = [...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+export default async function InsightsPage() {
+  const sortedPosts = await getAllPosts(); // already sorted newest-first
 
   return (
     <main className="bg-white">

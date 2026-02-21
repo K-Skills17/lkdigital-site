@@ -41,13 +41,13 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
 
         {/* Body copy */}
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-          Clínicas parceiras relatam{" "}
+          Nossa metodologia foi construída ao longo de seis anos em setores de
+          alta competição — e-commerce, educação online e SaaS. Quando chegamos
+          ao setor de saúde, trouxemos um{" "}
           <span className="text-foreground font-medium">
-            47% de aumento no ticket médio
-          </span>{" "}
-          nos primeiros 90 dias e crescimento de{" "}
-          <span className="text-foreground font-medium">3.2× no faturamento</span>{" "}
-          em 12 meses. Se não avançarmos em direção aos seus objetivos, nós nos
+            rigor analítico que poucos concorrentes possuem
+          </span>
+          . Se não avançarmos em direção aos seus objetivos, nós nos
           responsabilizamos — sem letras miúdas.
         </p>
 
@@ -70,7 +70,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
               </svg>
             </div>
             <span className="text-sm text-foreground">
-              +47% Ticket Médio em 90 Dias
+              Metodologia Proprietária
             </span>
           </div>
 
@@ -111,7 +111,7 @@ export function LKGuarantee({ showCTA = true }: LKGuaranteeProps) {
                 />
               </svg>
             </div>
-            <span className="text-sm text-foreground">3.2× ROI Médio Comprovado</span>
+            <span className="text-sm text-foreground">Exclusividade por Seleção</span>
           </div>
         </div>
 

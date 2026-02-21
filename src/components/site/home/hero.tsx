@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Users, Star } from "lucide-react";
+import { BookOpen, Briefcase, Cpu } from "lucide-react";
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -53,7 +53,7 @@ export function Hero() {
               aria-hidden="true"
             />
             <p className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
-              40+ Clínicas Crescendo com a LK Digital
+              Metodologia de Precisão para o Setor de Saúde
             </p>
           </div>
 
@@ -77,10 +77,10 @@ export function Hero() {
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            Sua agenda está cheia, mas o faturamento não cresceu
-            proporcionalmente? Clínicas parceiras aumentam o ticket médio em{" "}
-            <span className="text-foreground font-semibold">47% nos primeiros 90 dias</span>{" "}
-            — sem contratar mais staff, sem mudar sua rotina clínica.
+            Forjamos nossa metodologia em e-commerce e educação — dois dos
+            mercados mais competitivos do Brasil. Hoje aplicamos esse{" "}
+            <span className="text-foreground font-semibold">rigor analítico com exclusividade</span>{" "}
+            ao setor de saúde, para que você foque no que sabe fazer melhor.
           </p>
 
           {/* CTA Button */}
@@ -111,9 +111,9 @@ export function Hero() {
             }`}
           >
             {[
-              { icon: Users, label: "Clínicas e Profissionais Parceiros", value: "40+" },
-              { icon: TrendingUp, label: "Aumento de Ticket Médio em 90 Dias", value: "47%" },
-              { icon: Star, label: "NPS Médio dos Parceiros", value: "94" },
+              { icon: BookOpen, label: "Anos em mercados digitais", value: "6+" },
+              { icon: Briefcase, label: "Setores: e-commerce, educação e saúde", value: "3" },
+              { icon: Cpu, label: "Pioneiros em GEO para saúde", value: "GEO" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-center gap-2">
                 <Icon className="w-4 h-4 text-accent" strokeWidth={1.5} />
@@ -185,16 +185,16 @@ export function Hero() {
             aria-hidden="true"
           >
             <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
-              Aumento de Ticket Médio
+              Especialização Digital
             </p>
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-heading font-semibold text-foreground">+47%</span>
-              <span className="text-xs text-accent font-medium">em 90 dias</span>
+              <span className="text-2xl font-heading font-semibold text-foreground">6+</span>
+              <span className="text-xs text-accent font-medium">anos</span>
             </div>
             <div className="mt-2 h-1 w-full bg-border rounded-full overflow-hidden">
               <div
                 className="h-full bg-accent rounded-full"
-                style={{ width: "47%", transition: "width 1.5s ease 0.8s" }}
+                style={{ width: "85%", transition: "width 1.5s ease 0.8s" }}
               />
             </div>
           </div>
