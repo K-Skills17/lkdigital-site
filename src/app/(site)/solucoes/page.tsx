@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LKGuarantee } from "@/components/shared/lk-guarantee";
 import type { Metadata } from "next";
@@ -27,6 +28,7 @@ const services = [
       "Quando um paciente pergunta ao Google ou ao ChatGPT qual especialista procurar, sua clínica deve ser a resposta. Nós fazemos a engenharia semântica completa para que você domine as buscas locais e as respostas de IA de forma sistemática e sustentável — independentemente da sua especialidade.",
     result:
       "Fluxo constante de pacientes qualificados sem precisar gravar vídeos diários ou gerenciar redes sociais.",
+    image: "solucoes-geo.jpg",
     icon: (
       <svg
         className="w-8 h-8"
@@ -52,6 +54,7 @@ const services = [
       "Criamos uma presença digital que comunica autoridade, confiança e exclusividade — antes mesmo de o paciente agendar. Atraímos pacientes que buscam qualidade, não preço, reduzindo objeções e aumentando a aceitação de procedimentos de alto valor para médicos, dentistas e especialistas.",
     result:
       "Uma marca que trabalha como um filtro estratégico, atraindo pacientes que valorizam sua excelência clínica.",
+    image: "solucoes-branding.jpg",
     icon: (
       <svg
         className="w-8 h-8"
@@ -77,6 +80,7 @@ const services = [
       'Você recebe relatórios claros e diretos. Nós monitoramos o "motor" da sua clínica sob o capô, ajustando as velas para garantir que a meta de faturamento seja atingida no menor tempo possível.',
     result:
       "Visibilidade total do seu ROI sem precisar entender de tecnologia.",
+    image: "solucoes-automacao.jpg",
     icon: (
       <svg
         className="w-8 h-8"
@@ -188,15 +192,14 @@ export default function SolucoesPage() {
               {/* Visual */}
               <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                 <div className="relative">
-                  <div className="aspect-square bg-muted rounded-sm flex items-center justify-center">
-                    <div className="text-center space-y-4 p-8">
-                      <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto text-accent">
-                        {service.icon}
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Ilustração: {service.title}
-                      </p>
-                    </div>
+                  <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+                    <Image
+                      src={`/images/${service.image}`}
+                      alt={service.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
                   </div>
                   {/* Decorative corner */}
                   <div
