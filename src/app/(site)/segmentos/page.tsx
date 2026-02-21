@@ -388,22 +388,14 @@ export default function SegmentosPage() {
 
           <div className="grid md:grid-cols-2 gap-10 text-muted-foreground leading-relaxed">
             <p>
-              Marketing digital para profissionais de saúde exige conhecimento
-              das normas de cada conselho de classe — CFM, CFO, CFP, COFFITO,
-              CFN — além de compreender profundamente a jornada de decisão do
-              paciente em cada especialidade. Um paciente que busca um
-              cardiologista tem comportamento de pesquisa completamente diferente
-              de um que procura um psicólogo ou um dentista implantodontista.
+              Você recebe uma estratégia construída especificamente para a sua especialidade — não um template genérico reaproveitado. Cada área da saúde tem sua própria linguagem, paciente ideal e regras de comunicação. Um cardiologista e um psicólogo têm jornadas de pacientes completamente distintas.
             </p>
             <p>
-              A LK Digital acumulou expertise em{" "}
+              Você não precisa aprender sobre{" "}
               <span className="text-foreground font-medium">
-                9 especialidades de saúde
-              </span>{" "}
-              ao longo de mais de seis anos, desenvolvendo metodologias
-              específicas para cada área. Isso nos permite criar estratégias de
-              aquisição de pacientes que são eficientes, éticas e sustentáveis,
-              sem expor o profissional a riscos de sanção nos seus conselhos.
+                normas de CFM, CFO, CFP ou COFFITO
+              </span>
+              . Nós já dominamos isso. Você foca em atender. Nós garantimos que sua clínica cresça de forma ética, sustentável e sem riscos de sanção no seu conselho de classe.
             </p>
           </div>
 
@@ -452,11 +444,9 @@ export default function SegmentosPage() {
           <div className="w-16 h-px bg-accent mx-auto mb-8" aria-hidden="true" />
 
           <p className="text-lg text-background/75 leading-relaxed mb-10">
-            Independente da sua especialidade, temos uma metodologia
-            comprovada e ética para posicionar sua clínica como referência
-            digital. Solicite sua{" "}
-            <span className="text-accent font-medium">Diagnose Gratuita</span>{" "}
-            e descubra o plano específico para o seu mercado.
+            Independente da especialidade, você recebe um plano específico para o seu mercado — ético, sustentável e que não interfere na sua rotina clínica. Atendemos no máximo{" "}
+            <span className="text-accent font-medium">5 clínicas por cidade e 1 por município</span>
+            . Verifique se há disponibilidade para sua região.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

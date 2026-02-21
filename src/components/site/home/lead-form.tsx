@@ -49,13 +49,12 @@ export function LeadForm() {
           </AnimatedSection>
           <AnimatedSection animation="fade-up" delay={2}>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Em 30 minutos, analisamos o potencial de crescimento da sua clínica
-              e entregamos um plano personalizado — sem custo, sem compromisso.
-              Apenas{" "}
+              Em 30 minutos você recebe um plano personalizado para sua clínica — sem custo, sem compromisso.
+              Atendemos no máximo{" "}
               <span className="text-foreground font-medium">
-                vagas limitadas por mês
+                5 clínicas por cidade e 1 por município
               </span>
-              .
+              . Verifique agora se há vaga disponível na sua região.
             </p>
           </AnimatedSection>
         </div>

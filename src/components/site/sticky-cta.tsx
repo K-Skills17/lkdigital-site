@@ -13,7 +13,7 @@ export function StickyCTA() {
             asChild
             className="bg-accent text-white hover:opacity-90 shadow-lg"
           >
-            <Link href="/contato">Diagnose Gratuita</Link>
+            <Link href="/contato">Verificar Disponibilidade</Link>
           </Button>
         </div>
       </div>
@@ -25,7 +25,7 @@ export function StickyCTA() {
             asChild
             className="w-full bg-white hover:bg-white/90 text-accent font-medium"
           >
-            <Link href="/contato">Diagnose Gratuita</Link>
+            <Link href="/contato">Verificar Disponibilidade</Link>
           </Button>
         </div>
       </div>

@@ -278,13 +278,12 @@ export default function CasosPage() {
             metodologia LK Digital.
           </p>
 
-          {/* Stats bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-14">
+          {/* Authority pillars */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14">
             {[
-              { value: "150+", label: "Clínicas atendidas" },
-              { value: "9+", label: "Especialidades" },
-              { value: "95%", label: "Taxa de renovação" },
-              { value: "4×", label: "ROI médio no 1º ano" },
+              { value: "1", label: "Parceiro por município — exclusividade garantida" },
+              { value: "5", label: "Clínicas por cidade, no máximo — qualidade sobre volume" },
+              { value: "100%", label: "Responsabilidade pelos resultados — sem letras miúdas" },
             ].map((stat) => (
               <div key={stat.label} className="border-l-2 border-accent pl-4">
                 <div className="text-3xl md:text-4xl font-heading text-foreground font-semibold">

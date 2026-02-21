@@ -88,17 +88,16 @@ export function Footer() {
           {/* CTA box */}
           <div>
             <h3 className="text-[11px] font-semibold text-foreground uppercase tracking-widest mb-4">
-              Comece Agora
+              Reserve Sua Vaga
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              Agende uma diagnose gratuita e descubra o potencial de crescimento
-              da sua clínica.
+              Máx. 5 clínicas por cidade e 1 por município. Verifique se há disponibilidade para sua região.
             </p>
             <Link
               href="/contato"
               className="inline-block text-xs uppercase tracking-widest font-medium border border-accent/50 text-accent hover:bg-accent hover:text-white px-4 py-2.5 transition-all duration-300"
             >
-              Diagnose Gratuita
+              Verificar Disponibilidade
             </Link>
           </div>
         </div>

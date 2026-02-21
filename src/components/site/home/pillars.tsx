@@ -39,7 +39,7 @@ export function Pillars() {
         <AnimatedSection animation="fade-up">
           <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-4 flex items-center justify-center gap-3">
             <span className="block w-6 h-px bg-accent" aria-hidden="true" />
-            Nossa Expertise
+            O Que Você Conquista
             <span className="block w-6 h-px bg-accent" aria-hidden="true" />
           </p>
         </AnimatedSection>
@@ -50,9 +50,9 @@ export function Pillars() {
         </AnimatedSection>
         <AnimatedSection animation="fade-up" delay={2}>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Um ecossistema completo de crescimento — estratégia, identidade e
-            infraestrutura — construído para clínicas, consultórios e profissionais
-            de saúde que buscam excelência e escala sustentável.
+            Visibilidade onde seus pacientes buscam, uma marca que justifica seus
+            honorários e um sistema que trabalha por você 24h — sem que você
+            precise tocar em nada.
           </p>
         </AnimatedSection>
       </div>

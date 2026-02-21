@@ -95,33 +95,24 @@ export default function SobrePage() {
           {/* Right: Copy (60%) */}
           <div className="lg:col-span-3 space-y-6 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Com{" "}
-              <span className="text-foreground font-medium">mais de seis anos</span>{" "}
-              em mercados digitais competitivos, aplicamos nossa metodologia
-              primeiro às clínicas odontológicas — onde as exigências de
-              posicionamento, ética regulatória e ticket alto criam o ambiente
-              mais desafiador do setor de saúde.
+              Você chegou até aqui porque provavelmente é um dos melhores no que faz — e ainda assim o marketing não reflete isso. O problema é o mesmo em todas as especialidades: os melhores profissionais de saúde estão sobrecarregados enquanto clínicas medianas dominam o mercado por saberem usar as ferramentas certas.
             </p>
 
             <p>
-              O método funcionou. E foi replicado. Hoje atendemos{" "}
+              Você recebe um sistema completo que trabalha por você enquanto você atende. Visibilidade no Google, no ChatGPT e nas IAs locais. Uma marca que comunica o nível da sua excelência clínica. E pacientes que chegam qualificados — não por indicação, não por acaso.
+            </p>
+
+            <p>
+              Atendemos{" "}
               <span className="text-foreground font-medium">
                 dentistas, médicos, dermatologistas, psicólogos, fisioterapeutas
                 e nutricionistas
               </span>{" "}
-              — qualquer especialidade que constrói sua reputação sobre confiança
-              e excelência técnica.
-            </p>
-
-            <p>
-              Porque percebemos que o problema é o mesmo em todas as
-              especialidades: os melhores profissionais de saúde estão
-              sobrecarregados enquanto clínicas medianas dominam o mercado
-              por saberem usar as ferramentas certas.
+              — qualquer especialidade que constrói sua reputação sobre confiança e técnica.
             </p>
 
             <p className="text-foreground font-medium text-xl">
-              Nós mudamos esse jogo — em todas as especialidades.
+              A vantagem é sua, enquanto sua vaga estiver disponível.
             </p>
           </div>
         </div>
