@@ -54,12 +54,29 @@ export default function SobrePage() {
       {/* Team image — wide banner */}
       <section className="py-12">
         <div className="max-w-5xl mx-auto">
-          <div className="relative aspect-[21/9] overflow-hidden rounded-sm bg-muted">
+          <div className="relative aspect-[21/9] overflow-hidden rounded-sm bg-[#1A1A1A]">
+            <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 50% 50%, #C5A36818 0%, transparent 65%)",
+                }}
+              />
+              <div className="relative text-center">
+                <p className="font-[family-name:var(--font-cormorant)] text-2xl font-semibold text-[#C5A368]/50 tracking-[0.2em]">
+                  LK Digital
+                </p>
+                <p className="text-white/20 text-[10px] uppercase tracking-[0.25em] mt-1">
+                  Marketing Estratégico para Saúde
+                </p>
+              </div>
+            </div>
             <Image
               src="/images/sobre-team.jpg"
               alt="Equipe LK Digital analisando estratégias digitais em ambiente de trabalho premium"
               fill
-              className="object-cover object-center"
+              className="object-cover object-center z-10"
               sizes="(max-width: 1280px) 100vw, 1280px"
             />
           </div>
@@ -184,12 +201,17 @@ export default function SobrePage() {
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
                 <div className="md:pl-12">
-                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-muted">
+                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-[#1A1A1A]">
+                    <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                      <div className="border border-[#C5A368]/15 px-5 py-3 text-center">
+                        <span className="text-[#C5A368]/40 text-[10px] font-semibold uppercase tracking-[0.25em]">Antes</span>
+                      </div>
+                    </div>
                     <Image
                       src="/images/sobre-step-1.jpg"
                       alt="Profissional de saúde sobrecarregado antes da parceria LK Digital"
                       fill
-                      className="object-cover"
+                      className="object-cover z-10"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
@@ -212,12 +234,17 @@ export default function SobrePage() {
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
                 <div className="md:order-1 md:pr-12">
-                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-muted">
+                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-[#1A1A1A]">
+                    <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                      <div className="border border-[#C5A368]/15 px-5 py-3 text-center">
+                        <span className="text-[#C5A368]/40 text-[10px] font-semibold uppercase tracking-[0.25em]">Parceria LK</span>
+                      </div>
+                    </div>
                     <Image
                       src="/images/sobre-step-2.jpg"
                       alt="Profissional de saúde monitorando dashboard de pacientes durante parceria LK Digital"
                       fill
-                      className="object-cover"
+                      className="object-cover z-10"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
@@ -240,12 +267,17 @@ export default function SobrePage() {
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background" />
                 <div className="md:pl-12">
-                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-muted">
+                  <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-[#1A1A1A]">
+                    <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                      <div className="border border-[#C5A368]/15 px-5 py-3 text-center">
+                        <span className="text-[#C5A368]/40 text-[10px] font-semibold uppercase tracking-[0.25em]">Depois</span>
+                      </div>
+                    </div>
                     <Image
                       src="/images/sobre-step-3.jpg"
                       alt="Clínica escalável com crescimento previsível após parceria LK Digital"
                       fill
-                      className="object-cover"
+                      className="object-cover z-10"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
@@ -337,12 +369,24 @@ export default function SobrePage() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left: Visual */}
           <div className="relative">
-            <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+            <div className="relative aspect-square overflow-hidden rounded-sm bg-[#1A1A1A]">
+              <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(circle at 40% 55%, #C5A36818 0%, transparent 60%)",
+                  }}
+                />
+                <div className="relative border border-[#C5A368]/15 p-8 text-center">
+                  <span className="text-[#C5A368]/40 text-xs font-semibold uppercase tracking-[0.25em]">LK</span>
+                </div>
+              </div>
               <Image
                 src="/images/sobre-step-3.jpg"
                 alt="Especialista de saúde em clínica escalável — resultado final da parceria LK Digital"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-top z-10"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
