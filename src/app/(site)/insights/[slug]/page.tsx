@@ -63,7 +63,7 @@ function parseContent(content: string): React.ReactNode[] {
       return (
         <h2
           key={index}
-          className="mb-4 mt-12 text-2xl font-bold tracking-tight text-slate-900 first:mt-0"
+          className="mb-4 mt-12 text-2xl font-bold tracking-tight text-[#1A1A1A] first:mt-0"
         >
           {text}
         </h2>
@@ -74,7 +74,7 @@ function parseContent(content: string): React.ReactNode[] {
     if (trimmed.startsWith("### ")) {
       const text = trimmed.replace(/^### /, "");
       return (
-        <h3 key={index} className="mb-3 mt-8 text-xl font-semibold text-slate-800">
+        <h3 key={index} className="mb-3 mt-8 text-xl font-semibold text-[#1A1A1A]">
           {text}
         </h3>
       );
@@ -82,14 +82,14 @@ function parseContent(content: string): React.ReactNode[] {
 
     // Horizontal rule
     if (trimmed === "---") {
-      return <hr key={index} className="my-10 border-slate-200" />;
+      return <hr key={index} className="my-10 border-[#E5E5E5]" />;
     }
 
     // Bold heading paragraph (e.g. "**Pilar 1 — ...**")
     if (trimmed.startsWith("**") && trimmed.endsWith("**") && !trimmed.slice(2, -2).includes("\n")) {
       const text = trimmed.slice(2, -2);
       return (
-        <p key={index} className="mb-2 mt-6 font-bold text-slate-900">
+        <p key={index} className="mb-2 mt-6 font-bold text-[#1A1A1A]">
           {text}
         </p>
       );
@@ -101,7 +101,7 @@ function parseContent(content: string): React.ReactNode[] {
       return (
         <ul
           key={index}
-          className="mb-6 ml-6 list-disc space-y-2 text-slate-700 marker:text-[#C5A368]"
+          className="mb-6 ml-6 list-disc space-y-2 text-[#4A4A4A] marker:text-[#C5A368]"
         >
           {items.map((item, i) => {
             const raw = item.replace(/^- /, "");
@@ -117,7 +117,7 @@ function parseContent(content: string): React.ReactNode[] {
 
     // Regular paragraph — render inline bold/code
     return (
-      <p key={index} className="mb-6 leading-8 text-slate-700">
+      <p key={index} className="mb-6 leading-8 text-[#4A4A4A]">
         {renderInline(trimmed)}
       </p>
     );
@@ -130,7 +130,7 @@ function renderInline(text: string): React.ReactNode {
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
-        <strong key={i} className="font-semibold text-slate-900">
+        <strong key={i} className="font-semibold text-[#1A1A1A]">
           {part.slice(2, -2)}
         </strong>
       );
@@ -237,7 +237,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </h1>
 
             {/* Description */}
-            <p className="mt-5 text-lg leading-relaxed text-slate-300">
+            <p className="mt-5 text-lg leading-relaxed text-white/75">
               {post.description}
             </p>
 
@@ -250,7 +250,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">LK Digital</p>
-                  <p className="text-xs text-slate-400">Equipe Editorial</p>
+                  <p className="text-xs text-white/50">Equipe Editorial</p>
                 </div>
               </div>
 
@@ -309,15 +309,15 @@ export default async function BlogPostPage({ params }: PageProps) {
 
               {/* Tags */}
               {post.tags.length > 0 && (
-                <div className="mt-12 border-t border-slate-200 pt-8">
-                  <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-500">
+                <div className="mt-12 border-t border-[#E5E5E5] pt-8">
+                  <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#6B6B6B]">
                     Tópicos abordados
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"
+                        className="rounded-full bg-[#F9F6F0] px-3 py-1 text-xs font-medium text-[#8B6914]"
                       >
                         {tag}
                       </span>
@@ -331,14 +331,14 @@ export default async function BlogPostPage({ params }: PageProps) {
             <aside className="hidden lg:block">
               <div className="sticky top-24 space-y-8">
                 {/* About LK Digital card */}
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="rounded-2xl border border-[#E5E5E5] bg-[#FAFAFA] p-6 shadow-sm">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1A1A1A] text-sm font-bold text-[#C5A368]">
                     LK
                   </div>
-                  <h3 className="mb-2 text-sm font-bold text-slate-900">
+                  <h3 className="mb-2 text-sm font-bold text-[#1A1A1A]">
                     LK Digital
                   </h3>
-                  <p className="text-xs leading-relaxed text-slate-600">
+                  <p className="text-xs leading-relaxed text-[#6B6B6B]">
                     Agência especializada em marketing digital, GEO e SEO para
                     clínicas e profissionais de saúde no Brasil.
                   </p>
@@ -365,15 +365,15 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                 {/* Related posts */}
                 {relatedPosts.length > 0 && (
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-slate-500">
+                  <div className="rounded-2xl border border-[#E5E5E5] bg-[#FAFAFA] p-6 shadow-sm">
+                    <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-[#6B6B6B]">
                       Leitura relacionada
                     </h3>
                     <div className="space-y-4">
                       {relatedPosts.map((related) => (
                         <div
                           key={related.slug}
-                          className="border-b border-slate-100 pb-4 last:border-0 last:pb-0"
+                          className="border-b border-[#E5E5E5] pb-4 last:border-0 last:pb-0"
                         >
                           <span
                             className={`mb-2 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ring-1 ring-inset ${getCategoryClasses(related.category)}`}
@@ -386,7 +386,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                           >
                             {related.title}
                           </Link>
-                          <p className="mt-1 text-xs text-slate-500">
+                          <p className="mt-1 text-xs text-[#6B6B6B]">
                             {related.readTime} de leitura
                           </p>
                         </div>
