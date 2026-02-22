@@ -101,7 +101,7 @@ function parseContent(content: string): React.ReactNode[] {
       return (
         <ul
           key={index}
-          className="mb-6 ml-6 list-disc space-y-2 text-slate-700 marker:text-indigo-400"
+          className="mb-6 ml-6 list-disc space-y-2 text-slate-700 marker:text-[#C5A368]"
         >
           {items.map((item, i) => {
             const raw = item.replace(/^- /, "");
@@ -139,7 +139,7 @@ function renderInline(text: string): React.ReactNode {
       return (
         <code
           key={i}
-          className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-indigo-700"
+          className="rounded bg-[#F9F6F0] px-1.5 py-0.5 font-mono text-sm text-[#8B6914]"
         >
           {part.slice(1, -1)}
         </code>
@@ -150,14 +150,15 @@ function renderInline(text: string): React.ReactNode {
 }
 
 const categoryColors: Record<string, string> = {
-  "GEO & SEO": "bg-indigo-50 text-indigo-700 ring-indigo-600/20",
-  "Marketing de Saúde": "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
-  "SEO Local": "bg-sky-50 text-sky-700 ring-sky-600/20",
+  "GEO & SEO": "bg-amber-50 text-amber-800 ring-amber-600/20",
+  "Marketing de Saúde": "bg-stone-100 text-stone-700 ring-stone-600/20",
+  "SEO Local": "bg-[#F9F6F0] text-[#8B6914] ring-[#C5A368]/30",
+  "Gestão de Mídia Paga": "bg-[#1A1A1A] text-[#C5A368] ring-[#C5A368]/30",
 };
 
 function getCategoryClasses(category: string): string {
   return (
-    categoryColors[category] ?? "bg-slate-50 text-slate-700 ring-slate-600/20"
+    categoryColors[category] ?? "bg-stone-100 text-stone-700 ring-stone-600/20"
   );
 }
 
@@ -185,11 +186,11 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <main>
         {/* ── Article Header ── */}
-        <header className="bg-gradient-to-b from-slate-900 to-slate-800 pb-16 pt-12">
+        <header className="bg-gradient-to-b from-[#1A1A1A] to-[#2C2C2C] pb-16 pt-12">
           <div className="mx-auto max-w-4xl px-6 lg:px-8">
             {/* Breadcrumb */}
             <nav aria-label="Navegação estrutural" className="mb-8">
-              <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
+              <ol className="flex flex-wrap items-center gap-2 text-sm text-white/50">
                 <li>
                   <Link
                     href="/"
@@ -198,7 +199,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     Início
                   </Link>
                 </li>
-                <li aria-hidden="true" className="text-slate-600">
+                <li aria-hidden="true" className="text-white/25">
                   /
                 </li>
                 <li>
@@ -209,11 +210,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                     Insights
                   </Link>
                 </li>
-                <li aria-hidden="true" className="text-slate-600">
+                <li aria-hidden="true" className="text-white/25">
                   /
                 </li>
                 <li
-                  className="max-w-xs truncate text-slate-300"
+                  className="max-w-xs truncate text-white/75"
                   aria-current="page"
                 >
                   {post.title}
@@ -241,10 +242,10 @@ export default async function BlogPostPage({ params }: PageProps) {
             </p>
 
             {/* Meta row */}
-            <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-slate-700 pt-6">
+            <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-white/10 pt-6">
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-500 text-xs font-bold text-white">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A368] text-xs font-bold text-[#1A1A1A]">
                   LK
                 </div>
                 <div>
@@ -253,10 +254,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="h-4 w-px bg-slate-600" aria-hidden="true" />
+              <div className="h-4 w-px bg-white/20" aria-hidden="true" />
 
               {/* Date */}
-              <div className="flex items-center gap-1.5 text-sm text-slate-400">
+              <div className="flex items-center gap-1.5 text-sm text-white/60">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -273,10 +274,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
               </div>
 
-              <div className="h-4 w-px bg-slate-600" aria-hidden="true" />
+              <div className="h-4 w-px bg-white/20" aria-hidden="true" />
 
               {/* Read time */}
-              <div className="flex items-center gap-1.5 text-sm text-slate-400">
+              <div className="flex items-center gap-1.5 text-sm text-white/60">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -331,7 +332,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <div className="sticky top-24 space-y-8">
                 {/* About LK Digital card */}
                 <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-sm font-bold text-white">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1A1A1A] text-sm font-bold text-[#C5A368]">
                     LK
                   </div>
                   <h3 className="mb-2 text-sm font-bold text-slate-900">
@@ -343,7 +344,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </p>
                   <Link
                     href="/sobre"
-                    className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-800"
+                    className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#C5A368] hover:text-[#A8894F]"
                   >
                     Conhecer a equipe
                     <svg
@@ -381,7 +382,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                           </span>
                           <Link
                             href={`/insights/${related.slug}`}
-                            className="mt-1.5 block text-sm font-semibold leading-snug text-slate-800 transition-colors hover:text-indigo-700"
+                            className="mt-1.5 block text-sm font-semibold leading-snug text-[#1A1A1A] transition-colors hover:text-[#C5A368]"
                           >
                             {related.title}
                           </Link>
@@ -401,10 +402,10 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* ── Bottom CTA ── */}
         <section
           aria-labelledby="cta-heading"
-          className="border-t border-slate-100 bg-gradient-to-br from-slate-900 to-indigo-950"
+          className="border-t border-[#E5E5E5] bg-[#1A1A1A]"
         >
           <div className="mx-auto max-w-4xl px-6 py-16 text-center lg:px-8">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#C5A368]">
               Próximo Passo
             </p>
             <h2
@@ -413,21 +414,22 @@ export default async function BlogPostPage({ params }: PageProps) {
             >
               Pronto para aplicar estas estratégias na sua clínica?
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-              A LK Digital desenvolve estratégias personalizadas de GEO, SEO
-              local e marketing de saúde para clínicas e consultórios que desejam
-              crescer com previsibilidade e dentro das normas do CFM.
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/75">
+              A LK Digital estrutura um sistema completo — GEO, SEO local,
+              Google Ads e Meta Ads — para que sua clínica atraia pacientes
+              qualificados tanto pelo tráfego orgânico quanto pelo pago, dentro
+              das normas do CFM.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 href="/contato"
-                className="rounded-full bg-indigo-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                className="rounded-full bg-[#C5A368] px-8 py-3.5 text-sm font-semibold text-[#1A1A1A] shadow-lg transition-colors hover:bg-[#D4B87A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A368]"
               >
                 Solicitar análise gratuita
               </Link>
               <Link
                 href="/insights"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-300 transition-colors hover:text-white"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/60 transition-colors hover:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

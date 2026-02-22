@@ -192,12 +192,29 @@ export default function SolucoesPage() {
               {/* Visual */}
               <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                 <div className="relative">
-                  <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+                  <div className="relative aspect-square overflow-hidden rounded-sm bg-[#1A1A1A]">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4" aria-hidden="true">
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          backgroundImage:
+                            "radial-gradient(circle at 50% 45%, #C5A36818 0%, transparent 65%)",
+                        }}
+                      />
+                      <div className="relative text-center px-8">
+                        <div className="w-14 h-14 rounded-full border border-[#C5A368]/20 bg-[#C5A368]/5 flex items-center justify-center mx-auto mb-3 text-[#C5A368]/50">
+                          {service.icon}
+                        </div>
+                        <p className="text-[#C5A368]/50 text-[10px] font-semibold uppercase tracking-[0.25em]">
+                          {service.subtitle}
+                        </p>
+                      </div>
+                    </div>
                     <Image
                       src={`/images/${service.image}`}
                       alt={service.title}
                       fill
-                      className="object-cover"
+                      className="object-cover z-10"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </div>
