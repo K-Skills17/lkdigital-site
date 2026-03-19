@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 const API_BASE = "https://lk-chatbot-production.up.railway.app/api/webchat";
-const TENANT_ID = "2d4f6c15-d810-47a8-8c29-46abd483c3f1";
+const TENANT_ID = "lk_c401daf283e83d02b3afb651306813bf85d0587f34d8b257";
 const STORAGE_KEY = `lk_chat_session_${TENANT_ID}`;
 
 interface Message {
