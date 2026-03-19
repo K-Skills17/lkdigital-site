@@ -73,7 +73,7 @@ export default function Casos() {
                 key={i}
                 className="bg-card rounded-2xl border border-border/60 overflow-hidden"
               >
-                <div className="p-8 md:p-10">
+                <div className="p-5 sm:p-8 md:p-10">
                   {/* Header */}
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
                     <div>
@@ -99,13 +99,13 @@ export default function Casos() {
                   </div>
 
                   {/* Results Grid */}
-                  <div className="grid grid-cols-3 gap-6 mb-8 p-6 bg-muted rounded-xl">
+                  <div className="grid grid-cols-3 gap-3 sm:gap-6 mb-8 p-4 sm:p-6 bg-muted rounded-xl">
                     {c.results.map((r, j) => (
                       <div key={j} className="text-center">
-                        <p className="font-display text-2xl md:text-3xl font-semibold text-accent">
+                        <p className="font-display text-lg sm:text-2xl md:text-3xl font-semibold text-accent">
                           {r.metric}
                         </p>
-                        <p className="text-xs text-muted-foreground mt-1">
+                        <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">
                           {r.label}
                         </p>
                       </div>

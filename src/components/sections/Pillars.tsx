@@ -74,7 +74,7 @@ export default function Pillars() {
           {pillars.map((pillar, i) => (
             <div
               key={i}
-              className={`pillar-card group relative p-8 lg:p-10 cursor-default border-b border-border/60 ${
+              className={`pillar-card group relative p-5 sm:p-8 lg:p-10 cursor-default border-b border-border/60 ${
                 i < 2 ? "md:border-r" : ""
               } transition-colors duration-300 opacity-0`}
             >
@@ -82,7 +82,7 @@ export default function Pillars() {
               <div className="absolute top-0 left-0 h-[2px] w-0 bg-accent group-hover:w-full transition-all duration-500" />
 
               {/* Roman numeral */}
-              <span className="pillar-numeral inline-block font-display text-5xl font-light text-accent/15 group-hover:text-accent/30 transition-colors duration-500 mb-8">
+              <span className="pillar-numeral inline-block font-display text-3xl sm:text-5xl font-light text-accent/15 group-hover:text-accent/30 transition-colors duration-500 mb-4 sm:mb-8">
                 {pillar.numeral}
               </span>
 

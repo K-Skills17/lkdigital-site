@@ -35,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0f0f0f] text-white/60 border-t border-white/5">
       <div className="max-w-content mx-auto px-4 sm:px-6 py-16 md:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Brand Column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex mb-4">

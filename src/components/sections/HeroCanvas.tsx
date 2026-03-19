@@ -11,7 +11,7 @@ export default function HeroCanvas() {
     const container = containerRef.current;
     if (!container) return;
 
-    if (window.innerWidth < 768) return;
+    const isMobile = window.innerWidth < 768;
 
     const isBot = /bot|crawler|spider|google|bing|yahoo|perplexity|gptbot|claudebot/i.test(
       navigator.userAgent
@@ -54,14 +54,14 @@ export default function HeroCanvas() {
       renderer.domElement.style.position = "absolute";
       renderer.domElement.style.inset = "0";
 
-      // ── Soft floating orbs (warm, organic feel) ──
-      const orbCount = 12;
+      // ── Soft floating orbs (warm, organic feel) — fewer on mobile ──
+      const orbCount = isMobile ? 6 : 12;
       const orbs: THREE.Mesh[] = [];
       const orbData: { speed: number; radius: number; offset: number; yAmp: number }[] = [];
 
       for (let i = 0; i < orbCount; i++) {
         const size = 0.08 + Math.random() * 0.15;
-        const geo = new THREE.SphereGeometry(size, 16, 16);
+        const geo = new THREE.SphereGeometry(size, isMobile ? 8 : 16, isMobile ? 8 : 16);
         const mat = new THREE.MeshBasicMaterial({
           color: i % 3 === 0 ? 0xc5a368 : i % 3 === 1 ? 0xd4b87a : 0xa8894f,
           transparent: true,
@@ -86,7 +86,7 @@ export default function HeroCanvas() {
       }
 
       // ── Elegant ring (subtle, luxury feel) ──
-      const ringGeo = new THREE.TorusGeometry(2.8, 0.008, 16, 120);
+      const ringGeo = new THREE.TorusGeometry(2.8, 0.008, isMobile ? 8 : 16, isMobile ? 60 : 120);
       const ringMat = new THREE.MeshBasicMaterial({
         color: 0xc5a368,
         transparent: true,
@@ -97,7 +97,7 @@ export default function HeroCanvas() {
       scene.add(ring);
 
       // ── Second ring ──
-      const ring2Geo = new THREE.TorusGeometry(3.5, 0.005, 16, 120);
+      const ring2Geo = new THREE.TorusGeometry(3.5, 0.005, isMobile ? 8 : 16, isMobile ? 60 : 120);
       const ring2Mat = new THREE.MeshBasicMaterial({
         color: 0xd4b87a,
         transparent: true,
@@ -109,7 +109,7 @@ export default function HeroCanvas() {
       scene.add(ring2);
 
       // ── Warm dust particles ──
-      const particleCount = 60;
+      const particleCount = isMobile ? 25 : 60;
       const particleGeo = new THREE.BufferGeometry();
       const particlePos = new Float32Array(particleCount * 3);
       for (let i = 0; i < particleCount * 3; i++) {
@@ -128,7 +128,7 @@ export default function HeroCanvas() {
       scene.add(new THREE.Points(particleGeo, particleMat));
 
       // ── Soft ambient glow (center) ──
-      const glowGeo = new THREE.SphereGeometry(1.2, 32, 32);
+      const glowGeo = new THREE.SphereGeometry(1.2, isMobile ? 16 : 32, isMobile ? 16 : 32);
       const glowMat = new THREE.MeshBasicMaterial({
         color: 0xc5a368,
         transparent: true,
