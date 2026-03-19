@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/components/ui/Logo";
 
 const navLinks = [
@@ -17,19 +16,29 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const scrolledRef = useRef(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const isScrolled = window.scrollY > 60;
+          if (isScrolled !== scrolledRef.current) {
+            scrolledRef.current = isScrolled;
+            setScrolled(isScrolled);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
@@ -43,12 +52,10 @@ export default function Navbar() {
         }`}
       >
         <nav className="max-w-content mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Logo variant="compact" color="white" />
           </Link>
 
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
@@ -61,7 +68,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Desktop CTA */}
           <Link
             href="/contato"
             className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
@@ -69,7 +75,6 @@ export default function Navbar() {
             Diagnóstico Gratuito
           </Link>
 
-          {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden relative w-11 h-11 flex flex-col items-center justify-center gap-1.5"
@@ -90,48 +95,50 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-[#0f0f0f] flex flex-col items-center justify-center gap-8"
+      {/* Mobile Menu — CSS animations only, no Framer Motion */}
+      <div
+        className={`fixed inset-0 z-40 bg-[#0f0f0f] flex flex-col items-center justify-center gap-8 transition-all duration-300 ${
+          mobileOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
+        }`}
+      >
+        {navLinks.map((link, i) => (
+          <div
+            key={link.href}
+            className={`transition-all duration-300 ${
+              mobileOpen
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+            style={{ transitionDelay: mobileOpen ? `${i * 50 + 100}ms` : "0ms" }}
           >
-            {navLinks.map((link, i) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 + 0.1 }}
-              >
-                <Link
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-2xl font-display text-white/80 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+            <Link
+              href={link.href}
+              onClick={() => setMobileOpen(false)}
+              className="text-2xl font-display text-white/80 hover:text-white transition-colors"
             >
-              <Link
-                href="/contato"
-                onClick={() => setMobileOpen(false)}
-                className="mt-4 inline-flex px-8 py-3 bg-accent text-white rounded-md font-medium"
-              >
-                Diagnóstico Gratuito
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {link.label}
+            </Link>
+          </div>
+        ))}
+        <div
+          className={`transition-all duration-300 ${
+            mobileOpen
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+          }`}
+          style={{ transitionDelay: mobileOpen ? "400ms" : "0ms" }}
+        >
+          <Link
+            href="/contato"
+            onClick={() => setMobileOpen(false)}
+            className="mt-4 inline-flex px-8 py-3 bg-accent text-white rounded-md font-medium"
+          >
+            Diagnóstico Gratuito
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

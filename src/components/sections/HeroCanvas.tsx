@@ -13,6 +13,9 @@ export default function HeroCanvas() {
 
     const isMobile = window.innerWidth < 768;
 
+    // Skip 3D on mobile — use CSS gradient fallback for performance
+    if (isMobile) return;
+
     const isBot = /bot|crawler|spider|google|bing|yahoo|perplexity|gptbot|claudebot/i.test(
       navigator.userAgent
     );
@@ -26,6 +29,8 @@ export default function HeroCanvas() {
 
     let cancelled = false;
 
+    // Delay Three.js load to let LCP paint first
+    const loadTimer = setTimeout(() => {
     import("three").then((THREE) => {
       if (cancelled || !container) return;
 
@@ -222,8 +227,10 @@ export default function HeroCanvas() {
         }
       };
     });
+    }, 1500); // Delay Three.js by 1.5s
 
     return () => {
+      clearTimeout(loadTimer);
       cancelled = true;
       cleanupRef.current?.();
     };

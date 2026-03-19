@@ -7,14 +7,14 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["400", "500", "600", "700"],
-  display: "optional",
+  display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["300", "400", "500", "600"],
-  display: "optional",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -67,7 +67,7 @@ export default function RootLayout({
         {children}
         <Script
           src="https://lk-chatbot.onrender.com/api/webchat/38610ffd-cb80-4938-8b3b-be6230991592/widget.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>
