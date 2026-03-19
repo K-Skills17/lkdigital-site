@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import Script from "next/script";
-import ChatWidget from "@/components/ChatWidget";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -66,9 +65,8 @@ export default function RootLayout({
           Pular para o conteúdo
         </a>
         {children}
-        <ChatWidget />
         <Script
-          src="https://lk-chatbot.onrender.com/widget.js"
+          src="https://lk-chatbot.onrender.com/api/webchat/38610ffd-cb80-4938-8b3b-be6230991592/widget.js"
           strategy="afterInteractive"
         />
       </body>
