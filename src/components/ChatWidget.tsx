@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 
-const API_BASE = "https://lk-chatbot-production.up.railway.app/api/webchat";
+const API_BASE = "https://lk-chatbot.onrender.com/api/webchat";
 const TENANT_ID = "lk_c401daf283e83d02b3afb651306813bf85d0587f34d8b257";
 const STORAGE_KEY = `lk_chat_session_${TENANT_ID}`;
 
