@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -65,9 +64,17 @@ export default function RootLayout({
           Pular para o conteúdo
         </a>
         {children}
-        <Script
-          src="https://lk-chatbot-production.up.railway.app/api/webchat/38610ffd-cb80-4938-8b3b-be6230991592/widget.js"
-          strategy="afterInteractive"
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var s = document.createElement('script');
+                s.src = 'https://lk-chatbot-production.up.railway.app/api/webchat/38610ffd-cb80-4938-8b3b-be6230991592/widget.js';
+                s.async = true;
+                document.head.appendChild(s);
+              })();
+            `,
+          }}
         />
       </body>
     </html>
