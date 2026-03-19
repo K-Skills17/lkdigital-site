@@ -67,7 +67,7 @@ export default function RootLayout({
         {children}
         <Script
           src="https://lk-chatbot-production.up.railway.app/api/webchat/38610ffd-cb80-4938-8b3b-be6230991592/widget.js"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
       </body>
     </html>
