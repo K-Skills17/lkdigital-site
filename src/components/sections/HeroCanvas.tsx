@@ -13,9 +13,6 @@ export default function HeroCanvas() {
 
     const isMobile = window.innerWidth < 768;
 
-    // Skip 3D on mobile — use CSS gradient fallback for performance
-    if (isMobile) return;
-
     const isBot = /bot|crawler|spider|google|bing|yahoo|perplexity|gptbot|claudebot/i.test(
       navigator.userAgent
     );
@@ -29,8 +26,10 @@ export default function HeroCanvas() {
 
     let cancelled = false;
 
-    // Delay Three.js load to let LCP paint first
-    const loadTimer = setTimeout(() => {
+    // Longer delay on mobile so LCP paints cleanly before GPU work starts
+    const delay = isMobile ? 2500 : 1500;
+
+    const startLoad = () => {
     import("three").then((THREE) => {
       if (cancelled || !container) return;
 
@@ -47,11 +46,12 @@ export default function HeroCanvas() {
       camera.position.set(0, 0, 6);
 
       const renderer = new THREE.WebGLRenderer({
-        antialias: true,
+        antialias: !isMobile,
         alpha: true,
         powerPreference: "high-performance",
       });
-      const dpr = Math.min(window.devicePixelRatio, 2);
+      // Cap DPR to 1 on mobile — halves GPU fill rate
+      const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio, 2);
       renderer.setPixelRatio(dpr);
       renderer.setSize(container.clientWidth, container.clientHeight);
       renderer.setClearColor(0x0f0f0f, 1);
@@ -59,14 +59,21 @@ export default function HeroCanvas() {
       renderer.domElement.style.position = "absolute";
       renderer.domElement.style.inset = "0";
 
-      // ── Soft floating orbs (warm, organic feel) — fewer on mobile ──
-      const orbCount = isMobile ? 6 : 12;
+      // Fade canvas in over the CSS gradient fallback
+      renderer.domElement.style.opacity = "0";
+      renderer.domElement.style.transition = "opacity 0.8s ease-out";
+      requestAnimationFrame(() => {
+        renderer.domElement.style.opacity = "1";
+      });
+
+      // ── Soft floating orbs — aggressively reduced on mobile ──
+      const orbCount = isMobile ? 4 : 12;
       const orbs: THREE.Mesh[] = [];
       const orbData: { speed: number; radius: number; offset: number; yAmp: number }[] = [];
 
       for (let i = 0; i < orbCount; i++) {
         const size = 0.08 + Math.random() * 0.15;
-        const geo = new THREE.SphereGeometry(size, isMobile ? 8 : 16, isMobile ? 8 : 16);
+        const geo = new THREE.SphereGeometry(size, isMobile ? 6 : 16, isMobile ? 6 : 16);
         const mat = new THREE.MeshBasicMaterial({
           color: i % 3 === 0 ? 0xc5a368 : i % 3 === 1 ? 0xd4b87a : 0xa8894f,
           transparent: true,
@@ -90,8 +97,8 @@ export default function HeroCanvas() {
         });
       }
 
-      // ── Elegant ring (subtle, luxury feel) ──
-      const ringGeo = new THREE.TorusGeometry(2.8, 0.008, isMobile ? 8 : 16, isMobile ? 60 : 120);
+      // ── Elegant ring — single ring on mobile ──
+      const ringGeo = new THREE.TorusGeometry(2.8, 0.008, isMobile ? 6 : 16, isMobile ? 48 : 120);
       const ringMat = new THREE.MeshBasicMaterial({
         color: 0xc5a368,
         transparent: true,
@@ -101,20 +108,25 @@ export default function HeroCanvas() {
       ring.rotation.x = Math.PI * 0.45;
       scene.add(ring);
 
-      // ── Second ring ──
-      const ring2Geo = new THREE.TorusGeometry(3.5, 0.005, isMobile ? 8 : 16, isMobile ? 60 : 120);
-      const ring2Mat = new THREE.MeshBasicMaterial({
-        color: 0xd4b87a,
-        transparent: true,
-        opacity: 0.1,
-      });
-      const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
-      ring2.rotation.x = Math.PI * 0.6;
-      ring2.rotation.y = Math.PI * 0.15;
-      scene.add(ring2);
+      // Second ring — desktop only
+      let ring2: THREE.Mesh | null = null;
+      let ring2Geo: THREE.TorusGeometry | null = null;
+      let ring2Mat: THREE.MeshBasicMaterial | null = null;
+      if (!isMobile) {
+        ring2Geo = new THREE.TorusGeometry(3.5, 0.005, 16, 120);
+        ring2Mat = new THREE.MeshBasicMaterial({
+          color: 0xd4b87a,
+          transparent: true,
+          opacity: 0.1,
+        });
+        ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+        ring2.rotation.x = Math.PI * 0.6;
+        ring2.rotation.y = Math.PI * 0.15;
+        scene.add(ring2);
+      }
 
       // ── Warm dust particles ──
-      const particleCount = isMobile ? 25 : 60;
+      const particleCount = isMobile ? 15 : 60;
       const particleGeo = new THREE.BufferGeometry();
       const particlePos = new Float32Array(particleCount * 3);
       for (let i = 0; i < particleCount * 3; i++) {
@@ -133,7 +145,7 @@ export default function HeroCanvas() {
       scene.add(new THREE.Points(particleGeo, particleMat));
 
       // ── Soft ambient glow (center) ──
-      const glowGeo = new THREE.SphereGeometry(1.2, isMobile ? 16 : 32, isMobile ? 16 : 32);
+      const glowGeo = new THREE.SphereGeometry(1.2, isMobile ? 12 : 32, isMobile ? 12 : 32);
       const glowMat = new THREE.MeshBasicMaterial({
         color: 0xc5a368,
         transparent: true,
@@ -142,14 +154,29 @@ export default function HeroCanvas() {
       const glow = new THREE.Mesh(glowGeo, glowMat);
       scene.add(glow);
 
-      // ── Mouse tracking ──
+      // ── Mouse tracking (desktop) / gyroscope (mobile) ──
       let mouseX = 0;
       let mouseY = 0;
+
       const handleMouseMove = (e: MouseEvent) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 0.4;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 0.4;
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 1.6;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 1.6;
       };
-      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+      let handleOrientation: ((e: DeviceOrientationEvent) => void) | null = null;
+
+      if (isMobile) {
+        // Gyroscope parallax on mobile
+        handleOrientation = (e: DeviceOrientationEvent) => {
+          const gamma = (e.gamma || 0) / 90; // left-right tilt [-1, 1]
+          const beta = ((e.beta || 0) - 45) / 90; // front-back tilt, centered at 45°
+          mouseX = gamma * 1.2;
+          mouseY = beta * 1.2;
+        };
+        window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+      } else {
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
+      }
 
       // ── Animation ──
       let rafId: number;
@@ -172,14 +199,14 @@ export default function HeroCanvas() {
 
         // Slow ring rotation
         ring.rotation.z = t * 0.04;
-        ring2.rotation.z = -t * 0.025;
+        if (ring2) ring2.rotation.z = -t * 0.025;
 
         // Glow pulse
         glowMat.opacity = 0.03 + Math.sin(t * 0.5) * 0.015;
 
-        // Camera follow mouse
-        camera.position.x += (mouseX * 0.25 - camera.position.x) * 0.015;
-        camera.position.y += (-mouseY * 0.25 - camera.position.y) * 0.015;
+        // Camera follow mouse / gyroscope
+        camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.045;
+        camera.position.y += (-mouseY * 0.8 - camera.position.y) * 0.045;
         camera.lookAt(0, 0, 0);
 
         renderer.render(scene, camera);
@@ -204,6 +231,7 @@ export default function HeroCanvas() {
       // ── Cleanup ──
       cleanupRef.current = () => {
         cancelAnimationFrame(rafId);
+        if (handleOrientation) window.removeEventListener("deviceorientation", handleOrientation);
         window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("resize", handleResize);
         clearTimeout(resizeTimer);
@@ -215,8 +243,8 @@ export default function HeroCanvas() {
         });
         ringGeo.dispose();
         ringMat.dispose();
-        ring2Geo.dispose();
-        ring2Mat.dispose();
+        ring2Geo?.dispose();
+        ring2Mat?.dispose();
         particleGeo.dispose();
         particleMat.dispose();
         glowGeo.dispose();
@@ -227,7 +255,16 @@ export default function HeroCanvas() {
         }
       };
     });
-    }, 1500); // Delay Three.js by 1.5s
+    };
+
+    // Use requestIdleCallback on mobile so we only start after browser is idle
+    const loadTimer = setTimeout(() => {
+      if (isMobile && "requestIdleCallback" in window) {
+        (window as unknown as { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(startLoad);
+      } else {
+        startLoad();
+      }
+    }, delay);
 
     return () => {
       clearTimeout(loadTimer);
