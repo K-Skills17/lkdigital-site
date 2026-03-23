@@ -25,6 +25,7 @@ export function OrganizationSchema() {
       "marketing digital para saúde bucal",
     ],
     email: "contato@lkdigital.org",
+    telephone: "+5511959041799",
     sameAs: [],
   };
 

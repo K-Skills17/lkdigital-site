@@ -45,12 +45,22 @@ export default function Footer() {
               Marketing digital de precisão para dentistas que querem uma agenda
               cheia de pacientes qualificados — sem gerenciar nada.
             </p>
-            <a
-              href="mailto:contato@lkdigital.org"
-              className="inline-block mt-4 text-sm hover:text-white transition-colors duration-200"
-            >
-              contato@lkdigital.org
-            </a>
+            <div className="mt-4 flex flex-col gap-2">
+              <a
+                href="mailto:contato@lkdigital.org"
+                className="text-sm hover:text-white transition-colors duration-200"
+              >
+                contato@lkdigital.org
+              </a>
+              <a
+                href="https://wa.me/5511959041799"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm hover:text-white transition-colors duration-200"
+              >
+                WhatsApp: +55 11 95904-1799
+              </a>
+            </div>
           </div>
 
           {/* Link Columns */}
