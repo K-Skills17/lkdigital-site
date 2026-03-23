@@ -138,8 +138,8 @@ export default function Privacidade() {
                 </ul>
                 <p className="mt-3">
                   Para exercer qualquer desses direitos, entre em contato pelo e-mail:{" "}
-                  <a href="mailto:privacidade@lkdigital.odo.br" className="text-accent hover:text-accent-dark underline">
-                    privacidade@lkdigital.odo.br
+                  <a href="mailto:contato@lkdigital.org" className="text-accent hover:text-accent-dark underline">
+                    contato@lkdigital.org
                   </a>
                 </p>
               </div>

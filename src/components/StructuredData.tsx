@@ -24,6 +24,7 @@ export function OrganizationSchema() {
       "publicidade odontológica CFO",
       "marketing digital para saúde bucal",
     ],
+    email: "contato@lkdigital.org",
     sameAs: [],
   };
 

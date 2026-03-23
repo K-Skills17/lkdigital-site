@@ -45,6 +45,12 @@ export default function Footer() {
               Marketing digital de precisão para dentistas que querem uma agenda
               cheia de pacientes qualificados — sem gerenciar nada.
             </p>
+            <a
+              href="mailto:contato@lkdigital.org"
+              className="inline-block mt-4 text-sm hover:text-white transition-colors duration-200"
+            >
+              contato@lkdigital.org
+            </a>
           </div>
 
           {/* Link Columns */}

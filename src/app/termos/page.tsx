@@ -205,8 +205,8 @@ export default function Termos() {
                 </h2>
                 <p>
                   Para dúvidas sobre estes Termos de Uso, entre em contato:{" "}
-                  <a href="mailto:contato@lkdigital.odo.br" className="text-accent hover:text-accent-dark underline">
-                    contato@lkdigital.odo.br
+                  <a href="mailto:contato@lkdigital.org" className="text-accent hover:text-accent-dark underline">
+                    contato@lkdigital.org
                   </a>
                 </p>
               </div>
