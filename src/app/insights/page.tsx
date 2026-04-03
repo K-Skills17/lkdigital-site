@@ -80,8 +80,9 @@ export default function Insights() {
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
-                <article
+                <Link
                   key={post.slug}
+                  href={`/insights/${post.slug}`}
                   className="group bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 overflow-hidden flex flex-col"
                 >
                   {/* Placeholder image area */}
@@ -114,7 +115,7 @@ export default function Insights() {
                       </span>
                     </div>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           </div>

@@ -25,6 +25,10 @@ module.exports = {
     if (path.startsWith("/insights")) {
       return { loc: path, changefreq: "weekly", priority: 0.8, lastmod: new Date().toISOString() };
     }
+    // City pages
+    if (path.startsWith("/cidades")) {
+      return { loc: path, changefreq: "monthly", priority: 0.8, lastmod: new Date().toISOString() };
+    }
     return {
       loc: path,
       changefreq: config.changefreq,

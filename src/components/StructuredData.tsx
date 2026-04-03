@@ -6,6 +6,7 @@ export function OrganizationSchema() {
     url: "https://lkdigital.odo.br",
     description:
       "Agência de marketing digital especializada exclusivamente em odontologia. Captação de pacientes qualificados para dentistas e clínicas odontológicas.",
+    foundingDate: "2024",
     areaServed: [
       { "@type": "Country", name: "Brasil" },
       { "@type": "Country", name: "Portugal" },
@@ -24,7 +25,11 @@ export function OrganizationSchema() {
       "publicidade odontológica CFO",
       "marketing digital para saúde bucal",
     ],
-    sameAs: [],
+    sameAs: [
+      "https://instagram.com/lkdigital.odo",
+      "https://facebook.com/lkdigital.odo",
+      "https://linkedin.com/company/lkdigital",
+    ],
   };
 
   return (
@@ -112,9 +117,11 @@ export function BreadcrumbSchema({
 export function ServiceSchema({
   name,
   description,
+  dateModified,
 }: {
   name: string;
   description: string;
+  dateModified?: string;
 }) {
   const schema = {
     "@context": "https://schema.org",
@@ -127,6 +134,95 @@ export function ServiceSchema({
       url: "https://lkdigital.odo.br",
     },
     areaServed: { "@type": "Country", name: "Brasil" },
+    serviceType: "Marketing Digital para Odontologia",
+    ...(dateModified && { dateModified }),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function ArticleSchema({
+  title,
+  description,
+  slug,
+  datePublished,
+  dateModified,
+  category,
+}: {
+  title: string;
+  description: string;
+  slug: string;
+  datePublished: string;
+  dateModified: string;
+  category?: string;
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    url: `https://lkdigital.odo.br/insights/${slug}`,
+    datePublished,
+    dateModified,
+    author: {
+      "@type": "Person",
+      name: "Equipe LK Digital",
+      jobTitle: "Especialistas em Marketing Digital para Odontologia",
+      url: "https://lkdigital.odo.br/sobre",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "LK Digital",
+      url: "https://lkdigital.odo.br",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://lkdigital.odo.br/insights/${slug}`,
+    },
+    ...(category && { articleSection: category }),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function CityServiceSchema({
+  cityName,
+  stateAbbr,
+  description,
+}: {
+  cityName: string;
+  stateAbbr: string;
+  description: string;
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `Marketing Digital para Dentistas em ${cityName}`,
+    description,
+    provider: {
+      "@type": "ProfessionalService",
+      name: "LK Digital",
+      url: "https://lkdigital.odo.br",
+    },
+    areaServed: {
+      "@type": "City",
+      name: cityName,
+      containedInPlace: {
+        "@type": "State",
+        name: stateAbbr,
+        containedInPlace: { "@type": "Country", name: "Brasil" },
+      },
+    },
     serviceType: "Marketing Digital para Odontologia",
   };
 

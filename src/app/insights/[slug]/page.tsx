@@ -1,0 +1,405 @@
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { BreadcrumbSchema, FAQSchema } from "@/components/StructuredData";
+import { blogPosts, getBlogPost, getAllSlugs } from "@/data/blog-posts";
+import type { BlogPost } from "@/data/blog-posts";
+
+// ─── Static Params ───
+export function generateStaticParams() {
+  return getAllSlugs().map((slug) => ({ slug }));
+}
+
+// ─── Dynamic Metadata ───
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  if (!post) return { title: "Artigo não encontrado" };
+
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      locale: "pt_BR",
+      siteName: "LK Digital",
+      publishedTime: post.datePublished,
+      modifiedTime: post.dateModified,
+      authors: ["LK Digital"],
+    },
+    alternates: {
+      canonical: `/insights/${post.slug}`,
+    },
+  };
+}
+
+// ─── Article Schema ───
+function ArticleSchema({ post }: { post: BlogPost }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.datePublished,
+    dateModified: post.dateModified,
+    author: {
+      "@type": "Organization",
+      name: "LK Digital",
+      url: "https://lkdigital.odo.br",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "LK Digital",
+      url: "https://lkdigital.odo.br",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://lkdigital.odo.br/insights/${post.slug}`,
+    },
+    articleSection: post.category,
+    wordCount: post.content.reduce(
+      (acc, s) =>
+        acc +
+        s.content.split(" ").length +
+        (s.subsections?.reduce((a, ss) => a + ss.content.split(" ").length, 0) ?? 0),
+      0
+    ),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// ─── Helper: format date ───
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("pt-BR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+// ─── Page Component ───
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  if (!post) notFound();
+
+  const relatedPosts = post.relatedSlugs
+    .map((s) => blogPosts.find((p) => p.slug === s))
+    .filter(Boolean) as BlogPost[];
+
+  return (
+    <>
+      {/* Structured Data */}
+      <ArticleSchema post={post} />
+      <FAQSchema faqs={post.faqs} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Insights", href: "/insights" },
+          { name: post.title, href: `/insights/${post.slug}` },
+        ]}
+      />
+
+      <Navbar />
+
+      <main className="pt-20 md:pt-24">
+        {/* ─── Article Header ─── */}
+        <header className="border-b border-border">
+          <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-20">
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="mb-6 md:mb-8">
+              <ol className="flex items-center gap-2 text-xs text-muted-foreground">
+                <li>
+                  <Link href="/" className="hover:text-foreground transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                  <Link href="/insights" className="hover:text-foreground transition-colors">
+                    Insights
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground truncate max-w-[200px]">{post.title}</li>
+              </ol>
+            </nav>
+
+            {/* Category + Read Time */}
+            <div className="flex items-center gap-3 mb-4">
+              <span className="px-2.5 py-1 text-[10px] font-medium text-accent bg-accent/10 rounded uppercase tracking-wider">
+                {post.category}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {post.readTime} de leitura
+              </span>
+            </div>
+
+            {/* Title */}
+            <h1 className="font-display text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.1] tracking-tight text-foreground max-w-4xl">
+              {post.title}
+            </h1>
+
+            {/* Author Byline */}
+            <div className="mt-6 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center">
+                <span className="text-sm font-medium text-accent">LK</span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-foreground">
+                  Equipe LK Digital
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {formatDate(post.datePublished)}
+                  {post.dateModified !== post.datePublished && (
+                    <> &middot; Atualizado em {formatDate(post.dateModified)}</>
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* ─── Article Body ─── */}
+        <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12 lg:gap-16">
+            {/* Content */}
+            <article className="max-w-prose">
+              {/* Excerpt / Lead */}
+              <p className="text-lg text-muted-foreground leading-relaxed mb-10 border-l-2 border-accent/40 pl-5">
+                {post.excerpt}
+              </p>
+
+              {/* Sections */}
+              {post.content.map((section, i) => (
+                <section key={i} className="mb-10" id={`section-${i}`}>
+                  <h2 className="font-display text-display-sm text-foreground mb-4">
+                    {section.heading}
+                  </h2>
+                  <div className="prose-content">
+                    {section.content.split("\n\n").map((para, j) => (
+                      <p
+                        key={j}
+                        className="text-[15px] text-muted-foreground leading-[1.8] mb-4"
+                      >
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+
+                  {/* Subsections */}
+                  {section.subsections?.map((sub, k) => (
+                    <div key={k} className="mt-6 ml-0">
+                      <h3 className="font-display text-lg text-foreground mb-3">
+                        {sub.heading}
+                      </h3>
+                      <div className="prose-content">
+                        {sub.content.split("\n\n").map((para, l) => (
+                          <p
+                            key={l}
+                            className="text-[15px] text-muted-foreground leading-[1.8] mb-4"
+                          >
+                            {para}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </section>
+              ))}
+
+              {/* ─── FAQ Section ─── */}
+              <section className="mt-16 pt-10 border-t border-border">
+                <h2 className="font-display text-display-sm text-foreground mb-8">
+                  Perguntas Frequentes
+                </h2>
+                <div className="space-y-6">
+                  {post.faqs.map((faq, i) => (
+                    <details
+                      key={i}
+                      className="group bg-card rounded-lg border border-border/60 overflow-hidden"
+                    >
+                      <summary className="flex items-center justify-between cursor-pointer px-5 py-4 text-sm font-medium text-foreground hover:text-accent transition-colors list-none [&::-webkit-details-marker]:hidden">
+                        {faq.question}
+                        <svg
+                          className="w-4 h-4 text-muted-foreground group-open:rotate-180 transition-transform flex-shrink-0 ml-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={2}
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                          />
+                        </svg>
+                      </summary>
+                      <div className="px-5 pb-4">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </section>
+
+              {/* ─── CTA ─── */}
+              <section className="mt-16 p-8 rounded-xl bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
+                <h2 className="font-display text-display-sm text-foreground mb-3">
+                  {post.cta?.heading ?? "Quer Mais Pacientes Pelo Google?"}
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-lg">
+                  {post.cta?.description ??
+                    "A LK Digital é especializada exclusivamente em marketing para dentistas. Fazemos diagnóstico gratuito da sua presença digital e mostramos exatamente onde estão as oportunidades."}
+                </p>
+                <Link
+                  href="/contato"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
+                >
+                  {post.cta?.buttonText ?? "Agendar Diagnóstico Gratuito"}
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </Link>
+              </section>
+            </article>
+
+            {/* ─── Sidebar: Table of Contents ─── */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-28">
+                <p className="text-[10px] font-medium text-accent uppercase tracking-[0.25em] mb-4">
+                  Neste artigo
+                </p>
+                <nav aria-label="Sumário do artigo">
+                  <ol className="space-y-2 border-l border-border/60 pl-4">
+                    {post.content.map((section, i) => (
+                      <li key={i}>
+                        <a
+                          href={`#section-${i}`}
+                          className="block text-xs text-muted-foreground hover:text-accent transition-colors leading-snug py-1"
+                        >
+                          {section.heading}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+
+                {/* Sidebar CTA */}
+                <div className="mt-8 p-4 rounded-lg bg-card border border-border/60">
+                  <p className="text-xs font-medium text-foreground mb-2">
+                    {post.cta?.heading
+                      ? post.cta.heading.length > 50
+                        ? "Diagnóstico Gratuito"
+                        : post.cta.heading
+                      : "Diagnóstico Gratuito"}
+                  </p>
+                  <p className="text-[11px] text-muted-foreground leading-relaxed mb-3">
+                    {post.cta?.description
+                      ? post.cta.description.substring(0, 120) + (post.cta.description.length > 120 ? "..." : "")
+                      : "Descubra o que está impedindo seu consultório de aparecer no Google."}
+                  </p>
+                  <Link
+                    href="/contato"
+                    className="block w-full text-center px-3 py-2 bg-accent hover:bg-accent-dark text-white text-xs font-medium rounded transition-colors"
+                  >
+                    {post.cta?.buttonText ?? "Quero o Diagnóstico"}
+                  </Link>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        {/* ─── Related Articles ─── */}
+        {relatedPosts.length > 0 && (
+          <section className="py-16 md:py-20 bg-muted border-t border-border">
+            <div className="max-w-content mx-auto px-4 sm:px-6">
+              <h2 className="font-display text-display-md text-foreground mb-10">
+                Artigos Relacionados
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedPosts.map((related) => (
+                  <Link
+                    key={related.slug}
+                    href={`/insights/${related.slug}`}
+                    className="group bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 overflow-hidden flex flex-col"
+                  >
+                    <div className="aspect-[16/9] bg-gradient-to-br from-accent/5 to-accent/10 flex items-center justify-center">
+                      <span className="text-xs text-accent/40 uppercase tracking-[0.25em] font-medium">
+                        {related.category}
+                      </span>
+                    </div>
+                    <div className="p-5 flex flex-col flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="px-2 py-0.5 text-[10px] font-medium text-accent bg-accent/10 rounded">
+                          {related.category}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {related.readTime}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-base font-medium text-foreground group-hover:text-accent transition-colors line-clamp-2">
+                        {related.title}
+                      </h3>
+                      <div className="mt-3 pt-3 border-t border-border/60">
+                        <span className="inline-flex items-center gap-1 text-xs font-medium text-accent group-hover:gap-2 transition-all">
+                          Ler artigo
+                          <svg
+                            className="w-3.5 h-3.5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+
+      <Footer />
+    </>
+  );
+}
