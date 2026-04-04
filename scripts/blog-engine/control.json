@@ -1,0 +1,43 @@
+{
+  "engine": {
+    "enabled": true,
+    "articlesPerDay": 1,
+    "publishTime": "06:00",
+    "timezone": "America/Sao_Paulo"
+  },
+  "categories": {
+    "SEO": { "enabled": true, "maxPerWeek": 3, "priority": "high" },
+    "Google Maps": { "enabled": true, "maxPerWeek": 2, "priority": "high" },
+    "Ads": { "enabled": true, "maxPerWeek": 2, "priority": "high" },
+    "Conversão": { "enabled": true, "maxPerWeek": 3, "priority": "high" },
+    "Gestão": { "enabled": true, "maxPerWeek": 2, "priority": "medium" },
+    "Reputação": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Posicionamento": { "enabled": true, "maxPerWeek": 2, "priority": "high" },
+    "Tendências": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Compliance": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Estratégia": { "enabled": true, "maxPerWeek": 2, "priority": "high" },
+    "Mentalidade": { "enabled": true, "maxPerWeek": 1, "priority": "low" },
+    "Ferramentas": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Conteúdo": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Redes Sociais": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Retenção": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Captação": { "enabled": true, "maxPerWeek": 2, "priority": "high" },
+    "GEO": { "enabled": true, "maxPerWeek": 1, "priority": "high" },
+    "Dados": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Implantodontia": { "enabled": true, "maxPerWeek": 1, "priority": "high" },
+    "Ortodontia": { "enabled": true, "maxPerWeek": 1, "priority": "high" },
+    "Estética": { "enabled": true, "maxPerWeek": 1, "priority": "high" },
+    "Endodontia": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Periodontia": { "enabled": true, "maxPerWeek": 1, "priority": "medium" },
+    "Odontopediatria": { "enabled": true, "maxPerWeek": 1, "priority": "medium" }
+  },
+  "qualityGates": {
+    "minWordCount": 1800,
+    "maxWordCount": 3000,
+    "minFaqItems": 5,
+    "minH2Headings": 4,
+    "cfoComplianceCheck": true,
+    "bannedPhraseCheck": true,
+    "sourceAttributionCheck": true
+  }
+}

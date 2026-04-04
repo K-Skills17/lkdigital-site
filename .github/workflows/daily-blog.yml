@@ -1,0 +1,83 @@
+name: Daily Blog Generation
+
+on:
+  schedule:
+    # Runs daily at 9:00 AM UTC (6:00 AM São Paulo time)
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'generate'
+        type: choice
+        options:
+          - generate
+          - stats
+          - dry-run
+      count:
+        description: 'Number of articles to generate (1-5)'
+        required: false
+        default: '1'
+        type: choice
+        options:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install tsx typescript @types/node --save-dev
+
+      - name: Show pipeline stats
+        run: npx tsx scripts/blog-engine/run.ts --stats
+
+      - name: Generate articles
+        if: ${{ github.event.inputs.action != 'stats' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ACTION="${{ github.event.inputs.action || 'generate' }}"
+          COUNT="${{ github.event.inputs.count || '1' }}"
+
+          if [ "$ACTION" = "dry-run" ]; then
+            npx tsx scripts/blog-engine/run.ts --dry-run --count "$COUNT"
+          elif [ "$ACTION" = "generate" ]; then
+            npx tsx scripts/blog-engine/run.ts --count "$COUNT"
+          fi
+
+      - name: Show final stats
+        if: ${{ github.event.inputs.action != 'stats' }}
+        run: npx tsx scripts/blog-engine/run.ts --stats
+
+      - name: Commit and push changes
+        if: ${{ github.event.inputs.action != 'stats' && github.event.inputs.action != 'dry-run' }}
+        run: |
+          git config user.name "LK Digital Blog Engine"
+          git config user.email "blog-engine@lkdigital.odo.br"
+          git add content/blog/ scripts/blog-engine/published.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            ARTICLE_COUNT=$(git diff --staged --name-only | grep "content/blog/" | wc -l)
+            git commit -m "blog: add ${ARTICLE_COUNT} new article(s) [automated]"
+            git push
+          fi
