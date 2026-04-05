@@ -8,6 +8,7 @@ import {
   GENERATION_CONFIG,
   AUTHORS,
   DENTIST_PROBLEMS_CONTEXT,
+  PERSUASION_PRINCIPLES,
   FRAMEWORK_CONTEXTS,
   BANNED_PHRASES,
   type TopicSeed,
@@ -100,6 +101,8 @@ HTML STRUCTURE:
 - Use tables for comparisons
 
 CURRENT YEAR: ${GENERATION_CONFIG.currentYear}
+
+${PERSUASION_PRINCIPLES}
 
 OUTPUT: Return ONLY valid JSON (no markdown wrappers, no \`\`\`json). The JSON must match this exact structure:
 {

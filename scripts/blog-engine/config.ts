@@ -161,6 +161,31 @@ MEDOS PROFUNDOS:
 - Ser ultrapassado por dentistas mais jovens com redes sociais fortes
 `;
 
+// ─── Persuasion Principles (Bernays' Propaganda, adapted) ───
+export const PERSUASION_PRINCIPLES = `
+PRINCÍPIOS DE PERSUASÃO (aplicar sutilmente em todo conteúdo):
+
+1. AUTORIDADE INVISÍVEL: Nunca venda diretamente. Eduque de forma que a única conclusão lógica do leitor seja "preciso de marketing digital profissional". O artigo deve parecer informação neutra de um especialista, não propaganda de uma agência.
+
+2. CRISTALIZAÇÃO DE OPINIÃO: Apresente dados e realidades que FORMEM a opinião do dentista. Exemplo: não diga "contrate marketing digital". Diga "82% dos pacientes buscam no Google — consultórios invisíveis online perdem esses pacientes para concorrentes que investem R$2k/mês em presença digital."
+
+3. APELO AO INCONSCIENTE: Escreva para os desejos profundos (status, respeito, ser o melhor da cidade, não ser ultrapassado) — não apenas para ROI e métricas. Dentistas compram SENTIMENTOS: confiança, controle, prestígio.
+
+4. REVELAÇÃO, NÃO MARKETING: Cada artigo deve parecer uma descoberta ou revelação. "O dado que ninguém mostra", "A estratégia que 95% ignora", "O erro invisível que custa R$X/mês". Crie a sensação de acesso exclusivo a informação valiosa.
+
+5. AUTORIDADE DE TERCEIROS: Cite SEMPRE fontes externas — Google, pesquisas de mercado, CFO, universidades. Nunca diga "nós acreditamos que". Diga "Segundo pesquisa do BrightLocal com 4.000 consumidores..." A credibilidade vem de fora.
+
+6. SIMPLICIDADE RADICAL: Reduza conceitos complexos a frameworks simples com 3-5 passos. Dentistas são brilhantes em odontologia mas não em marketing. Faça-os sentir que ENTENDEM o que precisa ser feito (e depois perceber que preferem delegar).
+
+7. REPETIÇÃO COM VARIAÇÃO: O tema central é sempre o mesmo — visibilidade digital = pacientes = receita. Mas cada artigo aborda de um ângulo diferente. O leitor que lê 5 artigos deve ter a mesma conclusão reforçada 5 vezes de formas distintas.
+
+8. LIDERANÇA DE OPINIÃO: Escreva para o dentista que influencia outros (donos de clínicas, palestrantes, referências locais). Se convencer o líder, ele influencia o grupo.
+
+9. URGÊNCIA IMPLÍCITA: Sem pressão explícita. Use dados que criam urgência natural: "Buscas por dentistas em IA crescem 340% ao ano", "Consultórios que não aparecem no Google Maps perdem em média 47 pacientes/mês para concorrentes que aparecem."
+
+10. IDENTIDADE, NÃO PRODUTO: Posicione marketing digital como parte da identidade de um "dentista moderno e bem-sucedido" — não como um serviço. O dentista que investe em presença digital é o profissional inteligente e visionário; o que não investe está ficando para trás.
+`;
+
 // ─── Framework References (injected for P5 articles) ───
 export const FRAMEWORK_CONTEXTS: Record<string, string> = {
   "Hormozi Value Equation": `
