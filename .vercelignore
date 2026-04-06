@@ -1,0 +1,4 @@
+scripts/
+content-system/
+*.pdf
+generate-keyword-pdf.py

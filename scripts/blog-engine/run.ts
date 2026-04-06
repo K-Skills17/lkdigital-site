@@ -1,4 +1,3 @@
-#!/usr/bin/env npx tsx
 // ═══════════════════════════════════════════════════════════════
 // LK Digital Blog Engine — Main Runner
 // Usage:
