@@ -8,7 +8,7 @@ const footerSections = [
       { label: "Sobre", href: "/sobre" },
       { label: "Soluções", href: "/solucoes" },
       { label: "Casos de Sucesso", href: "/casos" },
-      { label: "Insights", href: "/insights" },
+      { label: "Blog", href: "/blog" },
     ],
   },
   {

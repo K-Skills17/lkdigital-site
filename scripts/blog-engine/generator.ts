@@ -86,7 +86,7 @@ CONTENT QUALITY RULES (NON-NEGOTIABLE):
 3. SPECIFICITY: Use exact numbers, city names, procedure names, tool names. "Aumente suas avaliações" is bad. "Vá de 12 para 50+ avaliações em 90 dias usando solicitação pós-consulta via WhatsApp" is good.
 4. NO AI-DETECTABLE PATTERNS: Never use these phrases: ${BANNED_PHRASES.join(", ")}. Write naturally, as a real marketing professional would. Vary sentence length. Use occasional rhetorical questions.
 5. ORIGINAL INSIGHT: Every article must contain at least one insight that is NOT generic marketing advice — something specific to Brazilian dentistry.
-6. INTERNAL LINKS: Reference 2-3 other LK Digital blog articles naturally in the text using relative URLs (/insights/[slug]).
+6. INTERNAL LINKS: Reference 2-3 other LK Digital blog articles naturally in the text using relative URLs (/blog/[slug]).
 
 SEO + AEO + GEO OPTIMIZATION:
 - SEO: Primary keyword in title, first paragraph, at least 2 H2 headings, and meta description
@@ -162,7 +162,7 @@ ${FRAMEWORK_CONTEXTS[frameworkKey]}`;
   const recentSlugs = publishedSlugs.slice(-10);
   if (recentSlugs.length > 0) {
     prompt += `\n\nINTERNAL LINKS — Reference 2-3 of these published articles naturally in the text:
-${recentSlugs.map((s) => `- /insights/${s}`).join("\n")}`;
+${recentSlugs.map((s) => `- /blog/${s}`).join("\n")}`;
   }
 
   prompt += `\n\nREMINDERS:
@@ -280,7 +280,7 @@ async function factCheckArticle(article: GeneratedArticle): Promise<{ pass: bool
   }
 
   // Check that internal links are valid
-  const linkPattern = /href="\/insights\/([^"]+)"/g;
+  const linkPattern = /href="\/blog\/([^"]+)"/g;
   let match;
   while ((match = linkPattern.exec(article.content)) !== null) {
     // Links will be validated against published slugs at publish time

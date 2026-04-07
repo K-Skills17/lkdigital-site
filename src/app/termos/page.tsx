@@ -111,10 +111,10 @@ export default function Termos() {
 
               <div>
                 <h2 className="font-display text-xl text-foreground mb-3">
-                  7. Conteúdo do Blog (Insights)
+                  7. Conteúdo do Blog
                 </h2>
                 <p>
-                  Os artigos publicados na seção Insights têm caráter educativo e
+                  Os artigos publicados no Blog têm caráter educativo e
                   informativo. Embora nos esforcemos para manter o conteúdo
                   atualizado e preciso, não garantimos que as informações estejam
                   completas ou livres de erros. O conteúdo não substitui consultoria

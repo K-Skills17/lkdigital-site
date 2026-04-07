@@ -3,7 +3,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { BreadcrumbSchema, FAQSchema } from "@/components/StructuredData";
+import {
+  BreadcrumbSchema,
+  FAQSchema,
+  ArticleSchema,
+} from "@/components/StructuredData";
 import { blogPosts, getBlogPost, getAllSlugs } from "@/data/blog-posts";
 import type { BlogPost } from "@/data/blog-posts";
 import { getBlogPostBySlug, getAllBlogSlugs } from "@/lib/blog";
@@ -29,8 +33,11 @@ export async function generateMetadata({
 
   if (!post && !enginePost) return { title: "Artigo não encontrado" };
 
-  const title = post?.title ?? enginePost!.title;
-  const description = post?.description ?? enginePost!.seoDescription ?? enginePost!.excerpt;
+  const title = post?.title ?? enginePost!.seoTitle ?? enginePost!.title;
+  const description =
+    post?.description ??
+    enginePost!.seoDescription ??
+    enginePost!.excerpt;
   const datePublished = post?.datePublished ?? enginePost!.datePublished;
   const dateModified = post?.dateModified ?? enginePost!.dateModified;
 
@@ -48,50 +55,9 @@ export async function generateMetadata({
       authors: ["LK Digital"],
     },
     alternates: {
-      canonical: `/insights/${slug}`,
+      canonical: `/blog/${slug}`,
     },
   };
-}
-
-// ─── Article Schema ───
-function ArticleSchema({ post }: { post: BlogPost }) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.datePublished,
-    dateModified: post.dateModified,
-    author: {
-      "@type": "Organization",
-      name: "LK Digital",
-      url: "https://lkdigital.odo.br",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "LK Digital",
-      url: "https://lkdigital.odo.br",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://lkdigital.odo.br/insights/${post.slug}`,
-    },
-    articleSection: post.category,
-    wordCount: post.content.reduce(
-      (acc, s) =>
-        acc +
-        s.content.split(" ").length +
-        (s.subsections?.reduce((a, ss) => a + ss.content.split(" ").length, 0) ?? 0),
-      0
-    ),
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
 }
 
 // ─── Helper: format date ───
@@ -117,28 +83,48 @@ export default async function BlogPostPage({
 
   // If it's an engine-generated post, render it differently
   if (enginePost && !post) {
-    return (
-      <EnginePostPage article={enginePost} />
-    );
+    return <EnginePostPage article={enginePost} />;
   }
 
   // Original initial-6-articles rendering (post is guaranteed non-null here)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const safePost = post!;
+
+  // Calculate word count for SEO schema
+  const wordCount = safePost.content.reduce(
+    (acc, s) =>
+      acc +
+      s.content.split(" ").length +
+      (s.subsections?.reduce(
+        (a, ss) => a + ss.content.split(" ").length,
+        0
+      ) ?? 0),
+    0
+  );
+
   const relatedPosts = safePost.relatedSlugs
     .map((s) => blogPosts.find((p) => p.slug === s))
     .filter(Boolean) as BlogPost[];
 
   return (
     <>
-      {/* Structured Data */}
-      <ArticleSchema post={safePost} />
+      {/* Structured Data — SEO + GEO (speakable) */}
+      <ArticleSchema
+        title={safePost.title}
+        description={safePost.description}
+        slug={safePost.slug}
+        datePublished={safePost.datePublished}
+        dateModified={safePost.dateModified}
+        category={safePost.category}
+        wordCount={wordCount}
+        speakable
+      />
       <FAQSchema faqs={safePost.faqs} />
       <BreadcrumbSchema
         items={[
           { name: "Home", href: "/" },
-          { name: "Insights", href: "/insights" },
-          { name: safePost.title, href: `/insights/${safePost.slug}` },
+          { name: "Blog", href: "/blog" },
+          { name: safePost.title, href: `/blog/${safePost.slug}` },
         ]}
       />
 
@@ -152,18 +138,26 @@ export default async function BlogPostPage({
             <nav aria-label="Breadcrumb" className="mb-6 md:mb-8">
               <ol className="flex items-center gap-2 text-xs text-muted-foreground">
                 <li>
-                  <Link href="/" className="hover:text-foreground transition-colors">
+                  <Link
+                    href="/"
+                    className="hover:text-foreground transition-colors"
+                  >
                     Home
                   </Link>
                 </li>
                 <li aria-hidden="true">/</li>
                 <li>
-                  <Link href="/insights" className="hover:text-foreground transition-colors">
-                    Insights
+                  <Link
+                    href="/blog"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Blog
                   </Link>
                 </li>
                 <li aria-hidden="true">/</li>
-                <li className="text-foreground truncate max-w-[200px]">{safePost.title}</li>
+                <li className="text-foreground truncate max-w-[200px]">
+                  {safePost.title}
+                </li>
               </ol>
             </nav>
 
@@ -178,7 +172,10 @@ export default async function BlogPostPage({
             </div>
 
             {/* Title */}
-            <h1 className="font-display text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.1] tracking-tight text-foreground max-w-4xl">
+            <h1
+              className="font-display text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.1] tracking-tight text-foreground max-w-4xl"
+              data-speakable
+            >
               {safePost.title}
             </h1>
 
@@ -194,7 +191,11 @@ export default async function BlogPostPage({
                 <p className="text-xs text-muted-foreground">
                   {formatDate(safePost.datePublished)}
                   {safePost.dateModified !== safePost.datePublished && (
-                    <> &middot; Atualizado em {formatDate(safePost.dateModified)}</>
+                    <>
+                      {" "}
+                      &middot; Atualizado em{" "}
+                      {formatDate(safePost.dateModified)}
+                    </>
                   )}
                 </p>
               </div>
@@ -207,15 +208,21 @@ export default async function BlogPostPage({
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12 lg:gap-16">
             {/* Content */}
             <article className="max-w-prose">
-              {/* Excerpt / Lead */}
-              <p className="text-lg text-muted-foreground leading-relaxed mb-10 border-l-2 border-accent/40 pl-5">
+              {/* AEO: Excerpt as citable lead */}
+              <p
+                className="text-lg text-muted-foreground leading-relaxed mb-10 border-l-2 border-accent/40 pl-5"
+                data-speakable
+              >
                 {safePost.excerpt}
               </p>
 
               {/* Sections */}
               {safePost.content.map((section, i) => (
                 <section key={i} className="mb-10" id={`section-${i}`}>
-                  <h2 className="font-display text-display-sm text-foreground mb-4">
+                  <h2
+                    className="font-display text-display-sm text-foreground mb-4"
+                    data-speakable
+                  >
                     {section.heading}
                   </h2>
                   <div className="prose-content">
@@ -250,7 +257,7 @@ export default async function BlogPostPage({
                 </section>
               ))}
 
-              {/* ─── FAQ Section ─── */}
+              {/* ─── FAQ Section (AEO: prominent, accessible) ─── */}
               <section className="mt-16 pt-10 border-t border-border">
                 <h2 className="font-display text-display-sm text-foreground mb-8">
                   Perguntas Frequentes
@@ -290,7 +297,8 @@ export default async function BlogPostPage({
               {/* ─── CTA ─── */}
               <section className="mt-16 p-8 rounded-xl bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
                 <h2 className="font-display text-display-sm text-foreground mb-3">
-                  {safePost.cta?.heading ?? "Quer Mais Pacientes Pelo Google?"}
+                  {safePost.cta?.heading ??
+                    "Quer Mais Pacientes Pelo Google?"}
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-lg">
                   {safePost.cta?.description ??
@@ -300,7 +308,8 @@ export default async function BlogPostPage({
                   href="/contato"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
                 >
-                  {safePost.cta?.buttonText ?? "Agendar Diagnóstico Gratuito"}
+                  {safePost.cta?.buttonText ??
+                    "Agendar Diagnóstico Gratuito"}
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -350,7 +359,8 @@ export default async function BlogPostPage({
                   </p>
                   <p className="text-[11px] text-muted-foreground leading-relaxed mb-3">
                     {safePost.cta?.description
-                      ? safePost.cta.description.substring(0, 120) + (safePost.cta.description.length > 120 ? "..." : "")
+                      ? safePost.cta.description.substring(0, 120) +
+                        (safePost.cta.description.length > 120 ? "..." : "")
                       : "Descubra o que está impedindo seu consultório de aparecer no Google."}
                   </p>
                   <Link
@@ -376,7 +386,7 @@ export default async function BlogPostPage({
                 {relatedPosts.map((related) => (
                   <Link
                     key={related.slug}
-                    href={`/insights/${related.slug}`}
+                    href={`/blog/${related.slug}`}
                     className="group bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 overflow-hidden flex flex-col"
                   >
                     <div className="aspect-[16/9] bg-gradient-to-br from-accent/5 to-accent/10 flex items-center justify-center">
@@ -432,27 +442,31 @@ export default async function BlogPostPage({
 // Engine-Generated Post Page (reads from content/blog/*.json)
 // ═══════════════════════════════════════════════════════════════
 function EnginePostPage({ article }: { article: BlogArticle }) {
-  const readTime = typeof article.readingTime === "number"
-    ? `${article.readingTime} min`
-    : article.readingTime;
+  const readTime =
+    typeof article.readingTime === "number"
+      ? `${article.readingTime} min`
+      : article.readingTime;
 
   return (
     <>
-      <ArticleSchema post={{
-        title: article.title,
-        description: article.seoDescription || article.excerpt,
-        datePublished: article.datePublished,
-        dateModified: article.dateModified,
-        slug: article.slug,
-        category: article.category,
-        content: [{ heading: "", content: article.content }],
-      } as BlogPost} />
+      {/* SEO + GEO: Enhanced Article schema with speakable */}
+      <ArticleSchema
+        title={article.seoTitle ?? article.title}
+        description={article.seoDescription ?? article.excerpt}
+        slug={article.slug}
+        datePublished={article.datePublished}
+        dateModified={article.dateModified}
+        category={article.category}
+        keywords={article.keywords}
+        authorName={article.author.name}
+        speakable
+      />
       {article.faqItems.length > 0 && <FAQSchema faqs={article.faqItems} />}
       <BreadcrumbSchema
         items={[
           { name: "Home", href: "/" },
-          { name: "Insights", href: "/insights" },
-          { name: article.title, href: `/insights/${article.slug}` },
+          { name: "Blog", href: "/blog" },
+          { name: article.title, href: `/blog/${article.slug}` },
         ]}
       />
 
@@ -464,11 +478,27 @@ function EnginePostPage({ article }: { article: BlogArticle }) {
           <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-20">
             <nav aria-label="Breadcrumb" className="mb-6 md:mb-8">
               <ol className="flex items-center gap-2 text-xs text-muted-foreground">
-                <li><Link href="/" className="hover:text-foreground transition-colors">Home</Link></li>
+                <li>
+                  <Link
+                    href="/"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Home
+                  </Link>
+                </li>
                 <li aria-hidden="true">/</li>
-                <li><Link href="/insights" className="hover:text-foreground transition-colors">Insights</Link></li>
+                <li>
+                  <Link
+                    href="/blog"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Blog
+                  </Link>
+                </li>
                 <li aria-hidden="true">/</li>
-                <li className="text-foreground truncate max-w-[200px]">{article.title}</li>
+                <li className="text-foreground truncate max-w-[200px]">
+                  {article.title}
+                </li>
               </ol>
             </nav>
 
@@ -476,10 +506,15 @@ function EnginePostPage({ article }: { article: BlogArticle }) {
               <span className="px-2.5 py-1 text-[10px] font-medium text-accent bg-accent/10 rounded uppercase tracking-wider">
                 {article.category}
               </span>
-              <span className="text-xs text-muted-foreground">{readTime} de leitura</span>
+              <span className="text-xs text-muted-foreground">
+                {readTime} de leitura
+              </span>
             </div>
 
-            <h1 className="font-display text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.1] tracking-tight text-foreground max-w-4xl">
+            <h1
+              className="font-display text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.1] tracking-tight text-foreground max-w-4xl"
+              data-speakable
+            >
               {article.title}
             </h1>
 
@@ -488,11 +523,17 @@ function EnginePostPage({ article }: { article: BlogArticle }) {
                 <span className="text-sm font-medium text-accent">LK</span>
               </div>
               <div>
-                <p className="text-sm font-medium text-foreground">{article.author.name}</p>
+                <p className="text-sm font-medium text-foreground">
+                  {article.author.name}
+                </p>
                 <p className="text-xs text-muted-foreground">
                   {formatDate(article.datePublished)}
                   {article.dateModified !== article.datePublished && (
-                    <> &middot; Atualizado em {formatDate(article.dateModified)}</>
+                    <>
+                      {" "}
+                      &middot; Atualizado em{" "}
+                      {formatDate(article.dateModified)}
+                    </>
                   )}
                 </p>
               </div>
@@ -504,16 +545,26 @@ function EnginePostPage({ article }: { article: BlogArticle }) {
         <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12 lg:gap-16">
             <article className="max-w-prose">
-              {/* TLDR */}
+              {/* AEO: TLDR / Quick Answer box */}
               {article.tldr && (
-                <div className="mb-10 p-5 rounded-lg bg-accent/5 border border-accent/20" data-speakable>
-                  <p className="text-xs font-medium text-accent uppercase tracking-wider mb-2">Resumo</p>
-                  <p className="text-sm text-foreground leading-relaxed">{article.tldr}</p>
+                <div
+                  className="answer-box mb-10 p-5 rounded-lg bg-accent/5 border border-accent/20"
+                  data-speakable
+                >
+                  <p className="text-xs font-medium text-accent uppercase tracking-wider mb-2">
+                    Resumo
+                  </p>
+                  <p className="text-sm text-foreground leading-relaxed">
+                    {article.tldr}
+                  </p>
                 </div>
               )}
 
               {/* Excerpt */}
-              <p className="text-lg text-muted-foreground leading-relaxed mb-10 border-l-2 border-accent/40 pl-5">
+              <p
+                className="text-lg text-muted-foreground leading-relaxed mb-10 border-l-2 border-accent/40 pl-5"
+                data-speakable
+              >
                 {article.excerpt}
               </p>
 
@@ -526,18 +577,35 @@ function EnginePostPage({ article }: { article: BlogArticle }) {
               {/* FAQ */}
               {article.faqItems.length > 0 && (
                 <section className="mt-16 pt-10 border-t border-border">
-                  <h2 className="font-display text-display-sm text-foreground mb-8">Perguntas Frequentes</h2>
+                  <h2 className="font-display text-display-sm text-foreground mb-8">
+                    Perguntas Frequentes
+                  </h2>
                   <div className="space-y-6">
                     {article.faqItems.map((faq, i) => (
-                      <details key={i} className="group bg-card rounded-lg border border-border/60 overflow-hidden">
+                      <details
+                        key={i}
+                        className="group bg-card rounded-lg border border-border/60 overflow-hidden"
+                      >
                         <summary className="flex items-center justify-between cursor-pointer px-5 py-4 text-sm font-medium text-foreground hover:text-accent transition-colors list-none [&::-webkit-details-marker]:hidden">
                           {faq.question}
-                          <svg className="w-4 h-4 text-muted-foreground group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                          <svg
+                            className="w-4 h-4 text-muted-foreground group-open:rotate-180 transition-transform flex-shrink-0 ml-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                            />
                           </svg>
                         </summary>
                         <div className="px-5 pb-4">
-                          <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {faq.answer}
+                          </p>
                         </div>
                       </details>
                     ))}
@@ -548,18 +616,30 @@ function EnginePostPage({ article }: { article: BlogArticle }) {
               {/* CTA */}
               <section className="mt-16 p-8 rounded-xl bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
                 <h2 className="font-display text-display-sm text-foreground mb-3">
-                  {article.ctaHeading ?? "Quer Mais Pacientes Pelo Google?"}
+                  {article.ctaHeading ??
+                    "Quer Mais Pacientes Pelo Google?"}
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-lg">
-                  {article.ctaDescription ?? "A LK Digital é especializada exclusivamente em marketing para dentistas. Fazemos diagnóstico gratuito da sua presença digital."}
+                  {article.ctaDescription ??
+                    "A LK Digital é especializada exclusivamente em marketing para dentistas. Fazemos diagnóstico gratuito da sua presença digital."}
                 </p>
                 <Link
                   href="/contato"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
                 >
                   {article.ctaButton ?? "Agendar Diagnóstico Gratuito"}
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                    />
                   </svg>
                 </Link>
               </section>
@@ -570,11 +650,15 @@ function EnginePostPage({ article }: { article: BlogArticle }) {
               <div className="sticky top-28">
                 <div className="p-4 rounded-lg bg-card border border-border/60">
                   <p className="text-xs font-medium text-foreground mb-2">
-                    {article.ctaHeading && article.ctaHeading.length <= 50 ? article.ctaHeading : "Diagnóstico Gratuito"}
+                    {article.ctaHeading &&
+                    article.ctaHeading.length <= 50
+                      ? article.ctaHeading
+                      : "Diagnóstico Gratuito"}
                   </p>
                   <p className="text-[11px] text-muted-foreground leading-relaxed mb-3">
                     {article.ctaDescription
-                      ? article.ctaDescription.substring(0, 120) + (article.ctaDescription.length > 120 ? "..." : "")
+                      ? article.ctaDescription.substring(0, 120) +
+                        (article.ctaDescription.length > 120 ? "..." : "")
                       : "Descubra o que está impedindo seu consultório de aparecer no Google."}
                   </p>
                   <Link

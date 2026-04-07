@@ -76,7 +76,7 @@ export function WebSiteSchema() {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://lkdigital.odo.br/insights?q={search_term_string}",
+        urlTemplate: "https://lkdigital.odo.br/blog?q={search_term_string}",
       },
       "query-input": "required name=search_term_string",
     },
@@ -153,6 +153,10 @@ export function ArticleSchema({
   datePublished,
   dateModified,
   category,
+  keywords,
+  wordCount,
+  authorName,
+  speakable,
 }: {
   title: string;
   description: string;
@@ -160,18 +164,23 @@ export function ArticleSchema({
   datePublished: string;
   dateModified: string;
   category?: string;
+  keywords?: string[];
+  wordCount?: number;
+  authorName?: string;
+  speakable?: boolean;
 }) {
-  const schema = {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: title,
     description,
-    url: `https://lkdigital.odo.br/insights/${slug}`,
+    url: `https://lkdigital.odo.br/blog/${slug}`,
     datePublished,
     dateModified,
+    inLanguage: "pt-BR",
     author: {
       "@type": "Person",
-      name: "Equipe LK Digital",
+      name: authorName ?? "Equipe LK Digital",
       jobTitle: "Especialistas em Marketing Digital para Odontologia",
       url: "https://lkdigital.odo.br/sobre",
     },
@@ -182,9 +191,72 @@ export function ArticleSchema({
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://lkdigital.odo.br/insights/${slug}`,
+      "@id": `https://lkdigital.odo.br/blog/${slug}`,
     },
+    isAccessibleForFree: true,
     ...(category && { articleSection: category }),
+    ...(keywords && keywords.length > 0 && { keywords: keywords.join(", ") }),
+    ...(wordCount && { wordCount }),
+    about: {
+      "@type": "Thing",
+      name: "Marketing Digital para Odontologia",
+    },
+  };
+
+  // GEO: Speakable markup for AI/voice assistants
+  if (speakable) {
+    schema.speakable = {
+      "@type": "SpeakableSpecification",
+      cssSelector: [
+        "[data-speakable]",
+        "article h1",
+        "article h2",
+        ".answer-box",
+      ],
+    };
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// ─── Blog Collection Schema (SEO: listing page) ───
+export function BlogCollectionSchema({
+  posts,
+}: {
+  posts: {
+    title: string;
+    slug: string;
+    datePublished?: string;
+  }[];
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Blog — Marketing Digital Para Dentistas",
+    description:
+      "Artigos, guias e estratégias de marketing digital exclusivos para dentistas. SEO local, Google Ads, captação de pacientes e mais.",
+    url: "https://lkdigital.odo.br/blog",
+    inLanguage: "pt-BR",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "LK Digital",
+      url: "https://lkdigital.odo.br",
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: posts.length,
+      itemListElement: posts.map((post, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `https://lkdigital.odo.br/blog/${post.slug}`,
+        name: post.title,
+      })),
+    },
   };
 
   return (

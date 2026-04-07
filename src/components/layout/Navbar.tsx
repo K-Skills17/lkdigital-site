@@ -10,7 +10,7 @@ const navLinks = [
   { href: "/segmentos", label: "Segmentos" },
   { href: "/cidades", label: "Cidades" },
   { href: "/casos", label: "Casos" },
-  { href: "/insights", label: "Insights" },
+  { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },
 ];
 
