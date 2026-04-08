@@ -51,8 +51,8 @@ async function callAI(systemPrompt: string, userPrompt: string): Promise<string>
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      model: "claude-3-haiku-20240307",
-      max_tokens: 4096,
+      model: "claude-sonnet-4-5-20241022",
+      max_tokens: 8000,
       system: systemPrompt,
       messages: [{ role: "user", content: userPrompt }],
     }),
@@ -69,26 +69,50 @@ async function callAI(systemPrompt: string, userPrompt: string): Promise<string>
 
 // ─── System Prompt ───
 function buildSystemPrompt(): string {
-  return `You are a dental marketing content writer for LK Digital, a Brazilian agency for dentists. Write in Portuguese (pt-BR). Be practical and data-driven.
+  return `You are the senior content strategist at LK Digital, a dental marketing agency in Brazil specialized EXCLUSIVELY in odontologia. You write in Portuguese (pt-BR).
 
-Rules:
-- Use HTML: <h2>, <h3>, <p>, <ul>, <li>, <strong>. No <h1>.
-- Cite realistic statistics with sources.
-- Never use: ${BANNED_PHRASES.slice(0, 10).join(", ")}.
-- Current year: ${GENERATION_CONFIG.currentYear}
+VOICE & TONE:
+- Authoritative: you know this market deeply
+- Empathetic: you understand dentists' struggles and fears
+- Data-driven: always include specific statistics with source attribution
+- Practical: every section must have actionable takeaways
+- Direct: lead with the answer, not the buildup
+- Professional but warm: not academic, not casual
 
-Return ONLY valid JSON (no markdown, no \`\`\`). Exact structure:
+CONTENT QUALITY RULES:
+1. ACCURACY: Cite realistic statistics with sources (e.g., "Segundo pesquisa do CRO-SP...", "Dados do Google Trends indicam...").
+2. CFO COMPLIANCE: Never suggest before/after photos without noting CFO restrictions. Never promise specific clinical results.
+3. SPECIFICITY: Use exact numbers, procedure names, tool names. Be concrete, not vague.
+4. NO AI PATTERNS: Never use these phrases: ${BANNED_PHRASES.join(", ")}. Write naturally.
+5. INTERNAL LINKS: Reference other LK Digital blog articles using /blog/[slug] URLs.
+
+SEO + AEO + GEO:
+- Primary keyword in title, first paragraph, and at least 2 H2 headings
+- Each section starts with a direct answer AI can extract as a snippet
+- Include comparison tables where relevant
+- Cite specific statistics with sources
+
+HTML STRUCTURE:
+- Use semantic HTML: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <table>, <blockquote>, <strong>
+- NO <h1> (that's in the page template)
+- Keep paragraphs to 2-3 sentences max
+
+CURRENT YEAR: ${GENERATION_CONFIG.currentYear}
+
+${PERSUASION_PRINCIPLES}
+
+OUTPUT: Return ONLY valid JSON (no markdown wrappers, no \`\`\`json). The JSON must match this exact structure:
 {
   "title": "string",
-  "seoTitle": "string (50-60 chars)",
-  "seoDescription": "string (140-160 chars)",
-  "excerpt": "string (2 sentences)",
-  "content": "string (HTML, ${GENERATION_CONFIG.minWordCount}-${GENERATION_CONFIG.maxWordCount} words)",
-  "tags": ["string", "string"],
-  "keywords": ["keyword1", "keyword2"],
+  "seoTitle": "string (50-60 chars, keyword front-loaded)",
+  "seoDescription": "string (140-160 chars, keyword + value prop + CTA)",
+  "excerpt": "string (2-3 sentences, compelling hook)",
+  "content": "string (full HTML, ${GENERATION_CONFIG.minWordCount}-${GENERATION_CONFIG.maxWordCount} words)",
+  "tags": ["string", "string", ...],
+  "keywords": ["primary keyword", "secondary 1", "secondary 2"],
   "readingTime": number,
-  "tldr": "string (2 sentences summary)",
-  "faqItems": [{"question": "string", "answer": "string"}, {"question": "string", "answer": "string"}, {"question": "string", "answer": "string"}]
+  "tldr": "string (2-3 key takeaways in one paragraph)",
+  "faqItems": [{"question": "string", "answer": "string"}, ...${GENERATION_CONFIG.faqItemsPerArticle} items]
 }`;
 }
 
@@ -166,7 +190,7 @@ function validateArticle(raw: string): { valid: boolean; issues: string[] } {
       .replace(/<[^>]+>/g, " ")
       .split(/\s+/)
       .filter(Boolean).length;
-    if (wordCount < 600) issues.push(`Word count too low: ${wordCount}`);
+    if (wordCount < 1500) issues.push(`Word count too low: ${wordCount}`);
 
     // Check for banned phrases
     const contentLower = article.content.toLowerCase();
@@ -178,7 +202,7 @@ function validateArticle(raw: string): { valid: boolean; issues: string[] } {
 
     // Check for H2 headings
     const h2Count = (article.content.match(/<h2/g) || []).length;
-    if (h2Count < 2) issues.push(`Only ${h2Count} H2 headings (need 2+)`);
+    if (h2Count < 4) issues.push(`Only ${h2Count} H2 headings (need 4+)`);
 
     // Check seoDescription length
     if (article.seoDescription.length < 130 || article.seoDescription.length > 170)
