@@ -139,25 +139,25 @@ export default function Sobre() {
               {[
                 {
                   name: "Stephen Komando",
-                  role: "CEO & Head de Vendas",
+                  role: "CEO & Diretor Comercial",
                   image: "/images/team/stephen-komando.png",
                   desc: "Estratégia comercial e relacionamento com clientes. Garante que cada dentista receba atenção personalizada.",
                 },
                 {
                   name: "Bassey Otudor",
-                  role: "Head de Tecnologia, IA & Programação",
+                  role: "Diretor de Tecnologia & IA",
                   image: "/images/team/bassey-otudor.png",
                   desc: "Arquiteta as soluções técnicas, automações e inteligência artificial que potencializam nossos resultados.",
                 },
                 {
                   name: "Alvana Lydia",
-                  role: "Head de Marketing",
+                  role: "Diretora de Marketing",
                   image: "/images/team/alvana-lydia.png",
                   desc: "Desenvolve estratégias de captação de pacientes, SEO local e campanhas que lotam agendas.",
                 },
                 {
                   name: "Angwi Fomunyam",
-                  role: "Designer & Head de Estratégia de Conteúdo",
+                  role: "Diretora Criativa & Conteúdo",
                   image: "/images/team/angwi-fomunyam.jpg",
                   desc: "Cria a identidade visual e o conteúdo estratégico que posiciona consultórios como referência.",
                 },
