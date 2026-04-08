@@ -11,6 +11,7 @@ const navLinks = [
   { href: "/cidades", label: "Cidades" },
   { href: "/casos", label: "Casos" },
   { href: "/blog", label: "Blog" },
+  { href: "/ferramentas", label: "Ferramentas" },
   { href: "/faq", label: "FAQ" },
 ];
 

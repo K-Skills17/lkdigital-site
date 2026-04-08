@@ -19,6 +19,7 @@ const pageDates = {
   "/casos": "2026-03-20T10:00:00-03:00",
   "/contato": "2026-04-07T12:00:00-03:00",
   "/faq": "2026-03-20T10:00:00-03:00",
+  "/ferramentas": "2026-04-07T12:00:00-03:00",
   "/blog": "2026-04-07T12:00:00-03:00",
   "/privacidade": "2026-03-19T10:00:00-03:00",
   "/termos": "2026-04-07T12:00:00-03:00",
@@ -62,6 +63,16 @@ module.exports = {
         changefreq: "weekly",
         priority: 1.0,
         lastmod: pageDates["/"],
+      };
+    }
+
+    // Ferramentas — high priority landing page
+    if (path === "/ferramentas") {
+      return {
+        loc: path,
+        changefreq: "monthly",
+        priority: 0.9,
+        lastmod: pageDates["/ferramentas"],
       };
     }
 

@@ -26,6 +26,7 @@ const footerSections = [
     title: "Reserve Sua Vaga",
     links: [
       { label: "Diagnóstico Gratuito", href: "/contato" },
+      { label: "Ferramentas Gratuitas", href: "/ferramentas" },
       { label: "FAQ", href: "/faq" },
     ],
   },
