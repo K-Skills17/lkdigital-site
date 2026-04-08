@@ -8,6 +8,7 @@ import HowItWorks from "@/components/sections/HowItWorks";
 import Marquee from "@/components/sections/Marquee";
 import Manifesto from "@/components/sections/Manifesto";
 import FAQ from "@/components/sections/FAQ";
+import LatestPosts from "@/components/sections/LatestPosts";
 import CTAFinal from "@/components/sections/CTAFinal";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import { OrganizationSchema, WebSiteSchema, FAQSchema } from "@/components/StructuredData";
@@ -38,6 +39,7 @@ export default function Home() {
         <HowItWorks />
         <Marquee />
         <Manifesto />
+        <LatestPosts />
         <FAQ />
         <CTAFinal />
       </main>
