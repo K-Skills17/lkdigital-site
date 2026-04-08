@@ -32,7 +32,7 @@ const tools = [
   {
     name: "Auditoria de Site",
     slug: "auditoria-site",
-    url: "https://lk-audit.vercel.app",
+    url: "https://fb-lead-audit-tool.vercel.app",
     category: "Website",
     description:
       "Analisa seu site em SEO, captação de leads, mobile, visibilidade em IA e prontidão para conversão.",
@@ -78,7 +78,7 @@ const tools = [
   {
     name: "Calculadora de Precificação",
     slug: "calculadora-precificacao",
-    url: "https://calculadora-precificacao.vercel.app",
+    url: "https://calculadora-precificacao-phi.vercel.app",
     category: "Financeiro",
     description:
       "Determina o preço correto dos seus procedimentos com base em custos, tempo e margem desejada.",
