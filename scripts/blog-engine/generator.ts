@@ -51,7 +51,7 @@ async function callAI(systemPrompt: string, userPrompt: string): Promise<string>
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      model: "claude-3-haiku-20240307",
+      model: "claude-3-sonnet-20240229",
       max_tokens: 4096,
       system: systemPrompt,
       messages: [{ role: "user", content: userPrompt }],
