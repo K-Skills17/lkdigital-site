@@ -51,8 +51,8 @@ async function callAI(systemPrompt: string, userPrompt: string): Promise<string>
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      model: "claude-3-haiku-20240307",
-      max_tokens: 4096,
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 8000,
       system: systemPrompt,
       messages: [{ role: "user", content: userPrompt }],
     }),
@@ -190,7 +190,7 @@ function validateArticle(raw: string): { valid: boolean; issues: string[] } {
       .replace(/<[^>]+>/g, " ")
       .split(/\s+/)
       .filter(Boolean).length;
-    if (wordCount < 600) issues.push(`Word count too low: ${wordCount}`);
+    if (wordCount < 1500) issues.push(`Word count too low: ${wordCount}`);
 
     // Check for banned phrases
     const contentLower = article.content.toLowerCase();
@@ -202,7 +202,7 @@ function validateArticle(raw: string): { valid: boolean; issues: string[] } {
 
     // Check for H2 headings
     const h2Count = (article.content.match(/<h2/g) || []).length;
-    if (h2Count < 2) issues.push(`Only ${h2Count} H2 headings (need 2+)`);
+    if (h2Count < 4) issues.push(`Only ${h2Count} H2 headings (need 4+)`);
 
     // Check seoDescription length
     if (article.seoDescription.length < 130 || article.seoDescription.length > 170)
