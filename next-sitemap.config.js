@@ -10,35 +10,62 @@ const blogPostDates = {
   "/blog/ia-busca-dentistas": "2026-03-18T10:00:00-03:00",
 };
 
-// ─── Static page dates (last meaningful content update) ───
-const pageDates = {
-  "/": "2026-04-07T12:00:00-03:00",
-  "/sobre": "2026-03-20T10:00:00-03:00",
-  "/solucoes": "2026-03-20T10:00:00-03:00",
-  "/segmentos": "2026-03-20T10:00:00-03:00",
-  "/casos": "2026-03-20T10:00:00-03:00",
-  "/contato": "2026-04-07T12:00:00-03:00",
-  "/faq": "2026-03-20T10:00:00-03:00",
-  "/ferramentas": "2026-04-07T12:00:00-03:00",
-  "/blog": "2026-04-07T12:00:00-03:00",
-  "/privacidade": "2026-03-19T10:00:00-03:00",
-  "/termos": "2026-04-07T12:00:00-03:00",
-};
+// ─── All site pages with their lastmod dates ───
+const allPages = [
+  { loc: "/", changefreq: "weekly", priority: 1.0, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/sobre", changefreq: "monthly", priority: 0.8, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/solucoes", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/segmentos", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/casos", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/contato", changefreq: "monthly", priority: 0.8, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/ferramentas", changefreq: "monthly", priority: 0.9, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/blog", changefreq: "daily", priority: 0.9, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/faq", changefreq: "monthly", priority: 0.6, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/privacidade", changefreq: "yearly", priority: 0.3, lastmod: "2026-03-19T10:00:00-03:00" },
+  { loc: "/termos", changefreq: "yearly", priority: 0.3, lastmod: "2026-04-07T12:00:00-03:00" },
+  // Blog posts (static 6)
+  { loc: "/blog/seo-local-dentistas-guia-completo", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-28T14:00:00-03:00" },
+  { loc: "/blog/google-meu-negocio-dentista", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-25T10:00:00-03:00" },
+  { loc: "/blog/google-ads-odontologia", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-22T10:00:00-03:00" },
+  { loc: "/blog/marketing-implantodontia", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/blog/regras-cfo-publicidade", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-18T10:00:00-03:00" },
+  { loc: "/blog/ia-busca-dentistas", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-18T10:00:00-03:00" },
+  // City pages
+  { loc: "/cidades", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/sao-paulo", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/rio-de-janeiro", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/belo-horizonte", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/brasilia", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/curitiba", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/porto-alegre", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/salvador", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/recife", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/fortaleza", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/campinas", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/florianopolis", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/goiania", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/manaus", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/belem", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  { loc: "/cidades/vitoria", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+  // Translated pages
+  { loc: "/en", changefreq: "monthly", priority: 0.6, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/en/about", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/en/solutions", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/en/contact", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/en/tools", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/fr", changefreq: "monthly", priority: 0.6, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/fr/a-propos", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/fr/solutions", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/fr/contact", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/fr/outils", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
+];
 
 module.exports = {
   siteUrl: "https://lkdigital.odo.br",
   generateRobotsTxt: true,
-  changefreq: "weekly",
-  priority: 0.7,
   sitemapSize: 5000,
-  // Exclude non-page files from sitemap
-  exclude: [
-    "/apple-icon.png",
-    "/icon.svg",
-    "/favicon.ico",
-    "/_next/*",
-    "/api/*",
-  ],
+  // Exclude everything from auto-discovery (we define all paths manually)
+  exclude: ["/**"],
   robotsTxtOptions: {
     additionalSitemaps: [],
     policies: [
@@ -50,68 +77,8 @@ module.exports = {
       { userAgent: "anthropic-ai", allow: "/" },
     ],
   },
-  transform: async (config, path) => {
-    // Skip non-page assets
-    if (path.match(/\.(png|svg|ico|jpg|jpeg|gif|webp|xml|json|txt)$/)) {
-      return null;
-    }
-
-    // Homepage — highest priority
-    if (path === "/") {
-      return {
-        loc: path,
-        changefreq: "weekly",
-        priority: 1.0,
-        lastmod: pageDates["/"],
-      };
-    }
-
-    // Ferramentas — high priority landing page
-    if (path === "/ferramentas") {
-      return {
-        loc: path,
-        changefreq: "monthly",
-        priority: 0.9,
-        lastmod: pageDates["/ferramentas"],
-      };
-    }
-
-    // Blog listing
-    if (path === "/blog") {
-      return {
-        loc: path,
-        changefreq: "daily",
-        priority: 0.9,
-        lastmod: pageDates["/blog"],
-      };
-    }
-
-    // Blog posts — use actual dateModified
-    if (path.startsWith("/blog/")) {
-      return {
-        loc: path,
-        changefreq: "monthly",
-        priority: 0.8,
-        lastmod: blogPostDates[path] || new Date().toISOString(),
-      };
-    }
-
-    // City pages
-    if (path.startsWith("/cidades")) {
-      return {
-        loc: path,
-        changefreq: "monthly",
-        priority: 0.7,
-        lastmod: "2026-03-20T10:00:00-03:00",
-      };
-    }
-
-    // Other pages — use known dates or fallback
-    return {
-      loc: path,
-      changefreq: config.changefreq,
-      priority: config.priority,
-      lastmod: pageDates[path] || "2026-03-20T10:00:00-03:00",
-    };
+  // Manually specify all paths since App Router dynamic pages aren't auto-discovered
+  additionalPaths: async () => {
+    return allPages;
   },
 };
