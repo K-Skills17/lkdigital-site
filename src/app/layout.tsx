@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -66,6 +67,7 @@ export default function RootLayout({
         </a>
         {children}
         <ChatWidget />
+        <WhatsAppButton />
       </body>
     </html>
   );
