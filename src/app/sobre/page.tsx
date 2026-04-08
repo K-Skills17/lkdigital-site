@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Sobre — Quem é a LK Digital",
@@ -111,6 +112,77 @@ export default function Sobre() {
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Team */}
+        <section className="py-20 md:py-28">
+          <div className="max-w-content mx-auto px-4 sm:px-6">
+            <div className="text-center mb-14">
+              <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
+                Equipe
+              </p>
+              <h2 className="font-display text-display-md text-foreground">
+                Quem Faz Acontecer
+              </h2>
+              <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
+                Uma equipe multidisciplinar dedicada exclusivamente a fazer
+                consultórios odontológicos crescerem.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+              {[
+                {
+                  name: "Stephen Komando",
+                  role: "CEO & Head de Vendas",
+                  image: "/images/team/stephen-komando.png",
+                  desc: "Estratégia comercial e relacionamento com clientes. Garante que cada dentista receba atenção personalizada.",
+                },
+                {
+                  name: "Bassey Otudor",
+                  role: "Head de Tecnologia, IA & Programação",
+                  image: "/images/team/bassey-otudor.png",
+                  desc: "Arquiteta as soluções técnicas, automações e inteligência artificial que potencializam nossos resultados.",
+                },
+                {
+                  name: "Alvana Lydia",
+                  role: "Head de Marketing",
+                  image: "/images/team/alvana-lydia.png",
+                  desc: "Desenvolve estratégias de captação de pacientes, SEO local e campanhas que lotam agendas.",
+                },
+                {
+                  name: "Angwi Fomunyam",
+                  role: "Designer & Head de Estratégia de Conteúdo",
+                  image: "/images/team/angwi-fomunyam.jpg",
+                  desc: "Cria a identidade visual e o conteúdo estratégico que posiciona consultórios como referência.",
+                },
+              ].map((member, i) => (
+                <div
+                  key={i}
+                  className="group text-center"
+                >
+                  <div className="relative w-48 h-48 mx-auto mb-5 rounded-2xl overflow-hidden border-2 border-border/60 group-hover:border-accent/40 transition-colors duration-300">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="192px"
+                    />
+                  </div>
+                  <h3 className="font-display text-lg font-medium text-foreground">
+                    {member.name}
+                  </h3>
+                  <p className="text-xs font-medium text-accent uppercase tracking-wider mt-1 mb-2">
+                    {member.role}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {member.desc}
                   </p>
                 </div>
               ))}
