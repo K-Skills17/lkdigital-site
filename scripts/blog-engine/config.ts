@@ -11,9 +11,9 @@ export const PENDING_TOPICS_FILE = "scripts/blog-engine/pending-topics.json";
 
 export const GENERATION_CONFIG = {
   articlesPerRun: 1,
-  minWordCount: 1800,
-  maxWordCount: 3000,
-  faqItemsPerArticle: 5,
+  minWordCount: 800,
+  maxWordCount: 1500,
+  faqItemsPerArticle: 3,
   language: "pt-BR",
   currentYear: new Date().getFullYear(),
 };

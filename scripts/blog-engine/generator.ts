@@ -167,11 +167,10 @@ ${recentSlugs.map((s) => `- /blog/${s}`).join("\n")}`;
 
   prompt += `\n\nREMINDERS:
 - Write ${GENERATION_CONFIG.minWordCount}-${GENERATION_CONFIG.maxWordCount} words
-- Include 3+ statistics with source attribution
-- Include at least 1 actionable checklist or step-by-step process
-- 5 FAQ items
+- Include 2+ statistics with source attribution
+- ${GENERATION_CONFIG.faqItemsPerArticle} FAQ items
 - All content in Portuguese (pt-BR)
-- Return ONLY valid JSON`;
+- Return ONLY valid JSON, no markdown wrappers`;
 
   return prompt;
 }
@@ -194,7 +193,7 @@ function validateArticle(raw: string): { valid: boolean; issues: string[] } {
       .replace(/<[^>]+>/g, " ")
       .split(/\s+/)
       .filter(Boolean).length;
-    if (wordCount < 1500) issues.push(`Word count too low: ${wordCount}`);
+    if (wordCount < 600) issues.push(`Word count too low: ${wordCount}`);
 
     // Check for banned phrases
     const contentLower = article.content.toLowerCase();
@@ -206,7 +205,7 @@ function validateArticle(raw: string): { valid: boolean; issues: string[] } {
 
     // Check for H2 headings
     const h2Count = (article.content.match(/<h2/g) || []).length;
-    if (h2Count < 4) issues.push(`Only ${h2Count} H2 headings (need 4+)`);
+    if (h2Count < 2) issues.push(`Only ${h2Count} H2 headings (need 2+)`);
 
     // Check seoDescription length
     if (article.seoDescription.length < 130 || article.seoDescription.length > 170)
@@ -303,8 +302,18 @@ export async function generateArticle(
   console.log("  → Calling Claude API...");
   let rawResponse = await callAI(systemPrompt, userPrompt);
 
-  // Clean response (remove markdown wrappers if any)
+  // Clean response (remove markdown wrappers, leading text, etc.)
   rawResponse = rawResponse.replace(/^```json\s*\n?/, "").replace(/\n?```\s*$/, "").trim();
+  // Strip any text before the first {
+  const jsonStart = rawResponse.indexOf("{");
+  if (jsonStart > 0) {
+    rawResponse = rawResponse.substring(jsonStart);
+  }
+  // Strip any text after the last }
+  const jsonEnd = rawResponse.lastIndexOf("}");
+  if (jsonEnd > 0 && jsonEnd < rawResponse.length - 1) {
+    rawResponse = rawResponse.substring(0, jsonEnd + 1);
+  }
 
   // Validate
   console.log("  → Validating article quality...");
