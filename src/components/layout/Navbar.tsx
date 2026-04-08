@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
-const navLinks = [
+const defaultNavLinks = [
   { href: "/sobre", label: "Sobre" },
   { href: "/solucoes", label: "Soluções" },
   { href: "/segmentos", label: "Segmentos" },
@@ -15,7 +16,18 @@ const navLinks = [
   { href: "/faq", label: "FAQ" },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  links?: { href: string; label: string }[];
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+export default function Navbar({
+  links,
+  ctaHref = "/contato",
+  ctaLabel = "Diagnóstico Gratuito",
+}: NavbarProps) {
+  const navLinks = links || defaultNavLinks;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const scrolledRef = useRef(false);
@@ -70,30 +82,36 @@ export default function Navbar() {
             ))}
           </div>
 
-          <Link
-            href="/contato"
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
-          >
-            Diagnóstico Gratuito
-          </Link>
+          <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
+            <Link
+              href={ctaHref}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
+            >
+              {ctaLabel}
+            </Link>
+          </div>
 
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden relative w-11 h-11 flex flex-col items-center justify-center gap-1.5"
-            aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
-            aria-expanded={mobileOpen}
-          >
-            <span
-              className={`w-5 h-[1.5px] bg-white transition-all duration-300 ${
-                mobileOpen ? "rotate-45 translate-y-[4.5px]" : ""
-              }`}
-            />
-            <span
-              className={`w-5 h-[1.5px] bg-white transition-all duration-300 ${
-                mobileOpen ? "-rotate-45 -translate-y-[4.5px]" : ""
-              }`}
-            />
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="relative w-11 h-11 flex flex-col items-center justify-center gap-1.5"
+              aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={mobileOpen}
+            >
+              <span
+                className={`w-5 h-[1.5px] bg-white transition-all duration-300 ${
+                  mobileOpen ? "rotate-45 translate-y-[4.5px]" : ""
+                }`}
+              />
+              <span
+                className={`w-5 h-[1.5px] bg-white transition-all duration-300 ${
+                  mobileOpen ? "-rotate-45 -translate-y-[4.5px]" : ""
+                }`}
+              />
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -133,11 +151,11 @@ export default function Navbar() {
           style={{ transitionDelay: mobileOpen ? "400ms" : "0ms" }}
         >
           <Link
-            href="/contato"
+            href={ctaHref}
             onClick={() => setMobileOpen(false)}
             className="mt-4 inline-flex px-8 py-3 bg-accent text-white rounded-md font-medium"
           >
-            Diagnóstico Gratuito
+            {ctaLabel}
           </Link>
         </div>
       </div>

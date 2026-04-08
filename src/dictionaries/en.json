@@ -1,0 +1,239 @@
+{
+  "nav": {
+    "about": "About",
+    "solutions": "Solutions",
+    "segments": "Segments",
+    "cities": "Cities",
+    "cases": "Cases",
+    "blog": "Blog",
+    "tools": "Tools",
+    "faq": "FAQ"
+  },
+  "footer": {
+    "company": "Company",
+    "about": "About",
+    "solutions": "Solutions",
+    "cases": "Success Stories",
+    "blog": "Blog",
+    "specialties": "Specialties",
+    "bookYourSpot": "Book Your Spot",
+    "freeDiagnosis": "Free Diagnosis",
+    "freeTools": "Free Tools",
+    "faq": "FAQ",
+    "description": "Precision digital marketing for dentists who want a full schedule of qualified patients — with zero management on your part.",
+    "copyright": "LK Digital. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  },
+  "home": {
+    "heroEyebrow": "Digital Marketing for Dentists",
+    "heroTitle": "A Full Schedule of Qualified Patients.",
+    "heroTitleAccent": "Zero Management On Your Part.",
+    "heroSubtitle": "We attract high-value patients to your dental practice — while you focus on what you do best: caring for smiles.",
+    "heroCTA": "Book Free Diagnosis",
+    "heroSecondaryCTA": "View Solutions",
+    "stat1Value": "24h",
+    "stat1Label": "Working for you",
+    "stat2Value": "100%",
+    "stat2Label": "Dentistry focused",
+    "stat3Value": "Zero",
+    "stat3Label": "Management on your part",
+    "valueProps": [
+      {
+        "title": "Google Visibility",
+        "desc": "Your practice on the first page of Google and Google Maps for the searches your patients actually make."
+      },
+      {
+        "title": "Predictable Patient Flow",
+        "desc": "Consistent stream of qualified patients via Google Ads, Meta Ads and SEO — no relying on referrals."
+      },
+      {
+        "title": "Territorial Exclusivity",
+        "desc": "We accept only one practice per specialty per region. Your direct competitor will never be our client."
+      }
+    ],
+    "multilingualTitle": "We Serve in 3 Languages",
+    "multilingualDesc": "Our team provides full service in Portugues, English and Francais.",
+    "faqTitle": "Frequently Asked Questions",
+    "faqs": [
+      {
+        "question": "How long until I see the first patients?",
+        "answer": "Most of our dentist clients start receiving qualified patients within the first 2 to 4 weeks after activation."
+      },
+      {
+        "question": "Do I need to create content or manage anything?",
+        "answer": "No. We create all the content, manage the campaigns, optimize the profiles and produce the reports."
+      },
+      {
+        "question": "How does territorial exclusivity work?",
+        "answer": "We accept only one practice per specialty per defined region. Your direct competitor will never be our client."
+      }
+    ],
+    "ctaTitle": "Ready For a Full Schedule?",
+    "ctaSubtitle": "The diagnosis is free, no commitment required, and shows exactly where the patients you're not reaching are.",
+    "ctaButton": "Book Free Diagnosis"
+  },
+  "about": {
+    "eyebrow": "About us",
+    "title": "We're Not a Generic Agency.",
+    "titleAccent": "We Are the System.",
+    "subtitle": "LK Digital exists to solve a specific problem: excellent dentists who don't receive the patients they deserve — because no one can find them online.",
+    "beliefTitle": "What we believe",
+    "beliefText1": "Brazilian dentistry has a paradox: extremely qualified professionals with half-empty schedules. The problem is almost never the quality of service. It's visibility.",
+    "beliefText2": "We were born to solve this. Not with vague promises of 'more followers' or 'branding', but with a measurable system that puts qualified patients in your chair — week after week.",
+    "beliefText3": "Every dollar invested must generate a return. Every strategy must be backed by data. And every dentist who works with us must feel they have a dedicated marketing team.",
+    "values": [
+      {
+        "value": "Precision",
+        "desc": "Every campaign, every piece of content, and every optimization is based on data from your region, specialty and competition."
+      },
+      {
+        "value": "Exclusivity",
+        "desc": "One practice per specialty per region. Your direct competitor will never be our client."
+      },
+      {
+        "value": "Transparency",
+        "desc": "You know exactly what is being done, how much it costs, and what results it is generating."
+      }
+    ],
+    "whyDentistryTitle": "Why Only Dentistry?",
+    "whyDentistry": [
+      {
+        "title": "We know advertising regulations",
+        "desc": "Dental advertising has specific rules. We know exactly what's allowed — because it's all we do."
+      },
+      {
+        "title": "We understand the patient funnel",
+        "desc": "From the first Google search to sitting in the chair. Each stage has an optimized strategy."
+      },
+      {
+        "title": "Real comparative data",
+        "desc": "Our benchmarks are from real dental practices — not e-commerce or restaurants."
+      },
+      {
+        "title": "Patient vocabulary",
+        "desc": "We know what patients actually search for, not what textbooks say."
+      }
+    ],
+    "teamEyebrow": "Team",
+    "teamTitle": "Who Makes It Happen",
+    "teamDesc": "A multidisciplinary team exclusively dedicated to growing dental practices.",
+    "ctaTitle": "Ready For a Schedule That Does Justice to Your Work?",
+    "ctaSubtitle": "The diagnosis is free, no commitment required, and shows exactly where the patients you're not reaching are.",
+    "ctaButton": "Book Free Diagnosis"
+  },
+  "solutions": {
+    "eyebrow": "Solutions",
+    "title": "Never an Empty Chair",
+    "titleAccent": "Again",
+    "subtitle": "Every service was designed specifically for dentistry. We don't adapt restaurant strategies for dentists — we build from scratch for your market.",
+    "categories": [
+      {
+        "category": "Digital Visibility",
+        "items": [
+          {
+            "title": "Local SEO for Dentists",
+            "desc": "We position your practice on the first page of Google for relevant searches.",
+            "result": "Patients find you before your competitor"
+          },
+          {
+            "title": "Google Maps & Google Business Profile",
+            "desc": "Optimized profile with photos, reviews, and weekly posts.",
+            "result": "Appearing in Google's local pack (top 3)"
+          },
+          {
+            "title": "GEO & AEO — AI Presence",
+            "desc": "Content optimized to be cited by ChatGPT, Gemini and Perplexity.",
+            "result": "Your practice recommended by artificial intelligences"
+          }
+        ]
+      },
+      {
+        "category": "Active Patient Acquisition",
+        "items": [
+          {
+            "title": "Google Ads for Dentistry",
+            "desc": "Campaigns focused on purchase intent.",
+            "result": "Patients ready to book reach you directly"
+          },
+          {
+            "title": "Meta Ads (Instagram & Facebook)",
+            "desc": "Targeted ads for your region's audience.",
+            "result": "Predictable flow of new patients via social media"
+          },
+          {
+            "title": "Conversion Landing Pages",
+            "desc": "Specific pages for each campaign and specialty.",
+            "result": "Conversion rate 3-5x higher than generic websites"
+          }
+        ]
+      }
+    ],
+    "ctaTitle": "Want to Know Which Solutions Make Sense For You?",
+    "ctaSubtitle": "The free diagnosis identifies the specific opportunities for your practice and region.",
+    "ctaButton": "Request Free Diagnosis"
+  },
+  "contact": {
+    "eyebrow": "Next step",
+    "title": "Request Your",
+    "titleAccent": "Free Diagnosis.",
+    "subtitle": "In 30 minutes, we'll show you how many patients you're losing and exactly what to do to attract them. No commitment.",
+    "formTitle": "Discover How Many Patients You're Losing Today",
+    "formDesc": "Our free diagnosis analyzes your digital presence, your region and your competitors.",
+    "benefits": [
+      "Complete analysis at no cost and no commitment",
+      "Personalized report for your specialty and city",
+      "30-minute meeting to present the results"
+    ],
+    "limitedSpots": "Limited spots — 1 practice per specialty per region",
+    "preferDirect": "Prefer to talk directly?",
+    "whatsapp": "Chat on WhatsApp",
+    "call": "Call",
+    "nameLabel": "Your name",
+    "namePlaceholder": "Dr.",
+    "clinicLabel": "Practice / Clinic name",
+    "clinicPlaceholder": "Dental Clinic...",
+    "emailLabel": "Professional email",
+    "emailPlaceholder": "you@clinic.com",
+    "challengeLabel": "Your biggest challenge today",
+    "challengeSelect": "Select...",
+    "challengeOptions": [
+      "Schedule with too many empty slots",
+      "I need more qualified patients",
+      "I don't have a strong digital presence",
+      "Competition is taking my patients",
+      "I don't have time to manage marketing"
+    ],
+    "submitButton": "Request My Free Diagnosis",
+    "successTitle": "Diagnosis Requested",
+    "successMessage": "We received your information. Our team will contact you within 24 business hours to schedule your analysis.",
+    "disclaimer": "No commitment. No spam. Your data is protected."
+  },
+  "tools": {
+    "eyebrow": "Free Tools",
+    "title": "Diagnose, Calculate and Optimize",
+    "titleAccent": "Your Practice.",
+    "subtitle": "6 tools created exclusively for dentists. No sign-up, no cost — just practical results to make better decisions today.",
+    "allTools": "All Tools",
+    "chooseTitle": "Choose the Right Tool For Your Challenge",
+    "chooseDesc": "Each tool solves a specific dental practice management problem.",
+    "useTool": "Use Tool Free",
+    "whyFreeTitle": "Why Free?",
+    "whyFreeText1": "We believe dentists need clarity before investing.",
+    "whyFreeText2": "Use the tools, discover where the bottlenecks are, and if you need help fixing them — LK Digital is here.",
+    "diagnosisTitle": "Want a Complete Diagnosis of Your Practice?",
+    "diagnosisDesc": "The tools show the numbers. Our team turns those numbers into patients in the chair.",
+    "diagnosisCTA": "Book Free Diagnosis",
+    "casesCTA": "View Success Stories"
+  },
+  "common": {
+    "freeDiagnosis": "Free Diagnosis",
+    "languages": {
+      "pt": "Portugues",
+      "en": "English",
+      "fr": "Francais"
+    },
+    "multilingualBadge": "We serve in Portugues, English & Francais",
+    "learnMore": "Learn more"
+  }
+}

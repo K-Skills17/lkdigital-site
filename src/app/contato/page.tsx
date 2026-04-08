@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
+import MultilingualBadge from "@/components/ui/MultilingualBadge";
 import CTAFinal from "@/components/sections/CTAFinal";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function Contato() {
 
         {/* Form Section */}
         <CTAFinal />
+        <MultilingualBadge />
       </main>
       <Footer />
     </>

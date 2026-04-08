@@ -1,0 +1,239 @@
+{
+  "nav": {
+    "about": "A propos",
+    "solutions": "Solutions",
+    "segments": "Segments",
+    "cities": "Villes",
+    "cases": "Cas",
+    "blog": "Blog",
+    "tools": "Outils",
+    "faq": "FAQ"
+  },
+  "footer": {
+    "company": "Entreprise",
+    "about": "A propos",
+    "solutions": "Solutions",
+    "cases": "Cas de Succes",
+    "blog": "Blog",
+    "specialties": "Specialites",
+    "bookYourSpot": "Reservez Votre Place",
+    "freeDiagnosis": "Diagnostic Gratuit",
+    "freeTools": "Outils Gratuits",
+    "faq": "FAQ",
+    "description": "Marketing digital de precision pour les dentistes qui veulent un agenda rempli de patients qualifies — sans rien gerer.",
+    "copyright": "LK Digital. Tous droits reserves.",
+    "privacy": "Politique de Confidentialite",
+    "terms": "Conditions d'Utilisation"
+  },
+  "home": {
+    "heroEyebrow": "Marketing Digital pour Dentistes",
+    "heroTitle": "Un Agenda Rempli de Patients Qualifies.",
+    "heroTitleAccent": "Zero Gestion de Votre Part.",
+    "heroSubtitle": "Nous attirons des patients de haute valeur pour votre cabinet dentaire — pendant que vous vous concentrez sur ce que vous faites le mieux : prendre soin des sourires.",
+    "heroCTA": "Reserver un Diagnostic Gratuit",
+    "heroSecondaryCTA": "Voir les Solutions",
+    "stat1Value": "24h",
+    "stat1Label": "A votre service",
+    "stat2Value": "100%",
+    "stat2Label": "Focus dentaire",
+    "stat3Value": "Zero",
+    "stat3Label": "Gestion de votre part",
+    "valueProps": [
+      {
+        "title": "Visibilite sur Google",
+        "desc": "Votre cabinet en premiere page de Google et Google Maps pour les recherches que vos patients font reellement."
+      },
+      {
+        "title": "Flux de Patients Previsible",
+        "desc": "Flux constant de patients qualifies via Google Ads, Meta Ads et SEO — sans dependre des recommandations."
+      },
+      {
+        "title": "Exclusivite Territoriale",
+        "desc": "Nous n'acceptons qu'un seul cabinet par specialite par region. Votre concurrent direct ne sera jamais notre client."
+      }
+    ],
+    "multilingualTitle": "Nous Servons en 3 Langues",
+    "multilingualDesc": "Notre equipe offre un service complet en Portugais, English et Francais.",
+    "faqTitle": "Questions Frequentes",
+    "faqs": [
+      {
+        "question": "Combien de temps pour voir les premiers patients ?",
+        "answer": "La plupart de nos clients dentistes commencent a recevoir des patients qualifies dans les 2 a 4 premieres semaines apres l'activation."
+      },
+      {
+        "question": "Dois-je creer du contenu ou gerer quoi que ce soit ?",
+        "answer": "Non. Nous creons tout le contenu, gerons les campagnes, optimisons les profils et produisons les rapports."
+      },
+      {
+        "question": "Comment fonctionne l'exclusivite territoriale ?",
+        "answer": "Nous n'acceptons qu'un seul cabinet par specialite par region definie. Votre concurrent direct ne sera jamais notre client."
+      }
+    ],
+    "ctaTitle": "Pret Pour un Agenda Rempli ?",
+    "ctaSubtitle": "Le diagnostic est gratuit, sans engagement, et montre exactement ou se trouvent les patients que vous n'atteignez pas.",
+    "ctaButton": "Reserver un Diagnostic Gratuit"
+  },
+  "about": {
+    "eyebrow": "A propos",
+    "title": "Nous Ne Sommes Pas une Agence Generique.",
+    "titleAccent": "Nous Sommes le Systeme.",
+    "subtitle": "LK Digital existe pour resoudre un probleme specifique : des dentistes excellents qui ne recoivent pas les patients qu'ils meritent — parce que personne ne les trouve en ligne.",
+    "beliefTitle": "Ce que nous croyons",
+    "beliefText1": "La dentisterie bresilienne a un paradoxe : des professionnels extremement qualifies avec des agendas a moitie vides. Le probleme n'est presque jamais la qualite du service. C'est la visibilite.",
+    "beliefText2": "Nous sommes nes pour resoudre cela. Pas avec des promesses vagues de 'plus d'abonnes' ou de 'branding', mais avec un systeme mesurable qui place des patients qualifies dans votre fauteuil — semaine apres semaine.",
+    "beliefText3": "Chaque euro investi doit generer un retour. Chaque strategie doit etre etayee par des donnees. Et chaque dentiste qui travaille avec nous doit sentir qu'il a une equipe marketing dediee.",
+    "values": [
+      {
+        "value": "Precision",
+        "desc": "Chaque campagne, chaque contenu et chaque optimisation est basee sur les donnees de votre region, specialite et concurrence."
+      },
+      {
+        "value": "Exclusivite",
+        "desc": "Un cabinet par specialite par region. Votre concurrent direct ne sera jamais notre client."
+      },
+      {
+        "value": "Transparence",
+        "desc": "Vous savez exactement ce qui est fait, combien cela coute et quels resultats cela genere."
+      }
+    ],
+    "whyDentistryTitle": "Pourquoi Seulement la Dentisterie ?",
+    "whyDentistry": [
+      {
+        "title": "Nous connaissons les reglementations",
+        "desc": "La publicite dentaire a des regles specifiques. Nous savons exactement ce qui est permis."
+      },
+      {
+        "title": "Nous comprenons le parcours patient",
+        "desc": "De la premiere recherche Google jusqu'au fauteuil. Chaque etape a une strategie optimisee."
+      },
+      {
+        "title": "Donnees comparatives reelles",
+        "desc": "Nos benchmarks proviennent de cabinets dentaires reels — pas de e-commerce ou de restaurants."
+      },
+      {
+        "title": "Vocabulaire du patient",
+        "desc": "Nous savons ce que les patients recherchent reellement, pas ce que disent les manuels."
+      }
+    ],
+    "teamEyebrow": "Equipe",
+    "teamTitle": "Qui Fait la Difference",
+    "teamDesc": "Une equipe multidisciplinaire exclusivement dediee a la croissance des cabinets dentaires.",
+    "ctaTitle": "Pret Pour un Agenda a la Hauteur de Votre Travail ?",
+    "ctaSubtitle": "Le diagnostic est gratuit, sans engagement, et montre exactement ou se trouvent les patients que vous n'atteignez pas.",
+    "ctaButton": "Reserver un Diagnostic Gratuit"
+  },
+  "solutions": {
+    "eyebrow": "Solutions",
+    "title": "Plus Jamais de Fauteuil Vide",
+    "titleAccent": "Vide",
+    "subtitle": "Chaque service a ete concu specifiquement pour la dentisterie. Nous n'adaptons pas des strategies de restaurant pour les dentistes — nous construisons a partir de zero pour votre marche.",
+    "categories": [
+      {
+        "category": "Visibilite Digitale",
+        "items": [
+          {
+            "title": "SEO Local pour Dentistes",
+            "desc": "Nous positionnons votre cabinet en premiere page de Google pour les recherches pertinentes.",
+            "result": "Les patients vous trouvent avant votre concurrent"
+          },
+          {
+            "title": "Google Maps & Google Business Profile",
+            "desc": "Profil optimise avec photos, avis et publications hebdomadaires.",
+            "result": "Apparition dans le pack local Google (top 3)"
+          },
+          {
+            "title": "GEO & AEO — Presence IA",
+            "desc": "Contenu optimise pour etre cite par ChatGPT, Gemini et Perplexity.",
+            "result": "Votre cabinet recommande par les intelligences artificielles"
+          }
+        ]
+      },
+      {
+        "category": "Acquisition Active de Patients",
+        "items": [
+          {
+            "title": "Google Ads pour la Dentisterie",
+            "desc": "Campagnes axees sur l'intention d'achat.",
+            "result": "Les patients prets a prendre rendez-vous vous contactent"
+          },
+          {
+            "title": "Meta Ads (Instagram & Facebook)",
+            "desc": "Annonces ciblees pour le public de votre region.",
+            "result": "Flux previsible de nouveaux patients via les reseaux sociaux"
+          },
+          {
+            "title": "Pages de Conversion",
+            "desc": "Pages specifiques pour chaque campagne et specialite.",
+            "result": "Taux de conversion 3 a 5 fois superieur aux sites generiques"
+          }
+        ]
+      }
+    ],
+    "ctaTitle": "Vous Voulez Savoir Quelles Solutions Ont du Sens Pour Vous ?",
+    "ctaSubtitle": "Le diagnostic gratuit identifie les opportunites specifiques de votre cabinet et de votre region.",
+    "ctaButton": "Demander un Diagnostic Gratuit"
+  },
+  "contact": {
+    "eyebrow": "Prochaine etape",
+    "title": "Demandez Votre Diagnostic",
+    "titleAccent": "Gratuit.",
+    "subtitle": "En 30 minutes, nous vous montrons combien de patients vous perdez et exactement quoi faire pour les attirer. Sans engagement.",
+    "formTitle": "Decouvrez Combien de Patients Vous Perdez Aujourd'hui",
+    "formDesc": "Notre diagnostic gratuit analyse votre presence digitale, votre region et vos concurrents.",
+    "benefits": [
+      "Analyse complete sans cout et sans engagement",
+      "Rapport personnalise pour votre specialite et ville",
+      "Reunion de 30 minutes pour presenter les resultats"
+    ],
+    "limitedSpots": "Places limitees — 1 cabinet par specialite par region",
+    "preferDirect": "Vous preferez parler directement ?",
+    "whatsapp": "Contacter sur WhatsApp",
+    "call": "Appeler",
+    "nameLabel": "Votre nom",
+    "namePlaceholder": "Dr.",
+    "clinicLabel": "Nom du cabinet / clinique",
+    "clinicPlaceholder": "Clinique Dentaire...",
+    "emailLabel": "E-mail professionnel",
+    "emailPlaceholder": "vous@clinique.com",
+    "challengeLabel": "Votre plus grand defi aujourd'hui",
+    "challengeSelect": "Selectionnez...",
+    "challengeOptions": [
+      "Agenda avec trop de creneaux vides",
+      "J'ai besoin de plus de patients qualifies",
+      "Je n'ai pas une forte presence digitale",
+      "La concurrence me prend des patients",
+      "Je n'ai pas le temps de gerer le marketing"
+    ],
+    "submitButton": "Demander Mon Diagnostic Gratuit",
+    "successTitle": "Diagnostic Demande",
+    "successMessage": "Nous avons recu vos informations. Notre equipe vous contactera dans les 24 heures ouvrables pour planifier votre analyse.",
+    "disclaimer": "Sans engagement. Sans spam. Vos donnees sont protegees."
+  },
+  "tools": {
+    "eyebrow": "Outils Gratuits",
+    "title": "Diagnostiquez, Calculez et Optimisez",
+    "titleAccent": "Votre Cabinet.",
+    "subtitle": "6 outils crees exclusivement pour les dentistes. Sans inscription, sans cout — juste des resultats pratiques pour prendre de meilleures decisions aujourd'hui.",
+    "allTools": "Tous les Outils",
+    "chooseTitle": "Choisissez le Bon Outil Pour Votre Defi",
+    "chooseDesc": "Chaque outil resout un probleme specifique de gestion de cabinet dentaire.",
+    "useTool": "Utiliser l'Outil Gratuitement",
+    "whyFreeTitle": "Pourquoi Gratuit ?",
+    "whyFreeText1": "Nous croyons que le dentiste a besoin de clarte avant d'investir.",
+    "whyFreeText2": "Utilisez les outils, decouvrez ou sont les goulots d'etranglement, et si vous avez besoin d'aide — LK Digital est la.",
+    "diagnosisTitle": "Vous Voulez un Diagnostic Complet de Votre Cabinet ?",
+    "diagnosisDesc": "Les outils montrent les chiffres. Notre equipe transforme ces chiffres en patients dans le fauteuil.",
+    "diagnosisCTA": "Reserver un Diagnostic Gratuit",
+    "casesCTA": "Voir les Cas de Succes"
+  },
+  "common": {
+    "freeDiagnosis": "Diagnostic Gratuit",
+    "languages": {
+      "pt": "Portugais",
+      "en": "English",
+      "fr": "Francais"
+    },
+    "multilingualBadge": "Nous servons en Portugais, English & Francais",
+    "learnMore": "En savoir plus"
+  }
+}

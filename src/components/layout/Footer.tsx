@@ -101,8 +101,23 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Language Links */}
+        <div className="mt-12 pt-6 border-t border-white/5 flex items-center justify-center gap-2 text-xs">
+          <a href="/" className="text-white/60 hover:text-white transition-colors">
+            Portugu&ecirc;s
+          </a>
+          <span className="text-white/20">|</span>
+          <a href="/en" className="text-white/60 hover:text-white transition-colors">
+            English
+          </a>
+          <span className="text-white/20">|</span>
+          <a href="/fr" className="text-white/60 hover:text-white transition-colors">
+            Fran&ccedil;ais
+          </a>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-6 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs">
             &copy; {new Date().getFullYear()} LK Digital. Todos os direitos
             reservados.

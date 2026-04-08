@@ -12,6 +12,7 @@ import LatestPosts from "@/components/sections/LatestPosts";
 import CTAFinal from "@/components/sections/CTAFinal";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import { OrganizationSchema, WebSiteSchema, FAQSchema } from "@/components/StructuredData";
+import MultilingualBadge from "@/components/ui/MultilingualBadge";
 
 const homeFaqs = [
   { question: "Quanto tempo leva para ver os primeiros pacientes?", answer: "A maioria dos nossos clientes dentistas começa a receber pacientes qualificados nas primeiras 2 a 4 semanas após a ativação." },
@@ -39,6 +40,7 @@ export default function Home() {
         <HowItWorks />
         <Marquee />
         <Manifesto />
+        <MultilingualBadge />
         <LatestPosts />
         <FAQ />
         <CTAFinal />
