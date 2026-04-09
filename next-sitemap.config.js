@@ -63,6 +63,7 @@ const allPages = [
 module.exports = {
   siteUrl: "https://lkdigital.odo.br",
   generateRobotsTxt: true,
+  generateIndexSitemap: false,
   sitemapSize: 5000,
   // Exclude everything from auto-discovery (we define all paths manually)
   exclude: ["/**"],
