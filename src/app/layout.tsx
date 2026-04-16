@@ -74,6 +74,22 @@ export default async function RootLayout({
     <html lang={htmlLang} className={`${cormorant.variable} ${inter.variable}`}>
       <head>
         <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-FXE36BBPPQ"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-FXE36BBPPQ');
+            `,
+          }}
+        />
+        <Script
           id="microsoft-clarity"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
