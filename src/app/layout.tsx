@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { headers } from "next/headers";
+import Script from "next/script";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -71,6 +72,21 @@ export default async function RootLayout({
 
   return (
     <html lang={htmlLang} className={`${cormorant.variable} ${inter.variable}`}>
+      <head>
+        <Script
+          id="microsoft-clarity"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "wcd0mr2thc");
+            `,
+          }}
+        />
+      </head>
       <body className="font-body antialiased">
         <a href="#main-content" className="skip-to-content">
           Pular para o conteúdo
