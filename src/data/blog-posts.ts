@@ -38,7 +38,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: "2026-03-28T14:00:00-03:00",
     excerpt:
       "82% dos pacientes buscam dentistas no Google antes de agendar. Este guia mostra exatamente como posicionar seu consultório na primeira página — passo a passo.",
-    relatedSlugs: ["google-meu-negocio-dentista", "google-ads-odontologia", "ia-busca-dentistas"],
+    relatedSlugs: ["google-meu-negocio-dentista", "concorrente-dominando-google-como-competir", "ia-busca-dentistas"],
     cta: {
       heading: "Descubra Por Que Seus Concorrentes Aparecem no Google e Você Não",
       description: "Fazemos uma auditoria completa de SEO local do seu consultório — grátis. Mostramos exatamente onde você está perdendo pacientes para concorrentes e o que fazer para reverter.",
@@ -182,7 +182,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: "2026-03-20T11:00:00-03:00",
     excerpt:
       "Seu perfil no Google Maps é o primeiro contato de muitos pacientes. Estas 7 otimizações transformam um perfil esquecido em uma máquina de agendamentos.",
-    relatedSlugs: ["seo-local-dentistas-guia-completo", "google-ads-odontologia", "ia-busca-dentistas"],
+    relatedSlugs: ["seo-local-dentistas-guia-completo", "concorrente-dominando-google-como-competir", "google-ads-odontologia"],
     cta: {
       heading: "Seu Perfil no Google Maps Está Perdendo Pacientes?",
       description: "Analisamos seu Google Meu Negócio gratuitamente e mostramos as otimizações que podem triplicar seus agendamentos via Google Maps.",
@@ -290,7 +290,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: "2026-03-25T09:00:00-03:00",
     excerpt:
       "O erro mais caro em Google Ads para dentistas é pagar por cliques que nunca viram pacientes. Veja como montar campanhas que geram agendamentos reais.",
-    relatedSlugs: ["seo-local-dentistas-guia-completo", "regras-cfo-publicidade", "marketing-implantodontia"],
+    relatedSlugs: ["seo-local-dentistas-guia-completo", "dentista-medo-investir-marketing-como-superar", "dentista-leads-nao-podem-pagar"],
     cta: {
       heading: "Seus Anúncios Estão Desperdiçando Dinheiro?",
       description: "Fazemos uma auditoria gratuita das suas campanhas de Google Ads e mostramos onde cada real está indo — e como transformar cliques em pacientes na cadeira.",
@@ -398,7 +398,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: "2026-03-18T16:00:00-03:00",
     excerpt:
       "Pacientes de implante pesquisam por semanas antes de decidir. Veja como construir a presença digital que os convence de que você é a melhor escolha.",
-    relatedSlugs: ["google-ads-odontologia", "seo-local-dentistas-guia-completo", "regras-cfo-publicidade"],
+    relatedSlugs: ["google-ads-odontologia", "valor-percebido-dentista-como-cobrar-mais", "oferta-irresistivel-dentista-como-criar"],
     cta: {
       heading: "Quer Captar Pacientes de Implante de R$5k a R$20k?",
       description: "Montamos uma estratégia personalizada de captação para implantodontistas — desde o Google Ads até o funil de nutrição no WhatsApp. Diagnóstico gratuito.",
@@ -496,7 +496,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: "2026-03-22T15:00:00-03:00",
     excerpt:
       "Antes e depois, preços, promessas de resultado — o que pode e o que não pode na publicidade odontológica segundo as resoluções do CFO.",
-    relatedSlugs: ["google-ads-odontologia", "marketing-implantodontia", "google-meu-negocio-dentista"],
+    relatedSlugs: ["google-ads-odontologia", "marketing-implantodontia", "dentista-autoridade-como-ser-referencia"],
     cta: {
       heading: "Marketing Efetivo Sem Problemas Com o CFO",
       description: "Toda nossa estratégia é desenvolvida em conformidade com as resoluções do Conselho Federal de Odontologia. Captamos pacientes para você — dentro das regras.",
@@ -604,7 +604,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: "2026-04-01T10:00:00-03:00",
     excerpt:
       "Pacientes já perguntam ao ChatGPT 'qual o melhor dentista em [cidade]'. Veja como garantir que seu consultório seja a resposta.",
-    relatedSlugs: ["seo-local-dentistas-guia-completo", "google-meu-negocio-dentista", "google-ads-odontologia"],
+    relatedSlugs: ["seo-local-dentistas-guia-completo", "concorrente-dominando-google-como-competir", "google-meu-negocio-dentista"],
     cta: {
       heading: "Seu Consultório Aparece Quando Pacientes Perguntam ao ChatGPT?",
       description: "Otimizamos sua presença digital para que IAs como ChatGPT, Gemini e Perplexity recomendem seu consultório quando pacientes perguntam por dentistas na sua cidade.",
