@@ -72,14 +72,22 @@ export default async function RootLayout({
 
   return (
     <html lang={htmlLang} className={`${cormorant.variable} ${inter.variable}`}>
-      <head>
+      <body className="font-body antialiased">
+        <a href="#main-content" className="skip-to-content">
+          Pular para o conteúdo
+        </a>
+        {children}
+        <ChatWidget />
+        <WhatsAppButton />
+
+        {/* Analytics — lazyOnload so they don't compete with LCP */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-FXE36BBPPQ"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script
           id="google-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -91,7 +99,7 @@ export default async function RootLayout({
         />
         <Script
           id="microsoft-clarity"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(c,l,a,r,i,t,y){
@@ -102,14 +110,6 @@ export default async function RootLayout({
             `,
           }}
         />
-      </head>
-      <body className="font-body antialiased">
-        <a href="#main-content" className="skip-to-content">
-          Pular para o conteúdo
-        </a>
-        {children}
-        <ChatWidget />
-        <WhatsAppButton />
       </body>
     </html>
   );

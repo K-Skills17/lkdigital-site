@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hero entrance animation — CSS only, no JS dependency for LCP */
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-fade-in {
+  animation: hero-fade-in 0.6s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 :root {
   /* Brand Colors — exact match from lkdigital.odo.br */
   --accent: #c5a368;

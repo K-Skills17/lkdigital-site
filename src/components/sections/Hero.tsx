@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
@@ -20,19 +18,19 @@ export default function Hero() {
       {/* Grain overlay */}
       <div className="absolute inset-0 grain-overlay z-[1]" />
 
-      {/* Content — HTML over canvas */}
+      {/* Content — visible immediately for fast LCP, CSS animations for entrance */}
       <div className="relative z-10 max-w-narrow mx-auto px-4 sm:px-6 pt-24 pb-16 md:pt-36 md:pb-28 text-center">
         {/* Eyebrow */}
         <p
-          className="hero-eyebrow inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 text-accent text-[11px] sm:text-xs font-medium tracking-[0.25em] uppercase mb-5 md:mb-6 opacity-0"
+          className="hero-eyebrow inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 text-accent text-[11px] sm:text-xs font-medium tracking-[0.25em] uppercase mb-5 md:mb-6 animate-hero-fade-in"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
           Marketing Digital para Dentistas
         </p>
 
-        {/* H1 */}
+        {/* H1 — LCP element, must be visible without JS */}
         <h1
-          className="hero-title font-display text-[clamp(1.75rem,5vw,4.5rem)] leading-[1.1] text-white text-balance max-w-4xl mx-auto mb-4 md:mb-6 opacity-0"
+          className="hero-title font-display text-[clamp(1.75rem,5vw,4.5rem)] leading-[1.1] text-white text-balance max-w-4xl mx-auto mb-4 md:mb-6 animate-hero-fade-in [animation-delay:150ms]"
         >
           Agenda Cheia de Pacientes Qualificados.{" "}
           <span className="text-accent">Sem Você Gerenciar Nada.</span>
@@ -40,14 +38,14 @@ export default function Hero() {
 
         {/* Subheadline */}
         <p
-          className="hero-sub text-base md:text-xl text-white/60 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed opacity-0"
+          className="hero-sub text-base md:text-xl text-white/60 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed animate-hero-fade-in [animation-delay:300ms]"
         >
           Captamos pacientes de alto valor para o seu consultório odontológico
           — enquanto você foca no que faz de melhor: cuidar de sorrisos.
         </p>
 
         {/* CTAs */}
-        <div className="hero-ctas flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 md:mb-16 opacity-0">
+        <div className="hero-ctas flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 md:mb-16 animate-hero-fade-in [animation-delay:450ms]">
           <Link
             href="/contato"
             className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25 text-center"
@@ -63,7 +61,7 @@ export default function Hero() {
         </div>
 
         {/* Stats */}
-        <div className="hero-stats grid grid-cols-3 gap-3 sm:gap-6 max-w-sm sm:max-w-lg mx-auto opacity-0">
+        <div className="hero-stats grid grid-cols-3 gap-3 sm:gap-6 max-w-sm sm:max-w-lg mx-auto animate-hero-fade-in [animation-delay:600ms]">
           <div className="text-center">
             <p className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-white">
               24h

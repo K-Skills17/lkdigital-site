@@ -15,19 +15,7 @@ export default function ScrollAnimations() {
       return;
     }
 
-    // Make hero visible immediately with CSS — don't wait for GSAP
-    const heroEls = document.querySelectorAll(
-      ".hero-eyebrow, .hero-title, .hero-sub, .hero-ctas, .hero-stats"
-    );
-    heroEls.forEach((el, i) => {
-      const htmlEl = el as HTMLElement;
-      htmlEl.style.transition = `opacity 0.6s ease ${i * 0.15}s, transform 0.6s ease ${i * 0.15}s`;
-      htmlEl.style.transform = "translateY(20px)";
-      requestAnimationFrame(() => {
-        htmlEl.style.opacity = "1";
-        htmlEl.style.transform = "translateY(0)";
-      });
-    });
+    // Hero elements are now CSS-animated (animate-hero-fade-in) — no JS needed
 
     const isMobile = window.innerWidth < 768;
     let cleanup: (() => void) | undefined;
