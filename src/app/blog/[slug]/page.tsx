@@ -10,7 +10,7 @@ import {
 } from "@/components/StructuredData";
 import { blogPosts, getBlogPost, getAllSlugs } from "@/data/blog-posts";
 import type { BlogPost } from "@/data/blog-posts";
-import { getBlogPostBySlug, getAllBlogSlugs } from "@/lib/blog";
+import { getBlogPostBySlug, getAllBlogSlugs, getRelatedPosts } from "@/lib/blog";
 import type { BlogArticle } from "@/lib/blog";
 
 // ─── Static Params (merge initial + engine-generated) ───
@@ -83,7 +83,8 @@ export default async function BlogPostPage({
 
   // If it's an engine-generated post, render it differently
   if (enginePost && !post) {
-    return <EnginePostPage article={enginePost} />;
+    const related = getRelatedPosts(enginePost.slug, 3);
+    return <EnginePostPage article={enginePost} relatedPosts={related} />;
   }
 
   // Original initial-6-articles rendering (post is guaranteed non-null here)
@@ -441,7 +442,7 @@ export default async function BlogPostPage({
 // ═══════════════════════════════════════════════════════════════
 // Engine-Generated Post Page (reads from content/blog/*.json)
 // ═══════════════════════════════════════════════════════════════
-function EnginePostPage({ article }: { article: BlogArticle }) {
+function EnginePostPage({ article, relatedPosts = [] }: { article: BlogArticle; relatedPosts?: BlogArticle[] }) {
   const readTime =
     typeof article.readingTime === "number"
       ? `${article.readingTime} min`
@@ -672,6 +673,45 @@ function EnginePostPage({ article }: { article: BlogArticle }) {
             </aside>
           </div>
         </div>
+
+        {/* Related Posts — internal linking for SEO */}
+        {relatedPosts.length > 0 && (
+          <section className="border-t border-border">
+            <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-16">
+              <h2 className="font-display text-display-sm text-foreground mb-8">
+                Artigos Relacionados
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedPosts.map((related) => {
+                  const relReadTime =
+                    typeof related.readingTime === "number"
+                      ? `${related.readingTime} min`
+                      : related.readingTime;
+                  return (
+                    <Link
+                      key={related.slug}
+                      href={`/blog/${related.slug}`}
+                      className="group block p-5 rounded-xl border border-border/60 bg-card hover:border-accent/40 transition-colors"
+                    >
+                      <span className="inline-block px-2 py-0.5 text-[10px] font-medium text-accent bg-accent/10 rounded uppercase tracking-wider mb-3">
+                        {related.category}
+                      </span>
+                      <h3 className="font-display text-base text-foreground group-hover:text-accent transition-colors leading-snug mb-2 line-clamp-2">
+                        {related.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mb-3">
+                        {related.excerpt}
+                      </p>
+                      <span className="text-xs text-muted-foreground">
+                        {relReadTime} de leitura
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />

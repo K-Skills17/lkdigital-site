@@ -141,13 +141,25 @@ export function getAllBlogSlugs(): string[] {
   return getAllBlogPosts().map((p) => p.slug);
 }
 
-// ─── Get related posts ───
+// ─── Get related posts (same category first, then recent from other categories) ───
 export function getRelatedPosts(slug: string, limit = 3): BlogArticle[] {
   const all = getAllBlogPosts();
   const current = all.find((p) => p.slug === slug);
   if (!current) return [];
 
-  return all
-    .filter((p) => p.slug !== slug && p.category === current.category)
-    .slice(0, limit);
+  // Same category first
+  const sameCategory = all.filter(
+    (p) => p.slug !== slug && p.category === current.category
+  );
+
+  if (sameCategory.length >= limit) {
+    return sameCategory.slice(0, limit);
+  }
+
+  // Fill remaining slots with recent posts from other categories
+  const others = all.filter(
+    (p) => p.slug !== slug && p.category !== current.category
+  );
+
+  return [...sameCategory, ...others].slice(0, limit);
 }
