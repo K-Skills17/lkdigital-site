@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all paths except static files, api routes, and _next
-    "/((?!_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|images|robots.txt|sitemap.xml).*)",
+    // Match all paths except static files, api routes, _next, and common bot probes
+    "/((?!_next|favicon.ico|icon.svg|apple-icon|apple-touch-icon|images|robots.txt|sitemap.xml|manifest|site.webmanifest|ads.txt|app-ads.txt|\\.well-known|wp-|xmlrpc|feed|rss|atom).*)",
   ],
 };
