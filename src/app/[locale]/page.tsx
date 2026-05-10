@@ -37,6 +37,7 @@ export async function generateMetadata({
       siteName: "LK Digital",
       title,
       description,
+      images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
     },
   };
 }

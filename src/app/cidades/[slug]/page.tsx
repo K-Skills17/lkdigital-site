@@ -52,14 +52,17 @@ export async function generateMetadata({
   if (!city) return {};
 
   return {
-    title: `Marketing Digital para Dentistas em ${city.name} ${city.stateAbbr} — LK Digital`,
-    description: `Captação de pacientes qualificados para dentistas em ${city.name}. SEO local, Google Ads, Google Maps e presença em IA. Exclusividade territorial — apenas 1 consultório por especialidade em ${city.name}.`,
+    title: {
+      absolute: `Marketing para Dentistas em ${city.name} ${city.stateAbbr}`,
+    },
+    description: `Marketing digital para dentistas em ${city.name}. Sites, Google Ads e SEO para lotar sua agenda. Resultados em 90 dias.`,
     alternates: {
       canonical: `/cidades/${city.slug}`,
     },
     openGraph: {
-      title: `Marketing Digital para Dentistas em ${city.name} — LK Digital`,
-      description: `Sistema completo de captação de pacientes para consultórios odontológicos em ${city.name}, ${city.stateAbbr}.`,
+      title: `Marketing para Dentistas em ${city.name} | LK Digital`,
+      description: `Sistema completo de captação de pacientes para dentistas em ${city.name}, ${city.stateAbbr}.`,
+      images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
     },
   };
 }

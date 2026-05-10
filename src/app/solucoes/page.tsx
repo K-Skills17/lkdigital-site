@@ -3,11 +3,17 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
+import { ServiceSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Soluções — O Que Fazemos Pelo Seu Consultório",
   description:
     "Visibilidade no Google e Maps, gestão completa de marketing, exclusividade territorial. Conheça os três pilares que enchem a agenda de dentistas.",
+  openGraph: {
+    title: "Soluções | LK Digital",
+    description: "Visibilidade no Google e Maps, gestão completa de marketing, exclusividade territorial para dentistas.",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+  },
 };
 
 const services = [
@@ -76,6 +82,11 @@ const services = [
 export default function Solucoes() {
   return (
     <>
+      <ServiceSchema name="Marketing Digital para Dentistas" description="Visibilidade no Google e Maps, gestão completa de marketing, exclusividade territorial para dentistas." />
+      <BreadcrumbSchema items={[
+        { name: "Home", href: "/" },
+        { name: "Soluções", href: "/solucoes" },
+      ]} />
       <Navbar />
       <main>
         <PageHero

@@ -3,11 +3,17 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
+import { BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Casos de Sucesso — Resultados Reais de Dentistas",
   description:
     "Veja como dentistas e clínicas odontológicas encheram suas agendas com pacientes qualificados usando o sistema LK Digital.",
+  openGraph: {
+    title: "Casos de Sucesso | LK Digital",
+    description: "Veja como dentistas encheram suas agendas com pacientes qualificados usando o sistema LK Digital.",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+  },
 };
 
 const cases = [
@@ -55,6 +61,17 @@ const cases = [
 export default function Casos() {
   return (
     <>
+      <BreadcrumbSchema items={[
+        { name: "Home", href: "/" },
+        { name: "Casos de Sucesso", href: "/casos" },
+      ]} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Casos de Sucesso",
+        "url": "https://lkdigital.odo.br/casos",
+        "description": "Resultados reais de dentistas usando o sistema LK Digital."
+      }) }} />
       <Navbar />
       <main>
         <PageHero

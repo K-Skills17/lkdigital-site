@@ -7,7 +7,7 @@ import { BreadcrumbSchema } from "@/components/StructuredData";
 import { cities } from "@/data/cities";
 
 export const metadata: Metadata = {
-  title: "Marketing Digital para Dentistas por Cidade — LK Digital",
+  title: { absolute: "Dentistas por Cidade | LK Digital" },
   description:
     "Captação de pacientes qualificados para dentistas nas principais cidades do Brasil. São Paulo, Rio de Janeiro, Curitiba, Salvador, Belo Horizonte e mais. Exclusividade territorial.",
 };

@@ -3,11 +3,17 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
+import { ServiceSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Segmentos — Especialidades Odontológicas Que Atendemos",
+  title: { absolute: "Segmentos Atendidos | LK Digital" },
   description:
-    "Marketing digital especializado para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental. Uma vaga por especialidade por região.",
+    "Marketing digital para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental.",
+  openGraph: {
+    title: "Segmentos Atendidos | LK Digital",
+    description: "Marketing digital para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental.",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+  },
 };
 
 const specialties = [
@@ -94,6 +100,11 @@ const specialties = [
 export default function Segmentos() {
   return (
     <>
+      <ServiceSchema name="Especialidades Odontológicas" description="Marketing digital especializado para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental." />
+      <BreadcrumbSchema items={[
+        { name: "Home", href: "/" },
+        { name: "Segmentos", href: "/segmentos" },
+      ]} />
       <Navbar />
       <main>
         <PageHero

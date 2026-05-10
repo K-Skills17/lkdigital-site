@@ -5,16 +5,27 @@ import PageHero from "@/components/ui/PageHero";
 import MultilingualBadge from "@/components/ui/MultilingualBadge";
 import Link from "next/link";
 import Image from "next/image";
+import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Sobre — Quem é a LK Digital",
   description:
-    "Somos uma agência de marketing digital especializada exclusivamente em odontologia. Precisão, dados e exclusividade territorial para dentistas que querem crescer.",
+    "Agência de marketing digital especializada em odontologia. Precisão, dados e exclusividade territorial para dentistas.",
+  openGraph: {
+    title: "Sobre a LK Digital",
+    description: "Agência de marketing digital especializada em odontologia. Precisão, dados e exclusividade territorial para dentistas.",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+  },
 };
 
 export default function Sobre() {
   return (
     <>
+      <OrganizationSchema />
+      <BreadcrumbSchema items={[
+        { name: "Home", href: "/" },
+        { name: "Sobre", href: "/sobre" },
+      ]} />
       <Navbar />
       <main>
         <PageHero

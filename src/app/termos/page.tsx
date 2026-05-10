@@ -2,16 +2,32 @@ import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
+import { BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Termos de Uso",
+  title: "Termos de Uso e Condições",
   description:
     "Termos de uso do site da LK Digital. Condições para utilização dos nossos serviços de marketing digital para dentistas.",
+  openGraph: {
+    title: "Termos de Uso e Condições | LK Digital",
+    description: "Termos de uso do site da LK Digital. Condições para utilização dos nossos serviços de marketing digital para dentistas.",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+  },
 };
 
 export default function Termos() {
   return (
     <>
+      <BreadcrumbSchema items={[
+        { name: "Home", href: "/" },
+        { name: "Termos de Uso", href: "/termos" },
+      ]} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Termos de Uso",
+        "url": "https://lkdigital.odo.br/termos"
+      }) }} />
       <Navbar />
       <main>
         <PageHero

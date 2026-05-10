@@ -2,16 +2,32 @@ import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
+import { BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade (LGPD)",
   description:
     "Política de privacidade da LK Digital. Saiba como coletamos, usamos e protegemos seus dados pessoais em conformidade com a LGPD.",
+  openGraph: {
+    title: "Política de Privacidade | LK Digital",
+    description: "Saiba como coletamos, usamos e protegemos seus dados pessoais em conformidade com a LGPD.",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+  },
 };
 
 export default function Privacidade() {
   return (
     <>
+      <BreadcrumbSchema items={[
+        { name: "Home", href: "/" },
+        { name: "Privacidade", href: "/privacidade" },
+      ]} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Política de Privacidade",
+        "url": "https://lkdigital.odo.br/privacidade"
+      }) }} />
       <Navbar />
       <main>
         <PageHero

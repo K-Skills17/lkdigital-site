@@ -48,6 +48,13 @@ export async function generateMetadata({
   return {
     title,
     description,
+    openGraph: {
+      title,
+      description,
+      locale: locale === "en" ? "en_US" : "fr_FR",
+      siteName: "LK Digital",
+      images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+    },
     alternates: {
       canonical: `https://lkdigital.odo.br/${locale}/${slug}`,
       languages: {

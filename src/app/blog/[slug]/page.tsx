@@ -42,7 +42,9 @@ export async function generateMetadata({
   const dateModified = post?.dateModified ?? enginePost!.dateModified;
 
   return {
-    title,
+    title: {
+      absolute: title.length > 50 ? title : `${title} | LK Digital`,
+    },
     description,
     openGraph: {
       type: "article",
@@ -53,6 +55,7 @@ export async function generateMetadata({
       publishedTime: datePublished,
       modifiedTime: dateModified,
       authors: ["LK Digital"],
+      images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
     },
     alternates: {
       canonical: `/blog/${slug}`,

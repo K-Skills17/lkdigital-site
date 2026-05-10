@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     title: "LK Digital — Marketing Digital de Precisão para Dentistas",
     description:
       "Captação de pacientes qualificados para consultórios e clínicas odontológicas.",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
   },
   robots: {
     index: true,

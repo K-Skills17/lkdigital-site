@@ -5,9 +5,9 @@ import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Ferramentas Gratuitas Para Dentistas — Audite, Calcule e Otimize Sua Clínica",
+  title: { absolute: "Ferramentas Gratuitas | LK Digital" },
   description:
-    "6 ferramentas gratuitas para dentistas: auditoria de site, diagnóstico Google Meu Negócio, simulador de convênios, calculadora de preços, diagnóstico de clínica e calculadora de agenda.",
+    "6 ferramentas gratuitas para dentistas: auditoria de site, Google Meu Negócio, simulador de convênios, calculadora de preços e mais.",
   keywords: [
     "ferramentas para dentistas",
     "calculadora odontologia",
