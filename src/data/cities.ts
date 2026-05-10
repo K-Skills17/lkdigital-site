@@ -10,6 +10,13 @@ export interface CityData {
   highlights: string[];
   topSearches: string[];
   marketInsight: string;
+  neighborhoods: string[];
+  localContext: string;
+  topSpecialties: string[];
+  nearbyCity?: string;
+  croCode: string;
+  avgTicket: string;
+  digitalMaturity: string;
 }
 
 export const cities: CityData[] = [
@@ -22,6 +29,13 @@ export const cities: CityData[] = [
     estimatedDentists: "85.000+",
     competitionLevel: "alta",
     region: "Sudeste",
+    neighborhoods: ["Moema", "Jardins", "Vila Mariana", "Tatuapé", "Santana", "Pinheiros", "Itaim Bibi", "Perdizes"],
+    croCode: "CRO-SP",
+    avgTicket: "R$ 3.500–8.000",
+    digitalMaturity: "Muito alta — 91% dos pacientes pesquisam online antes de agendar",
+    topSpecialties: ["Estética Dental", "Implantodontia", "Ortodontia"],
+    nearbyCity: "campinas",
+    localContext: "São Paulo tem o maior número de dentistas registrados no CRO-SP do Brasil — mais de 85 mil profissionais ativos. A competição é segmentada por bairros: Moema e Jardins concentram clínicas premium de estética dental, enquanto Tatuapé e Santana têm forte demanda por implantes e ortodontia. Consultórios na Zona Sul competem com mais de 200 clínicas em um raio de 5km, tornando SEO hiperlocal por bairro a única forma viável de se destacar. Pacientes paulistanos raramente se deslocam mais de 15 minutos — quem não aparece na busca local do bairro simplesmente não existe.",
     highlights: [
       "Maior concentração de dentistas do Brasil — diferenciação digital é essencial",
       "Pacientes pesquisam por bairro, não apenas cidade — SEO hiperlocal é obrigatório",
@@ -46,6 +60,13 @@ export const cities: CityData[] = [
     estimatedDentists: "42.000+",
     competitionLevel: "alta",
     region: "Sudeste",
+    neighborhoods: ["Copacabana", "Barra da Tijuca", "Ipanema", "Botafogo", "Tijuca", "Recreio", "Niterói", "Méier"],
+    croCode: "CRO-RJ",
+    avgTicket: "R$ 3.000–7.000",
+    digitalMaturity: "Alta — 87% dos pacientes verificam avaliações no Google antes de escolher",
+    topSpecialties: ["Estética Dental", "Implantodontia", "Periodontia"],
+    nearbyCity: "vitoria",
+    localContext: "O mercado carioca é geograficamente dividido: a Zona Sul (Copacabana, Ipanema, Botafogo) concentra clínicas premium com ticket médio acima de R$ 5.000 para estética dental, enquanto a Barra da Tijuca vive um boom de clínicas de harmonização orofacial. Niterói, embora faça parte da região metropolitana, funciona como mercado independente com menos competição digital. O turismo médico odontológico cresce — pacientes de outros estados e até do exterior buscam especialistas cariocas em lentes de contato dental e implantes com carga imediata.",
     highlights: [
       "Forte demanda por estética dental — lentes de contato e clareamento lideram buscas",
       "Mercado dividido entre Zona Sul premium e expansão na Zona Oeste e Baixada",
@@ -70,6 +91,13 @@ export const cities: CityData[] = [
     estimatedDentists: "15.000+",
     competitionLevel: "alta",
     region: "Sul",
+    neighborhoods: ["Batel", "Água Verde", "Centro Cívico", "Ecoville", "Juvevê", "Santa Felicidade", "Cabral"],
+    croCode: "CRO-PR",
+    avgTicket: "R$ 2.800–6.000",
+    digitalMaturity: "Alta — público exigente que pesquisa reviews e compara tratamentos online",
+    topSpecialties: ["Ortodontia", "Implantodontia", "Estética Dental"],
+    nearbyCity: "florianopolis",
+    localContext: "Curitiba se destaca pela concentração de clínicas de ortodontia com alinhadores invisíveis — a cidade tem mais buscas per capita por 'Invisalign' que qualquer outra capital do Sul. O bairro Batel concentra as clínicas mais premium, enquanto Água Verde e Ecoville atendem a classe média alta com forte presença de famílias jovens buscando odontopediatria. A região metropolitana (São José dos Pinhais, Colombo, Pinhais) representa uma oportunidade sub-explorada — alta demanda com menos de 30% dos dentistas investindo em presença digital.",
     highlights: [
       "Público exigente e bem informado — conteúdo de qualidade converte mais que preço baixo",
       "Forte presença de clínicas de ortodontia com alinhadores invisíveis",
@@ -94,6 +122,13 @@ export const cities: CityData[] = [
     estimatedDentists: "12.000+",
     competitionLevel: "média",
     region: "Nordeste",
+    neighborhoods: ["Pituba", "Barra", "Itaigara", "Caminho das Árvores", "Ondina", "Paralela", "Lauro de Freitas"],
+    croCode: "CRO-BA",
+    avgTicket: "R$ 2.000–5.000",
+    digitalMaturity: "Média — digitalização acelerada, mas maioria ainda depende de indicação",
+    topSpecialties: ["Implantodontia", "Endodontia", "Ortodontia"],
+    nearbyCity: "recife",
+    localContext: "Salvador está no ponto de inflexão digital. A Pituba e o Caminho das Árvores concentram as clínicas mais modernas, com pacientes de renda média-alta que já pesquisam no Google antes de agendar. Mas a maioria dos dentistas soteropolitanos ainda não tem Google Meu Negócio otimizado — menos de 20% dos perfis estão completos com fotos e avaliações recentes. Lauro de Freitas, na região metropolitana, cresce como polo odontológico para a classe média, com competição digital quase zero.",
     highlights: [
       "Mercado em digitalização acelerada — oportunidade de ser pioneiro no posicionamento digital",
       "Forte demanda por implantes e próteses na região metropolitana",
@@ -118,6 +153,13 @@ export const cities: CityData[] = [
     estimatedDentists: "10.000+",
     competitionLevel: "média",
     region: "Centro-Oeste",
+    neighborhoods: ["Setor Bueno", "Setor Marista", "Jardim Goiás", "Setor Oeste", "Setor Sul", "Alphaville Flamboyant"],
+    croCode: "CRO-GO",
+    avgTicket: "R$ 2.200–5.500",
+    digitalMaturity: "Média — forte cultura presencial, mas buscas online crescem 35% ao ano",
+    topSpecialties: ["Estética Dental", "Implantodontia", "Ortodontia"],
+    nearbyCity: "brasilia",
+    localContext: "Goiânia é uma anomalia odontológica: tem mais dentistas per capita que São Paulo, mas a competição digital é surpreendentemente baixa. O Setor Bueno e Setor Marista concentram clínicas premium com forte demanda por lentes de contato dental e facetas — procedimentos de alto ticket que pacientes pesquisam extensivamente. A cultura goianiense ainda valoriza muito a indicação pessoal, mas o comportamento está mudando rapidamente com a geração de 25-40 anos que busca tudo pelo celular. Dentistas que constroem presença digital agora dominam um mercado que a concorrência só vai perceber quando for tarde.",
     highlights: [
       "Uma das maiores concentrações de dentistas per capita do Brasil",
       "Mercado de estética dental em expansão acelerada",
@@ -142,6 +184,13 @@ export const cities: CityData[] = [
     estimatedDentists: "25.000+",
     competitionLevel: "alta",
     region: "Sudeste",
+    neighborhoods: ["Savassi", "Lourdes", "Funcionários", "Buritis", "Nova Lima", "Contagem", "Betim", "Mangabeiras"],
+    croCode: "CRO-MG",
+    avgTicket: "R$ 2.500–6.000",
+    digitalMaturity: "Alta — UFMG e PUC formam profissionais digitalmente informados",
+    topSpecialties: ["Implantodontia", "Ortodontia", "Periodontia"],
+    nearbyCity: "vitoria",
+    localContext: "Belo Horizonte é dominada academicamente pela UFMG e PUC Minas, que formam centenas de dentistas por ano — intensificando a competição. A Savassi e Lourdes concentram clínicas de alto padrão, mas a verdadeira oportunidade está na expansão metropolitana: Nova Lima atrai pacientes premium, enquanto Contagem e Betim têm demanda crescente com menos de 15% dos dentistas investindo em Google Ads. O mineiro é um paciente leal — conquiste-o com credibilidade online e ele traz toda a família por gerações.",
     highlights: [
       "Forte tradição acadêmica em odontologia — UFMG forma grande volume de profissionais",
       "Mercado competitivo que exige diferenciação clara",
@@ -166,6 +215,13 @@ export const cities: CityData[] = [
     estimatedDentists: "12.000+",
     competitionLevel: "média",
     region: "Sudeste",
+    neighborhoods: ["Cambuí", "Barão Geraldo", "Taquaral", "Sousas", "Nova Campinas", "Alphaville Campinas"],
+    croCode: "CRO-SP",
+    avgTicket: "R$ 2.800–6.500",
+    digitalMaturity: "Muito alta — hub tech com público que pesquisa extensivamente online",
+    topSpecialties: ["Ortodontia", "Estética Dental", "Implantodontia"],
+    nearbyCity: "sao-paulo",
+    localContext: "Campinas é o hub tecnológico do interior paulista — sede de Unicamp, PUC-Campinas e dezenas de empresas tech. Isso cria um perfil de paciente único: profissionais de tecnologia de 25-45 anos com renda alta, que leem reviews no Google, comparam preços, verificam credenciais e só agendam após pesquisa detalhada. O Cambuí concentra as clínicas premium, enquanto Barão Geraldo atende a comunidade universitária com forte demanda por ortodontia. A proximidade com São Paulo faz com que pacientes de alto ticket migrem para a capital se não encontrarem opções premium locais.",
     highlights: [
       "Hub tecnológico — público digitalmente maduro que pesquisa antes de agendar",
       "Proximidade com São Paulo cria competição por pacientes de alto ticket",
@@ -190,6 +246,13 @@ export const cities: CityData[] = [
     estimatedDentists: "16.000+",
     competitionLevel: "alta",
     region: "Centro-Oeste",
+    neighborhoods: ["Asa Sul", "Asa Norte", "Lago Sul", "Águas Claras", "Sudoeste", "Noroeste", "Taguatinga"],
+    croCode: "CRO-DF",
+    avgTicket: "R$ 3.500–8.000",
+    digitalMaturity: "Alta — maior renda per capita do Brasil impulsiona busca por procedimentos premium",
+    topSpecialties: ["Estética Dental", "Implantodontia", "Ortodontia"],
+    nearbyCity: "goiania",
+    localContext: "Brasília é o mercado odontológico com maior ticket médio do Brasil. Servidores públicos e funcionários de organismos internacionais formam um público com renda estável e alta disposição para investir em estética dental. A Asa Sul e Lago Sul concentram clínicas premium, mas Águas Claras — a cidade satélite que mais cresce no DF — é o mercado emergente com forte demanda e menos competição. A estrutura de Brasília em regiões administrativas torna essencial ter estratégias de SEO segmentadas por RA, já que o paciente busca 'dentista Asa Sul' ou 'dentista Águas Claras', raramente 'dentista Brasília'.",
     highlights: [
       "Maior renda per capita do Brasil — pacientes investem em procedimentos premium",
       "Mercado de harmonização orofacial e estética em forte crescimento",
@@ -214,6 +277,13 @@ export const cities: CityData[] = [
     estimatedDentists: "11.000+",
     competitionLevel: "média",
     region: "Nordeste",
+    neighborhoods: ["Aldeota", "Meireles", "Cocó", "Dionísio Torres", "Edson Queiroz", "Eusébio", "Maraponga"],
+    croCode: "CRO-CE",
+    avgTicket: "R$ 1.800–4.500",
+    digitalMaturity: "Média — cresce acima da média nordestina, com 40% de aumento em buscas locais",
+    topSpecialties: ["Implantodontia", "Ortodontia", "Endodontia"],
+    nearbyCity: "recife",
+    localContext: "Fortaleza vive uma transformação digital acelerada. A Aldeota e Meireles já funcionam como micro-mercados com competição digital moderada, mas bairros como Cocó e Eusébio — em forte expansão imobiliária — representam oportunidades praticamente virgens. O volume de buscas por 'dentista em Fortaleza' cresce 40% ao ano, mais rápido que a média nacional. A classe média cearense, historicamente dependente de indicações, migra para buscas online à medida que condomínios e shoppings novos reconfiguram as relações de vizinhança.",
     highlights: [
       "Digitalização acelerada — buscas por dentistas crescem acima da média nordestina",
       "Mercado de implantes em expansão com público cada vez mais exigente",
@@ -238,6 +308,13 @@ export const cities: CityData[] = [
     estimatedDentists: "10.000+",
     competitionLevel: "média",
     region: "Nordeste",
+    neighborhoods: ["Boa Viagem", "Espinheiro", "Aflitos", "Casa Forte", "Graças", "Olinda", "Jaboatão dos Guararapes"],
+    croCode: "CRO-PE",
+    avgTicket: "R$ 2.000–5.000",
+    digitalMaturity: "Média-alta — Porto Digital criou um público tech-savvy que pesquisa tudo online",
+    topSpecialties: ["Estética Dental", "Ortodontia", "Implantodontia"],
+    nearbyCity: "salvador",
+    localContext: "Recife é único no Nordeste por ter o Porto Digital — um dos maiores parques tecnológicos do Brasil. Isso criou uma geração de profissionais jovens (25-40 anos) com renda acima da média regional e comportamento de consumo 100% digital. Boa Viagem concentra as clínicas premium, mas Espinheiro e Casa Forte emergem como polos odontológicos para a classe média alta. Olinda e Jaboatão, embora façam parte da região metropolitana, têm competição digital praticamente zero — um dentista com Google Meu Negócio otimizado pode dominar essas regiões sozinho.",
     highlights: [
       "Polo de tecnologia (Porto Digital) — público digitalmente ativo",
       "Forte demanda por estética dental entre jovens profissionais",
@@ -262,6 +339,13 @@ export const cities: CityData[] = [
     estimatedDentists: "18.000+",
     competitionLevel: "alta",
     region: "Sul",
+    neighborhoods: ["Moinhos de Vento", "Petrópolis", "Bela Vista", "Higienópolis", "Menino Deus", "Canoas", "Novo Hamburgo"],
+    croCode: "CRO-RS",
+    avgTicket: "R$ 2.500–5.500",
+    digitalMaturity: "Alta — público gaúcho valoriza credibilidade e relacionamento de longo prazo",
+    topSpecialties: ["Implantodontia", "Periodontia", "Ortodontia"],
+    nearbyCity: "curitiba",
+    localContext: "O gaúcho é o paciente mais fiel do Brasil — uma vez conquistado, permanece com o mesmo dentista por décadas e traz toda a família. Mas conquistá-lo exige credibilidade demonstrada. Moinhos de Vento é o bairro premium com maior concentração de clínicas de implantes e estética, enquanto Canoas e Novo Hamburgo — cidades da região metropolitana com populações acima de 300 mil — representam mercados com alta demanda e menos de 25% de presença digital entre dentistas. O mercado gaúcho de reabilitação oral sobre implantes é o mais forte do Sul.",
     highlights: [
       "Alta densidade de profissionais — diferenciação digital é decisiva",
       "Público gaúcho valoriza qualidade e relacionamento de longo prazo",
@@ -286,6 +370,13 @@ export const cities: CityData[] = [
     estimatedDentists: "5.000+",
     competitionLevel: "média",
     region: "Sul",
+    neighborhoods: ["Centro", "Trindade", "Ingleses", "Jurerê", "Coqueiros", "Palhoça", "São José"],
+    croCode: "CRO-SC",
+    avgTicket: "R$ 3.000–6.500",
+    digitalMaturity: "Muito alta — hub de startups onde 95% dos pacientes decidem online",
+    topSpecialties: ["Estética Dental", "Ortodontia", "Implantodontia"],
+    nearbyCity: "curitiba",
+    localContext: "Florianópolis tem o ecossistema de startups mais denso per capita do Brasil, e isso molda profundamente como os pacientes escolhem dentistas. O público florianopolitano — jovem, digital e com renda alta — não aceita sites desatualizados ou perfis do Google sem fotos profissionais. Jurerê e Centro concentram clínicas premium, enquanto São José e Palhoça (continente) têm demanda crescente com ticket médio ligeiramente menor. A sazonalidade do turismo cria picos de demanda em dezembro-março que podem ser captados com campanhas de Google Ads bem cronometradas.",
     highlights: [
       "Alta renda e qualidade de vida — pacientes investem em estética dental",
       "Hub de startups — público tech-savvy que decide tudo online",
@@ -310,6 +401,13 @@ export const cities: CityData[] = [
     estimatedDentists: "5.000+",
     competitionLevel: "baixa",
     region: "Norte",
+    neighborhoods: ["Adrianópolis", "Nossa Sra. das Graças", "Vieiralves", "Parque 10", "Flores", "Cidade Nova"],
+    croCode: "CRO-AM",
+    avgTicket: "R$ 1.500–4.000",
+    digitalMaturity: "Baixa-média — grande oportunidade para pioneiros digitais",
+    topSpecialties: ["Implantodontia", "Ortodontia", "Endodontia"],
+    nearbyCity: "belem",
+    localContext: "Manaus é o maior vácuo digital odontológico do Brasil entre capitais. Com mais de 5 mil dentistas, menos de 10% tem Google Meu Negócio otimizado com fotos e avaliações. Adrianópolis e Vieiralves concentram as clínicas mais modernas, mas a maioria do mercado opera sem site ou com sites desatualizados. O Polo Industrial de Manaus gera renda para mais de 100 mil trabalhadores que buscam serviços odontológicos, mas encontram poucas opções online. Um consultório que investir em presença digital agora pode literalmente dominar a primeira página do Google para toda a região sem concorrência significativa.",
     highlights: [
       "Menor competição digital — oportunidade de dominar o posicionamento da região",
       "Polo Industrial de Manaus gera renda e demanda por serviços odontológicos de qualidade",
@@ -334,6 +432,13 @@ export const cities: CityData[] = [
     estimatedDentists: "6.000+",
     competitionLevel: "média",
     region: "Sudeste",
+    neighborhoods: ["Praia do Canto", "Jardim da Penha", "Jardim Camburi", "Vila Velha Centro", "Serra Sede", "Laranjeiras"],
+    croCode: "CRO-ES",
+    avgTicket: "R$ 2.000–5.000",
+    digitalMaturity: "Média — região compacta onde SEO local bem feito domina todo o mercado",
+    topSpecialties: ["Estética Dental", "Implantodontia", "Ortodontia"],
+    nearbyCity: "belo-horizonte",
+    localContext: "A Grande Vitória é um dos mercados mais compactos e domináveis do Sudeste. Praia do Canto concentra as clínicas premium, mas Vila Velha — com população maior que Vitória — é o mercado emergente com forte demanda e menos competição. Serra e Cariacica completam a região metropolitana com mais de 500 mil habitantes cada e presença digital odontológica quase inexistente. Uma estratégia de SEO local bem executada pode posicionar um consultório no topo do Google para toda a Grande Vitória — algo impossível em São Paulo ou Rio, mas perfeitamente viável aqui.",
     highlights: [
       "Alta qualidade de vida impulsiona demanda por estética dental",
       "Região metropolitana compacta — SEO local bem feito domina toda a Grande Vitória",
@@ -358,6 +463,13 @@ export const cities: CityData[] = [
     estimatedDentists: "6.000+",
     competitionLevel: "baixa",
     region: "Norte",
+    neighborhoods: ["Nazaré", "Umarizal", "Batista Campos", "Marco", "Ananindeua Centro", "Marituba"],
+    croCode: "CRO-PA",
+    avgTicket: "R$ 1.500–3.500",
+    digitalMaturity: "Baixa — posicionamento pioneiro disponível para quem investir primeiro",
+    topSpecialties: ["Implantodontia", "Endodontia", "Ortodontia"],
+    nearbyCity: "manaus",
+    localContext: "Belém tem o maior potencial inexplorado entre as capitais brasileiras para marketing digital odontológico. Nazaré e Umarizal concentram os consultórios mais tradicionais, mas a grande maioria opera com zero presença digital. Ananindeua — a segunda maior cidade do Pará com mais de 500 mil habitantes — é um mercado com alta demanda e virtualmente nenhuma competição online. As buscas por 'dentista em Belém' crescem mês a mês à medida que o acesso à internet se expande. O dentista que estabelecer presença digital agora será referência antes que qualquer concorrente comece a investir.",
     highlights: [
       "Baixíssima competição digital — posicionamento pioneiro disponível",
       "Crescimento econômico impulsiona demanda por odontologia de qualidade",

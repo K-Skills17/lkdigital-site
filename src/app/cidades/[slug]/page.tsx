@@ -6,39 +6,6 @@ import Footer from "@/components/layout/Footer";
 import { BreadcrumbSchema, FAQSchema, CityServiceSchema } from "@/components/StructuredData";
 import { cities, getCityBySlug } from "@/data/cities";
 
-const specialties = [
-  {
-    name: "Implantodontia",
-    desc: "Pacientes de implante pesquisam por semanas antes de decidir. Posicionamos seu consultório como referência em implantes na região.",
-    keywords: ["implante dentário", "carga imediata", "prótese sobre implante"],
-  },
-  {
-    name: "Ortodontia",
-    desc: "Alinhadores invisíveis, aparelhos estéticos e ortodontia digital. Diferenciamos seu consultório pela expertise, não pelo preço.",
-    keywords: ["ortodontista", "invisalign", "aparelho invisível"],
-  },
-  {
-    name: "Odontopediatria",
-    desc: "Pais são extremamente criteriosos. Construímos autoridade e confiança com conteúdo que responde às preocupações reais dos responsáveis.",
-    keywords: ["dentista infantil", "odontopediatra", "primeira consulta bebê"],
-  },
-  {
-    name: "Endodontia",
-    desc: "Buscas de urgência exigem presença digital imediata. Quando alguém busca tratamento de canal às 22h, seu consultório precisa aparecer.",
-    keywords: ["tratamento de canal", "dor de dente urgente", "endodontista"],
-  },
-  {
-    name: "Periodontia",
-    desc: "Conteúdo educativo transforma buscas informacionais em consultas agendadas. Posicionamos você como autoridade em saúde gengival.",
-    keywords: ["periodontista", "gengiva sangrando", "tratamento periodontal"],
-  },
-  {
-    name: "Estética Dental",
-    desc: "Lentes de contato, clareamento e harmonização. Atraímos pacientes que valorizam qualidade acima de preço.",
-    keywords: ["lente de contato dental", "clareamento dental", "facetas de porcelana"],
-  },
-];
-
 export async function generateStaticParams() {
   return cities.map((city) => ({ slug: city.slug }));
 }
@@ -71,6 +38,10 @@ export default function CityPage({ params }: { params: { slug: string } }) {
   const city = getCityBySlug(params.slug);
   if (!city) notFound();
 
+  const nearbyCity = city.nearbyCity
+    ? cities.find((c) => c.slug === city.nearbyCity)
+    : null;
+
   const competitionColors = {
     alta: "bg-red-500/10 text-red-400 border-red-500/20",
     média: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
@@ -80,23 +51,23 @@ export default function CityPage({ params }: { params: { slug: string } }) {
   const cityFaqs = [
     {
       question: `Quanto custa marketing digital para dentistas em ${city.name}?`,
-      answer: `O investimento varia conforme a especialidade, a concorrência na região de ${city.name} e os objetivos do consultório. Oferecemos um diagnóstico gratuito que analisa sua situação específica e apresenta opções de investimento com ROI projetado. Em ${city.name}, onde a competição é ${city.competitionLevel}, uma estratégia bem direcionada gera retorno desde as primeiras semanas.`,
+      answer: `O investimento varia conforme a especialidade, a concorrência na região de ${city.name} e os objetivos do consultório. Em ${city.name}, onde a competição é ${city.competitionLevel} e o ticket médio é de ${city.avgTicket} por procedimento, uma estratégia bem direcionada gera retorno desde as primeiras semanas. Oferecemos um diagnóstico gratuito que analisa sua situação específica e apresenta opções com ROI projetado.`,
     },
     {
       question: `Como aparecer no Google quando alguém busca "dentista em ${city.name}"?`,
-      answer: `Para aparecer nas primeiras posições do Google em ${city.name}, é necessário combinar SEO local (otimização do site para buscas da região), Google Meu Negócio otimizado (perfil no Google Maps), conteúdo relevante e avaliações de pacientes reais. Nosso sistema implementa tudo isso de forma integrada e contínua.`,
+      answer: `Para aparecer nas primeiras posições em ${city.name}, combinamos SEO local otimizado para bairros como ${city.neighborhoods.slice(0, 3).join(", ")}, Google Meu Negócio com fotos e avaliações reais, conteúdo relevante e campanhas de Google Ads segmentadas. Nosso sistema implementa tudo de forma integrada.`,
     },
     {
-      question: `Vocês atendem consultórios em toda a região metropolitana de ${city.name}?`,
-      answer: `Sim, atendemos consultórios em ${city.name} e toda a região metropolitana. Na verdade, a estratégia de SEO local permite segmentar bairros e sub-regiões específicas, o que é especialmente valioso em metrópoles como ${city.name}.`,
+      question: `Quais bairros de ${city.name} vocês atendem?`,
+      answer: `Atendemos consultórios em toda a região metropolitana de ${city.name}, incluindo ${city.neighborhoods.join(", ")}. Nossa estratégia de SEO local segmenta por bairros e micro-regiões específicas — posicionando seu consultório exatamente onde seus pacientes buscam.`,
     },
     {
       question: `Qual a diferença da LK Digital para outras agências em ${city.name}?`,
-      answer: `Somos especializados exclusivamente em odontologia. Não adaptamos estratégias de restaurante ou e-commerce para dentistas — construímos do zero para o mercado odontológico. Além disso, oferecemos exclusividade territorial: aceitamos apenas um consultório por especialidade por região em ${city.name}.`,
+      answer: `Somos especializados exclusivamente em odontologia — não adaptamos estratégias genéricas. Conhecemos as especialidades mais buscadas em ${city.name} (${city.topSpecialties.join(", ")}), os bairros com maior demanda e a maturidade digital do mercado local. Além disso, oferecemos exclusividade territorial: aceitamos apenas um consultório por especialidade por região.`,
     },
     {
       question: `Em quanto tempo vejo resultados em ${city.name}?`,
-      answer: `A maioria dos nossos clientes em cidades do porte de ${city.name} começa a receber pacientes qualificados nas primeiras 2 a 4 semanas. Resultados mais consistentes e escaláveis se consolidam entre 60 e 90 dias, à medida que o SEO local e as campanhas amadurecem.`,
+      answer: `Com competição ${city.competitionLevel} em ${city.name}, a maioria dos nossos clientes começa a receber pacientes qualificados nas primeiras 2 a 4 semanas. Resultados consistentes se consolidam entre 60 e 90 dias. ${city.competitionLevel === "baixa" ? "Em mercados de baixa competição como " + city.name + ", o posicionamento é conquistado mais rapidamente." : ""}`,
     },
   ];
 
@@ -170,7 +141,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
               </div>
               <div className="text-center border-x border-white/10">
                 <p className="font-display text-xl sm:text-2xl font-semibold text-white">{city.estimatedDentists}</p>
-                <p className="text-[10px] sm:text-xs text-white/40 mt-1">Dentistas na região</p>
+                <p className="text-[10px] sm:text-xs text-white/40 mt-1">Dentistas ({city.croCode})</p>
               </div>
               <div className="text-center">
                 <p className="font-display text-xl sm:text-2xl font-semibold text-accent">1</p>
@@ -211,8 +182,53 @@ export default function CityPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
+        {/* Local Context — UNIQUE per city */}
+        <section className="py-16 md:py-24 bg-muted">
+          <div className="max-w-prose mx-auto px-4 sm:px-6">
+            <h2 className="font-display text-display-sm text-foreground mb-6">
+              Bairros e Regiões de {city.name}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed text-base mb-8">
+              {city.localContext}
+            </p>
+
+            {/* Neighborhood tags */}
+            <div className="mb-8">
+              <p className="text-xs text-muted-foreground uppercase tracking-[0.25em] mb-3">
+                Regiões que atendemos em {city.name}:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {city.neighborhoods.map((n) => (
+                  <span
+                    key={n}
+                    className="px-3 py-1.5 text-sm bg-card rounded-lg border border-border/60 text-foreground"
+                  >
+                    {n}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Market data cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-4 bg-card rounded-lg border border-border/60">
+                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Ticket Médio</p>
+                <p className="font-display text-lg font-medium text-foreground">{city.avgTicket}</p>
+              </div>
+              <div className="p-4 bg-card rounded-lg border border-border/60">
+                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Conselho Regional</p>
+                <p className="font-display text-lg font-medium text-foreground">{city.croCode}</p>
+              </div>
+              <div className="p-4 bg-card rounded-lg border border-border/60">
+                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Maturidade Digital</p>
+                <p className="text-sm text-foreground leading-snug">{city.digitalMaturity}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Top Searches */}
-        <section className="py-16 bg-muted">
+        <section className="py-16">
           <div className="max-w-content mx-auto px-4 sm:px-6 text-center">
             <h2 className="font-display text-display-sm text-foreground mb-3">
               O Que Pacientes em {city.name} Buscam no Google
@@ -233,51 +249,52 @@ export default function CityPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        {/* Specialties */}
-        <section className="py-20 md:py-28">
+        {/* Top Specialties for this city */}
+        <section className="py-20 md:py-28 bg-muted">
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div className="text-center mb-14">
               <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
-                Especialidades disponíveis
+                Mais buscadas em {city.name}
               </p>
               <h2 className="font-display text-display-md text-foreground text-balance">
-                Vagas Por Especialidade em {city.name}
+                Especialidades em Alta em {city.name}
               </h2>
               <p className="text-sm text-muted-foreground mt-3 max-w-xl mx-auto">
-                Aceitamos apenas 1 consultório por especialidade por região. Verifique se a sua ainda está disponível.
+                Estas são as especialidades com maior volume de buscas na região de {city.name}. Aceitamos apenas 1 consultório por especialidade.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {specialties.map((spec) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {city.topSpecialties.map((specName, i) => (
                 <div
-                  key={spec.name}
+                  key={specName}
                   className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 flex flex-col"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors">
-                      {spec.name}
-                    </h3>
+                    <span className="text-[10px] font-medium text-accent/60 uppercase tracking-wider">
+                      #{i + 1} mais buscada
+                    </span>
                     <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 text-[10px] font-medium">
                       <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                       Verificar
                     </span>
                   </div>
+                  <h3 className="font-display text-xl font-medium text-foreground group-hover:text-accent transition-colors mb-3">
+                    {specName} em {city.name}
+                  </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-                    {spec.desc}
+                    {specName === "Implantodontia" && `Pacientes em ${city.name} pesquisam por semanas antes de decidir sobre implantes. Posicionamos seu consultório como referência em implantes na região de ${city.neighborhoods[0]} e arredores.`}
+                    {specName === "Ortodontia" && `Alinhadores invisíveis e aparelhos estéticos lideram as buscas em ${city.name}. Diferenciamos seu consultório pela expertise, atraindo pacientes que valorizam resultado acima de preço.`}
+                    {specName === "Estética Dental" && `Lentes de contato dental, clareamento e facetas são os procedimentos mais buscados em ${city.name}. Atraímos pacientes de ${city.neighborhoods.slice(0, 2).join(" e ")} que investem em qualidade.`}
+                    {specName === "Endodontia" && `Buscas de urgência por tratamento de canal em ${city.name} exigem presença digital imediata. Quando alguém busca às 22h, seu consultório precisa aparecer.`}
+                    {specName === "Periodontia" && `Conteúdo educativo sobre saúde gengival transforma buscas informacionais em ${city.name} em consultas agendadas. Posicionamos você como autoridade regional.`}
+                    {specName === "Odontopediatria" && `Pais em ${city.name} são extremamente criteriosos ao escolher dentista para os filhos. Construímos autoridade com conteúdo que responde às preocupações dos responsáveis.`}
                   </p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {spec.keywords.map((kw) => (
-                      <span key={kw} className="px-2 py-0.5 text-[10px] bg-accent/5 text-accent/70 rounded">
-                        {kw}
-                      </span>
-                    ))}
-                  </div>
                   <Link
                     href="/contato"
                     className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-dark transition-colors"
                   >
-                    Verificar disponibilidade
+                    Verificar disponibilidade em {city.name}
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                     </svg>
@@ -288,8 +305,8 @@ export default function CityPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        {/* How It Works */}
-        <section className="py-20 md:py-28 bg-muted">
+        {/* How It Works — localized */}
+        <section className="py-20 md:py-28">
           <div className="max-w-narrow mx-auto px-4 sm:px-6">
             <div className="text-center mb-14">
               <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
@@ -303,18 +320,18 @@ export default function CityPage({ params }: { params: { slug: string } }) {
               {[
                 {
                   number: "01",
-                  title: "Diagnóstico da Sua Região",
-                  desc: `Analisamos o cenário odontológico da sua área em ${city.name}: concorrentes diretos, volume de buscas, oportunidades inexploradas e onde estão os pacientes que você não está alcançando.`,
+                  title: `Diagnóstico de ${city.name}`,
+                  desc: `Analisamos o cenário odontológico de ${city.name}: concorrentes em ${city.neighborhoods.slice(0, 3).join(", ")} e região, volume de buscas por especialidade, e oportunidades que seus concorrentes não estão explorando.`,
                 },
                 {
                   number: "02",
                   title: "Implementação Sob Medida",
-                  desc: `Ativamos a estratégia completa para ${city.name}: Google, Maps, redes sociais, conteúdo, campanhas pagas — tudo personalizado para a sua especialidade e micro-região. Você não precisa fazer nada.`,
+                  desc: `Ativamos a estratégia completa para ${city.name}: SEO local por bairro, Google Maps, campanhas de Google Ads segmentadas para ${city.stateAbbr} e conteúdo focado em ${city.topSpecialties[0].toLowerCase()}. Você não precisa fazer nada.`,
                 },
                 {
                   number: "03",
                   title: "Pacientes + Otimização Contínua",
-                  desc: `Em semanas, os primeiros pacientes de ${city.name} começam a aparecer. Otimizamos continuamente para aumentar o volume e a qualidade dos agendamentos.`,
+                  desc: `Em semanas, os primeiros pacientes de ${city.name} começam a aparecer. Otimizamos com dados do ${city.croCode} e métricas da região para aumentar volume e qualidade dos agendamentos.`,
                 },
               ].map((step, i) => (
                 <div key={i} className="flex items-start gap-6 p-6 bg-card rounded-xl border border-border/60">
@@ -332,7 +349,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 md:py-28">
+        <section className="py-20 md:py-28 bg-muted">
           <div className="max-w-narrow mx-auto px-4 sm:px-6">
             <div className="text-center mb-14">
               <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
@@ -368,6 +385,34 @@ export default function CityPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </section>
+
+        {/* Nearby city cross-link */}
+        {nearbyCity && (
+          <section className="py-12 border-t border-border">
+            <div className="max-w-narrow mx-auto px-4 sm:px-6">
+              <div className="flex items-center justify-between p-6 bg-card rounded-xl border border-border/60">
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Também atendemos</p>
+                  <p className="font-display text-lg font-medium text-foreground">
+                    Dentistas em {nearbyCity.name}, {nearbyCity.stateAbbr}
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {nearbyCity.estimatedDentists} dentistas · Competição {nearbyCity.competitionLevel}
+                  </p>
+                </div>
+                <Link
+                  href={`/cidades/${nearbyCity.slug}`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent/10 hover:bg-accent/20 text-accent text-sm font-medium rounded-md transition-colors"
+                >
+                  Ver {nearbyCity.name}
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
         <section className="py-20 md:py-28 bg-muted text-center">
