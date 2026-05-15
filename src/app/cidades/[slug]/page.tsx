@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { BreadcrumbSchema, FAQSchema, CityServiceSchema } from "@/components/StructuredData";
 import { cities, getCityBySlug } from "@/data/cities";
+import { TrackedCTAButton, TrackedNearbyCityLink } from "@/components/TrackedCityButton";
 
 export async function generateStaticParams() {
   return cities.map((city) => ({ slug: city.slug }));
@@ -125,12 +126,12 @@ export default function CityPage({ params }: { params: { slug: string } }) {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-              <Link
+              <TrackedCTAButton
                 href="/contato"
+                label={`Verificar Disponibilidade em ${city.name}`}
+                cityName={city.name}
                 className="w-full sm:w-auto px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25 text-center"
-              >
-                Verificar Disponibilidade em {city.name}
-              </Link>
+              />
             </div>
 
             {/* City Stats */}
@@ -290,15 +291,12 @@ export default function CityPage({ params }: { params: { slug: string } }) {
                     {specName === "Periodontia" && `Conteúdo educativo sobre saúde gengival transforma buscas informacionais em ${city.name} em consultas agendadas. Posicionamos você como autoridade regional.`}
                     {specName === "Odontopediatria" && `Pais em ${city.name} são extremamente criteriosos ao escolher dentista para os filhos. Construímos autoridade com conteúdo que responde às preocupações dos responsáveis.`}
                   </p>
-                  <Link
+                  <TrackedCTAButton
                     href="/contato"
+                    label={`Verificar disponibilidade em ${city.name}`}
+                    cityName={city.name}
                     className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-dark transition-colors"
-                  >
-                    Verificar disponibilidade em {city.name}
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                  </Link>
+                  />
                 </div>
               ))}
             </div>
@@ -400,15 +398,18 @@ export default function CityPage({ params }: { params: { slug: string } }) {
                     {nearbyCity.estimatedDentists} dentistas · Competição {nearbyCity.competitionLevel}
                   </p>
                 </div>
-                <Link
+                <TrackedNearbyCityLink
                   href={`/cidades/${nearbyCity.slug}`}
+                  label={`Ver ${nearbyCity.name}`}
+                  fromCity={city.name}
+                  toCity={nearbyCity.name}
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent/10 hover:bg-accent/20 text-accent text-sm font-medium rounded-md transition-colors"
                 >
                   Ver {nearbyCity.name}
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                   </svg>
-                </Link>
+                </TrackedNearbyCityLink>
               </div>
             </div>
           </section>
@@ -428,12 +429,12 @@ export default function CityPage({ params }: { params: { slug: string } }) {
               O diagnóstico é gratuito, sem compromisso, e mostra exatamente onde estão os pacientes
               em {city.name} que você não está alcançando.
             </p>
-            <Link
+            <TrackedCTAButton
               href="/contato"
+              label={`Agendar Diagnóstico Gratuito em ${city.name}`}
+              cityName={city.name}
               className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
-            >
-              Agendar Diagnóstico Gratuito em {city.name}
-            </Link>
+            />
           </div>
         </section>
       </main>

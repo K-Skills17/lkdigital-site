@@ -144,6 +144,10 @@ h1, h2, h3, h4, h5, h6 {
   animation-play-state: paused;
 }
 
+.cities-marquee-track:hover {
+  animation-play-state: paused;
+}
+
 /* ── FAQ Accordion ── */
 .faq-content {
   display: grid;
@@ -169,6 +173,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .marquee-track {
+    animation: none;
+  }
+
+  .cities-marquee-track {
     animation: none;
   }
 }

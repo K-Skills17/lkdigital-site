@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/events";
 
 export default function CTAFinal() {
   const [formState, setFormState] = useState<"idle" | "loading" | "success">("idle");
@@ -14,8 +15,20 @@ export default function CTAFinal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("loading");
+
+    trackEvent("form_submit", {
+      form: "diagnostico_gratuito",
+      challenge: formData.challenge,
+    });
+
     // Simulate submission — replace with real endpoint
     await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    trackEvent("generate_lead", {
+      form: "diagnostico_gratuito",
+      challenge: formData.challenge,
+    });
+
     setFormState("success");
   };
 

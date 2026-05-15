@@ -41,12 +41,17 @@ const config: Config = {
       },
       animation: {
         "marquee": "marquee 40s linear infinite",
+        "marquee-scroll": "marquee-scroll 60s linear infinite",
         "fade-up": "fadeUp 0.6s ease-out forwards",
         "fade-in": "fadeIn 0.6s ease-out forwards",
       },
       keyframes: {
         marquee: {
           "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-scroll": {
+          "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
         fadeUp: {

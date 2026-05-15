@@ -8,6 +8,7 @@ import HowItWorks from "@/components/sections/HowItWorks";
 import Marquee from "@/components/sections/Marquee";
 import Manifesto from "@/components/sections/Manifesto";
 import FAQ from "@/components/sections/FAQ";
+import CitiesMarquee from "@/components/sections/CitiesMarquee";
 import LatestPosts from "@/components/sections/LatestPosts";
 import CTAFinal from "@/components/sections/CTAFinal";
 import ScrollAnimations from "@/components/ScrollAnimations";
@@ -42,6 +43,7 @@ export default function Home() {
         <Manifesto />
         <MultilingualBadge />
         <LatestPosts />
+        <CitiesMarquee />
         <FAQ />
         <CTAFinal />
       </main>
