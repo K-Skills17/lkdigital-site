@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
-import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+
 
 const defaultNavLinks = [
   { href: "/sobre", label: "Sobre" },
@@ -83,7 +83,6 @@ export default function Navbar({
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            <LanguageSwitcher />
             <Link
               href={ctaHref}
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
@@ -93,7 +92,6 @@ export default function Navbar({
           </div>
 
           <div className="md:hidden flex items-center gap-2">
-            <LanguageSwitcher />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="relative w-11 h-11 flex flex-col items-center justify-center gap-1.5"

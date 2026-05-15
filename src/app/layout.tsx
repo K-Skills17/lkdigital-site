@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import { headers } from "next/headers";
+
 import Script from "next/script";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
@@ -30,12 +30,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://lkdigital.odo.br"),
   alternates: {
     canonical: "/",
-    languages: {
-      "pt-BR": "/",
-      "pt-PT": "/",
-      en: "/en",
-      fr: "/fr",
-    },
   },
   openGraph: {
     type: "website",
@@ -59,20 +53,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headersList = headers();
-  // headers() may return a Promise in newer Next.js versions
-  const resolvedHeaders = headersList instanceof Promise ? await headersList : headersList;
-  const locale = resolvedHeaders.get("x-locale") || "pt";
-  const langMap: Record<string, string> = { pt: "pt-BR", en: "en", fr: "fr" };
-  const htmlLang = langMap[locale] || "pt-BR";
-
   return (
-    <html lang={htmlLang} className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="pt-BR" className={`${cormorant.variable} ${inter.variable}`}>
       <body className="font-body antialiased">
         <a href="#main-content" className="skip-to-content">
           Pular para o conteúdo

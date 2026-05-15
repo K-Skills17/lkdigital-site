@@ -63,19 +63,6 @@ const cityPages = [
   lastmod: "2026-03-20T10:00:00-03:00",
 }));
 
-// ─── Translated pages ───
-const translatedPages = [
-  { loc: "/en", changefreq: "monthly", priority: 0.6, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/en/about", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/en/solutions", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/en/contact", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/en/tools", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/fr", changefreq: "monthly", priority: 0.6, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/fr/a-propos", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/fr/solutions", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/fr/contact", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/fr/outils", changefreq: "monthly", priority: 0.5, lastmod: "2026-04-08T12:00:00-03:00" },
-];
 
 module.exports = {
   siteUrl: "https://lkdigital.odo.br",
@@ -109,7 +96,6 @@ module.exports = {
       ...engineBlogPages,
       { loc: "/cidades", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
       ...cityPages,
-      ...translatedPages,
     ];
   },
 };

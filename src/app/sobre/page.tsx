@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
-import MultilingualBadge from "@/components/ui/MultilingualBadge";
+
 import Link from "next/link";
 import Image from "next/image";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
@@ -202,7 +202,6 @@ export default function Sobre() {
           </div>
         </section>
 
-        <MultilingualBadge />
 
         {/* CTA */}
         <section className="py-20 md:py-28 text-center">
