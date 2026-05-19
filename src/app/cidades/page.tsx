@@ -9,7 +9,15 @@ import { cities } from "@/data/cities";
 export const metadata: Metadata = {
   title: { absolute: "Dentistas por Cidade | LK Digital" },
   description:
-    "Captação de pacientes qualificados para dentistas nas principais cidades do Brasil. São Paulo, Rio de Janeiro, Curitiba, Salvador, Belo Horizonte e mais. Exclusividade territorial.",
+    "Captação de pacientes qualificados para dentistas nas principais cidades do Brasil. São Paulo, Rio, Curitiba, Salvador e mais.",
+  openGraph: {
+    title: "Dentistas por Cidade | LK Digital",
+    description:
+      "Marketing digital para dentistas nas principais cidades do Brasil. Exclusividade territorial garantida.",
+    url: "https://lkdigital.odo.br/cidades",
+    type: "website",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+  },
 };
 
 const competitionBadge = {

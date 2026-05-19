@@ -22,6 +22,7 @@ export const metadata: Metadata = {
       "Audite seu site, calcule preços, simule convênios e otimize sua agenda. 6 ferramentas criadas exclusivamente para dentistas.",
     url: "https://lkdigital.odo.br/ferramentas",
     type: "website",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
   },
   alternates: {
     canonical: "https://lkdigital.odo.br/ferramentas",

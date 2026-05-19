@@ -23,6 +23,7 @@ export const metadata: Metadata = {
       "Artigos práticos sobre marketing digital para odontologia. SEO, Google Ads, IA e captação de pacientes.",
     locale: "pt_BR",
     siteName: "LK Digital",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
   },
 };
 

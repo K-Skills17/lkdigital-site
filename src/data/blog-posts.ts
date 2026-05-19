@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
   // ═══════════════════════════════════════════════════════════════
   {
     slug: "seo-local-dentistas-guia-completo",
-    title: "SEO Local para Dentistas: O Guia Completo para Aparecer no Google da Sua Região",
+    title: "SEO Local para Dentistas: Guia Completo 2026",
     description:
       "Aprenda passo a passo como posicionar seu consultório odontológico na primeira página do Google. Guia completo de SEO local para dentistas em 2026.",
     category: "SEO",
@@ -173,7 +173,7 @@ export const blogPosts: BlogPost[] = [
   // ═══════════════════════════════════════════════════════════════
   {
     slug: "google-meu-negocio-dentista",
-    title: "Google Meu Negócio Para Dentistas: 7 Otimizações Que Triplicam Seus Pacientes",
+    title: "Google Meu Negócio: 7 Dicas Para Dentistas",
     description:
       "Descubra as 7 otimizações essenciais no Google Business Profile para dentistas. Aumente agendamentos e apareça no topo do Google Maps.",
     category: "Google Maps",
@@ -281,7 +281,7 @@ export const blogPosts: BlogPost[] = [
   // ═══════════════════════════════════════════════════════════════
   {
     slug: "google-ads-odontologia",
-    title: "Google Ads Para Odontologia: Como Investir Sem Desperdiçar Dinheiro",
+    title: "Google Ads Para Dentistas: Invista Sem Perder",
     description:
       "Guia completo de Google Ads para dentistas. Aprenda a criar campanhas que geram agendamentos reais, com estrutura, palavras-chave e compliance CFO.",
     category: "Ads",
@@ -389,7 +389,7 @@ export const blogPosts: BlogPost[] = [
   // ═══════════════════════════════════════════════════════════════
   {
     slug: "marketing-implantodontia",
-    title: "Marketing Para Implantodontistas: Como Captar Pacientes de Alto Ticket",
+    title: "Marketing Para Implantodontistas: Alto Ticket",
     description:
       "Estratégias de marketing digital para implantodontistas captarem pacientes de alto ticket. Conteúdo, SEO, confiança e jornada de decisão.",
     category: "Estratégia",
@@ -487,7 +487,7 @@ export const blogPosts: BlogPost[] = [
   // ═══════════════════════════════════════════════════════════════
   {
     slug: "regras-cfo-publicidade",
-    title: "Publicidade Odontológica: O Que o CFO Permite (e O Que Pode Dar Problema)",
+    title: "Publicidade Odontológica: O Que o CFO Permite",
     description:
       "Guia atualizado sobre as regras do CFO para publicidade odontológica. Saiba o que é permitido e proibido em anúncios, redes sociais e sites de dentistas.",
     category: "Compliance",
@@ -595,7 +595,7 @@ export const blogPosts: BlogPost[] = [
   // ═══════════════════════════════════════════════════════════════
   {
     slug: "ia-busca-dentistas",
-    title: "Como IAs (ChatGPT, Gemini) Estão Mudando a Forma Como Pacientes Escolhem Dentistas",
+    title: "Como IAs Mudam a Busca por Dentistas em 2026",
     description:
       "Saiba como ChatGPT, Gemini e Perplexity estão mudando a busca por dentistas. Guia de GEO (Generative Engine Optimization) para odontologia.",
     category: "GEO",
