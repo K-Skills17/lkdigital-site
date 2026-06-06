@@ -83,9 +83,9 @@ export default function Footer() {
           {/* Link Columns */}
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h4 className="font-display text-white text-sm font-medium mb-4 uppercase tracking-[0.25em]">
+              <p className="font-display text-white text-sm font-medium mb-4 uppercase tracking-[0.25em]" role="heading" aria-level={4}>
                 {section.title}
-              </h4>
+              </p>
               <ul className="space-y-2.5">
                 {section.links.map((link) => (
                   <li key={link.label}>

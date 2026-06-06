@@ -154,7 +154,7 @@ export default function ScrollAnimations() {
           lenis?.destroy();
         };
       });
-    }, 2500); // Delay 2.5s — let LCP render first
+    }, isMobile ? 4000 : 2500); // Delay longer on mobile — let LCP render and TBT window close
 
     return () => {
       clearTimeout(loadTimer);

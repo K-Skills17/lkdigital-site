@@ -27,7 +27,7 @@ export default function HeroCanvas() {
     let cancelled = false;
 
     // Longer delay on mobile so LCP paints cleanly before GPU work starts
-    const delay = isMobile ? 2500 : 1500;
+    const delay = isMobile ? 4000 : 1500;
 
     const startLoad = () => {
     import("three").then((THREE) => {
