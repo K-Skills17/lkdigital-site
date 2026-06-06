@@ -286,6 +286,25 @@ export default function FerramentasPage() {
           </div>
         </section>
 
+        {/* Cross-links to Blog */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-content mx-auto px-4 sm:px-6">
+            <h2 className="font-display text-display-sm text-foreground mb-6">
+              Aprenda a Usar Seus Dados
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Link href="/blog" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Blog</h3>
+                <p className="text-sm text-muted-foreground">Artigos práticos que complementam as ferramentas com estratégias aplicáveis.</p>
+              </Link>
+              <Link href="/solucoes" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Soluções</h3>
+                <p className="text-sm text-muted-foreground">Conheça os serviços profissionais que transformam diagnósticos em resultados.</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA */}
         <section className="py-20 md:py-28 text-center">
           <div className="max-w-narrow mx-auto px-4 sm:px-6">

@@ -6,9 +6,12 @@ import Link from "next/link";
 import { BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Casos de Sucesso — Resultados Reais de Dentistas",
+  title: { absolute: "Casos de Sucesso — Resultados Reais | LK Digital" },
   description:
     "Veja como dentistas e clínicas odontológicas encheram suas agendas com pacientes qualificados usando o sistema LK Digital.",
+  alternates: {
+    canonical: "/casos",
+  },
   openGraph: {
     title: "Casos de Sucesso | LK Digital",
     description: "Veja como dentistas encheram suas agendas com pacientes qualificados usando o sistema LK Digital.",
@@ -138,6 +141,26 @@ export default function Casos() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Cross-links */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-content mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Link href="/solucoes" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Nossas Soluções</h3>
+                <p className="text-sm text-muted-foreground">Conheça os serviços que geram esses resultados.</p>
+              </Link>
+              <Link href="/segmentos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Especialidades</h3>
+                <p className="text-sm text-muted-foreground">Implantodontia, ortodontia, estética e mais.</p>
+              </Link>
+              <Link href="/cidades" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Sua Cidade</h3>
+                <p className="text-sm text-muted-foreground">Veja como atuamos na sua região.</p>
+              </Link>
+            </div>
           </div>
         </section>
 

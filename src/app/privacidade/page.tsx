@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Política de Privacidade (LGPD)",
   description:
     "Política de privacidade da LK Digital. Saiba como coletamos, usamos e protegemos seus dados pessoais em conformidade com a LGPD.",
+  alternates: {
+    canonical: "/privacidade",
+  },
   openGraph: {
     title: "Política de Privacidade | LK Digital",
     description: "Saiba como coletamos, usamos e protegemos seus dados pessoais em conformidade com a LGPD.",

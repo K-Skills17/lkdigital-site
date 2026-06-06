@@ -6,9 +6,12 @@ import Link from "next/link";
 import { ServiceSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Soluções — O Que Fazemos Pelo Seu Consultório",
+  title: "Soluções — O Que Fazemos Pelo Consultório",
   description:
     "Visibilidade no Google e Maps, gestão completa de marketing, exclusividade territorial. Conheça os três pilares que enchem a agenda de dentistas.",
+  alternates: {
+    canonical: "/solucoes",
+  },
   openGraph: {
     title: "Soluções | LK Digital",
     description: "Visibilidade no Google e Maps, gestão completa de marketing, exclusividade territorial para dentistas.",
@@ -133,6 +136,29 @@ export default function Solucoes() {
             </div>
           </section>
         ))}
+
+        {/* Cross-links */}
+        <section className="py-16 md:py-20 bg-muted">
+          <div className="max-w-content mx-auto px-4 sm:px-6">
+            <h2 className="font-display text-display-sm text-foreground mb-8">
+              Explore Mais
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Link href="/segmentos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Especialidades</h3>
+                <p className="text-sm text-muted-foreground">Estratégias sob medida para implantodontia, ortodontia, estética e mais.</p>
+              </Link>
+              <Link href="/casos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Casos de Sucesso</h3>
+                <p className="text-sm text-muted-foreground">Veja os resultados reais que entregamos para dentistas como você.</p>
+              </Link>
+              <Link href="/blog" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Blog</h3>
+                <p className="text-sm text-muted-foreground">Artigos práticos sobre marketing digital para consultórios odontológicos.</p>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         {/* CTA */}
         <section className="py-20 md:py-28 text-center">

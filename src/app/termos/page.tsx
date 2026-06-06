@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Termos de Uso e Condições",
   description:
     "Termos de uso do site da LK Digital. Condições para utilização dos nossos serviços de marketing digital para dentistas.",
+  alternates: {
+    canonical: "/termos",
+  },
   openGraph: {
     title: "Termos de Uso e Condições | LK Digital",
     description: "Termos de uso do site da LK Digital. Condições para utilização dos nossos serviços de marketing digital para dentistas.",

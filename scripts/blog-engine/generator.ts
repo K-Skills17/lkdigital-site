@@ -104,7 +104,7 @@ ${PERSUASION_PRINCIPLES}
 OUTPUT: Return ONLY valid JSON (no markdown wrappers, no \`\`\`json). The JSON must match this exact structure:
 {
   "title": "string",
-  "seoTitle": "string (50-60 chars, keyword front-loaded)",
+  "seoTitle": "string (40-48 chars MAX, keyword front-loaded — Google truncates at 60 and we append ' | LK Digital')",
   "seoDescription": "string (140-160 chars, keyword + value prop + CTA)",
   "excerpt": "string (2-3 sentences, compelling hook)",
   "content": "string (full HTML, ${GENERATION_CONFIG.minWordCount}-${GENERATION_CONFIG.maxWordCount} words)",
@@ -208,9 +208,9 @@ function validateArticle(raw: string): { valid: boolean; issues: string[] } {
     if (article.seoDescription.length < 130 || article.seoDescription.length > 170)
       issues.push(`seoDescription length: ${article.seoDescription.length} (need 130-170)`);
 
-    // Check seoTitle length
-    if (article.seoTitle && (article.seoTitle.length < 40 || article.seoTitle.length > 70))
-      issues.push(`seoTitle length: ${article.seoTitle.length} (need 40-70)`);
+    // Check seoTitle length — must be ≤48 so "title | LK Digital" stays under 60
+    if (article.seoTitle && (article.seoTitle.length < 30 || article.seoTitle.length > 48))
+      issues.push(`seoTitle length: ${article.seoTitle.length} (need 30-48)`);
 
   } catch {
     issues.push("Invalid JSON");

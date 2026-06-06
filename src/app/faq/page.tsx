@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: { absolute: "Perguntas Frequentes | LK Digital" },
   description:
     "Respostas completas sobre marketing digital para dentistas: prazos, investimento, exclusividade territorial, conformidade com CFO e mais.",
+  alternates: {
+    canonical: "/faq",
+  },
   openGraph: {
     title: "Perguntas Frequentes | LK Digital",
     description: "Respostas completas sobre marketing digital para dentistas: prazos, investimento, exclusividade territorial, conformidade com CFO e mais.",

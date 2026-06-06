@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Sobre — Quem é a LK Digital",
   description:
     "Agência de marketing digital especializada em odontologia. Precisão, dados e exclusividade territorial para dentistas.",
+  alternates: {
+    canonical: "/sobre",
+  },
   openGraph: {
     title: "Sobre a LK Digital",
     description: "Agência de marketing digital especializada em odontologia. Precisão, dados e exclusividade territorial para dentistas.",

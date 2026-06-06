@@ -41,9 +41,13 @@ export async function generateMetadata({
   const datePublished = post?.datePublished ?? enginePost!.datePublished;
   const dateModified = post?.dateModified ?? enginePost!.dateModified;
 
+  // Keep final <title> under 60 chars for Google SERP display
+  const withBrand = `${title} | LK Digital`;
+  const finalTitle = withBrand.length <= 60 ? withBrand : title;
+
   return {
     title: {
-      absolute: title.length > 50 ? title : `${title} | LK Digital`,
+      absolute: finalTitle,
     },
     description,
     openGraph: {

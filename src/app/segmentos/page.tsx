@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: { absolute: "Segmentos Atendidos | LK Digital" },
   description:
     "Marketing digital para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental.",
+  alternates: {
+    canonical: "/segmentos",
+  },
   openGraph: {
     title: "Segmentos Atendidos | LK Digital",
     description: "Marketing digital para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental.",
@@ -173,6 +176,22 @@ export default function Segmentos() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Cross-links */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-content mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Link href="/cidades" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Atuação por Cidade</h3>
+                <p className="text-sm text-muted-foreground">Veja como operamos nas principais cidades do Brasil com exclusividade territorial.</p>
+              </Link>
+              <Link href="/casos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Casos de Sucesso</h3>
+                <p className="text-sm text-muted-foreground">Resultados reais de dentistas que usam o sistema LK Digital.</p>
+              </Link>
+            </div>
           </div>
         </section>
 

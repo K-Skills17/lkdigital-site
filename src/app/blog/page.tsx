@@ -147,6 +147,26 @@ export default function Blog() {
           </div>
         </section>
 
+        {/* Cross-links */}
+        <section className="py-16 md:py-20 border-t border-border">
+          <div className="max-w-content mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Link href="/solucoes" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Soluções</h3>
+                <p className="text-sm text-muted-foreground">Conheça os serviços que executam as estratégias dos nossos artigos.</p>
+              </Link>
+              <Link href="/ferramentas" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Ferramentas Gratuitas</h3>
+                <p className="text-sm text-muted-foreground">Diagnostique seu consultório com nossas calculadoras e auditorias.</p>
+              </Link>
+              <Link href="/segmentos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Especialidades</h3>
+                <p className="text-sm text-muted-foreground">Marketing sob medida para sua especialidade odontológica.</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Newsletter CTA */}
         <section className="py-20 md:py-28 bg-muted text-center">
           <div className="max-w-narrow mx-auto px-4 sm:px-6">

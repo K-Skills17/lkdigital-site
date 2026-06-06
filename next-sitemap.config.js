@@ -28,17 +28,17 @@ function getEngineBlogPages() {
 
 // ─── Static pages (non-blog) ───
 const staticPages = [
-  { loc: "/", changefreq: "weekly", priority: 1.0, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/sobre", changefreq: "monthly", priority: 0.8, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/solucoes", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-20T10:00:00-03:00" },
-  { loc: "/segmentos", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
-  { loc: "/casos", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
-  { loc: "/contato", changefreq: "monthly", priority: 0.8, lastmod: "2026-04-08T12:00:00-03:00" },
-  { loc: "/ferramentas", changefreq: "monthly", priority: 0.9, lastmod: "2026-04-08T12:00:00-03:00" },
+  { loc: "/", changefreq: "weekly", priority: 1.0, lastmod: new Date().toISOString() },
+  { loc: "/sobre", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
+  { loc: "/solucoes", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
+  { loc: "/segmentos", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
+  { loc: "/casos", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
+  { loc: "/contato", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
+  { loc: "/ferramentas", changefreq: "monthly", priority: 0.9, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/blog", changefreq: "daily", priority: 0.9, lastmod: new Date().toISOString() },
-  { loc: "/faq", changefreq: "monthly", priority: 0.6, lastmod: "2026-03-20T10:00:00-03:00" },
-  { loc: "/privacidade", changefreq: "yearly", priority: 0.3, lastmod: "2026-03-19T10:00:00-03:00" },
-  { loc: "/termos", changefreq: "yearly", priority: 0.3, lastmod: "2026-04-07T12:00:00-03:00" },
+  { loc: "/faq", changefreq: "monthly", priority: 0.6, lastmod: "2026-06-05T12:00:00-03:00" },
+  { loc: "/privacidade", changefreq: "yearly", priority: 0.3, lastmod: "2026-06-05T12:00:00-03:00" },
+  { loc: "/termos", changefreq: "yearly", priority: 0.3, lastmod: "2026-06-05T12:00:00-03:00" },
 ];
 
 // ─── Static blog posts (initial 6, before engine existed) ───
@@ -60,7 +60,7 @@ const cityPages = [
   loc: `/cidades/${city}`,
   changefreq: "monthly",
   priority: 0.7,
-  lastmod: "2026-03-20T10:00:00-03:00",
+  lastmod: "2026-06-05T12:00:00-03:00",
 }));
 
 
@@ -94,7 +94,7 @@ module.exports = {
       ...staticPages,
       ...dedupedStaticBlog,
       ...engineBlogPages,
-      { loc: "/cidades", changefreq: "monthly", priority: 0.7, lastmod: "2026-03-20T10:00:00-03:00" },
+      { loc: "/cidades", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
       ...cityPages,
     ];
   },

@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Diagnóstico Gratuito — Agende Sua Análise",
   description:
     "Solicite seu diagnóstico digital gratuito. Analisamos sua presença online, região e concorrência — e mostramos exatamente como captar mais pacientes.",
+  alternates: {
+    canonical: "/contato",
+  },
   openGraph: {
     title: "Diagnóstico Gratuito | LK Digital",
     description: "Solicite seu diagnóstico digital gratuito para dentistas. Analisamos sua presença online e mostramos como captar mais pacientes.",
