@@ -123,6 +123,21 @@ export const BANNED_PHRASES = [
   "no mundo atual",
 ];
 
+// ─── Fabricated sources that must NEVER appear ───
+export const BANNED_SOURCES = [
+  "Instituto Brasileiro de Odontologia Digital",
+  "Associação Brasileira de Marketing Odontológico",
+  "Brazilian Dental Performance Association",
+  "Dental Growth Institute",
+  "Dental Analytics",
+  "Dental Marketing Association",
+  "Associação Brasileira de Odontologia Digital",
+  "Instituto Nacional de Odontologia Digital",
+  "Brazilian Dental Marketing Institute",
+  "Dental Intelligence Institute",
+  "Pesquisa Gestão Odontológica",
+];
+
 // ─── Master Problems Context (injected into prompts) ───
 export const DENTIST_PROBLEMS_CONTEXT = `
 PROBLEMAS REAIS DE DENTISTAS NO BRASIL (use como contexto para escrever com empatia e precisão):

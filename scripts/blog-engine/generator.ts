@@ -11,6 +11,7 @@ import {
   PERSUASION_PRINCIPLES,
   FRAMEWORK_CONTEXTS,
   BANNED_PHRASES,
+  BANNED_SOURCES,
   type TopicSeed,
   type Author,
 } from "./config";
@@ -74,28 +75,57 @@ function buildSystemPrompt(): string {
 VOICE & TONE:
 - Authoritative: you know this market deeply
 - Empathetic: you understand dentists' struggles and fears
-- Data-driven: always include specific statistics with source attribution
 - Practical: every section must have actionable takeaways
 - Direct: lead with the answer, not the buildup
 - Professional but warm: not academic, not casual
 
-CONTENT QUALITY RULES:
-1. ACCURACY: Cite realistic statistics with sources (e.g., "Segundo pesquisa do CRO-SP...", "Dados do Google Trends indicam...").
-2. CFO COMPLIANCE: Never suggest before/after photos without noting CFO restrictions. Never promise specific clinical results.
-3. SPECIFICITY: Use exact numbers, procedure names, tool names. Be concrete, not vague.
-4. NO AI PATTERNS: Never use these phrases: ${BANNED_PHRASES.join(", ")}. Write naturally.
-5. INTERNAL LINKS: Reference other LK Digital blog articles using /blog/[slug] URLs.
+═══ CRITICAL CONTENT RULES (VIOLATIONS = REJECTED ARTICLE) ═══
 
-SEO + AEO + GEO:
-- Primary keyword in title, first paragraph, and at least 2 H2 headings
+1. NEVER FABRICATE STATISTICS OR SOURCES.
+   - Do NOT invent percentages, studies, or organizations.
+   - Do NOT attribute claims to institutions unless you are CERTAIN they published them.
+   - NEVER use these fake sources: ${BANNED_SOURCES.join("; ")}.
+   - If you don't have a real stat, use logical reasoning, practical experience, or qualitative arguments instead.
+   - It is MUCH better to say "consultórios que investem em presença digital tendem a receber mais pacientes" than to invent "73% dos consultórios que investem em presença digital recebem 340% mais pacientes segundo o Instituto X".
+
+2. REAL SOURCES ONLY — use these sparingly (max 3-5 per article):
+   - Google (Trends, Search Console data, algorithm updates)
+   - BrightLocal (local SEO surveys — they publish annual reports)
+   - CFO/CRO (regulatory data — cite resolution numbers)
+   - IBGE / Datasus (demographic data)
+   - General common knowledge (e.g., "a maioria dos pacientes pesquisa online antes de agendar")
+   - When unsure, frame as observation: "Na nossa experiência com consultórios...", "O que vemos no mercado é que..."
+
+3. NEVER USE "340%" for anything. This number is banned.
+
+4. NO FICTIONAL TESTIMONIALS.
+   - Do NOT create fake dentist quotes with names and cities.
+   - Instead, use anonymized examples: "Um implantodontista em capital do Sudeste relatou que..." or frame as hypothetical: "Imagine um consultório que..."
+   - For case studies, use "Consultório A" / "Clínica B" format, not invented names.
+
+5. KEYWORD DENSITY: Use the primary keyword naturally, MAX 2-3 times in the full article. NEVER stuff it into every section heading.
+
+6. NO AI PATTERNS: Never use these phrases: ${BANNED_PHRASES.join(", ")}. Write naturally.
+
+7. CFO COMPLIANCE: Never suggest before/after photos without noting CFO restrictions. Never promise specific clinical results.
+
+8. VARY YOUR STRUCTURE. Not every article needs a comparison table, not every section needs a stat. Mix formats:
+   - Some sections: narrative explanation with examples
+   - Some sections: step-by-step instructions
+   - Some sections: checklist or framework
+   - Some sections: practical templates (scripts, emails, messages)
+   Avoid the pattern of "bold claim + percentage + bullet list" repeating in every section.
+
+SEO + AEO:
+- Primary keyword in title and first paragraph
 - Each section starts with a direct answer AI can extract as a snippet
-- Include comparison tables where relevant
-- Cite specific statistics with sources
+- Include comparison tables only where they genuinely add value
 
 HTML STRUCTURE:
 - Use semantic HTML: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <table>, <blockquote>, <strong>
 - NO <h1> (that's in the page template)
 - Keep paragraphs to 2-3 sentences max
+- Use 4-7 H2 headings per article (not 10+). Depth over breadth.
 
 CURRENT YEAR: ${GENERATION_CONFIG.currentYear}
 
@@ -106,11 +136,11 @@ OUTPUT: Return ONLY valid JSON (no markdown wrappers, no \`\`\`json). The JSON m
   "title": "string",
   "seoTitle": "string (40-48 chars MAX, keyword front-loaded — Google truncates at 60 and we append ' | LK Digital')",
   "seoDescription": "string (140-160 chars, keyword + value prop + CTA)",
-  "excerpt": "string (2-3 sentences, compelling hook)",
+  "excerpt": "string (2-3 sentences, compelling hook — NO fabricated statistics)",
   "content": "string (full HTML, ${GENERATION_CONFIG.minWordCount}-${GENERATION_CONFIG.maxWordCount} words)",
   "tags": ["string", "string", ...],
   "keywords": ["primary keyword", "secondary 1", "secondary 2"],
-  "readingTime": number,
+  "readingTime": number (CALCULATE from word count: words / 200, rounded up),
   "tldr": "string (2-3 key takeaways in one paragraph)",
   "faqItems": [{"question": "string", "answer": "string"}, ...${GENERATION_CONFIG.faqItemsPerArticle} items]
 }`;
@@ -164,8 +194,12 @@ ${recentSlugs.map((s) => `- /blog/${s}`).join("\n")}`;
 
   prompt += `\n\nREMINDERS:
 - Write ${GENERATION_CONFIG.minWordCount}-${GENERATION_CONFIG.maxWordCount} words
-- Include 2+ statistics with source attribution
+- ONLY use real, verifiable statistics (max 3-5 per article). NO fabricated sources or percentages.
+- NEVER use "340%" for anything
+- NEVER create fictional dentist testimonials with names — use anonymized examples
+- Primary keyword max 2-3 times in the full article
 - ${GENERATION_CONFIG.faqItemsPerArticle} FAQ items
+- Calculate readingTime from word count (words / 200, rounded up)
 - All content in Portuguese (pt-BR)
 - Return ONLY valid JSON, no markdown wrappers`;
 
@@ -200,9 +234,30 @@ function validateArticle(raw: string): { valid: boolean; issues: string[] } {
       }
     }
 
-    // Check for H2 headings
+    // Check for H2 headings (4-8 ideal, not 10+)
     const h2Count = (article.content.match(/<h2/g) || []).length;
     if (h2Count < 4) issues.push(`Only ${h2Count} H2 headings (need 4+)`);
+    if (h2Count > 10) issues.push(`Too many H2 headings: ${h2Count} (max 10)`);
+
+    // Check for fabricated sources
+    for (const source of BANNED_SOURCES) {
+      if (article.content.toLowerCase().includes(source.toLowerCase())) {
+        issues.push(`Contains fabricated source: "${source}"`);
+      }
+    }
+
+    // Check for "340%"
+    if (article.content.includes("340%")) {
+      issues.push('Contains banned statistic "340%"');
+    }
+
+    // Check keyword stuffing (primary keyword max 4 times)
+    if (article.keywords && article.keywords[0]) {
+      const kw = article.keywords[0].toLowerCase();
+      const contentLowerKw = article.content.toLowerCase().replace(/<[^>]+>/g, " ");
+      const kwCount = contentLowerKw.split(kw).length - 1;
+      if (kwCount > 4) issues.push(`Keyword stuffing: "${kw}" appears ${kwCount} times (max 4)`);
+    }
 
     // Check seoDescription length
     if (article.seoDescription.length < 130 || article.seoDescription.length > 170)
@@ -333,6 +388,11 @@ export async function generateArticle(
 
   const now = new Date().toISOString();
 
+  // Calculate actual reading time from word count
+  const contentText = (parsed.content || "").replace(/<[^>]+>/g, " ");
+  const wordCount = contentText.split(/\s+/).filter(Boolean).length;
+  const calculatedReadingTime = Math.max(5, Math.ceil(wordCount / 200));
+
   const article: GeneratedArticle = {
     title: parsed.title || topic.title,
     seoTitle: parsed.seoTitle || topic.title,
@@ -344,7 +404,7 @@ export async function generateArticle(
     keywords: parsed.keywords || [topic.primaryKeyword, ...topic.secondaryKeywords],
     category: topic.category,
     pillar: topic.pillar,
-    readingTime: parsed.readingTime || 8,
+    readingTime: calculatedReadingTime,
     tldr: parsed.tldr || "",
     faqItems: parsed.faqItems || [],
     author,
@@ -375,6 +435,13 @@ export async function generateArticle(
     const regex = new RegExp(phrase, "gi");
     cleanContent = cleanContent.replace(regex, "");
   }
+  // Remove fabricated source references
+  for (const source of BANNED_SOURCES) {
+    const regex = new RegExp(source, "gi");
+    cleanContent = cleanContent.replace(regex, "especialistas do setor");
+  }
+  // Remove "340%" anywhere
+  cleanContent = cleanContent.replace(/340%/g, "significativamente");
   // Clean up any double spaces left
   cleanContent = cleanContent.replace(/\s{2,}/g, " ").replace(/>\s+</g, "><");
   article.content = cleanContent;
