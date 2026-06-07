@@ -134,7 +134,69 @@ export default function Sobre() {
           </div>
         </section>
 
-        {/* Team */}
+        {/* Founder Story */}
+        <section className="py-20 md:py-28">
+          <div className="max-w-narrow mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="relative w-full max-w-sm mx-auto md:mx-0">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-border/60">
+                  <Image
+                    src="/images/team/stephen-komando.png"
+                    alt="Stephen Komando — Fundador da LK Digital"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 384px"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 bg-accent text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg">
+                  Fundador & CEO
+                </div>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
+                  Quem Está Por Trás
+                </p>
+                <h2 className="font-display text-display-sm text-foreground mb-6">
+                  Por Que Eu Só Trabalho Com Dentistas
+                </h2>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    Meu nome é Stephen Komando. Antes de fundar a LK Digital, eu vi de
+                    perto o que agências genéricas fazem com profissionais de saúde:
+                    vendem seguidores, entregam métricas de vaidade, e desaparecem
+                    quando o contrato acaba.
+                  </p>
+                  <p>
+                    Decidi fazer diferente. Montei um sistema focado em uma única
+                    coisa: colocar pacientes qualificados na cadeira de dentistas que
+                    merecem ser encontrados. Não atendo restaurantes, advogados ou
+                    e-commerces. Só odontologia. Isso significa que conheço as regras
+                    do CFO, entendo o funil do paciente dental, e tenho benchmarks
+                    reais de consultórios — não de outros nichos.
+                  </p>
+                  <p>
+                    A exclusividade territorial é pessoal: se eu aceito trabalhar com
+                    você, seu concorrente da mesma região não tem acesso ao mesmo
+                    sistema. É assim que garanto que cada cliente receba minha atenção
+                    total.
+                  </p>
+                </div>
+                <div className="mt-6 flex items-center gap-4">
+                  <div>
+                    <p className="font-display text-lg font-medium text-foreground">
+                      Stephen Komando
+                    </p>
+                    <p className="text-sm text-accent">
+                      CEO & Diretor Comercial — LK Digital
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Team */
         <section className="py-20 md:py-28">
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div className="text-center mb-14">
@@ -210,7 +272,7 @@ export default function Sobre() {
         <section className="py-20 md:py-28 text-center">
           <div className="max-w-narrow mx-auto px-4 sm:px-6">
             <h2 className="font-display text-display-md text-foreground mb-4">
-              Pronto Para Ter Uma Agenda Que Faz Jus ao Seu Trabalho?
+              Pronto Para Ser Encontrado Pelos Pacientes Que Você Merece?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
               O diagnóstico é gratuito, sem compromisso, e mostra exatamente

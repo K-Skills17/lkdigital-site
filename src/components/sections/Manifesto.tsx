@@ -12,7 +12,7 @@ export default function Manifesto() {
             Marketing de precisão não é sobre fazer mais.
             <br className="hidden md:block" />
             É sobre fazer o{" "}
-            <span className="text-accent">exactamente certo</span> — para que
+            <span className="text-accent">exatamente certo</span> — para que
             cada real investido traga um paciente real à sua cadeira.
           </p>
         </blockquote>

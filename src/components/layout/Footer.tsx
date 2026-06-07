@@ -44,8 +44,8 @@ export default function Footer() {
               <Logo variant="full" color="white" />
             </Link>
             <p className="text-sm leading-relaxed max-w-xs mb-5">
-              Marketing digital de precisão para dentistas que querem uma agenda
-              cheia de pacientes qualificados — sem gerenciar nada.
+              Marketing digital de precisão para dentistas que querem ser
+              encontrados pelos pacientes certos — sem gerenciar nada.
             </p>
             <div className="flex flex-col gap-2.5">
               <a

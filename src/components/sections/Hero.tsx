@@ -32,7 +32,7 @@ export default function Hero() {
         <h1
           className="hero-title font-display text-[clamp(1.75rem,5vw,4.5rem)] leading-[1.1] text-white text-balance max-w-4xl mx-auto mb-4 md:mb-6 animate-hero-fade-in [animation-delay:150ms]"
         >
-          Agenda Cheia de Pacientes Qualificados.{" "}
+          Pacientes de Alto Valor Encontram Você Primeiro.{" "}
           <span className="text-accent">Sem Você Gerenciar Nada.</span>
         </h1>
 
@@ -40,7 +40,7 @@ export default function Hero() {
         <p
           className="hero-sub text-base md:text-xl text-white/60 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed animate-hero-fade-in [animation-delay:300ms]"
         >
-          Captamos pacientes de alto valor para o seu consultório odontológico
+          Posicionamos seu consultório como a primeira opção na sua região
           — enquanto você foca no que faz de melhor: cuidar de sorrisos.
         </p>
 
