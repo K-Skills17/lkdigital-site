@@ -196,7 +196,7 @@ export default function Sobre() {
           </div>
         </section>
 
-        {/* Team */
+        {/* Team */}
         <section className="py-20 md:py-28">
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div className="text-center mb-14">
