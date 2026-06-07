@@ -141,7 +141,7 @@ export default function Sobre() {
               <div className="relative w-full max-w-sm mx-auto md:mx-0">
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-border/60">
                   <Image
-                    src="/images/team/stephen-komando.png"
+                    src="/images/team/stephen-komando-founder.jpg"
                     alt="Stephen Komando — Fundador da LK Digital"
                     fill
                     className="object-cover object-top"
