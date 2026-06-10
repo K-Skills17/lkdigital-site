@@ -20,7 +20,7 @@ export default function Hero() {
       >
         Solicitar meu Raio-X gratuito →
       </a>
-      <div className="mt-4">
+      <div className="mt-8">
         <SpotCounter />
       </div>
     </section>

@@ -6,7 +6,8 @@ import HowItWorks from "@/components/raiox/HowItWorks";
 import FAQ from "@/components/raiox/FAQ";
 import LeadForm from "@/components/raiox/LeadForm";
 import Footer from "@/components/raiox/Footer";
-import RaioXViewEvent from "@/components/raiox/RaioXViewEvent";
+import SpotCounter from "@/components/raiox/SpotCounter";
+import RaioXTracking from "@/components/raiox/RaioXViewEvent";
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -60,7 +61,7 @@ export default function RaioXPage() {
   return (
     <main
       id="main-content"
-      className="min-h-screen bg-[#111111] text-[#EDE8DF] selection:bg-[#C4963A]/30"
+      className="min-h-screen bg-[#111111] text-[#EDE8DF] selection:bg-[#C4963A]/30 pb-16 md:pb-0"
     >
       <script
         type="application/ld+json"
@@ -70,22 +71,35 @@ export default function RaioXPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
-      <RaioXViewEvent />
+      <RaioXTracking />
 
       <Hero />
       <hr className="border-[#C4963A]/10 max-w-3xl mx-auto" />
-      <TheShift />
+      <section data-track-section="the-shift">
+        <TheShift />
+      </section>
       <hr className="border-[#C4963A]/10 max-w-3xl mx-auto" />
-      <WhatYouGet />
+      <section data-track-section="what-you-get">
+        <WhatYouGet />
+      </section>
       <hr className="border-[#C4963A]/10 max-w-3xl mx-auto" />
-      <WhoAnalyzes />
+      <section data-track-section="who-analyzes">
+        <WhoAnalyzes />
+      </section>
       <hr className="border-[#C4963A]/10 max-w-3xl mx-auto" />
-      <HowItWorks />
+      <section data-track-section="how-it-works">
+        <HowItWorks />
+      </section>
       <hr className="border-[#C4963A]/10 max-w-3xl mx-auto" />
-      <FAQ />
+      <section data-track-section="faq">
+        <FAQ />
+      </section>
       <hr className="border-[#C4963A]/10 max-w-3xl mx-auto" />
       <LeadForm />
       <Footer />
+
+      {/* Sticky mobile counter bar */}
+      <SpotCounter variant="sticky" />
     </main>
   );
 }
