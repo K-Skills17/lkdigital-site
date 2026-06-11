@@ -15,7 +15,7 @@ const cards = [
 
 export default function TheShift() {
   return (
-    <section className="px-6 py-16 md:py-24 max-w-3xl mx-auto">
+    <section className="px-6 py-10 md:py-16 max-w-3xl mx-auto">
       <h2 className="font-display text-display-md text-[#EDE8DF] mb-6">
         O jogo mudou — e a maioria das clínicas ainda não percebeu.
       </h2>

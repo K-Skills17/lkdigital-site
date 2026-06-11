@@ -25,7 +25,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="px-6 py-16 md:py-24 max-w-3xl mx-auto">
+    <section className="px-6 py-10 md:py-16 max-w-3xl mx-auto">
       <h2 className="font-display text-display-md text-[#EDE8DF] mb-10">Perguntas frequentes</h2>
       <div className="divide-y divide-[#C4963A]/20">
         {faqs.map((faq, i) => (

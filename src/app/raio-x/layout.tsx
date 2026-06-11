@@ -33,8 +33,7 @@ export default function RaioXLayout({ children }: { children: React.ReactNode })
         dangerouslySetInnerHTML={{
           __html: `
             .raiox-page { --font-display: ${playfair.style.fontFamily}; }
-            /* Hide global widgets on raio-x pages */
-            #chat-widget, #whatsapp-button, .chat-widget-container, .whatsapp-float { display: none !important; }
+            #global-widgets { display: none !important; }
           `,
         }}
       />

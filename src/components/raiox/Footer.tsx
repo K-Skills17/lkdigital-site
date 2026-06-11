@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="px-6 py-12 max-w-3xl mx-auto text-center border-t border-[#C4963A]/10">
+    <footer className="px-6 py-8 max-w-3xl mx-auto text-center border-t border-[#C4963A]/10">
       <p className="text-[#EDE8DF]/60 text-sm font-body mb-2">
         As vagas desta turma encerram em 31/07/2026 ou quando as 50 forem preenchidas — o que vier
         primeiro.

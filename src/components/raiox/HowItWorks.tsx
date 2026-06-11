@@ -6,7 +6,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="px-6 py-16 md:py-24 max-w-3xl mx-auto">
+    <section className="px-6 py-10 md:py-16 max-w-3xl mx-auto">
       <h2 className="font-display text-display-md text-[#EDE8DF] mb-10">Como funciona</h2>
       <div className="flex flex-col md:flex-row gap-6 md:gap-4 md:items-start">
         {steps.map((step, i) => (

@@ -65,8 +65,10 @@ export default function RootLayout({
           Pular para o conteúdo
         </a>
         {children}
-        <ChatWidget />
-        <WhatsAppButton />
+        <div id="global-widgets">
+          <ChatWidget />
+          <WhatsAppButton />
+        </div>
 
         {/* Analytics — delayed 5s after load to avoid competing with TBT window */}
         <Script

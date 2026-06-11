@@ -11,7 +11,7 @@ const leadSchema = z.object({
     .transform((v) => v.replace(/\D/g, ""))
     .pipe(z.string().min(10, "WhatsApp inválido").max(11, "WhatsApp inválido")),
   instagram: z.string().optional().default(""),
-  site_url: z.string().url("URL inválida").optional().or(z.literal("")),
+  site_url: z.string().optional().or(z.literal("")),
   role: z.enum(["Dono(a) / Sócio(a)", "Gerente", "Marketing", "Outro"]),
   chairs: z.enum(["1", "2–3", "4–6", "7+"]),
   procedures: z

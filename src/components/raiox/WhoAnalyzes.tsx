@@ -7,7 +7,7 @@ export default function WhoAnalyzes() {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <section className="px-6 py-16 md:py-24 max-w-3xl mx-auto">
+    <section className="px-6 py-10 md:py-16 max-w-3xl mx-auto">
       <div className="flex flex-col md:flex-row gap-8 items-start">
         <div className="flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-[#1A1A1A] border border-[#C4963A]/30 flex items-center justify-center">
           {imgError ? (

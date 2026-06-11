@@ -9,7 +9,7 @@ const items = [
 
 export default function WhatYouGet() {
   return (
-    <section className="px-6 py-16 md:py-24 max-w-3xl mx-auto">
+    <section className="px-6 py-10 md:py-16 max-w-3xl mx-auto">
       <h2 className="font-display text-display-md text-[#EDE8DF] mb-10">
         O que você recebe — em até 7 dias úteis
       </h2>

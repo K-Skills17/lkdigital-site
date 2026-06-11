@@ -82,7 +82,9 @@ export default function LeadForm() {
     if (!data.chairs) newErrors.chairs = "Selecione o número de cadeiras";
     if (data.procedures.length === 0) newErrors.procedures = "Selecione ao menos um procedimento";
     if (!data.marketing_owner) newErrors.marketing_owner = "Selecione uma opção";
-    if (data.site_url && !isValidUrl(data.site_url)) newErrors.site_url = "URL inválida";
+    if (data.site_url) {
+      data.site_url = normalizeUrl(data.site_url);
+    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -135,7 +137,7 @@ export default function LeadForm() {
 
   if (state === "success") {
     return (
-      <section id="form" className="px-6 py-16 md:py-24 max-w-2xl mx-auto text-center">
+      <section id="form" className="px-6 py-10 md:py-16 max-w-2xl mx-auto text-center">
         <div className="text-[#C4963A] text-5xl mb-4">&#10003;</div>
         <p className="text-[#EDE8DF] text-lg font-body leading-relaxed">
           Recebido! Seu Raio-X entra na fila da Turma Jun–Jul. Você receberá uma confirmação no
@@ -147,7 +149,7 @@ export default function LeadForm() {
 
   if (state === "full") {
     return (
-      <section id="form" className="px-6 py-16 md:py-24 max-w-2xl mx-auto">
+      <section id="form" className="px-6 py-10 md:py-16 max-w-2xl mx-auto">
         <div className="bg-[#1A1A1A] border border-[#C4963A]/30 rounded p-8 text-center">
           <p className="text-[#EDE8DF] text-base font-body mb-6">
             As 50 vagas desta turma foram preenchidas. Deixe seu WhatsApp para entrar na lista da
@@ -160,7 +162,7 @@ export default function LeadForm() {
   }
 
   return (
-    <section id="form" className="px-6 py-16 md:py-24 max-w-2xl mx-auto">
+    <section id="form" className="px-6 py-10 md:py-16 max-w-2xl mx-auto">
       <h2 className="font-display text-display-md text-[#EDE8DF] mb-2">
         Solicite o Raio-X da sua clínica
       </h2>
@@ -205,8 +207,7 @@ export default function LeadForm() {
         <Field
           label="Site (se tiver)"
           name="site_url"
-          type="url"
-          placeholder="https://"
+          placeholder="www.suaclinica.com.br"
           required={false}
           error={errors.site_url}
           onFocus={fireFormStart}
@@ -435,12 +436,10 @@ function getUtmParams() {
   return Object.keys(utm).length > 0 ? utm : undefined;
 }
 
-function isValidUrl(s: string): boolean {
-  try {
-    new URL(s);
-    return true;
-  } catch {
-    return false;
-  }
+function normalizeUrl(s: string): string {
+  const trimmed = s.trim();
+  if (!trimmed) return "";
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return "https://" + trimmed;
 }
 
