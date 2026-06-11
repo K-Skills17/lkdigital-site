@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { trackAll } from "./RaioXViewEvent";
 
 const roleOptions = ["Dono(a) / Sócio(a)", "Gerente", "Marketing", "Outro"];
 const chairOptions = ["1", "2–3", "4–6", "7+"];
@@ -39,9 +40,7 @@ export default function LeadForm() {
   const fireFormStart = useCallback(() => {
     if (hasFiredStart.current) return;
     hasFiredStart.current = true;
-    if (typeof window !== "undefined" && window.dataLayer) {
-      window.dataLayer.push({ event: "raiox_form_start" });
-    }
+    trackAll("raiox_form_start", null);
   }, []);
 
   const toggleProcedure = (proc: string) => {
@@ -121,9 +120,12 @@ export default function LeadForm() {
         setState("waitlist");
       } else {
         setState("success");
-        if (typeof window !== "undefined" && window.dataLayer) {
-          window.dataLayer.push({ event: "raiox_submit_success" });
-        }
+        // GA4: generate_lead + custom event | Meta: Lead (with dedup ID for CAPI)
+        trackAll("raiox_submit_success", "Lead", {
+          content_name: "Raio-X Digital 2026",
+          value: 0,
+          currency: "BRL",
+        });
       }
     } catch {
       setServerError("Erro de conexão. Verifique sua internet e tente novamente.");
