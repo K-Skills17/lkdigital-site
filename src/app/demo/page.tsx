@@ -8,7 +8,7 @@ const DEMO_TENANT_ID =
   process.env.NEXT_PUBLIC_DEMO_TENANT_ID ?? "dd0cd808-2d1b-481a-8f0b-cc9b47b685ac";
 
 const WA_LINK =
-  "https://wa.me/5511952823271?text=Ol%C3%A1!%20Testei%20a%20demonstra%C3%A7%C3%A3o%20e%20quero%20montar%20o%20assistente%20para%20minha%20cl%C3%ADnica.";
+  "https://wa.me/5511946851028?text=Ol%C3%A1!%20Testei%20a%20demonstra%C3%A7%C3%A3o%20e%20quero%20montar%20o%20assistente%20para%20minha%20cl%C3%ADnica.";
 const IG_LINK = "https://instagram.com/lkdigital.odo";
 
 export default function DemoPage() {
