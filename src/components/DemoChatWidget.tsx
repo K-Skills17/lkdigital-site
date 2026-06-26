@@ -26,7 +26,7 @@ export default function DemoChatWidget({ tenantId }: { tenantId: string }) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const storageKey = `lk_demo_session_${tenantId}`;
 
-  // Always fetch config for header branding
+  // Fetch config for header branding only
   useEffect(() => {
     fetch(`${API_BASE}/${tenantId}/config`)
       .then((r) => r.json())
@@ -34,8 +34,13 @@ export default function DemoChatWidget({ tenantId }: { tenantId: string }) {
       .catch(() => {});
   }, [tenantId]);
 
-  // Init messages: restore history if session exists, else show welcome message
+  // Init: restore existing session history, or create a new session and
+  // fire a hidden trigger so the bot sends its real opening greeting.
+  // This keeps the backend conversation state in sync with what the user sees,
+  // preventing the bot from re-introducing itself on the first real reply.
   useEffect(() => {
+    const TRIGGER = "__start__";
+
     const init = async () => {
       const stored = localStorage.getItem(storageKey);
 
@@ -45,20 +50,44 @@ export default function DemoChatWidget({ tenantId }: { tenantId: string }) {
           const r = await fetch(`${API_BASE}/${tenantId}/messages/${stored}`);
           const data = await r.json();
           if (data.messages?.length > 0) {
-            setMessages(data.messages);
+            // Filter the hidden auto-trigger from display
+            const visible = (data.messages as Message[]).filter(
+              (m, i) => !(i === 0 && m.role === "user" && m.content === TRIGGER)
+            );
+            setMessages(visible);
             return;
           }
         } catch {}
       }
 
-      // No prior session or empty history — show welcome from config
+      // New session — create it, then fire the hidden trigger to get the
+      // bot's real opening message (not a fake client-side string).
+      setLoading(true);
       try {
-        const r = await fetch(`${API_BASE}/${tenantId}/config`);
-        const cfg: WidgetConfig = await r.json();
-        if (cfg.welcomeMessage) {
-          setMessages([{ content: cfg.welcomeMessage, role: "assistant" }]);
+        const sessRes = await fetch(`${API_BASE}/${tenantId}/session`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        });
+        const sessData = await sessRes.json();
+        const sid = sessData.sessionId;
+        localStorage.setItem(storageKey, sid);
+        setSessionId(sid);
+
+        const msgRes = await fetch(`${API_BASE}/${tenantId}/message`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId: sid, text: TRIGGER }),
+        });
+        const msgData = await msgRes.json();
+        if (msgData.reply) {
+          setMessages([{ content: msgData.reply, role: "assistant" }]);
         }
-      } catch {}
+      } catch {
+        // Silent fail — user can still type and the session will be created then
+      } finally {
+        setLoading(false);
+      }
     };
 
     init();
