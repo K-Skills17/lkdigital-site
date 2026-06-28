@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "Captação de pacientes qualificados para consultórios e clínicas odontológicas.",
     images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
   },
+  other: {
+    "facebook-domain-verification": "vl2tn4mo9rttbeblfoujf3m4ah1irk",
+  },
   robots: {
     index: true,
     follow: true,
