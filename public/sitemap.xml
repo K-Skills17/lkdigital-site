@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://lkdigital.odo.br</loc><lastmod>2026-06-06T13:12:21.270Z</lastmod><changefreq>weekly</changefreq><priority>1</priority></url>
+<url><loc>https://lkdigital.odo.br</loc><lastmod>2026-06-28T07:24:21.789Z</lastmod><changefreq>weekly</changefreq><priority>1</priority></url>
 <url><loc>https://lkdigital.odo.br/sobre</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/solucoes</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/segmentos</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://lkdigital.odo.br/casos</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://lkdigital.odo.br/contato</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/ferramentas</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-<url><loc>https://lkdigital.odo.br/blog</loc><lastmod>2026-06-06T13:12:21.271Z</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
+<url><loc>https://lkdigital.odo.br/raio-x</loc><lastmod>2026-06-28T00:00:00Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/unicornio</loc><lastmod>2026-06-28T00:00:00Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog</loc><lastmod>2026-06-28T07:24:21.799Z</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
 <url><loc>https://lkdigital.odo.br/faq</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://lkdigital.odo.br/privacidade</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 <url><loc>https://lkdigital.odo.br/termos</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
@@ -21,6 +23,7 @@
 <url><loc>https://lkdigital.odo.br/blog/atracao-riqueza-dentista-mentalidade-crescimento</loc><lastmod>2026-05-17T10:25:57.916Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/avaliacoes-google-dentista-como-conseguir</loc><lastmod>2026-04-20T10:54:02.770Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/cadeiras-vazias-consultorio-como-resolver</loc><lastmod>2026-04-10T10:11:58.221Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/chatgpt-recomendando-dentistas-como-aparecer</loc><lastmod>2026-06-07T11:12:30.922Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/como-dentista-aparecer-primeira-pagina-google</loc><lastmod>2026-05-02T10:01:37.617Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/como-medir-resultados-marketing-dentista</loc><lastmod>2026-05-23T10:39:24.020Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/concorrente-dominando-google-como-competir</loc><lastmod>2026-04-15T10:20:48.408Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -28,6 +31,7 @@
 <url><loc>https://lkdigital.odo.br/blog/custo-por-lead-dentista-quanto-pagar</loc><lastmod>2026-05-06T11:10:55.963Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/dados-mercado-odontologico-brasil-2025</loc><lastmod>2026-05-30T10:50:27.903Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/demonstracao-resultados-dentista-marketing</loc><lastmod>2026-05-08T10:28:28.664Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/dentista-acao-supera-perfeicao</loc><lastmod>2026-06-09T12:08:35.216Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/dentista-autoridade-como-ser-referencia</loc><lastmod>2026-04-08T13:43:51.896Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/dentista-branding-marca-premium</loc><lastmod>2026-05-09T10:10:09.115Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/dentista-burnout-trabalho-demais-como-resolver</loc><lastmod>2026-04-23T10:24:24.384Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -38,7 +42,9 @@
 <url><loc>https://lkdigital.odo.br/blog/dentista-leads-nao-podem-pagar</loc><lastmod>2026-04-12T09:52:40.154Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/dentista-medo-investir-marketing-como-superar</loc><lastmod>2026-04-09T10:17:36.694Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/dentista-nao-aparece-online-como-resolver</loc><lastmod>2026-06-01T15:25:46.273Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/dentista-oportunidade-mercado-como-aproveitar</loc><lastmod>2026-06-11T12:50:22.197Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/dentista-pacientes-somem-depois-primeira-consulta</loc><lastmod>2026-05-01T10:27:08.426Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/dentista-prova-social-como-construir</loc><lastmod>2026-06-10T12:25:02.366Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/dentista-sem-desculpas-crescimento</loc><lastmod>2026-06-02T12:46:26.323Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/email-marketing-dentista-reativacao-pacientes</loc><lastmod>2026-05-24T10:45:26.972Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/escassez-urgencia-consultorio-odontologico</loc><lastmod>2026-05-12T11:24:59.914Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -67,16 +73,21 @@
 <url><loc>https://lkdigital.odo.br/blog/marketing-protese-dentaria-pacientes-idosos</loc><lastmod>2026-05-29T12:19:13.437Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/oferta-irresistivel-dentista-como-criar</loc><lastmod>2026-04-11T09:45:43.542Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/pacientes-so-querem-preco-como-lidar</loc><lastmod>2026-05-18T12:37:24.824Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/parcerias-estrategicas-dentista-indicacoes</loc><lastmod>2026-06-15T15:19:57.444Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/pensamento-sistemico-consultorio-odontologico</loc><lastmod>2026-04-18T09:54:16.433Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/perplexity-gemini-dentista-como-aparecer</loc><lastmod>2026-06-08T13:10:52.909Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/recepcao-consultorio-perdendo-pacientes</loc><lastmod>2026-04-08T13:45:34.033Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/regulamentacao-cfo-publicidade-odontologica-2025</loc><lastmod>2026-04-25T09:57:29.739Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/sazonalidade-odontologia-como-manter-faturamento</loc><lastmod>2026-06-04T11:59:11.873Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/schema-markup-dentista-seo-tecnico</loc><lastmod>2026-06-14T11:34:01.090Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/script-venda-consultorio-dentista</loc><lastmod>2026-05-13T11:33:58.031Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/seo-local-dentista-bairro-regiao</loc><lastmod>2026-06-13T11:18:25.634Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/site-consultorio-odontologico-elementos-essenciais</loc><lastmod>2026-04-19T09:52:47.137Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/tendencias-marketing-odontologico-2025</loc><lastmod>2026-05-07T11:13:14.921Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/tiktok-reels-dentista-vale-a-pena</loc><lastmod>2026-06-06T10:57:07.454Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/valor-percebido-dentista-como-cobrar-mais</loc><lastmod>2026-04-08T13:17:52.350Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/blog/whatsapp-business-dentista-converter-leads</loc><lastmod>2026-04-26T09:58:20.541Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://lkdigital.odo.br/blog/whatsapp-paciente-nao-responde-como-recuperar</loc><lastmod>2026-06-12T12:23:12.248Z</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://lkdigital.odo.br/cidades</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://lkdigital.odo.br/cidades/sao-paulo</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://lkdigital.odo.br/cidades/rio-de-janeiro</loc><lastmod>2026-06-05T12:00:00-03:00</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>

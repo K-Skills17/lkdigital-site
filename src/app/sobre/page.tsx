@@ -8,7 +8,7 @@ import Image from "next/image";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Sobre — Quem é a LK Digital",
+  title: { absolute: "A Agência de Marketing Exclusiva para Dentistas | LK Digital" },
   description:
     "Agência de marketing digital especializada em odontologia. Precisão, dados e exclusividade territorial para dentistas.",
   alternates: {

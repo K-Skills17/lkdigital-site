@@ -10,7 +10,7 @@ import {
 import { getAllListItems } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog — Marketing Digital Para Dentistas",
+  title: { absolute: "Blog: Marketing Digital para Dentistas | LK Digital" },
   description:
     "Artigos, guias e estratégias de marketing digital exclusivos para dentistas. SEO local, Google Ads, GEO, captação de pacientes e mais.",
   alternates: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Blog — Marketing Digital Para Dentistas | LK Digital",
+    title: "Blog: Marketing Digital para Dentistas | LK Digital",
     description:
       "Artigos práticos sobre marketing digital para odontologia. SEO, Google Ads, IA e captação de pacientes.",
     locale: "pt_BR",
@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
   },
 };
+
+const POSTS_PER_PAGE = 12;
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("pt-BR", {
@@ -35,14 +37,24 @@ function formatDate(iso: string) {
   });
 }
 
-export default function Blog() {
-  const posts = getAllListItems();
+export default function Blog({
+  searchParams,
+}: {
+  searchParams: { page?: string };
+}) {
+  const allPosts = getAllListItems();
+  const currentPage = Math.max(1, parseInt(searchParams.page ?? "1", 10));
+  const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+  const posts = allPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
 
   return (
     <>
       {/* SEO: Collection + Breadcrumb schemas */}
       <BlogCollectionSchema
-        posts={posts.map((p) => ({
+        posts={allPosts.slice(0, 20).map((p) => ({
           title: p.title,
           slug: p.slug,
           datePublished: p.datePublished,
@@ -60,9 +72,9 @@ export default function Blog() {
         <PageHero
           variant="editorial"
           eyebrow="Blog"
-          title="Estratégias Que Funcionam."
-          titleAccent="Para Quem Quer Crescer."
-          subtitle="Artigos práticos e aprofundados sobre marketing digital para odontologia. Sem teoria vazia — cada artigo mostra exatamente o que fazer e por quê."
+          title="Marketing Digital para Dentistas:"
+          titleAccent="Estratégias que Funcionam."
+          subtitle="Artigos práticos e aprofundados sobre SEO, Google Ads e captação de pacientes para odontologia. Sem teoria vazia — cada artigo mostra exatamente o que fazer."
           pageNumber="06"
         />
 
@@ -98,7 +110,6 @@ export default function Blog() {
                   href={`/blog/${post.slug}`}
                   className="group bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 overflow-hidden flex flex-col"
                 >
-                  {/* Placeholder image area */}
                   <div className="aspect-[16/9] bg-gradient-to-br from-accent/5 to-accent/10 flex items-center justify-center">
                     <span className="text-xs text-accent/40 uppercase tracking-[0.25em] font-medium">
                       {post.category}
@@ -125,18 +136,8 @@ export default function Blog() {
                       </span>
                       <span className="inline-flex items-center gap-1 text-sm font-medium text-accent group-hover:gap-2 transition-all">
                         Ler artigo
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={2}
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                          />
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                         </svg>
                       </span>
                     </div>
@@ -144,6 +145,41 @@ export default function Blog() {
                 </Link>
               ))}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <nav aria-label="Paginação do blog" className="mt-16 flex items-center justify-center gap-2">
+                {currentPage > 1 && (
+                  <Link
+                    href={currentPage === 2 ? "/blog" : `/blog?page=${currentPage - 1}`}
+                    className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-border/60 rounded-md hover:border-accent/40 hover:text-accent transition-colors"
+                  >
+                    ← Anterior
+                  </Link>
+                )}
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <Link
+                    key={page}
+                    href={page === 1 ? "/blog" : `/blog?page=${page}`}
+                    className={`px-4 py-2 text-sm font-medium rounded-md border transition-colors ${
+                      page === currentPage
+                        ? "bg-accent text-white border-accent"
+                        : "text-muted-foreground bg-card border-border/60 hover:border-accent/40 hover:text-accent"
+                    }`}
+                  >
+                    {page}
+                  </Link>
+                ))}
+                {currentPage < totalPages && (
+                  <Link
+                    href={`/blog?page=${currentPage + 1}`}
+                    className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-border/60 rounded-md hover:border-accent/40 hover:text-accent transition-colors"
+                  >
+                    Próxima →
+                  </Link>
+                )}
+              </nav>
+            )}
           </div>
         </section>
 

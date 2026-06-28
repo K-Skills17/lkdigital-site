@@ -13,6 +13,26 @@ import type { BlogPost } from "@/data/blog-posts";
 import { getBlogPostBySlug, getAllBlogSlugs, getRelatedPosts } from "@/lib/blog";
 import type { BlogArticle } from "@/lib/blog";
 
+// Engine-generated posts that are strong enough to index.
+// All others get noindex to protect crawl budget until content quality improves.
+const INDEXED_ENGINE_SLUGS = new Set([
+  "como-dentista-aparecer-primeira-pagina-google",
+  "google-ads-vs-seo-dentista-qual-melhor",
+  "instagram-dentista-conteudo-que-converte",
+  "dados-mercado-odontologico-brasil-2025",
+  "chatgpt-recomendando-dentistas-como-aparecer",
+  "google-maps-dentista-como-aparecer-top-3",
+  "marketing-implantes-dentarios-captar-pacientes",
+  "marketing-ortodontia-invisalign-captar-pacientes",
+  "marketing-estetica-dental-lentes-contato",
+  "landing-page-dentista-alta-conversao",
+  "whatsapp-business-dentista-converter-leads",
+  "schema-markup-dentista-seo-tecnico",
+  "seo-local-dentista-bairro-regiao",
+  "perplexity-gemini-dentista-como-aparecer",
+  "regulamentacao-cfo-publicidade-odontologica-2025",
+]);
+
 // ─── Static Params (merge initial + engine-generated) ───
 export function generateStaticParams() {
   const initialSlugs = getAllSlugs();
@@ -32,6 +52,14 @@ export async function generateMetadata({
   const enginePost = !post ? getBlogPostBySlug(slug) : null;
 
   if (!post && !enginePost) return { title: "Artigo não encontrado" };
+
+  // Noindex engine posts not in the allowlist — protects crawl budget
+  if (enginePost && !post && !INDEXED_ENGINE_SLUGS.has(slug)) {
+    return {
+      title: enginePost.seoTitle ?? enginePost.title,
+      robots: { index: false, follow: true },
+    };
+  }
 
   const title = post?.title ?? enginePost!.seoTitle ?? enginePost!.title;
   const description =
@@ -190,19 +218,17 @@ export default async function BlogPostPage({
             {/* Author Byline */}
             <div className="mt-6 flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center">
-                <span className="text-sm font-medium text-accent">LK</span>
+                <span className="text-sm font-medium text-accent">SK</span>
               </div>
               <div>
-                <p className="text-sm font-medium text-foreground">
-                  Equipe LK Digital
-                </p>
+                <Link href="/autores/stephen-domingos-komando" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
+                  Stephen Domingos Komando
+                </Link>
                 <p className="text-xs text-muted-foreground">
-                  {formatDate(safePost.datePublished)}
+                  Fundador, LK Digital &middot; {formatDate(safePost.datePublished)}
                   {safePost.dateModified !== safePost.datePublished && (
                     <>
-                      {" "}
-                      &middot; Atualizado em{" "}
-                      {formatDate(safePost.dateModified)}
+                      {" "}&middot; Atualizado em {formatDate(safePost.dateModified)}
                     </>
                   )}
                 </p>
@@ -528,19 +554,17 @@ function EnginePostPage({ article, relatedPosts = [] }: { article: BlogArticle; 
 
             <div className="mt-6 flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center">
-                <span className="text-sm font-medium text-accent">LK</span>
+                <span className="text-sm font-medium text-accent">SK</span>
               </div>
               <div>
-                <p className="text-sm font-medium text-foreground">
+                <Link href={`/autores/${article.author.slug ?? "stephen-domingos-komando"}`} className="text-sm font-medium text-foreground hover:text-accent transition-colors">
                   {article.author.name}
-                </p>
+                </Link>
                 <p className="text-xs text-muted-foreground">
-                  {formatDate(article.datePublished)}
+                  {article.author.title} &middot; {formatDate(article.datePublished)}
                   {article.dateModified !== article.datePublished && (
                     <>
-                      {" "}
-                      &middot; Atualizado em{" "}
-                      {formatDate(article.dateModified)}
+                      {" "}&middot; Atualizado em {formatDate(article.dateModified)}
                     </>
                   )}
                 </p>

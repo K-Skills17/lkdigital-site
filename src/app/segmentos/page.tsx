@@ -6,15 +6,15 @@ import Link from "next/link";
 import { ServiceSchema, BreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: { absolute: "Segmentos Atendidos | LK Digital" },
+  title: { absolute: "Marketing para Implantodontia, Ortodontia e Estética Dental | LK Digital" },
   description:
-    "Marketing digital para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental.",
+    "Marketing digital especializado para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental. Captação de pacientes qualificados por especialidade.",
   alternates: {
     canonical: "/segmentos",
   },
   openGraph: {
-    title: "Segmentos Atendidos | LK Digital",
-    description: "Marketing digital para implantodontia, ortodontia, odontopediatria, endodontia, periodontia e estética dental.",
+    title: "Marketing para Implantodontia, Ortodontia e Estética Dental | LK Digital",
+    description: "Marketing digital especializado para dentistas. Estratégia por especialidade: implantes, ortodontia, estética, odontopediatria e mais.",
     images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
   },
 };
