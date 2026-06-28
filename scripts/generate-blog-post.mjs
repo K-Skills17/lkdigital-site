@@ -2,19 +2,22 @@
 /**
  * LK Digital — Blog Post Generator
  * ─────────────────────────────────
- * Generates research-backed blog posts that read as human-written.
+ * Two-call Claude pipeline. No external APIs needed beyond Anthropic.
  *
- * Flow:
- *   1. Perplexity API → real web research with citations + stats
- *   2. Claude API     → writes the post using Stephen's voice + the research
- *   3. Saves JSON     → content/blog/[slug].json (ready for the blog engine)
+ * Call 1 — Research: Claude acts as a market research analyst.
+ *   Produces a structured brief with specific stats, market data, CFO rules,
+ *   patient behavior patterns, and competitive angles for the topic.
+ *
+ * Call 2 — Write: Claude writes in Stephen's voice using the research brief.
+ *   Strict style rules prevent AI-sounding output.
+ *
+ * Call 3 — Save: JSON lands in content/blog/[slug].json, live on site.
  *
  * Usage:
  *   node scripts/generate-blog-post.mjs "marketing para ortodontia invisalign"
  *   node scripts/generate-blog-post.mjs "SEO local dentista bairro" --keyword="seo local dentista"
  *
- * Env vars required (add to .env.local):
- *   PERPLEXITY_API_KEY=pplx-...
+ * Env vars required (.env.local):
  *   ANTHROPIC_API_KEY=sk-ant-...
  */
 
@@ -28,17 +31,14 @@ const ROOT = path.join(__dirname, "..");
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 
 // ─── Config ───────────────────────────────────────────────────────────────
-const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
-if (!PERPLEXITY_API_KEY) {
-  console.error("Missing PERPLEXITY_API_KEY in environment");
-  process.exit(1);
-}
 if (!ANTHROPIC_API_KEY) {
   console.error("Missing ANTHROPIC_API_KEY in environment");
   process.exit(1);
 }
+
+const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 
 // ─── CLI args ─────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -51,67 +51,155 @@ if (!topic) {
   process.exit(1);
 }
 
+const TODAY = new Date().toLocaleDateString("pt-BR", {
+  day: "2-digit", month: "long", year: "numeric"
+});
+
 console.log(`\n🔍 Researching: "${topic}"`);
-console.log(`🎯 Target keyword: "${targetKeyword}"\n`);
+console.log(`🎯 Keyword: "${targetKeyword}" | Date: ${TODAY}\n`);
 
-// ─── Step 1: Perplexity research ──────────────────────────────────────────
+// ─── Step 1: Research call ─────────────────────────────────────────────────
 async function research(topic) {
-  const response = await fetch("https://api.perplexity.ai/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${PERPLEXITY_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "llama-3.1-sonar-large-128k-online",
-      messages: [
-        {
-          role: "system",
-          content: `Você é um pesquisador especializado em marketing digital para dentistas no Brasil.
-Sua tarefa é encontrar dados reais, estatísticas atuais e informações verificáveis sobre o tópico solicitado.
-Foco em:
-- Dados do mercado odontológico brasileiro (CFO, IBGE, CRO estaduais)
-- Estatísticas de comportamento do consumidor ao buscar dentistas
-- Dados de Google Trends, volumes de busca reais
-- Benchmarks reais de campanhas de marketing odontológico
-- Informações sobre regulamentação CFO/CRO relevante
-- Exemplos concretos e casos do mercado brasileiro
-Cite suas fontes. Prefira dados de 2023, 2024 e 2025.`,
-        },
-        {
-          role: "user",
-          content: `Pesquise dados reais e atuais sobre: "${topic}" no contexto de marketing digital para dentistas e consultórios odontológicos no Brasil.
+  console.log("📊 Call 1/2 — Building research brief...");
 
-Quero especificamente:
-1. Estatísticas e números concretos (volume de buscas, taxas de conversão, preços médios, número de profissionais)
-2. Dados do mercado odontológico brasileiro relacionados ao tema
-3. Comportamento do paciente brasileiro ao buscar esse tipo de serviço
-4. Regulamentações do CFO ou CRO relevantes (se houver)
-5. Dados comparativos (antes/depois, com/sem estratégia, por região)
-6. Tendências recentes (2024-2025)
+  const msg = await anthropic.messages.create({
+    model: "claude-sonnet-4-6",
+    max_tokens: 3000,
+    system: `Você é um analista de mercado especializado no setor odontológico brasileiro.
+Sua função é produzir briefings de pesquisa densos, com dados específicos e acionáveis.
+Hoje é ${TODAY}.
 
-Seja específico. Cite percentuais, valores em reais, cidades, anos. Dados vagos não servem.`,
-        },
-      ],
-      max_tokens: 2000,
-      temperature: 0.2,
-      return_citations: true,
-    }),
+REGRAS:
+- Cite números reais: percentuais, valores em reais, volumes de busca, ano dos dados
+- Mencione fontes conhecidas: CFO, IBGE, CRO estaduais, Google Trends, Sebrae, ANS
+- Inclua variações regionais quando relevante (SP vs interior, Sul vs Norte)
+- Mencione regulamentações do CFO que impactam o tema (se houver)
+- Inclua comportamento real do paciente brasileiro (como busca, decide, paga)
+- Seja específico sobre preços de mercado, ROI típico, benchmarks de campanhas
+- Prefira dados de 2023, 2024 e 2025`,
+
+    messages: [{
+      role: "user",
+      content: `Produza um briefing de pesquisa completo sobre: "${topic}"
+Contexto: marketing digital para dentistas e clínicas odontológicas no Brasil.
+
+Estruture assim:
+
+## DADOS DE MERCADO
+(números, volumes, tamanho do mercado, crescimento)
+
+## COMPORTAMENTO DO PACIENTE
+(como busca, o que digita no Google, como decide, ticket médio)
+
+## DADOS COMPETITIVOS
+(quantos dentistas disputam, dificuldade de ranquear, custo por clique típico no Google Ads)
+
+## REGULAMENTAÇÃO CFO/CRO
+(o que pode e não pode fazer em marketing para este tema)
+
+## OPORTUNIDADES ESPECÍFICAS
+(o que a maioria dos dentistas não está fazendo e deveria)
+
+## DADOS DE PERFORMANCE
+(benchmarks reais: taxas de conversão, CPL, ROI típico de campanha)
+
+## TENDÊNCIAS 2024-2025
+(mudanças recentes no comportamento ou na tecnologia relevantes para este tema)
+
+Seja específico. Sem generalidades.`
+    }],
   });
 
-  if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`Perplexity error ${response.status}: ${err}`);
-  }
-
-  const data = await response.json();
-  const content = data.choices[0].message.content;
-  const citations = data.citations ?? [];
-
-  return { content, citations };
+  return msg.content[0].type === "text" ? msg.content[0].text : "";
 }
 
-// ─── Step 2: Generate slug ─────────────────────────────────────────────────
+// ─── Step 2: Writing call ──────────────────────────────────────────────────
+async function writePost(topic, keyword, researchBrief) {
+  console.log("✍️  Call 2/2 — Writing article as Stephen...");
+
+  const msg = await anthropic.messages.create({
+    model: "claude-sonnet-4-6",
+    max_tokens: 8000,
+    system: `Você é Stephen Domingos Komando, fundador da LK Digital. Você escreve artigos sobre marketing para dentistas no Brasil.
+
+SOBRE VOCÊ:
+- Fundou a LK Digital depois de ver agências genéricas destruindo consultórios com campanhas erradas
+- Fala com dentistas de igual para igual. Não condescende, não simplifica demais
+- Tem opiniões fortes e não tem medo de dizer que a maioria erra
+- Usa exemplos de casos reais (sem citar nomes): "Tive um cliente em Campinas que..."
+- Conhece as regulações do CFO de memória e cita quando relevante
+- Não gosta de promessas váguas. Prefere números concretos
+
+REGRAS ABSOLUTAS DE ESTILO:
+1. Proibido usar travessão (—) para ligar frases. Use ponto ou vírgula.
+2. Proibido começar com "No cenário atual", "Em um mundo", "Com a crescente"
+3. Proibido: "alavancar", "otimizar sua presença", "maximizar resultados", "no contexto de"
+4. Proibido: qualquer frase que pareça de relatório corporativo
+5. Frases curtas criam impacto. Use-as estrategicamente após parágrafos longos.
+6. Primeira pessoa quando for perspectiva sua: "Vi isso acontecer...", "Quando atendo..."
+7. Números específicos são obrigatórios onde existem na pesquisa. "Cerca de 70%" é melhor que "a maioria"
+8. Critique abertamente o que não funciona: "A maioria das agências faz X. Isso é um erro."
+9. Português do Brasil coloquial, não europeu. "Você" não "tu". "A gente" quando cabível.
+10. Máximo 4 linhas por parágrafo.
+
+ESTRUTURA DO ARTIGO:
+- Abertura: vai direto ao problema concreto. Sem rodeios.
+- H2s conversacionais: "Por que quase ninguém faz isso certo", "O que o Google realmente quer"
+- Dados da pesquisa integrados naturalmente com sua análise sobre eles
+- FAQ com 5 perguntas que dentistas realmente fazem (não perguntas óbvias)
+- CTA honesto e direto ao tema
+
+OUTPUT: JSON válido apenas. Sem markdown. Sem texto antes ou depois.`,
+
+    messages: [{
+      role: "user",
+      content: `Escreva um artigo completo sobre: "${topic}"
+Keyword principal a usar naturalmente: "${keyword}"
+
+BRIEFING DE PESQUISA (use esses dados no artigo):
+${researchBrief}
+
+Gere este JSON exato:
+{
+  "title": "Título direto com keyword natural (50-65 chars)",
+  "seoTitle": "Keyword primeiro no título SEO (máx 60 chars)",
+  "seoDescription": "Meta description com keyword + proposta clara (145-160 chars)",
+  "slug": "slug-em-portugues-sem-acentos",
+  "excerpt": "2-3 frases que resumem o valor real do artigo. Direto ao ponto. Sem clichê.",
+  "tldr": "Resposta direta à pergunta principal em 2-3 frases. Para leitores rápidos.",
+  "content": "HTML completo. <h2> para seções, <h3> para sub-seções, <p> para parágrafos, <ul><li> para listas. Mínimo 1800 palavras. Dados do briefing integrados com sua análise.",
+  "category": "SEO",
+  "tags": ["tag1", "tag2", "tag3", "tag4", "tag5"],
+  "keywords": ["keyword principal", "secundária 1", "secundária 2"],
+  "readingTime": 9,
+  "faqItems": [
+    {"question": "Pergunta real que dentistas fazem", "answer": "Resposta direta com dado concreto"},
+    {"question": "Segunda pergunta específica", "answer": "Segunda resposta prática"},
+    {"question": "Terceira pergunta", "answer": "Terceira resposta"},
+    {"question": "Quarta pergunta", "answer": "Quarta resposta"},
+    {"question": "Quinta pergunta", "answer": "Quinta resposta"}
+  ],
+  "author": {
+    "name": "Stephen Domingos Komando",
+    "title": "Fundador, LK Digital",
+    "bio": "Stephen Domingos Komando é fundador da LK Digital, agência especializada exclusivamente em marketing odontológico. Trabalha com dentistas em todo o Brasil ajudando a lotar agendas e construir marcas premium.",
+    "slug": "stephen-domingos-komando"
+  },
+  "ctaHeading": "CTA título relacionado ao tema",
+  "ctaDescription": "O que a LK Digital faz especificamente para este problema",
+  "ctaButton": "Texto do botão"
+}
+
+Apenas JSON. Nada mais.`
+    }],
+  });
+
+  const raw = msg.content[0].type === "text" ? msg.content[0].text : "";
+  const clean = raw.replace(/^```(?:json)?\n?/m, "").replace(/\n?```$/m, "").trim();
+  return JSON.parse(clean);
+}
+
+// ─── Step 3: Save ──────────────────────────────────────────────────────────
 function slugify(text) {
   return text
     .toLowerCase()
@@ -124,166 +212,38 @@ function slugify(text) {
     .substring(0, 80);
 }
 
-// ─── Step 3: Claude writing ────────────────────────────────────────────────
-async function writePost(topic, keyword, researchData) {
-  const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
-
-  const systemPrompt = `Você é Stephen Domingos Komando, fundador da LK Digital, agência de marketing digital especializada exclusivamente em dentistas no Brasil.
-
-QUEM É STEPHEN:
-- Trabalha exclusivamente com dentistas há anos
-- Tem opiniões fortes baseadas em experiência real com consultórios
-- Fala de igual para igual com o dentista — sem condescendência
-- É direto, honesto, às vezes provocativo ("a maioria das agências mente sobre isso")
-- Usa exemplos concretos de casos reais (sem citar nomes de clientes)
-- Conhece as regulações do CFO de cabeça
-- Não tem medo de criticar o que não funciona
-
-ESTILO DE ESCRITA (REGRAS ABSOLUTAS):
-1. NUNCA use travessão (—) para conectar frases. Use ponto final ou vírgula.
-2. NUNCA comece com "No cenário atual", "Em um mundo", "Com a evolução de"
-3. NUNCA use: "delve", "harness", "tapestry", "multifaceted", "dive into", "in conclusion", "in summary"
-4. NUNCA use linguagem corporativa vazia: "alavancar sinergias", "otimizar sua presença", "maximizar resultados"
-5. Use frases curtas quando quiser impacto. Use frases mais longas quando estiver explicando algo técnico.
-6. Alterne ritmo: uma frase curta após um parágrafo longo. Isso soa humano.
-7. Escreva na primeira pessoa quando der perspectiva pessoal: "Vi isso acontecer em dezenas de consultórios."
-8. Seja específico: "34% dos pacientes" é melhor que "muitos pacientes".
-9. Inclua os dados da pesquisa com naturalidade no texto, citando a fonte.
-10. Adicione uma opinião própria sobre cada dado: o que isso significa na prática.
-11. Use linguagem conversacional do português brasileiro — não europeu.
-12. Evite listas com 10 itens. Prefira 3-5 itens com explicação real de cada um.
-
-FORMATO DO ARTIGO:
-- Abertura que vai direto ao problema real (sem introdução genérica)
-- H2s que soam como o que alguém diria em conversa ("Por que 90% dos dentistas erra aqui")
-- Parágrafos de 3-5 linhas no máximo
-- Dados de pesquisa integrados naturalmente com análise
-- FAQ com perguntas que pacientes/dentistas realmente fazem
-- CTA final direto e honesto
-
-OUTPUT: Retorne APENAS um JSON válido sem markdown, sem blocos de código. JSON com esta estrutura exata.`;
-
-  const userPrompt = `Escreva um artigo completo sobre: "${topic}"
-Keyword principal: "${keyword}"
-
-DADOS DE PESQUISA REAIS (use-os no artigo):
-${researchData.content}
-
-${researchData.citations.length > 0 ? `FONTES VERIFICADAS:\n${researchData.citations.slice(0, 5).map((c, i) => `${i + 1}. ${c}`).join("\n")}` : ""}
-
-Gere um JSON com esta estrutura exata:
-{
-  "title": "Título do artigo (direto, com keyword natural, 50-65 chars)",
-  "seoTitle": "Título SEO otimizado (keyword primeiro, até 60 chars)",
-  "seoDescription": "Meta description com keyword e proposta de valor, 145-160 chars",
-  "slug": "slug-do-artigo-em-portugues",
-  "excerpt": "Parágrafo de abertura que resume o valor do artigo (2-3 frases, direto ao ponto, sem clichê)",
-  "tldr": "Resumo em 2-3 frases para box de resposta rápida — como se fosse a resposta direta a uma pergunta",
-  "content": "HTML completo do artigo. Use <h2> para seções principais, <h3> para sub-seções, <p> para parágrafos, <ul>/<li> para listas quando necessário. Mínimo 1800 palavras. Inclua os dados de pesquisa com análise real.",
-  "category": "SEO | Google Ads | Gestão | Conteúdo | Marca | Estratégia | Regulamentação | Especialidade",
-  "tags": ["tag1", "tag2", "tag3", "tag4", "tag5"],
-  "keywords": ["keyword principal", "keyword secundária 1", "keyword secundária 2"],
-  "readingTime": 8,
-  "faqItems": [
-    {
-      "question": "Pergunta real que dentistas fazem sobre esse tema",
-      "answer": "Resposta direta e prática, 2-4 frases, com dado concreto se possível"
-    },
-    {
-      "question": "Segunda pergunta",
-      "answer": "Segunda resposta"
-    },
-    {
-      "question": "Terceira pergunta",
-      "answer": "Terceira resposta"
-    },
-    {
-      "question": "Quarta pergunta",
-      "answer": "Quarta resposta"
-    },
-    {
-      "question": "Quinta pergunta",
-      "answer": "Quinta resposta"
-    }
-  ],
-  "author": {
-    "name": "Stephen Domingos Komando",
-    "title": "Fundador, LK Digital",
-    "bio": "Stephen Domingos Komando é fundador da LK Digital, agência especializada exclusivamente em marketing odontológico. Trabalha com dentistas em todo o Brasil ajudando a lotar agendas e construir marcas premium.",
-    "slug": "stephen-domingos-komando"
-  },
-  "ctaHeading": "Título do CTA relacionado ao tema do artigo",
-  "ctaDescription": "Descrição do CTA — o que a LK Digital faz especificamente relacionado a este tema",
-  "ctaButton": "Texto do botão CTA"
-}
-
-Retorne SOMENTE o JSON. Nenhum texto antes ou depois. Nenhum markdown. Apenas JSON válido.`;
-
-  console.log("✍️  Writing post with Claude...");
-
-  const message = await anthropic.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 8000,
-    messages: [{ role: "user", content: userPrompt }],
-    system: systemPrompt,
-  });
-
-  const raw = message.content[0].type === "text" ? message.content[0].text : "";
-
-  // Strip markdown code fences if present
-  const clean = raw.replace(/^```(?:json)?\n?/m, "").replace(/\n?```$/m, "").trim();
-
-  return JSON.parse(clean);
-}
-
-// ─── Step 4: Save ──────────────────────────────────────────────────────────
 function savePost(post) {
   const now = new Date().toISOString();
   const slug = post.slug || slugify(post.title);
 
-  const final = {
-    ...post,
-    slug,
-    pillar: "P1",
-    datePublished: now,
-    dateModified: now,
-  };
+  const final = { ...post, slug, pillar: "P1", datePublished: now, dateModified: now };
 
-  if (!fs.existsSync(CONTENT_DIR)) {
-    fs.mkdirSync(CONTENT_DIR, { recursive: true });
-  }
+  if (!fs.existsSync(CONTENT_DIR)) fs.mkdirSync(CONTENT_DIR, { recursive: true });
 
   const filepath = path.join(CONTENT_DIR, `${slug}.json`);
   fs.writeFileSync(filepath, JSON.stringify(final, null, 2), "utf8");
-
   return { filepath, slug };
 }
 
 // ─── Main ──────────────────────────────────────────────────────────────────
 async function main() {
   try {
-    // 1. Research
-    console.log("📡 Fetching real data from Perplexity...");
-    const researchData = await research(topic);
-    console.log(`✅ Research complete. Found ${researchData.citations.length} sources.\n`);
+    const researchBrief = await research(topic);
 
-    // Preview research
-    console.log("─── RESEARCH PREVIEW ───────────────────────────────────────");
-    console.log(researchData.content.substring(0, 500) + "...\n");
+    console.log("\n─── RESEARCH PREVIEW ─────────────────────────────────────");
+    console.log(researchBrief.substring(0, 600) + "...\n");
 
-    // 2. Write
-    const post = await writePost(topic, targetKeyword, researchData);
-    console.log(`✅ Article written: "${post.title}"\n`);
+    const post = await writePost(topic, targetKeyword, researchBrief);
+    console.log(`\n✅ Article: "${post.title}"`);
 
-    // 3. Save
-    const { filepath, slug } = savePost(post);
-    console.log(`✅ Saved to: content/blog/${slug}.json`);
-    console.log(`\n🎯 View at: https://lkdigital.odo.br/blog/${slug}`);
-    console.log(`📝 Remember to add "${slug}" to INDEXED_ENGINE_SLUGS in blog/[slug]/page.tsx when ready to index.\n`);
+    const { slug } = savePost(post);
+    console.log(`✅ Saved:   content/blog/${slug}.json`);
+    console.log(`\n🌐 URL:     https://lkdigital.odo.br/blog/${slug}`);
+    console.log(`📋 Next:    add "${slug}" to INDEXED_ENGINE_SLUGS in src/app/blog/[slug]/page.tsx\n`);
   } catch (err) {
     console.error("\n❌ Error:", err.message);
     if (err.message.includes("JSON")) {
-      console.error("The AI returned invalid JSON. Try running again.");
+      console.error("→ AI returned invalid JSON. Run again — it's usually a one-time fluke.");
     }
     process.exit(1);
   }
