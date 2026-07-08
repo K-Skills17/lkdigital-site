@@ -113,8 +113,8 @@ export default function ResultadoPage() {
       let disp: "lk" | "marcos" | "both" | "optimize";
       if (route === "dual") {
         const resolved = resolveDualRoute(
-          parsed.domainScores.visibilidade.pct,
-          parsed.domainScores.operacao.pct,
+          { score: parsed.domainScores.visibilidade.pct, pct: parsed.domainScores.visibilidade.pct, gap: parsed.domainScores.visibilidade.gap, label: "" },
+          { score: parsed.domainScores.operacao.pct, pct: parsed.domainScores.operacao.pct, gap: parsed.domainScores.operacao.gap, label: "" },
           raioXConfig.routing.dualRouteStrategy
         );
         disp = resolved;
