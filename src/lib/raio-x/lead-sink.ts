@@ -31,7 +31,9 @@ export async function sinkLead(payload: LeadPayload): Promise<SinkResult> {
       email: payload.email,
       answers: payload.answers,
       vis_score: payload.vis_score,
+      vis_gap: payload.vis_gap,
       op_score: payload.op_score,
+      op_gap: payload.op_gap,
       route: payload.route,
       consent: true,
     })
