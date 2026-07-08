@@ -28,12 +28,12 @@ function DomainBar({ label, pct, gap }: { label: string; pct: number; gap: boole
     <div className="mb-6">
       <div className="flex justify-between mb-1 text-sm">
         <span className="text-[#EDE8DF] font-medium">{label}</span>
-        <span style={{ color }} className="font-semibold">{Math.round(pct * 100)}%</span>
+        <span style={{ color }} className="font-semibold">{pct}%</span>
       </div>
       <div className="h-2 rounded-full bg-[#2a2a2a] overflow-hidden">
         <div
           className="h-full rounded-full transition-all duration-700"
-          style={{ width: `${Math.round(pct * 100)}%`, backgroundColor: color }}
+          style={{ width: `${pct}%`, backgroundColor: color }}
         />
       </div>
       <p className="mt-1 text-xs" style={{ color }}>{statusText}</p>
@@ -76,20 +76,20 @@ function MarcosCta({ label = "Falar com a Biodonte" }: { label?: string }) {
 // --- CFO-271 compliant copy blocks ---
 const COPY: Record<string, { headline: string; body: string }> = {
   lk: {
-    headline: "Seu maior potencial estÃ¡ na visibilidade",
-    body: "A anÃ¡lise aponta oportunidades de melhoria em Visibilidade & AquisiÃ§Ã£o. Nossa equipe pode apresentar um plano de aÃ§Ãµes para fortalecer a presenÃ§a digital da sua clÃ­nica.",
+    headline: "Seu maior potencial está na visibilidade",
+    body: "A análise aponta oportunidades de melhoria em Visibilidade & Aquisição. Nossa equipe pode apresentar um plano de ações para fortalecer a presença digital da sua clínica.",
   },
   marcos: {
-    headline: "Seu maior potencial estÃ¡ na conversÃ£o",
-    body: "A anÃ¡lise aponta oportunidades de melhoria em ConversÃ£o & OperaÃ§Ã£o. A equipe da Biodonte pode apresentar um plano de aÃ§Ãµes para elevar a eficiÃªncia operacional da sua clÃ­nica.",
+    headline: "Seu maior potencial está na conversão",
+    body: "A análise aponta oportunidades de melhoria em Conversão & Operação. A equipe da Biodonte pode apresentar um plano de ações para elevar a eficiência operacional da sua clínica.",
   },
   both: {
-    headline: "Oportunidades identificadas em duas Ã¡reas",
-    body: "A anÃ¡lise identificou oportunidades tanto em Visibilidade & AquisiÃ§Ã£o quanto em ConversÃ£o & OperaÃ§Ã£o. Abaixo, vocÃª encontra um contato especializado para cada frente.",
+    headline: "Oportunidades identificadas em duas áreas",
+    body: "A análise identificou oportunidades tanto em Visibilidade & Aquisição quanto em Conversão & Operação. Abaixo, você encontra um contato especializado para cada frente.",
   },
   optimize: {
-    headline: "Sua clÃ­nica estÃ¡ bem posicionada",
-    body: "A anÃ¡lise nÃ£o identificou lacunas crÃ­ticas nos dois domÃ­nios avaliados. Se quiser explorar um diagnÃ³stico mais aprofundado, nossa equipe estÃ¡ Ã  disposiÃ§Ã£o.",
+    headline: "Sua clínica está bem posicionada",
+    body: "A análise não identificou lacunas críticas nos dois domínios avaliados. Se quiser explorar um diagnóstico mais aprofundado, nossa equipe está à disposição.",
   },
 };
 
@@ -129,8 +129,8 @@ export default function ResultadoPage() {
         window.gtag("event", "raio_x_results_view", {
           route,
           display: disp,
-          vis_pct: Math.round(parsed.domainScores.visibilidade.pct * 100),
-          op_pct: Math.round(parsed.domainScores.operacao.pct * 100),
+          vis_pct: parsed.domainScores.visibilidade.pct,
+          op_pct: parsed.domainScores.operacao.pct,
         });
       }
     } catch {
@@ -154,7 +154,7 @@ export default function ResultadoPage() {
       <div className="max-w-xl mx-auto">
         <div className="text-center mb-10">
           <p className="text-[#C4963A] text-sm font-medium uppercase tracking-widest mb-3">
-            MÃ©todo ClÃ­nica UnicÃ³rnio&#x2122;
+            Método Clínica Unicórnio&#x2122;
           </p>
           <h1 className="font-display text-3xl md:text-4xl font-semibold leading-tight mb-4">
             {copy.headline}
@@ -164,15 +164,15 @@ export default function ResultadoPage() {
 
         <div className="bg-[#1a1a1a] rounded-xl p-6 mb-8 border border-[#2a2a2a]">
           <h2 className="text-sm font-semibold uppercase tracking-widest text-[#6E6A63] mb-4">
-            Seu diagnÃ³stico
+            Seu diagnóstico
           </h2>
           <DomainBar
-            label="Visibilidade & AquisiÃ§Ã£o"
+            label="Visibilidade & Aquisição"
             pct={visibilidade.pct}
             gap={visibilidade.gap}
           />
           <DomainBar
-            label="ConversÃ£o & OperaÃ§Ã£o"
+            label="Conversão & Operação"
             pct={operacao.pct}
             gap={operacao.gap}
           />
@@ -183,18 +183,18 @@ export default function ResultadoPage() {
             <LkCta label={display === "optimize" ? "Conversar com a LK Digital" : "Quero melhorar minha visibilidade"} />
           )}
           {display === "marcos" && (
-            <MarcosCta label="Quero melhorar minha conversÃ£o" />
+            <MarcosCta label="Quero melhorar minha conversão" />
           )}
           {display === "both" && (
             <>
               <LkCta label="Quero melhorar minha visibilidade" />
-              <MarcosCta label="Quero melhorar minha conversÃ£o" />
+              <MarcosCta label="Quero melhorar minha conversão" />
             </>
           )}
         </div>
 
         <p className="mt-8 text-center text-xs text-[#6E6A63]">
-          Este diagnÃ³stico Ã© baseado nas suas respostas e nÃ£o constitui garantia de resultados.{" "}
+          Este diagnóstico Ã© baseado nas suas respostas e nÃ£o constitui garantia de resultados.{" "}
           <Link href="/raio-x/privacidade" className="underline hover:text-[#C4963A]">
             PolÃ­tica de Privacidade
           </Link>
