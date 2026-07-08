@@ -44,15 +44,20 @@ export async function sinkLead(payload: LeadPayload): Promise<SinkResult> {
 
   const id = (data as { id: string }).id;
 
-  void notifyKomando(id, payload).catch((e) =>
-    console.error("[raio-x/lead-sink] komando notify error:", e)
-  );
-
+  // Await before returning -- Vercel serverless kills pending promises on response
+  const tasks = [
+    notifyKomando(id, payload).catch((e) =>
+      console.error("[raio-x/lead-sink] komando notify error:", e)
+    ),
+  ];
   if (payload.route === "marcos" || payload.route === "dual") {
-    void notifyMarcos(id, payload).catch((e) =>
-      console.error("[raio-x/lead-sink] marcos notify error:", e)
+    tasks.push(
+      notifyMarcos(id, payload).catch((e) =>
+        console.error("[raio-x/lead-sink] marcos notify error:", e)
+      )
     );
   }
+  await Promise.all(tasks);
 
   return { id };
 }
