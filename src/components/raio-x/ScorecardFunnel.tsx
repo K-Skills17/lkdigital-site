@@ -40,7 +40,7 @@ const scale = raioXConfig.scale;
 const TOTAL = questions.length; // 12
 
 function formatPhone(v: string): string {
-  const d = v.replace(/D/g, "").slice(0, 11);
+  const d = v.replace(/\D/g, "").slice(0, 11);
   if (d.length <= 2) return d;
   if (d.length <= 7) return "(" + d.slice(0, 2) + ") " + d.slice(2);
   return "(" + d.slice(0, 2) + ") " + d.slice(2, 7) + "-" + d.slice(7);
@@ -404,7 +404,7 @@ export default function ScorecardFunnel() {
       const errs: typeof errors = {};
       if (form.name.trim().length < 2) errs.name = "Nome é obrigatório";
       if (form.clinic_name.trim().length < 2) errs.clinic_name = "Nome da clínica é obrigatório";
-      const waDigits = form.whatsapp.replace(/D/g, "");
+      const waDigits = form.whatsapp.replace(/\D/g, "");
       const hasWa = waDigits.length >= 10 && waDigits.length <= 11;
       const hasEmail = /^[^s@]+@[^s@]+.[^s@]+$/.test(form.email.trim());
       if (!hasWa && !hasEmail) {
