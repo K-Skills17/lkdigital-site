@@ -406,7 +406,7 @@ export default function ScorecardFunnel() {
       if (form.clinic_name.trim().length < 2) errs.clinic_name = "Nome da clínica é obrigatório";
       const waDigits = form.whatsapp.replace(/\D/g, "");
       const hasWa = waDigits.length >= 10 && waDigits.length <= 11;
-      const hasEmail = /^[^s@]+@[^s@]+.[^s@]+$/.test(form.email.trim());
+      const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
       if (!hasWa && !hasEmail) {
         errs.whatsapp = "Informe WhatsApp ou e-mail para receber o resultado";
       } else if (form.whatsapp.trim() && !hasWa) {

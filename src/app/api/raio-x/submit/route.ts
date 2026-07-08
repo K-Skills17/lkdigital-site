@@ -51,32 +51,41 @@ export async function POST(request: Request) {
   // Score
   const { visibilidade, operacao, route } = computeScores(answers, raioXConfig);
 
-  // Persist + notify (non-blocking for email)
-  try {
-    const { id } = await sinkLead({
-      name,
-      clinic_name,
-      whatsapp: whatsapp?.trim() || null,
-      email: email?.trim() || null,
-      answers: questionIds.map((id) => answers[id] ?? 0),
-      vis_score: visibilidade.score,
-      vis_gap: visibilidade.gap,
-      op_score: operacao.score,
-      op_gap: operacao.gap,
-      route,
-      consent: true,
-    });
+  // Persist + notify (non-blocking for notifications)
+  // If Supabase is not configured (e.g. during testing), skip persistence and return scores.
+  const supabaseReady = !!(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+  let id = "local-" + Date.now();
 
-    return NextResponse.json({
-      id,
-      route,
-      domainScores: {
-        visibilidade: { pct: visibilidade.pct, gap: visibilidade.gap },
-        operacao: { pct: operacao.pct, gap: operacao.gap },
-      },
-    });
-  } catch (err) {
-    console.error("[raio-x/submit]", err);
-    return NextResponse.json({ error: "Erro ao salvar. Tente novamente." }, { status: 500 });
+  if (supabaseReady) {
+    try {
+      const result = await sinkLead({
+        name,
+        clinic_name,
+        whatsapp: whatsapp?.trim() || null,
+        email: email?.trim() || null,
+        answers: questionIds.map((qid) => answers[qid] ?? 0),
+        vis_score: visibilidade.score,
+        vis_gap: visibilidade.gap,
+        op_score: operacao.score,
+        op_gap: operacao.gap,
+        route,
+        consent: true,
+      });
+      id = result.id;
+    } catch (err) {
+      console.error("[raio-x/submit]", err);
+      return NextResponse.json({ error: "Erro ao salvar. Tente novamente." }, { status: 500 });
+    }
+  } else {
+    console.warn("[raio-x/submit] Supabase not configured — skipping persistence");
   }
+
+  return NextResponse.json({
+    id,
+    route,
+    domainScores: {
+      visibilidade: { pct: visibilidade.pct, gap: visibilidade.gap },
+      operacao: { pct: operacao.pct, gap: operacao.gap },
+    },
+  });
 }
