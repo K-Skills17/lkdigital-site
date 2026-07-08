@@ -10,7 +10,9 @@
     "build": "next build && next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "blog:new": "node scripts/generate-blog-post.mjs"
+    "blog:new": "node scripts/generate-blog-post.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
@@ -34,6 +36,8 @@
     "eslint-config-next": "14.2.35",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.0.0",
+    "@vitest/coverage-v8": "^2.0.0"
   }
 }

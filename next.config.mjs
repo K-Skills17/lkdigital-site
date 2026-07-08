@@ -9,7 +9,13 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Legacy /insights → /blog redirects
+      // RAIO-X alias — /diagnostico → /raio-x
+      {
+        source: "/diagnostico",
+        destination: "/raio-x",
+        permanent: false,
+      },
+            // Legacy /insights → /blog redirects
       {
         source: "/insights",
         destination: "/blog",
