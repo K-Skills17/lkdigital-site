@@ -1,5 +1,11 @@
 "use client";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -38,8 +44,8 @@ function DomainBar({ label, pct, gap }: { label: string; pct: number; gap: boole
 function LkCta({ label = "Falar com a LK Digital" }: { label?: string }) {
   const { lkBookingUrl } = raioXConfig.routing;
   function handleClick() {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "raio_x_cta_click", { cta: "lk" });
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "raio_x_cta_click", { cta: "lk" });
     }
   }
   return (
@@ -55,8 +61,8 @@ function MarcosCta({ label = "Falar com a Biodonte" }: { label?: string }) {
   const { marcosBookingUrl, marcosWaNumber } = raioXConfig.routing;
   const href = marcosBookingUrl ?? `https://wa.me/${marcosWaNumber}`;
   function handleClick() {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "raio_x_cta_click", { cta: "marcos" });
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "raio_x_cta_click", { cta: "marcos" });
     }
   }
   return (
@@ -119,8 +125,8 @@ export default function ResultadoPage() {
       }
       setDisplay(disp);
 
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "raio_x_results_view", {
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "raio_x_results_view", {
           route,
           display: disp,
           vis_pct: Math.round(parsed.domainScores.visibilidade.pct * 100),
