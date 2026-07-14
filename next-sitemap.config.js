@@ -28,17 +28,16 @@ function getEngineBlogPages() {
 
 // ─── Static pages (non-blog) ───
 const staticPages = [
-  { loc: "/", changefreq: "weekly", priority: 1.0, lastmod: new Date().toISOString() },
+  { loc: "/", changefreq: "weekly", priority: 1.0, lastmod: "2026-07-14T12:00:00-03:00" },
   { loc: "/sobre", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/solucoes", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/segmentos", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/casos", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/contato", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/ferramentas", changefreq: "monthly", priority: 0.9, lastmod: "2026-06-05T12:00:00-03:00" },
-  { loc: "/blog", changefreq: "daily", priority: 0.9, lastmod: new Date().toISOString() },
+  { loc: "/blog", changefreq: "daily", priority: 0.9, lastmod: "2026-07-14T12:00:00-03:00" },
   { loc: "/faq", changefreq: "monthly", priority: 0.6, lastmod: "2026-06-05T12:00:00-03:00" },
-  { loc: "/privacidade", changefreq: "yearly", priority: 0.3, lastmod: "2026-06-05T12:00:00-03:00" },
-  { loc: "/termos", changefreq: "yearly", priority: 0.3, lastmod: "2026-06-05T12:00:00-03:00" },
+  // privacidade and termos are noindex — excluded from sitemap
 ];
 
 // ─── Static blog posts (initial 6, before engine existed) ───
@@ -74,7 +73,7 @@ module.exports = {
   robotsTxtOptions: {
     additionalSitemaps: [],
     policies: [
-      { userAgent: "*", allow: "/", disallow: ["/api/", "/_next/"] },
+      { userAgent: "*", allow: "/", disallow: ["/api/", "/_next/", "/raio-x/resultado", "/raio-x/privacidade", "/demo", "/unicornio"] },
       { userAgent: "GPTBot", allow: "/" },
       { userAgent: "Google-Extended", allow: "/" },
       { userAgent: "PerplexityBot", allow: "/" },

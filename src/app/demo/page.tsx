@@ -1,4 +1,10 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Demonstração — Assistente de Agendamento para Dentistas | LK Digital",
+  robots: { index: false, follow: false },
+};
 import { LogoIcon } from "@/components/ui/Logo";
 import DemoChatWidget from "@/components/DemoChatWidget";
 

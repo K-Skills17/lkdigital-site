@@ -24,7 +24,7 @@ export default function SocialProof() {
           {proofs.map((proof, i) => (
             <div
               key={i}
-              className="social-proof-card flex flex-col gap-3 opacity-0"
+              className="social-proof-card flex flex-col gap-3"
             >
               <p className="text-sm text-foreground/80 italic leading-relaxed">
                 &ldquo;{proof.quote}&rdquo;

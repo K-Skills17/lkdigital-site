@@ -76,7 +76,7 @@ export default function Pillars() {
               key={i}
               className={`pillar-card group relative p-5 sm:p-8 lg:p-10 cursor-default border-b border-border/60 ${
                 i < 2 ? "md:border-r" : ""
-              } transition-colors duration-300 opacity-0`}
+              } transition-colors duration-300`}
             >
               {/* Top accent line — expands on hover */}
               <div className="absolute top-0 left-0 h-[2px] w-0 bg-accent group-hover:w-full transition-all duration-500" />

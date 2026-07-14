@@ -8,12 +8,7 @@ export default function ScrollAnimations() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    if (prefersReduced) {
-      document.querySelectorAll(".opacity-0").forEach((el) => {
-        (el as HTMLElement).style.opacity = "1";
-      });
-      return;
-    }
+    if (prefersReduced) return;
 
     // Hero elements are now CSS-animated (animate-hero-fade-in) — no JS needed
 
@@ -56,83 +51,99 @@ export default function ScrollAnimations() {
         );
 
         revealElements.forEach((el) => {
-          gsap.set(el, { y: 20 });
-          gsap.to(el, {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          });
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
         });
 
         // Pillar asymmetric (only on desktop)
         if (!isMobile) {
           document.querySelectorAll(".pillar-card").forEach((card, i) => {
             const xStart = i === 0 ? -30 : i === 2 ? 30 : 0;
-            gsap.set(card, { x: xStart });
-            gsap.to(card, {
-              x: 0,
-              duration: 0.6,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 80%",
-                toggleActions: "play none none none",
-              },
-            });
+            gsap.fromTo(
+              card,
+              { x: xStart },
+              {
+                x: 0,
+                duration: 0.6,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top 80%",
+                  toggleActions: "play none none none",
+                },
+              }
+            );
           });
         }
 
         // Manifesto
         const manifestoQuote = document.querySelector(".manifesto-quote");
         if (manifestoQuote) {
-          gsap.set(manifestoQuote, { scale: 0.8 });
-          gsap.to(manifestoQuote, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.6,
-            ease: "back.out(1.4)",
-            scrollTrigger: {
-              trigger: manifestoQuote,
-              start: "top 75%",
-              toggleActions: "play none none none",
-            },
-          });
+          gsap.fromTo(
+            manifestoQuote,
+            { opacity: 0, scale: 0.8 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.6,
+              ease: "back.out(1.4)",
+              scrollTrigger: {
+                trigger: manifestoQuote,
+                start: "top 75%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
         }
 
         const manifestoText = document.querySelector(".manifesto-text");
         if (manifestoText) {
-          gsap.to(manifestoText, {
-            opacity: 1,
-            duration: 0.7,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: manifestoText,
-              start: "top 75%",
-              toggleActions: "play none none none",
-            },
-          });
+          gsap.fromTo(
+            manifestoText,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              duration: 0.7,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: manifestoText,
+                start: "top 75%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
         }
 
         const manifestoTrilogy = document.querySelector(".manifesto-trilogy");
         if (manifestoTrilogy) {
-          gsap.set(manifestoTrilogy, { y: 16 });
-          gsap.to(manifestoTrilogy, {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: manifestoTrilogy,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          });
+          gsap.fromTo(
+            manifestoTrilogy,
+            { opacity: 0, y: 16 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: manifestoTrilogy,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
         }
 
         // Hero canvas fade — only on desktop (no scrub overhead on mobile)

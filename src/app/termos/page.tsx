@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Termos de Uso e Condições",
   description:
     "Termos de uso do site da LK Digital. Condições para utilização dos nossos serviços de marketing digital para dentistas.",
+  robots: { index: false, follow: false },
   alternates: {
     canonical: "/termos",
   },

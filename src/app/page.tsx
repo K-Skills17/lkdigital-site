@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -14,6 +15,25 @@ import CTAFinal from "@/components/sections/CTAFinal";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import { OrganizationSchema, WebSiteSchema, FAQSchema } from "@/components/StructuredData";
 
+
+export const metadata: Metadata = {
+  title: "Agência de Marketing para Dentistas | LK Digital",
+  description:
+    "Especialistas em marketing odontológico. Enchemos a agenda de dentistas e clínicas com pacientes qualificados via Google, Instagram e IA. Exclusividade por região.",
+  alternates: {
+    canonical: "https://lkdigital.odo.br",
+  },
+  openGraph: {
+    title: "LK Digital — Marketing que Enche a Agenda do Dentista",
+    description:
+      "Especialistas em marketing odontológico. Enchemos a agenda de dentistas e clínicas com pacientes qualificados via Google, Instagram e IA. Exclusividade por região.",
+    url: "https://lkdigital.odo.br",
+    siteName: "LK Digital",
+    locale: "pt_BR",
+    type: "website",
+    images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
+  },
+};
 
 const homeFaqs = [
   { question: "Quanto tempo leva para ver os primeiros pacientes?", answer: "A maioria dos nossos clientes dentistas começa a receber pacientes qualificados nas primeiras 2 a 4 semanas após a ativação." },

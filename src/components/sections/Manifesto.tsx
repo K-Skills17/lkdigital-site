@@ -3,11 +3,11 @@ export default function Manifesto() {
     <section className="py-24 md:py-32 relative overflow-hidden">
       <div className="max-w-prose mx-auto px-4 sm:px-6 text-center">
         {/* Decorative quotes */}
-        <span className="manifesto-quote block font-display text-7xl md:text-8xl text-accent/10 leading-none mb-4 opacity-0">
+        <span className="manifesto-quote block font-display text-7xl md:text-8xl text-accent/10 leading-none mb-4">
           &ldquo;
         </span>
 
-        <blockquote className="manifesto-text opacity-0">
+        <blockquote className="manifesto-text">
           <p className="font-display text-display-sm md:text-display-md text-foreground leading-snug text-balance mb-8">
             Marketing de precisão não é sobre fazer mais.
             <br className="hidden md:block" />
@@ -20,7 +20,7 @@ export default function Manifesto() {
         <div className="w-12 h-px bg-accent/40 mx-auto mb-8" />
 
         {/* Philosophy trilogy */}
-        <div className="manifesto-trilogy flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 opacity-0">
+        <div className="manifesto-trilogy flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
           {[
             { label: "Precisão", desc: "sobre volume" },
             { label: "Dados", desc: "sobre intuição" },

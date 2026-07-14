@@ -59,7 +59,7 @@ export default function Problem() {
           {painPoints.map((point, i) => (
             <div
               key={i}
-              className="problem-card flex items-start gap-4 p-6 bg-muted border-l-2 border-accent/30 hover:border-accent transition-colors duration-300 opacity-0"
+              className="problem-card flex items-start gap-4 p-6 bg-muted border-l-2 border-accent/30 hover:border-accent transition-colors duration-300"
             >
               <div className="flex-shrink-0 w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center">
                 {point.icon}

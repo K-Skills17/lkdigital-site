@@ -42,7 +42,7 @@ export default function HowItWorks() {
             {steps.map((step, i) => (
               <div
                 key={i}
-                className={`how-step relative flex flex-col md:flex-row items-center gap-8 opacity-0 ${
+                className={`how-step relative flex flex-col md:flex-row items-center gap-8 ${
                   i % 2 === 1 ? "md:flex-row-reverse" : ""
                 }`}
               >

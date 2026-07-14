@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description:
     "Responda 12 perguntas e descubra os pontos de melhoria da sua clínica odontológica em Visibilidade & Aquisição e Conversão & Operação. Gratuito, sem compromisso.",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://lkdigital.odo.br/raio-x",
+  },
   openGraph: {
     title: "RAIO-X da Clínica | Diagnóstico gratuito em 3 minutos",
     description:

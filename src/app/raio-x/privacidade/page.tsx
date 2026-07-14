@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Política de Privacidade — Raio-X Digital | LK Digital",
   description: "Política de privacidade do Raio-X Digital 2026, em conformidade com a LGPD.",
+  robots: { index: false, follow: false },
 };
 
 export default function PrivacidadePage() {

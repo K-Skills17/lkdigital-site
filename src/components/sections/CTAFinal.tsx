@@ -122,7 +122,7 @@ export default function CTAFinal() {
           </div>
 
           {/* Right — Form */}
-          <div className="cta-form bg-card rounded-xl border border-border/60 p-6 md:p-8 shadow-lg shadow-black/5 opacity-0">
+          <div className="cta-form bg-card rounded-xl border border-border/60 p-6 md:p-8 shadow-lg shadow-black/5">
             {formState === "success" ? (
               <div className="text-center py-8">
                 <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4">
