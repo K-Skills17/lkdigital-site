@@ -83,7 +83,7 @@ export default function CTAFinal() {
                 Prefere falar direto?
               </p>
               <a
-                href="https://wa.me/5511952823271?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20diagn%C3%B3stico%20gratuito%20para%20meu%20consult%C3%B3rio."
+                href="https://wa.me/5511946851028?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20diagn%C3%B3stico%20gratuito%20para%20meu%20consult%C3%B3rio."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-green-600/20"

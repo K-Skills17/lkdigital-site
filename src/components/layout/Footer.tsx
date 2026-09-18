@@ -49,7 +49,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-2.5">
               <a
-                href="https://wa.me/5511952823271"
+                href="https://wa.me/5511946851028"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
