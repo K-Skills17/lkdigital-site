@@ -11,823 +11,385 @@
   <meta property="og:image" content="[OG_IMAGE]" />
   <meta property="og:type" content="website" />
 
+  <!-- Fonts: Cormorant Garamond (display) + Inter (body) — exact match lkdigital.odo.br -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Reset & Tokens ──────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* ── Brand tokens: exact match globals.css + tailwind.config.ts ── */
     :root {
-      --bg:         #09170d;
-      --bg-2:       #0d2014;
-      --bg-3:       #0a1910;
-      --text:       #e8e4da;
-      --text-dim:   #8fa494;
-      --accent:     #c5a368;
-      --accent-lo:  rgba(197, 163, 104, 0.12);
-      --border:     rgba(197, 163, 104, 0.25);
-      --border-lo:  rgba(255, 255, 255, 0.07);
-      --radius:     12px;
-      --serif:      'Playfair Display', Georgia, serif;
-      --sans:       'Inter', system-ui, sans-serif;
+      --accent:        #c5a368;
+      --accent-dark:   #a8894f;
+      --accent-light:  #d4b87a;
+      --bg:            #fafafa;
+      --bg-dark:       #0f0f0f;
+      --bg-trust:      #f9f6f0;
+      --bg-card:       #ffffff;
+      --text:          #1a1a1a;
+      --text-muted:    #6b6b6b;
+      --border:        #e5e5e5;
+      --font-display:  'Cormorant Garamond', Georgia, serif;
+      --font-body:     'Inter', system-ui, sans-serif;
+      --r:             8px;
+      --r-lg:          12px;
     }
 
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html  { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body  { font-family: var(--font-body); font-size: 16px; line-height: 1.6; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 16px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── Typography ──────────────────────────────────── */
-    h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
-    h1 { font-size: clamp(1.9rem, 5vw, 2.9rem); font-weight: 700; }
-    h2 { font-size: clamp(1.4rem, 3.5vw, 2.1rem); font-weight: 500; margin-bottom: 1rem; }
-    h3 { font-size: 1rem; font-weight: 500; }
+    h1,h2,h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.15; }
+    h1 { font-size: clamp(1.9rem, 5vw, 4rem);   letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); letter-spacing: -0.01em; }
+    h3 { font-size: 1.1rem; }
     p  { margin-bottom: 1rem; }
     p:last-child { margin-bottom: 0; }
     a  { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    em { font-style: italic; color: var(--text-dim); }
+    ::selection { background: var(--accent); color: #fff; }
 
-    /* ── Layout ──────────────────────────────────────── */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-    section { padding: 4rem 0; }
+    .container { max-width: 56rem; margin: 0 auto; padding: 0 1.25rem; }
+    section    { padding: 5rem 0; }
 
-    /* ── Top Bar ─────────────────────────────────────── */
+    /* ── Top bar ──────────────────────────────────────── */
     .top-bar {
-      background: var(--bg-2);
-      border-bottom: 1px solid var(--border-lo);
+      background: var(--bg-dark);
+      border-bottom: 1px solid rgba(255,255,255,.05);
       text-align: center;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.65rem 1rem;
+      font-size: .72rem; font-weight: 500;
+      color: rgba(255,255,255,.4);
+      letter-spacing: .2em; text-transform: uppercase;
+      padding: .6rem 1rem;
     }
 
-    /* ── Hero ────────────────────────────────────────── */
-    .hero { padding: 3rem 0 2.5rem; text-align: center; }
-
+    /* ── Eyebrow pill — matches Hero eyebrow in site ──── */
     .eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      font-weight: 500;
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .4rem 1rem; border-radius: 9999px;
+      border: 1px solid rgba(197,163,104,.2);
+      background: rgba(197,163,104,.05);
+      color: var(--accent); font-size: .72rem; font-weight: 500;
+      letter-spacing: .25em; text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .pulse-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+      animation: pulse-anim 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse-anim { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
+
+    /* ── Section label (above h2) ─────────────────────── */
+    .section-label {
+      font-size: .72rem; font-weight: 500; color: var(--accent);
+      letter-spacing: .25em; text-transform: uppercase;
+      margin-bottom: .75rem;
     }
 
-    .hero h1 { margin-bottom: 1.25rem; }
-
-    .subhead {
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      max-width: 580px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
+    /* ── Hero (dark — #0f0f0f, grain, matches site) ───── */
+    .hero {
+      background: var(--bg-dark);
+      background-image: linear-gradient(135deg, #0f0f0f 0%, #1a1510 50%, #0f0f0f 100%);
+      padding: 5rem 0 4rem; text-align: center;
+      position: relative; overflow: hidden;
     }
-
-    /* ── Player ──────────────────────────────────────── */
-    .player-section {
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .player-hint {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      margin-bottom: 0.75rem;
-      font-style: italic;
-    }
-
-    #player-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      background: #000;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border-lo);
-      user-select: none;
-    }
-
-    #vsl {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Overlay */
-    #play-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(7, 18, 10, 0.88);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      gap: 1rem;
-      transition: opacity 0.25s;
-    }
-
-    #play-overlay.hidden { display: none; }
-
-    .overlay-circle {
-      width: 68px;
-      height: 68px;
-      border: 2px solid var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    #play-overlay:hover .overlay-circle { background: var(--accent-lo); }
-
-    .overlay-circle svg {
-      width: 24px;
-      height: 24px;
-      fill: var(--accent);
-      margin-left: 4px;
-    }
-
-    .overlay-label {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      font-weight: 500;
-      letter-spacing: 0.03em;
-    }
-
-    /* Resume Dialog */
-    #resume-dialog {
-      position: absolute;
-      inset: 0;
-      background: rgba(7, 18, 10, 0.94);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
-      z-index: 20;
-      padding: 2rem;
-    }
-
-    #resume-dialog.hidden { display: none; }
-
-    #resume-dialog p {
-      font-size: 1rem;
-      color: var(--text);
-      text-align: center;
-      margin: 0;
-    }
-
-    .resume-btns {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn-resume, .btn-restart {
-      padding: 0.65rem 1.6rem;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      font-family: var(--sans);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: opacity 0.2s;
-    }
-
-    .btn-resume  { background: var(--accent); color: #0a1910; }
-    .btn-restart { background: transparent; border: 1px solid var(--border); color: var(--text-dim); }
-    .btn-resume:hover, .btn-restart:hover { opacity: 0.82; }
-
-    /* Custom Controls */
-    .custom-controls {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 0.5rem 0.875rem 0.875rem;
-      background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      z-index: 5;
-    }
-
-    #btn-play-pause {
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #btn-play-pause svg { width: 18px; height: 18px; fill: #fff; }
-
-    .progress-wrap {
-      flex: 1;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.18);
-      border-radius: 2px;
-      overflow: hidden;
-      cursor: default;
-    }
-
-    #progress-fill {
-      height: 100%;
-      background: var(--accent);
-      width: 0%;
-      border-radius: 2px;
-      transition: width 0.4s linear;
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: repeating-conic-gradient(rgba(255,255,255,.008) 0% 25%, transparent 0% 50%) 0 0 / 3px 3px;
       pointer-events: none;
     }
-
-    /* ── Qualification ───────────────────────────────── */
-    .qualification {
-      border-top: 1px solid var(--border-lo);
-      padding-top: 3rem;
-      padding-bottom: 3rem;
+    .hero-inner { position: relative; z-index: 1; }
+    .hero h1    { color: #fff; margin-bottom: 1.25rem; }
+    .hero .subhead {
+      font-size: 1.05rem; color: rgba(255,255,255,.55);
+      max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.7;
     }
 
-    .qual-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-    }
+    /* ── Video player ─────────────────────────────────── */
+    .player-section { max-width: 480px; margin: 0 auto; }
+    .player-hint    { font-size: .75rem; color: rgba(255,255,255,.35); margin-bottom: .75rem; font-style: italic; }
 
-    @media (max-width: 580px) { .qual-grid { grid-template-columns: 1fr; } }
+    #player-container {
+      position: relative; width: 100%; aspect-ratio: 4/5;
+      background: #000; border-radius: var(--r-lg);
+      overflow: hidden; border: 1px solid rgba(255,255,255,.07);
+      user-select: none;
+    }
+    #vsl { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    #play-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,10,10,.85);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10; gap: 1rem;
+    }
+    #play-overlay.hidden { display: none; }
+    .overlay-circle {
+      width: 68px; height: 68px;
+      border: 1.5px solid var(--accent); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    #play-overlay:hover .overlay-circle { background: rgba(197,163,104,.12); }
+    .overlay-circle svg { width: 22px; height: 22px; fill: var(--accent); margin-left: 3px; }
+    .overlay-label { font-size: .83rem; color: rgba(255,255,255,.5); font-weight: 500; letter-spacing: .03em; }
+
+    #resume-dialog {
+      position: absolute; inset: 0;
+      background: rgba(10,10,10,.93);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.25rem; z-index: 20; padding: 2rem;
+    }
+    #resume-dialog.hidden { display: none; }
+    #resume-dialog p { font-size: 1rem; color: #fff; text-align: center; margin: 0; }
+    .resume-btns { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+    .btn-resume, .btn-restart {
+      padding: .6rem 1.5rem; border-radius: var(--r); border: none;
+      cursor: pointer; font-family: var(--font-body);
+      font-size: .875rem; font-weight: 500; transition: opacity .2s;
+    }
+    .btn-resume  { background: var(--accent); color: #fff; }
+    .btn-restart { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.6); }
+    .btn-resume:hover, .btn-restart:hover { opacity: .8; }
+
+    .custom-controls {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: .5rem .875rem .875rem;
+      background: linear-gradient(transparent, rgba(0,0,0,.7));
+      display: flex; align-items: center; gap: .75rem; z-index: 5;
+    }
+    #btn-play-pause {
+      width: 30px; height: 30px; flex-shrink: 0;
+      background: none; border: none; cursor: pointer; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #btn-play-pause svg { width: 16px; height: 16px; fill: #fff; }
+    .progress-wrap { flex: 1; height: 2px; background: rgba(255,255,255,.2); border-radius: 1px; overflow: hidden; cursor: default; }
+    #progress-fill { height: 100%; background: var(--accent); width: 0%; border-radius: 1px; transition: width .4s linear; pointer-events: none; }
+
+    /* ── Light qualification section ──────────────────── */
+    .qual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+    @media (max-width: 560px) { .qual-grid { grid-template-columns: 1fr; } }
 
     .qual-box {
-      background: var(--bg-2);
-      border: 1px solid var(--border-lo);
-      border-radius: var(--radius);
-      padding: 1.5rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 1.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
     }
+    .qual-box.yes { border-color: rgba(197,163,104,.3); }
+    .qual-box h3  { font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; color: var(--accent); margin-bottom: 1rem; }
+    .qual-box.no h3 { color: var(--text-muted); }
+    .qual-box ul { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
+    .qual-box li { display: flex; gap: .6rem; font-size: .875rem; line-height: 1.55; color: var(--text-muted); }
+    .qi { flex-shrink: 0; margin-top: 1px; }
+    .qi svg { width: 15px; height: 15px; }
+    .qual-box.yes .qi { color: var(--accent); }
+    .qual-box.no  .qi { color: #ef4444; }
 
-    .qual-box.yes { border-color: rgba(197, 163, 104, 0.28); }
+    /* ── Unlocked content wrapper ──────────────────────── */
+    #unlocked-content { display: none; opacity: 0; transition: opacity .6s ease; }
 
-    .qual-box h3 {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .qual-box.no h3 { color: var(--text-dim); }
-
-    .qual-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-
-    .qual-box li {
-      display: flex;
-      gap: 0.6rem;
-      font-size: 0.875rem;
-      line-height: 1.55;
-      color: var(--text-dim);
-    }
-
-    .qual-box.yes li::before { content: '✓'; color: var(--accent); flex-shrink: 0; }
-    .qual-box.no  li::before { content: '✗'; color: #d46060;       flex-shrink: 0; }
-
-    /* ── Unlocked Content ────────────────────────────── */
-    #unlocked-content {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    /* ── CTA Block ───────────────────────────────────── */
+    /* ── CTA block (dark — same grain as hero) ─────────── */
     .cta-block {
-      text-align: center;
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 4rem 0;
+      background: var(--bg-dark);
+      background-image: linear-gradient(135deg, #0f0f0f 0%, #1a1510 50%, #0f0f0f 100%);
+      padding: 5rem 0; text-align: center; position: relative; overflow: hidden;
     }
-
-    .cta-block h2 { margin-bottom: 1rem; }
-
-    .cta-body {
-      font-size: 1rem;
-      color: var(--text-dim);
-      max-width: 540px;
-      margin: 0 auto 2rem;
-      line-height: 1.7;
+    .cta-block::after {
+      content: ""; position: absolute; inset: 0;
+      background: repeating-conic-gradient(rgba(255,255,255,.008) 0% 25%, transparent 0% 50%) 0 0 / 3px 3px;
+      pointer-events: none;
     }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-block h2 { color: #fff; margin-bottom: 1rem; }
+    .cta-body     { font-size: 1rem; color: rgba(255,255,255,.55); max-width: 520px; margin: 0 auto 2rem; line-height: 1.75; }
+    .cta-microcopy { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: 1rem; font-style: italic; }
 
+    /* WA button — matches site green CTA style */
     .btn-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: #25d366;
-      color: #fff;
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 600;
-      padding: 1rem 1.75rem;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s, opacity 0.2s;
-      letter-spacing: 0.01em;
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: #16a34a; color: #fff;
+      font-family: var(--font-body); font-size: .9rem; font-weight: 500;
+      padding: .875rem 1.75rem; border-radius: var(--r);
+      border: none; cursor: pointer; text-decoration: none;
+      transition: background .2s, transform .2s, box-shadow .2s;
     }
+    .btn-whatsapp:hover { background: #15803d; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(34,197,94,.2); text-decoration: none; color: #fff; }
+    .btn-whatsapp svg   { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
 
-    .btn-whatsapp:hover { transform: translateY(-2px); opacity: 0.93; text-decoration: none; color: #fff; }
-    .btn-whatsapp svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
-
-    .cta-microcopy {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      margin-top: 1rem;
-      font-style: italic;
-    }
-
-    /* ── Stack (O que está incluso) ──────────────────── */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    @media (min-width: 580px) { .stack-grid { grid-template-columns: 1fr 1fr; } }
-
+    /* ── Stack cards (light bg, white card, subtle border) */
+    .stack-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 560px) { .stack-grid { grid-template-columns: 1fr 1fr; } }
     .stack-card {
-      background: var(--bg-2);
-      border: 1px solid var(--border-lo);
-      border-radius: var(--radius);
-      padding: 1.4rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04); transition: border-color .2s;
     }
+    .stack-card:hover { border-color: rgba(197,163,104,.35); }
+    .stack-num  { font-size: .65rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
+    .stack-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--text); margin-bottom: .5rem; }
+    .stack-card p  { font-size: .85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: .5rem; }
+    .stack-card em { font-style: italic; opacity: .75; }
+    .stack-value   { font-size: .75rem; color: var(--text-muted); opacity: .4; text-decoration: line-through; }
 
-    .stack-num {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.35rem;
-    }
-
-    .stack-card h3 {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .stack-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.5rem; }
-
-    .stack-value {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      opacity: 0.4;
-      text-decoration: line-through;
-    }
-
-    /* ── Bonus Cards ─────────────────────────────────── */
-    .bonus-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    @media (min-width: 580px) { .bonus-grid { grid-template-columns: repeat(3, 1fr); } }
-
+    /* ── Bonus cards (trust bg section) ───────────────── */
+    .bonus-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 560px) { .bonus-grid { grid-template-columns: repeat(3,1fr); } }
     .bonus-card {
-      background: var(--bg-3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.4rem;
+      background: var(--bg-card); border: 1px solid rgba(197,163,104,.25);
+      border-radius: var(--r-lg); padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
     }
-
-    .bonus-card h3 {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .bonus-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0.5rem; }
-
-    .total-line {
-      text-align: right;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-dim);
-      margin-top: 1.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border-lo);
-    }
-
+    .bonus-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--accent-dark); margin-bottom: .5rem; }
+    .bonus-card p  { font-size: .85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: .5rem; }
+    .total-line    { text-align: right; font-size: .9rem; font-weight: 500; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
     .total-line strong { color: var(--text); }
 
-    /* ── A Sua Parte ─────────────────────────────────── */
-    .player-side-intro { color: var(--text-dim); margin-bottom: 2rem; }
+    /* ── Checklist ─────────────────────────────────────── */
+    .checklist { display: flex; flex-direction: column; gap: .8rem; margin-bottom: 3rem; }
+    .checklist-item { display: flex; align-items: flex-start; gap: .6rem; font-size: .9rem; color: var(--text-muted); line-height: 1.55; }
+    .check-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 1px; }
 
-    .checklist { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 3rem; }
-
-    .checklist-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      line-height: 1.55;
-    }
-
-    .check-box {
-      width: 20px;
-      height: 20px;
-      border: 1.5px solid var(--accent);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 0.12rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .check-box svg { width: 11px; height: 11px; stroke: var(--accent); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-
-    /* Timeline */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 2rem;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border-lo);
-    }
-
-    @media (min-width: 580px) { .timeline { flex-direction: row; } }
-
-    .tl-item {
-      flex: 1;
-      padding: 1.4rem;
-      background: var(--bg-2);
-      border-bottom: 1px solid var(--border-lo);
-    }
-
-    @media (min-width: 580px) {
-      .tl-item { border-bottom: none; border-right: 1px solid var(--border-lo); }
-      .tl-item:last-child { border-right: none; }
-    }
-
+    /* ── Timeline ──────────────────────────────────────── */
+    .timeline { display: flex; flex-direction: column; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); margin-bottom: 2rem; }
+    @media (min-width: 560px) { .timeline { flex-direction: row; } }
+    .tl-item { flex: 1; padding: 1.4rem 1.5rem; background: var(--bg-card); border-bottom: 1px solid var(--border); }
+    @media (min-width: 560px) { .tl-item { border-bottom: none; border-right: 1px solid var(--border); } .tl-item:last-child { border-right: none; } }
     .tl-item:last-child { border-bottom: none; }
-    .tl-item.highlight { background: var(--accent-lo); border-color: var(--border); }
+    .tl-item.highlight  { background: rgba(197,163,104,.06); border-color: rgba(197,163,104,.3); }
+    .tl-label { font-size: .65rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
+    .tl-desc  { font-size: .85rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+    .commitment-note { font-size: .85rem; color: var(--text-muted); font-style: italic; text-align: center; margin-top: 1.5rem; }
 
-    .tl-label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.4rem;
-    }
-
-    .tl-desc { font-size: 0.85rem; color: var(--text-dim); margin: 0; }
-
-    .commitment-note {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      font-style: italic;
-      text-align: center;
-      margin-top: 1.5rem;
-    }
-
-    /* ── Investment ──────────────────────────────────── */
-    .investment { text-align: center; }
-
-    .price-strike-total {
-      font-size: 0.95rem;
-      color: var(--text-dim);
-      text-decoration: line-through;
-      opacity: 0.4;
-    }
-
-    .price-strike-full {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      text-decoration: line-through;
-      opacity: 0.35;
-      margin-bottom: 0.25rem;
-    }
-
-    .price-turma-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin: 0.5rem 0 0.25rem;
-    }
-
-    .price-main {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 0.35rem;
-      line-height: 1.1;
-    }
-
-    .price-installment { font-size: 1rem; color: var(--text-dim); margin-bottom: 2rem; }
-
+    /* ── Investment (trust bg, centered) ──────────────── */
+    .investment { background: var(--bg-trust); padding: 5rem 0; text-align: center; }
+    .price-strike-total { font-size: .9rem; color: var(--text-muted); text-decoration: line-through; opacity: .4; }
+    .price-strike-full  { font-size: .82rem; color: var(--text-muted); text-decoration: line-through; opacity: .35; margin-bottom: .25rem; }
+    .price-turma-label  { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin: .5rem 0 .2rem; }
+    .price-main         { font-family: var(--font-display); font-size: clamp(2.25rem,6vw,3.5rem); font-weight: 600; color: var(--text); letter-spacing: -.02em; line-height: 1.1; margin-bottom: .35rem; }
+    .price-installment  { font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem; }
     .founder-note {
-      background: var(--accent-lo);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.2rem 1.5rem;
-      font-size: 0.875rem;
-      color: var(--text-dim);
-      text-align: left;
-      max-width: 540px;
-      margin: 0 auto 2rem;
-      line-height: 1.65;
+      background: rgba(197,163,104,.08); border: 1px solid rgba(197,163,104,.25);
+      border-radius: var(--r-lg); padding: 1.25rem 1.5rem;
+      font-size: .875rem; color: var(--text-muted);
+      text-align: left; max-width: 520px; margin: 0 auto 2rem; line-height: 1.65;
     }
-
-    .price-ladder {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      max-width: 380px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .ladder-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-    }
-
-    .ladder-item.past    { background: var(--bg-2); opacity: 0.38; }
-    .ladder-item.current { background: var(--accent-lo); border: 1px solid var(--border); }
-    .ladder-item.future  { background: var(--bg-2); opacity: 0.6; }
-
+    .price-ladder    { display: flex; flex-direction: column; gap: .4rem; max-width: 380px; margin: 0 auto 1.5rem; }
+    .ladder-item     { display: flex; justify-content: space-between; align-items: center; padding: .65rem 1rem; border-radius: var(--r); font-size: .85rem; background: var(--bg-card); border: 1px solid var(--border); }
+    .ladder-item.past    { opacity: .35; }
+    .ladder-item.current { border-color: rgba(197,163,104,.4); background: rgba(197,163,104,.06); }
+    .ladder-item.future  { opacity: .6; }
     .ladder-name  { color: var(--text); font-weight: 500; }
-    .ladder-item.current .ladder-name  { color: var(--accent); }
-    .ladder-price { color: var(--text-dim); }
+    .ladder-item.current .ladder-name  { color: var(--accent-dark); }
+    .ladder-price { color: var(--text-muted); }
     .ladder-item.current .ladder-price { color: var(--text); font-weight: 600; }
-    .ladder-status { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+    .ladder-status { font-size: .7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; }
+    .price-compare { font-size: .85rem; color: var(--text-muted); font-style: italic; }
 
-    .price-compare { font-size: 0.85rem; color: var(--text-dim); font-style: italic; }
-
-    /* ── Guarantee ───────────────────────────────────── */
-    .guarantee {
-      background: var(--bg-2);
-      border-top: 1px solid var(--border-lo);
-      border-bottom: 1px solid var(--border-lo);
-    }
-
+    /* ── Guarantee ─────────────────────────────────────── */
     .guarantee-box {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      background: var(--bg-3);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 2rem; background: var(--bg-card);
+      box-shadow: 0 1px 3px rgba(0,0,0,.04); margin-top: 2rem;
     }
+    .guarantee-box > p { color: var(--text-muted); font-size: .95rem; line-height: 1.75; }
+    .guarantee-sub { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .guarantee-sub h3 { font-family: var(--font-display); font-size: 1.1rem; color: var(--accent-dark); margin-bottom: .5rem; }
+    .guarantee-sub p  { color: var(--text-muted); font-size: .9rem; }
+    .guarantee-closer { margin-top: 1.5rem; font-weight: 600; color: var(--text); font-style: italic; }
 
-    .guarantee-box > p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; }
-
-    .guarantee-sub {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-lo);
-    }
-
-    .guarantee-sub h3 {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .guarantee-sub p { color: var(--text-dim); font-size: 0.9rem; }
-
-    .guarantee-closer {
-      margin-top: 1.5rem;
-      font-weight: 600;
-      color: var(--text);
-      font-style: italic;
-      font-size: 1rem;
-    }
-
-    /* ── Vagas ───────────────────────────────────────── */
-    .vagas-intro  { color: var(--text-dim); }
-    .vagas-exclus { color: var(--text-dim); margin-top: 0.25rem; margin-bottom: 2rem; }
-
-    .turmas-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    @media (min-width: 480px) { .turmas-grid { grid-template-columns: repeat(3, 1fr); } }
-
-    .turma-card {
-      border: 1px solid var(--border-lo);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      background: var(--bg-2);
-    }
-
-    .turma-card.past    { opacity: 0.38; }
-    .turma-card.current { border-color: var(--accent); background: var(--accent-lo); }
-
-    .turma-name {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-dim);
-      margin-bottom: 0.4rem;
-    }
-
+    /* ── Vagas ─────────────────────────────────────────── */
+    .vagas-text { color: var(--text-muted); font-size: .95rem; margin-top: .5rem; }
+    .turmas-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1.75rem 0 1rem; }
+    @media (min-width: 480px) { .turmas-grid { grid-template-columns: repeat(3,1fr); } }
+    .turma-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+    .turma-card.past    { opacity: .38; }
+    .turma-card.current { border-color: rgba(197,163,104,.4); background: rgba(197,163,104,.05); }
+    .turma-name  { font-size: .65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .15em; color: var(--text-muted); margin-bottom: .4rem; }
     .turma-card.current .turma-name { color: var(--accent); }
+    .turma-price { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: .2rem; }
+    .turma-fecha { font-size: .78rem; color: var(--text-muted); }
+    .turma-encerrada { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); }
+    .vagas-note  { font-size: .83rem; color: var(--text-muted); font-style: italic; }
 
-    .turma-price { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
-    .turma-fecha { font-size: 0.8rem; color: var(--text-dim); }
-    .turma-encerrada { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); }
-
-    .vagas-note {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      font-style: italic;
-      text-align: center;
-    }
-
-    /* ── FAQ ─────────────────────────────────────────── */
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 2rem;
-    }
-
-    .faq-item {
-      border: 1px solid var(--border-lo);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-
+    /* ── FAQ ───────────────────────────────────────────── */
+    .faq-list { display: flex; flex-direction: column; gap: .5rem; margin-top: 2rem; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; background: var(--bg-card); }
     .faq-q {
-      width: 100%;
-      background: var(--bg-2);
-      border: none;
-      padding: 1.1rem 1.25rem;
-      text-align: left;
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      transition: background 0.15s;
+      width: 100%; background: none; border: none; padding: 1.1rem 1.25rem;
+      text-align: left; color: var(--text); font-family: var(--font-body);
+      font-size: .9rem; font-weight: 500; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: background .15s;
     }
-
-    .faq-q:hover { background: var(--bg-3); }
-    .faq-q[aria-expanded="true"] { border-bottom: 1px solid var(--border-lo); }
-
-    .faq-icon {
-      font-size: 1.2rem;
-      color: var(--accent);
-      line-height: 1;
-      flex-shrink: 0;
-      transition: transform 0.2s;
-    }
-
+    .faq-q:hover { background: rgba(197,163,104,.04); }
+    .faq-q[aria-expanded="true"] { border-bottom: 1px solid var(--border); }
+    .faq-icon { font-size: 1.1rem; color: var(--accent); flex-shrink: 0; transition: transform .2s; line-height: 1; }
     .faq-q[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
-
-    .faq-a {
-      display: none;
-      padding: 1rem 1.25rem;
-      font-size: 0.875rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-      background: var(--bg-3);
-    }
-
+    .faq-a { display: none; padding: 1rem 1.25rem; font-size: .875rem; color: var(--text-muted); line-height: 1.75; }
     .faq-a.open { display: block; }
 
-    /* ── Footer ──────────────────────────────────────── */
+    /* ── Footer (dark — matches site footer exactly) ───── */
     footer {
-      border-top: 1px solid var(--border-lo);
-      padding: 2rem 0;
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-dim);
+      background: var(--bg-dark); border-top: 1px solid rgba(255,255,255,.05);
+      padding: 2.5rem 0; text-align: center;
+      font-size: .78rem; color: rgba(255,255,255,.35);
     }
+    footer a { color: rgba(255,255,255,.35); }
+    footer a:hover { color: rgba(255,255,255,.7); text-decoration: none; }
+    footer p + p { margin-top: .4rem; }
 
-    footer a { color: var(--text-dim); }
-    footer a:hover { color: var(--accent); }
-    footer p + p { margin-top: 0.4rem; }
-
-    /* ── LGPD Banner ─────────────────────────────────── */
+    /* ── LGPD banner (white, matches site style) ────────── */
     #lgpd-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-      padding: 0.875rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      z-index: 9999;
-      font-size: 0.82rem;
-      color: var(--text-dim);
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; border-top: 1px solid var(--border);
+      padding: .875rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      z-index: 9999; font-size: .82rem; color: var(--text-muted);
+      box-shadow: 0 -4px 20px rgba(0,0,0,.06);
     }
-
     #lgpd-banner.hidden { display: none; }
     #lgpd-banner p { margin: 0; }
-
     #lgpd-ok {
-      background: var(--accent);
-      color: #0a1910;
-      border: none;
-      padding: 0.45rem 1.25rem;
-      border-radius: 6px;
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 0.82rem;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: opacity 0.2s;
+      background: var(--accent); color: #fff; border: none;
+      padding: .45rem 1.25rem; border-radius: var(--r);
+      font-family: var(--font-body); font-weight: 500; font-size: .82rem;
+      cursor: pointer; flex-shrink: 0; transition: background .2s;
     }
+    #lgpd-ok:hover { background: var(--accent-dark); }
 
-    #lgpd-ok:hover { opacity: 0.85; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    .section-intro { color: var(--text-muted); max-width: 560px; line-height: 1.75; }
   </style>
 </head>
 <body>
 
-<!-- ── LGPD Banner ────────────────────────────────── -->
+<!-- LGPD -->
 <div id="lgpd-banner">
   <p>Usamos cookies de análise para melhorar esta página.</p>
   <button id="lgpd-ok">OK</button>
 </div>
 
-<!-- ── Top Bar ────────────────────────────────────── -->
+<!-- Top bar -->
 <div class="top-bar">LK Digital · Marketing exclusivo para clínicas odontológicas</div>
 
-<!-- ══════════════════════════════════════════════════
-     LOCKED CONTENT (always visible)
-══════════════════════════════════════════════════ -->
-
-<!-- ── Hero ──────────────────────────────────────── -->
+<!-- ── HERO (dark) ──────────────────────────────────── -->
 <section class="hero">
-  <div class="container">
-    <p class="eyebrow">Para implantodontistas · 15 vagas · 1 clínica por região</p>
+  <div class="container hero-inner">
+    <span class="eyebrow">
+      <span class="pulse-dot"></span>
+      Para implantodontistas · 15 vagas · 1 clínica por região
+    </span>
     <h1>Não anuncie sua clínica de implante. Ainda.</h1>
     <p class="subhead">Em 90 dias, a gente monta tudo em volta da sua clínica — e você começa a anunciar na semana 6, numa estrutura que não vaza.</p>
 
     <div class="player-section">
       <p class="player-hint">Vídeo de ~10 min · Assista até o fim: no vídeo há 3 palavras. Você vai precisar delas.</p>
-
       <div id="player-container">
-        <video
-          id="vsl"
-          playsinline
-          muted
-          autoplay
-          preload="metadata"
-        ></video>
+        <video id="vsl" playsinline muted autoplay preload="metadata"></video>
 
-        <!-- Play Overlay -->
         <div id="play-overlay">
           <div class="overlay-circle">
             <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -835,7 +397,6 @@
           <span class="overlay-label">Toque para assistir com som</span>
         </div>
 
-        <!-- Resume Dialog -->
         <div id="resume-dialog" class="hidden">
           <p>Continuar de onde parou?</p>
           <div class="resume-btns">
@@ -844,53 +405,70 @@
           </div>
         </div>
 
-        <!-- Custom Controls -->
         <div class="custom-controls">
           <button id="btn-play-pause" aria-label="Play/Pause">
             <svg id="icon-play"  viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
             <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
           </button>
-          <div class="progress-wrap" id="progress-wrap">
-            <div id="progress-fill"></div>
-          </div>
+          <div class="progress-wrap" id="progress-wrap"><div id="progress-fill"></div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── Para quem é / não é ────────────────────────── -->
-<section class="qualification">
+<!-- ── PARA QUEM É / NÃO É (light) ─────────────────── -->
+<section style="background:var(--bg);padding:5rem 0;">
   <div class="container">
+    <p class="section-label">Qualificação</p>
+    <h2>Esse programa é para você?</h2>
     <div class="qual-grid">
       <div class="qual-box yes">
         <h3>É para você se:</h3>
         <ul>
-          <li>Você faz implante e quer fechar mais casos com os contatos que já chegam.</li>
-          <li>Sua secretária vive no WhatsApp e mesmo assim os orçamentos ficam parados.</li>
-          <li>Você quer anunciar, mas só numa estrutura que aguente o volume.</li>
+          <li>
+            <span class="qi"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg></span>
+            Você faz implante e quer fechar mais casos com os contatos que já chegam.
+          </li>
+          <li>
+            <span class="qi"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg></span>
+            Sua secretária vive no WhatsApp e mesmo assim os orçamentos ficam parados.
+          </li>
+          <li>
+            <span class="qi"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg></span>
+            Você quer anunciar, mas só numa estrutura que aguente o volume.
+          </li>
         </ul>
       </div>
       <div class="qual-box no">
         <h3>Não é para você se:</h3>
         <ul>
-          <li>Você não pode investir pelo menos R$3 mil/mês em anúncio a partir da semana 6.</li>
-          <li>Sua equipe não vai seguir roteiro.</li>
-          <li>Você procura resultado sem fazer a sua parte.</li>
+          <li>
+            <span class="qi"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></span>
+            Você não pode investir pelo menos R$3 mil/mês em anúncio a partir da semana 6.
+          </li>
+          <li>
+            <span class="qi"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></span>
+            Sua equipe não vai seguir roteiro.
+          </li>
+          <li>
+            <span class="qi"><svg viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></span>
+            Você procura resultado sem fazer a sua parte.
+          </li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════
-     UNLOCKED CONTENT (hidden until CTA_TIME)
-══════════════════════════════════════════════════ -->
-<div id="unlocked-content" style="display:none; opacity:0; transition: opacity 0.6s ease;">
+<!-- ═══════════════════════════════════════════════════
+     UNLOCKED CONTENT
+═══════════════════════════════════════════════════ -->
+<div id="unlocked-content" style="display:none;opacity:0;transition:opacity .6s ease;">
 
-  <!-- 5. CTA Block -->
+  <!-- CTA (dark) -->
   <section class="cta-block">
-    <div class="container">
+    <div class="container cta-inner">
       <h2>Pronto para a Pré-Temporada?</h2>
       <p class="cta-body">Toque no botão, abra o WhatsApp e mande as 3 palavras do vídeo. O Sistema Zagueiro confere, faz 3 perguntas rápidas e marca sua conversa com o Komando.</p>
       <a id="cta-wa-1" href="#" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
@@ -901,45 +479,52 @@
     </div>
   </section>
 
-  <!-- 6. O que está incluso -->
-  <section>
+  <!-- STACK (light) -->
+  <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
+      <p class="section-label">O que está incluso</p>
       <h2>O que eu instalo na sua clínica</h2>
       <div class="stack-grid" id="stack-grid"></div>
     </div>
   </section>
 
-  <!-- 7. Bônus -->
-  <section>
+  <hr class="divider" />
+
+  <!-- BONUS (trust bg) -->
+  <section style="background:var(--bg-trust);padding:5rem 0;">
     <div class="container">
+      <p class="section-label">Bônus incluídos</p>
       <h2>E mais 3 bônus</h2>
       <div class="bonus-grid" id="bonus-grid"></div>
       <div class="total-line">Valor total: <strong>R$35.000</strong></div>
     </div>
   </section>
 
-  <!-- 8. A sua parte -->
-  <section>
+  <!-- A SUA PARTE (light) -->
+  <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
+      <p class="section-label">Comprometimento</p>
       <h2>A minha parte e a sua</h2>
-      <p class="player-side-intro">Não é mágica e eu não faço sozinho. Se você cumprir a sua parte, na semana 6 a sua clínica recebe a Liberação para Jogo e pode começar a anunciar.</p>
+      <p class="section-intro" style="margin:1rem 0 2rem;">Não é mágica e eu não faço sozinho. Se você cumprir a sua parte, na semana 6 a sua clínica recebe a Liberação para Jogo e pode começar a anunciar.</p>
       <div class="checklist" id="checklist"></div>
       <div class="timeline" id="timeline"></div>
       <p class="commitment-note">Compromisso de 3 meses: 6 semanas de preparação + 6 semanas jogando. Menos que isso, não dá para ver o efeito.</p>
     </div>
   </section>
 
-  <!-- 9. Investimento -->
+  <!-- INVESTIMENTO (trust bg) -->
   <section class="investment">
     <div class="container">
-      <h2>Investimento</h2>
-      <div id="investment-block"></div>
+      <p class="section-label">Investimento</p>
+      <h2>O valor do programa</h2>
+      <div id="investment-block" style="margin-top:2rem;"></div>
     </div>
   </section>
 
-  <!-- 10. Garantia -->
-  <section class="guarantee">
+  <!-- GARANTIA (light) -->
+  <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
+      <p class="section-label">Garantia</p>
       <h2>Garantia Pague-se em 90 Dias</h2>
       <div class="guarantee-box">
         <p>Se você cumpriu a sua parte e, em 90 dias, o sistema não trouxe de volta em tratamentos fechados pelo menos o valor investido — contando a Operação Rebote e tudo registrado no Placar — você recebe 100% de volta. E fica com as fotos e com o perfil do Google refeito.</p>
@@ -952,30 +537,32 @@
     </div>
   </section>
 
-  <!-- 11. Vagas e exclusividade -->
-  <section>
+  <!-- VAGAS (trust bg) -->
+  <section style="background:var(--bg-trust);padding:5rem 0;">
     <div class="container">
+      <p class="section-label">Exclusividade</p>
       <h2>Vagas e exclusividade</h2>
-      <p class="vagas-intro">15 vagas em 3 turmas de 5 — trabalho personalizado e dedicado a cada clínica.</p>
-      <p class="vagas-exclus">1 clínica de implante por região. Se a vaga da sua região for preenchida, ela fecha.</p>
+      <p class="vagas-text">15 vagas em 3 turmas de 5 — trabalho personalizado e dedicado a cada clínica.</p>
+      <p class="vagas-text">1 clínica de implante por região. Se a vaga da sua região for preenchida, ela fecha.</p>
       <div class="turmas-grid" id="turmas-grid"></div>
       <p class="vagas-note">A cada turma, o preço sobe — porque a prova aumenta.</p>
     </div>
   </section>
 
-  <!-- 12. FAQ -->
-  <section>
+  <!-- FAQ (light) -->
+  <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
+      <p class="section-label">Dúvidas</p>
       <h2>Perguntas frequentes</h2>
       <div class="faq-list" id="faq-list"></div>
     </div>
   </section>
 
-  <!-- 13. CTA Final -->
+  <!-- CTA FINAL (dark) -->
   <section class="cta-block">
-    <div class="container">
+    <div class="container cta-inner">
       <h2>Sua clínica já é boa. Vamos montar tudo em volta.</h2>
-      <a id="cta-wa-2" href="#" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+      <a id="cta-wa-2" href="#" class="btn-whatsapp" target="_blank" rel="noopener noreferrer" style="margin-top:1rem;">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Enviar minhas 3 palavras no WhatsApp
       </a>
@@ -984,100 +571,49 @@
 
 </div><!-- /unlocked-content -->
 
-<!-- ── Footer (always visible) ───────────────────── -->
+<!-- Footer (dark — matches site footer) -->
 <footer>
   <div class="container">
     <p>LK Digital · lkdigital.odo.br · São Paulo — SP</p>
-    <p><a href="/politica-de-privacidade">Política de Privacidade</a></p>
+    <p><a href="/privacidade">Privacidade (LGPD)</a> &nbsp;·&nbsp; <a href="/termos">Termos de Uso</a></p>
   </div>
 </footer>
 
 <script>
-/* ═══════════════════════════════════════════════════════
-   CONFIG — edit before each turma
-═══════════════════════════════════════════════════════ */
+/* ── CONFIG ─────────────────────────────────────────── */
 const CONFIG = {
-  VIDEO_URL:        "[VIDEO_URL_MP4]",
-  POSTER_URL:       "[POSTER_IMAGE]",
-  VIDEO_LENGTH_LABEL: "~10 min",
-  KEYWORD_TIMES:    [195, 420, 525],   // seconds — set from the final edit
-  CTA_TIME:         570,               // seconds — moment Komando says "toca no botão"
-  WHATSAPP_NUMBER:  "[55DDDNUMERO]",
-  WHATSAPP_TEXT:    "Assisti ao vídeo da Pré-Temporada. Minhas 3 palavras: ",
-  TURMA_ATUAL:      0,                 // index into TURMAS; increment when a turma closes
-  PRECO_CHEIO:      "R\$5.997",
+  VIDEO_URL:       "[VIDEO_URL_MP4]",
+  POSTER_URL:      "[POSTER_IMAGE]",
+  KEYWORD_TIMES:   [195, 420, 525],
+  CTA_TIME:        570,
+  WHATSAPP_NUMBER: "[55DDDNUMERO]",
+  WHATSAPP_TEXT:   "Assisti ao vídeo da Pré-Temporada. Minhas 3 palavras: ",
+  TURMA_ATUAL:     0,
+  PRECO_CHEIO:     "R\$5.997",
   TURMAS: [
-    { nome: "Turma 1 \u00b7 Fundadora", fecha: "[DD/MM]", avista: "R\$2.997", parcelado: "3x de R\$1.097" },
-    { nome: "Turma 2",                  fecha: "[DD/MM]", avista: "R\$4.497", parcelado: "3x de R\$1.647" },
-    { nome: "Turma 3",                  fecha: "[DD/MM]", avista: "R\$5.997", parcelado: "3x de R\$2.197" }
+    { nome:"Turma 1 \u00b7 Fundadora", fecha:"[DD/MM]", avista:"R\$2.997", parcelado:"3x de R\$1.097" },
+    { nome:"Turma 2",                  fecha:"[DD/MM]", avista:"R\$4.497", parcelado:"3x de R\$1.647" },
+    { nome:"Turma 3",                  fecha:"[DD/MM]", avista:"R\$5.997", parcelado:"3x de R\$2.197" }
   ]
 };
 
-/* ═══════════════════════════════════════════════════════
-   STATIC DATA
-═══════════════════════════════════════════════════════ */
+/* ── Static data ─────────────────────────────────────── */
 const STACK = [
-  {
-    num: "01", nome: "RAIO-X Completo",
-    desc: "Auditoria do sistema inteiro — do Google ao fechamento — com lig\u00e7\u00e3o oculta na recep\u00e7\u00e3o. Voc\u00ea recebe o mapa dos pontos cegos.",
-    valor: "R$3.000"
-  },
-  {
-    num: "02", nome: "Titular no Google",
-    desc: "Perfil do Google refeito: fotos, servi\u00e7os, bot\u00e3o de WhatsApp e fluxo de pedido de avalia\u00e7\u00f5es. Quem mora perto j\u00e1 v\u00ea sua cl\u00ednica; agora passa a escolher.",
-    valor: "R$2.500"
-  },
-  {
-    num: "03", nome: "Ensaio da Cl\u00ednica",
-    desc: "Ensaio fotogr\u00e1fico profissional + 10 a 20 fotos geolocalizadas + v\u00eddeo curto do(a) dentista se apresentando. <em>Cl\u00ednicas em S\u00e3o Paulo recebem o ensaio feito por n\u00f3s in loco. Cl\u00ednicas em outras cidades recebem guia de produ\u00e7\u00e3o e indica\u00e7\u00e3o de parceiro local.</em>",
-    valor: "R$2.500"
-  },
-  {
-    num: "04", nome: "Site Pronto para IA",
-    desc: "Site otimizado para convers\u00e3o e para aparecer em buscas e respostas de IA (Google, ChatGPT).",
-    valor: "R$6.000"
-  },
-  {
-    num: "05", nome: "P\u00e1ginas de Implante A/B",
-    desc: "Duas p\u00e1ginas de implante em teste. Os dados escolhem a vencedora.",
-    valor: "R$4.000"
-  },
-  {
-    num: "06", nome: "Jogadas Ensaiadas",
-    desc: "Roteiros e playbook de atendimento do primeiro \u201coi\u201d at\u00e9 a avalia\u00e7\u00e3o, com respostas para \u201ct\u00e1 caro\u201d, \u201cvou pensar\u201d e \u201cvou falar com meu marido\u201d. Treinamento ao vivo da equipe.",
-    valor: "R$4.000"
-  },
-  {
-    num: "07", nome: "Sistema Zagueiro",
-    desc: "Resposta imediata no WhatsApp, 24h, que qualifica cada contato. A secret\u00e1ria s\u00f3 entra quando a pessoa tem perfil.",
-    valor: "R$3.000"
-  },
-  {
-    num: "08", nome: "Placar Semanal",
-    desc: "6 n\u00fameros toda semana: contatos, qualificados, avalia\u00e7\u00f5es agendadas, comparecimento, implantes fechados, faturamento.",
-    valor: "R$2.000"
-  }
+  {num:"01",nome:"RAIO-X Completo",desc:"Auditoria do sistema inteiro \u2014 do Google ao fechamento \u2014 com liga\u00e7\u00e3o oculta na recep\u00e7\u00e3o. Voc\u00ea recebe o mapa dos pontos cegos.",valor:"R$3.000"},
+  {num:"02",nome:"Titular no Google",desc:"Perfil do Google refeito: fotos, servi\u00e7os, bot\u00e3o de WhatsApp e fluxo de pedido de avalia\u00e7\u00f5es. Quem mora perto j\u00e1 v\u00ea sua cl\u00ednica; agora passa a escolher.",valor:"R$2.500"},
+  {num:"03",nome:"Ensaio da Cl\u00ednica",desc:"Ensaio fotogr\u00e1fico profissional + 10 a 20 fotos geolocalizadas + v\u00eddeo curto do(a) dentista se apresentando. <em>Cl\u00ednicas em S\u00e3o Paulo recebem o ensaio in loco. Demais cidades recebem guia de produ\u00e7\u00e3o e indica\u00e7\u00e3o de parceiro local.</em>",valor:"R$2.500"},
+  {num:"04",nome:"Site Pronto para IA",desc:"Site otimizado para convers\u00e3o e para aparecer em buscas e respostas de IA (Google, ChatGPT).",valor:"R$6.000"},
+  {num:"05",nome:"P\u00e1ginas de Implante A/B",desc:"Duas p\u00e1ginas de implante em teste. Os dados escolhem a vencedora.",valor:"R$4.000"},
+  {num:"06",nome:"Jogadas Ensaiadas",desc:"Roteiros e playbook de atendimento do primeiro \u201coi\u201d at\u00e9 a avalia\u00e7\u00e3o, com respostas para \u201ct\u00e1 caro\u201d, \u201cvou pensar\u201d e \u201cvou falar com meu marido\u201d. Treinamento ao vivo da equipe.",valor:"R$4.000"},
+  {num:"07",nome:"Sistema Zagueiro",desc:"Resposta imediata no WhatsApp, 24h, que qualifica cada contato. A secret\u00e1ria s\u00f3 entra quando a pessoa tem perfil.",valor:"R$3.000"},
+  {num:"08",nome:"Placar Semanal",desc:"6 n\u00fameros toda semana: contatos, qualificados, avalia\u00e7\u00f5es agendadas, comparecimento, implantes fechados, faturamento.",valor:"R$2.000"}
 ];
-
 const BONUSES = [
-  {
-    nome: "Opera\u00e7\u00e3o Rebote",
-    desc: "Reativa\u00e7\u00e3o dos or\u00e7amentos de implante parados. O dinheiro mais r\u00e1pido que existe: essa pessoa j\u00e1 sentou na sua cadeira.",
-    valor: "R$5.000"
-  },
-  {
-    nome: "Kit Concentra\u00e7\u00e3o",
-    desc: "Antes de cada avalia\u00e7\u00e3o, o paciente recebe um \u00e1udio ou v\u00eddeo seu e os lembretes certos para comparecer.",
-    valor: "R$1.500"
-  },
-  {
-    nome: "Olheiro Oculto",
-    desc: "Liga\u00e7\u00f5es an\u00f4nimas mensais na recep\u00e7\u00e3o, com nota de 0 a 10.",
-    valor: "R$1.500"
-  }
+  {nome:"Opera\u00e7\u00e3o Rebote",desc:"Reativa\u00e7\u00e3o dos or\u00e7amentos de implante parados. O dinheiro mais r\u00e1pido que existe: essa pessoa j\u00e1 sentou na sua cadeira.",valor:"R$5.000"},
+  {nome:"Kit Concentra\u00e7\u00e3o",desc:"Antes de cada avalia\u00e7\u00e3o, o paciente recebe um \u00e1udio ou v\u00eddeo seu e os lembretes certos para comparecer.",valor:"R$1.500"},
+  {nome:"Olheiro Oculto",desc:"Liga\u00e7\u00f5es an\u00f4nimas mensais na recep\u00e7\u00e3o, com nota de 0 a 10.",valor:"R$1.500"}
 ];
-
-const CHECKLIST_ITEMS = [
+const CHECKLIST = [
   "Acessos entregues em at\u00e9 48h",
   "Contato qualificado respondido em at\u00e9 5 min no hor\u00e1rio comercial",
   "Roteiros das Jogadas Ensaiadas em uso (nota m\u00ednima 8/10 no Olheiro Oculto)",
@@ -1085,487 +621,182 @@ const CHECKLIST_ITEMS = [
   "Lista de or\u00e7amentos parados entregue na semana 1",
   "20 min de reuni\u00e3o por semana"
 ];
-
-const TIMELINE_ITEMS = [
-  { label: "Semanas 1\u20136 \u00b7 Pr\u00e9-temporada",      desc: "Estrutura montada, Opera\u00e7\u00e3o Rebote rodando, zero an\u00fancio.", highlight: false },
-  { label: "Semana 6 \u00b7 Libera\u00e7\u00e3o para Jogo",    desc: "An\u00fancios no ar.",                                              highlight: true  },
-  { label: "Semanas 7\u201312 \u00b7 Temporada",              desc: "Jogando com a estrutura pronta.",                                  highlight: false }
+const TIMELINE = [
+  {label:"Semanas 1\u20136 \u00b7 Pr\u00e9-temporada",  desc:"Estrutura montada, Opera\u00e7\u00e3o Rebote rodando, zero an\u00fancio.", h:false},
+  {label:"Semana 6 \u00b7 Libera\u00e7\u00e3o para Jogo", desc:"An\u00fancios no ar.",                                             h:true },
+  {label:"Semanas 7\u201312 \u00b7 Temporada",           desc:"Jogando com a estrutura pronta.",                                h:false}
+];
+const FAQS = [
+  {q:"Voc\u00eas garantem pacientes?",                   a:"N\u00e3o. Nenhuma ag\u00eancia s\u00e9ria pode prometer pacientes, e o CFO n\u00e3o permite. A garantia \u00e9 sobre o retorno do investimento no sistema, com regras claras."},
+  {q:"Por que n\u00e3o come\u00e7ar com an\u00fancio?",  a:"Porque an\u00fancio acelera o que j\u00e1 existe. Se a estrutura vaza, voc\u00ea paga mais caro para perder mais r\u00e1pido. Primeiro a gente fecha os vazamentos."},
+  {q:"J\u00e1 tenho site. Ainda faz sentido?",           a:"Sim. O RAIO-X diz o que aproveitar e o que refazer."},
+  {q:"J\u00e1 tenho ag\u00eancia.",                       a:"O RAIO-X mostra onde est\u00e1 o gargalo. A gente conversa sobre como fica a divis\u00e3o."},
+  {q:"Quanto preciso investir em an\u00fancio depois?",  a:"A partir de R$3 mil/m\u00eas, a partir da semana 6."},
+  {q:"Quem faz as fotos?",                               a:"Para cl\u00ednicas em S\u00e3o Paulo, vamos at\u00e9 voc\u00ea, no hor\u00e1rio que n\u00e3o atrapalhe os atendimentos. Para cl\u00ednicas em outras cidades, enviamos guia de produ\u00e7\u00e3o e indicamos um parceiro local."},
+  {q:"O que acontece com o site se eu pedir a garantia?",a:"Voc\u00ea fica com as fotos e com o perfil do Google refeito. Site, p\u00e1ginas e sistemas s\u00e3o desativados."},
+  {q:"E se minha regi\u00e3o j\u00e1 estiver ocupada?",  a:"Voc\u00ea entra na lista de espera da regi\u00e3o."}
 ];
 
-const FAQ_ITEMS = [
-  {
-    q: "Voc\u00eas garantem pacientes?",
-    a: "N\u00e3o. Nenhuma ag\u00eancia s\u00e9ria pode prometer pacientes, e o CFO n\u00e3o permite. A garantia \u00e9 sobre o retorno do investimento no sistema, com regras claras."
-  },
-  {
-    q: "Por que n\u00e3o come\u00e7ar com an\u00fancio?",
-    a: "Porque an\u00fancio acelera o que j\u00e1 existe. Se a estrutura vaza, voc\u00ea paga mais caro para perder mais r\u00e1pido. Primeiro a gente fecha os vazamentos."
-  },
-  {
-    q: "J\u00e1 tenho site. Ainda faz sentido?",
-    a: "Sim. O RAIO-X diz o que aproveitar e o que refazer."
-  },
-  {
-    q: "J\u00e1 tenho ag\u00eancia.",
-    a: "O RAIO-X mostra onde est\u00e1 o gargalo. A gente conversa sobre como fica a divis\u00e3o."
-  },
-  {
-    q: "Quanto preciso investir em an\u00fancio depois?",
-    a: "A partir de R$3 mil/m\u00eas, a partir da semana 6."
-  },
-  {
-    q: "Quem faz as fotos?",
-    a: "Para cl\u00ednicas em S\u00e3o Paulo, vamos at\u00e9 voc\u00ea, no hor\u00e1rio que n\u00e3o atrapalhe os atendimentos. Para cl\u00ednicas em outras cidades, enviamos guia de produ\u00e7\u00e3o e indicamos um parceiro local."
-  },
-  {
-    q: "O que acontece com o site se eu pedir a garantia?",
-    a: "Voc\u00ea fica com as fotos e com o perfil do Google refeito. Site, p\u00e1ginas e sistemas s\u00e3o desativados."
-  },
-  {
-    q: "E se minha regi\u00e3o j\u00e1 estiver ocupada?",
-    a: "Voc\u00ea entra na lista de espera da regi\u00e3o."
-  }
-];
-
-/* ═══════════════════════════════════════════════════════
-   SAFE LOCALSTORAGE WRAPPER
-═══════════════════════════════════════════════════════ */
-const ls = {
-  get: function(k)    { try { return localStorage.getItem(k); }       catch(e) { return null; } },
-  set: function(k, v) { try { localStorage.setItem(k, String(v)); }   catch(e) {} },
-  del: function(k)    { try { localStorage.removeItem(k); }           catch(e) {} }
+/* ── localStorage ────────────────────────────────────── */
+var ls = {
+  get: function(k){try{return localStorage.getItem(k);}catch(e){return null;}},
+  set: function(k,v){try{localStorage.setItem(k,String(v));}catch(e){}},
+  del: function(k){try{localStorage.removeItem(k);}catch(e){}}
 };
 
-/* ═══════════════════════════════════════════════════════
-   CAPTURE ?c= CLINIC SLUG
-═══════════════════════════════════════════════════════ */
-(function() {
-  try {
-    var c = new URL(location.href).searchParams.get('c');
-    if (c) ls.set('pt_clinica', c);
-  } catch(e) {}
-})();
+/* ── Clinic slug ──────────────────────────────────────── */
+(function(){try{var c=new URL(location.href).searchParams.get('c');if(c)ls.set('pt_clinica',c);}catch(e){}})();
 
-/* ═══════════════════════════════════════════════════════
-   MICROSOFT CLARITY + LGPD
-═══════════════════════════════════════════════════════ */
+/* ── Clarity + LGPD ──────────────────────────────────── */
 var clarityReady = false;
+function loadClarity(){
+  if(clarityReady)return; clarityReady=true;
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","[CLARITY_PROJECT_ID]");
+  try{var cl=ls.get('pt_clinica');if(cl)clarity("set","clinica",cl);}catch(e){}
+}
+function trackEvent(n){if(!clarityReady)return;try{clarity("event",n);}catch(e){}}
 
-function loadClarity() {
-  if (clarityReady) return;
-  clarityReady = true;
-  (function(c, l, a, r, i, t, y) {
-    c[a] = c[a] || function() { (c[a].q = c[a].q || []).push(arguments); };
-    t = l.createElement(r); t.async = 1;
-    t.src = "https://www.clarity.ms/tag/" + i;
-    y = l.getElementsByTagName(r)[0];
-    y.parentNode.insertBefore(t, y);
-  })(window, document, "clarity", "script", "[CLARITY_PROJECT_ID]");
+var lgpdEl = document.getElementById('lgpd-banner');
+document.getElementById('lgpd-ok').addEventListener('click',function(){lgpdEl.classList.add('hidden');ls.set('pt_lgpd','1');loadClarity();});
+if(ls.get('pt_lgpd')==='1'){lgpdEl.classList.add('hidden');loadClarity();}
 
-  try {
-    var clinica = ls.get('pt_clinica');
-    if (clinica) clarity("set", "clinica", clinica);
-  } catch(e) {}
+/* ── WhatsApp links ──────────────────────────────────── */
+function applyWA(){
+  var href='https://wa.me/'+CONFIG.WHATSAPP_NUMBER+'?text='+encodeURIComponent(CONFIG.WHATSAPP_TEXT);
+  ['cta-wa-1','cta-wa-2'].forEach(function(id){var el=document.getElementById(id);if(el)el.href=href;});
+  document.querySelectorAll('.btn-whatsapp').forEach(function(el){el.addEventListener('click',function(){trackEvent('cta_click');});});
 }
 
-function trackEvent(name) {
-  if (!clarityReady) return;
-  try { clarity("event", name); } catch(e) {}
+/* ── Render helpers ──────────────────────────────────── */
+function renderStack(){
+  var el=document.getElementById('stack-grid');if(!el)return;
+  el.innerHTML=STACK.map(function(s){return'<div class="stack-card"><div class="stack-num">'+s.num+'</div><h3>'+s.nome+'</h3><p>'+s.desc+'</p><div class="stack-value">'+s.valor+'</div></div>';}).join('');
 }
-
-var lgpdBanner = document.getElementById('lgpd-banner');
-var lgpdOk     = document.getElementById('lgpd-ok');
-
-if (ls.get('pt_lgpd') === '1') {
-  lgpdBanner.classList.add('hidden');
-  loadClarity();
+function renderBonuses(){
+  var el=document.getElementById('bonus-grid');if(!el)return;
+  el.innerHTML=BONUSES.map(function(b){return'<div class="bonus-card"><h3>'+b.nome+'</h3><p>'+b.desc+'</p><div class="stack-value">'+b.valor+'</div></div>';}).join('');
 }
-
-lgpdOk.addEventListener('click', function() {
-  lgpdBanner.classList.add('hidden');
-  ls.set('pt_lgpd', '1');
-  loadClarity();
-});
-
-/* ═══════════════════════════════════════════════════════
-   WHATSAPP LINK BUILDER
-═══════════════════════════════════════════════════════ */
-function buildWAHref() {
-  return 'https://wa.me/' + CONFIG.WHATSAPP_NUMBER +
-         '?text=' + encodeURIComponent(CONFIG.WHATSAPP_TEXT);
+function renderChecklist(){
+  var el=document.getElementById('checklist');if(!el)return;
+  var svg='<svg viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>';
+  el.innerHTML=CHECKLIST.map(function(item){return'<div class="checklist-item"><span class="check-icon">'+svg+'</span><span>'+item+'</span></div>';}).join('');
 }
-
-function applyWALinks() {
-  var href = buildWAHref();
-  ['cta-wa-1', 'cta-wa-2'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) el.href = href;
-  });
-
-  document.querySelectorAll('.btn-whatsapp').forEach(function(el) {
-    el.addEventListener('click', function() { trackEvent('cta_click'); });
-  });
+function renderTimeline(){
+  var el=document.getElementById('timeline');if(!el)return;
+  el.innerHTML=TIMELINE.map(function(t){return'<div class="tl-item'+(t.h?' highlight':'')+'"><div class="tl-label">'+t.label+'</div><p class="tl-desc">'+t.desc+'</p></div>';}).join('');
 }
-
-/* ═══════════════════════════════════════════════════════
-   RENDER: STACK CARDS
-═══════════════════════════════════════════════════════ */
-function renderStack() {
-  var el = document.getElementById('stack-grid');
-  if (!el) return;
-  el.innerHTML = STACK.map(function(item) {
-    return '<div class="stack-card">' +
-      '<div class="stack-num">' + item.num + '</div>' +
-      '<h3>' + item.nome + '</h3>' +
-      '<p>' + item.desc + '</p>' +
-      '<div class="stack-value">' + item.valor + '</div>' +
-      '</div>';
+function renderInvestment(){
+  var el=document.getElementById('investment-block');if(!el)return;
+  var t=CONFIG.TURMAS[CONFIG.TURMA_ATUAL],isLast=CONFIG.TURMA_ATUAL===CONFIG.TURMAS.length-1;
+  var sf=!isLast?'<p class="price-strike-full">Pre\u00e7o cheio: '+CONFIG.PRECO_CHEIO+'</p>':'';
+  var fn=CONFIG.TURMA_ATUAL===0?'<div class="founder-note">Pre\u00e7o de turma fundadora. Em troca, voc\u00ea autoriza a documenta\u00e7\u00e3o dos n\u00fameros reais do Placar e grava um depoimento de 2 min no dia 90.</div>':'';
+  var ld=CONFIG.TURMAS.map(function(tu,i){
+    var cls=i<CONFIG.TURMA_ATUAL?'past':i===CONFIG.TURMA_ATUAL?'current':'future';
+    var r=i<CONFIG.TURMA_ATUAL?'<span class="ladder-status">encerrada</span>':'<span class="ladder-price">'+tu.avista+'</span>';
+    return'<div class="ladder-item '+cls+'"><span class="ladder-name">'+tu.nome+'</span>'+r+'</div>';
+  }).join('');
+  el.innerHTML='<p class="price-strike-total">R$35.000</p>'+sf+'<p class="price-turma-label">'+t.nome+'</p><p class="price-main">'+t.avista+' \u00e0 vista</p><p class="price-installment">ou '+t.parcelado+'</p>'+fn+'<div class="price-ladder">'+ld+'</div><p class="price-compare">Compare com um \u00fanico caso de implante fechado na sua cl\u00ednica.</p>';
+}
+function renderTurmas(){
+  var el=document.getElementById('turmas-grid');if(!el)return;
+  el.innerHTML=CONFIG.TURMAS.map(function(t,i){
+    var cls=i<CONFIG.TURMA_ATUAL?'past':i===CONFIG.TURMA_ATUAL?'current':'future';
+    var b=i<CONFIG.TURMA_ATUAL?'<div class="turma-encerrada">Encerrada</div>':'<div class="turma-price">'+t.avista+'</div><div class="turma-fecha">Fecha em '+t.fecha+'</div>';
+    return'<div class="turma-card '+cls+'"><div class="turma-name">'+t.nome+'</div>'+b+'</div>';
   }).join('');
 }
-
-/* ═══════════════════════════════════════════════════════
-   RENDER: BONUS CARDS
-═══════════════════════════════════════════════════════ */
-function renderBonuses() {
-  var el = document.getElementById('bonus-grid');
-  if (!el) return;
-  el.innerHTML = BONUSES.map(function(b) {
-    return '<div class="bonus-card">' +
-      '<h3>' + b.nome + '</h3>' +
-      '<p>' + b.desc + '</p>' +
-      '<div class="stack-value">' + b.valor + '</div>' +
-      '</div>';
-  }).join('');
-}
-
-/* ═══════════════════════════════════════════════════════
-   RENDER: CHECKLIST
-═══════════════════════════════════════════════════════ */
-function renderChecklist() {
-  var el = document.getElementById('checklist');
-  if (!el) return;
-  var svg = '<svg viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>';
-  el.innerHTML = CHECKLIST_ITEMS.map(function(item) {
-    return '<div class="checklist-item">' +
-      '<div class="check-box">' + svg + '</div>' +
-      '<span>' + item + '</span>' +
-      '</div>';
-  }).join('');
-}
-
-/* ═══════════════════════════════════════════════════════
-   RENDER: TIMELINE
-═══════════════════════════════════════════════════════ */
-function renderTimeline() {
-  var el = document.getElementById('timeline');
-  if (!el) return;
-  el.innerHTML = TIMELINE_ITEMS.map(function(t) {
-    return '<div class="tl-item' + (t.highlight ? ' highlight' : '') + '">' +
-      '<div class="tl-label">' + t.label + '</div>' +
-      '<p class="tl-desc">' + t.desc + '</p>' +
-      '</div>';
-  }).join('');
-}
-
-/* ═══════════════════════════════════════════════════════
-   RENDER: INVESTMENT BLOCK
-═══════════════════════════════════════════════════════ */
-function renderInvestment() {
-  var el = document.getElementById('investment-block');
-  if (!el) return;
-  var t      = CONFIG.TURMAS[CONFIG.TURMA_ATUAL];
-  var isLast = CONFIG.TURMA_ATUAL === CONFIG.TURMAS.length - 1;
-
-  var strikeFull = !isLast
-    ? '<p class="price-strike-full">Pre\u00e7o cheio: ' + CONFIG.PRECO_CHEIO + '</p>'
-    : '';
-
-  var founderNote = CONFIG.TURMA_ATUAL === 0
-    ? '<div class="founder-note">Pre\u00e7o de turma fundadora. Em troca, voc\u00ea autoriza a documenta\u00e7\u00e3o dos n\u00fameros reais do Placar e grava um depoimento de 2 min no dia 90.</div>'
-    : '';
-
-  var ladder = CONFIG.TURMAS.map(function(turma, i) {
-    var cls    = i < CONFIG.TURMA_ATUAL ? 'past' : i === CONFIG.TURMA_ATUAL ? 'current' : 'future';
-    var right  = i < CONFIG.TURMA_ATUAL
-      ? '<span class="ladder-status">encerrada</span>'
-      : '<span class="ladder-price">' + turma.avista + '</span>';
-    return '<div class="ladder-item ' + cls + '">' +
-      '<span class="ladder-name">' + turma.nome + '</span>' +
-      right +
-      '</div>';
-  }).join('');
-
-  el.innerHTML =
-    '<p class="price-strike-total">R$35.000</p>' +
-    strikeFull +
-    '<p class="price-turma-label">' + t.nome + '</p>' +
-    '<p class="price-main">' + t.avista + ' \u00e0 vista</p>' +
-    '<p class="price-installment">ou ' + t.parcelado + '</p>' +
-    founderNote +
-    '<div class="price-ladder">' + ladder + '</div>' +
-    '<p class="price-compare">Compare com um \u00fanico caso de implante fechado na sua cl\u00ednica.</p>';
-}
-
-/* ═══════════════════════════════════════════════════════
-   RENDER: TURMAS CARDS
-═══════════════════════════════════════════════════════ */
-function renderTurmas() {
-  var el = document.getElementById('turmas-grid');
-  if (!el) return;
-  el.innerHTML = CONFIG.TURMAS.map(function(t, i) {
-    var cls    = i < CONFIG.TURMA_ATUAL ? 'past' : i === CONFIG.TURMA_ATUAL ? 'current' : 'future';
-    var isPast = i < CONFIG.TURMA_ATUAL;
-    return '<div class="turma-card ' + cls + '">' +
-      '<div class="turma-name">' + t.nome + '</div>' +
-      (isPast
-        ? '<div class="turma-encerrada">Encerrada</div>'
-        : '<div class="turma-price">' + t.avista + '</div><div class="turma-fecha">Fecha em ' + t.fecha + '</div>'
-      ) +
-      '</div>';
-  }).join('');
-}
-
-/* ═══════════════════════════════════════════════════════
-   RENDER: FAQ ACCORDION
-═══════════════════════════════════════════════════════ */
-function renderFAQ() {
-  var el = document.getElementById('faq-list');
-  if (!el) return;
-  el.innerHTML = FAQ_ITEMS.map(function(item, i) {
-    return '<div class="faq-item">' +
-      '<button class="faq-q" aria-expanded="false" data-idx="' + i + '">' +
-        '<span>' + item.q + '</span>' +
-        '<span class="faq-icon">+</span>' +
-      '</button>' +
-      '<div class="faq-a" id="faq-a-' + i + '">' + item.a + '</div>' +
-      '</div>';
-  }).join('');
-
-  el.addEventListener('click', function(e) {
-    var btn = e.target.closest('.faq-q');
-    if (!btn) return;
-    var idx      = btn.dataset.idx;
-    var expanded = btn.getAttribute('aria-expanded') === 'true';
-    el.querySelectorAll('.faq-q').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
-    el.querySelectorAll('.faq-a').forEach(function(a) { a.classList.remove('open'); });
-    if (!expanded) {
-      btn.setAttribute('aria-expanded', 'true');
-      document.getElementById('faq-a-' + idx).classList.add('open');
-    }
+function renderFAQ(){
+  var el=document.getElementById('faq-list');if(!el)return;
+  el.innerHTML=FAQS.map(function(f,i){return'<div class="faq-item"><button class="faq-q" aria-expanded="false" data-idx="'+i+'"><span>'+f.q+'</span><span class="faq-icon">+</span></button><div class="faq-a" id="fa-'+i+'">'+f.a+'</div></div>';}).join('');
+  el.addEventListener('click',function(e){
+    var btn=e.target.closest('.faq-q');if(!btn)return;
+    var idx=btn.dataset.idx,open=btn.getAttribute('aria-expanded')==='true';
+    el.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');});
+    el.querySelectorAll('.faq-a').forEach(function(a){a.classList.remove('open');});
+    if(!open){btn.setAttribute('aria-expanded','true');document.getElementById('fa-'+idx).classList.add('open');}
   });
 }
 
-/* ═══════════════════════════════════════════════════════
-   UNLOCK CONTENT
-═══════════════════════════════════════════════════════ */
-function revealUnlocked(animate) {
-  var el = document.getElementById('unlocked-content');
-  el.style.display = 'block';
-  if (animate) {
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() { el.style.opacity = '1'; });
-    });
-  } else {
-    el.style.opacity = '1';
-  }
+/* ── Unlock ──────────────────────────────────────────── */
+function revealUnlocked(animate){
+  var el=document.getElementById('unlocked-content');
+  el.style.display='block';
+  if(animate){requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.opacity='1';});});}
+  else{el.style.opacity='1';}
+}
+function unlockAndPersist(){
+  if(ls.get('pt_unlocked')==='1')return;
+  ls.set('pt_unlocked','1');revealUnlocked(true);trackEvent('cta_unlocked');
 }
 
-function unlockAndPersist() {
-  if (ls.get('pt_unlocked') === '1') return; // already done
-  ls.set('pt_unlocked', '1');
-  revealUnlocked(true);
-  trackEvent('cta_unlocked');
-}
+/* ── Video player ─────────────────────────────────────── */
+(function(){
+  var video=document.getElementById('vsl'),overlay=document.getElementById('play-overlay'),
+      resumeDlg=document.getElementById('resume-dialog'),
+      btnSim=document.getElementById('btn-sim'),btnRe=document.getElementById('btn-recomecar'),
+      btnPP=document.getElementById('btn-play-pause'),
+      iconPlay=document.getElementById('icon-play'),iconPause=document.getElementById('icon-pause'),
+      fill=document.getElementById('progress-fill'),pw=document.getElementById('progress-wrap');
+  if(!video)return;
+  video.src=CONFIG.VIDEO_URL; video.poster=CONFIG.POSTER_URL;
+  var savedMax=parseFloat(ls.get('pt_max')||'0')||0, maxW=savedMax, isSeeking=false, hasPlayed=false;
+  var kwF=[false,false,false], pF={p25:false,p50:false,p75:false,p100:false};
 
-/* ═══════════════════════════════════════════════════════
-   VIDEO PLAYER
-═══════════════════════════════════════════════════════ */
-(function initPlayer() {
-  var video        = document.getElementById('vsl');
-  var overlay      = document.getElementById('play-overlay');
-  var resumeDlg    = document.getElementById('resume-dialog');
-  var btnSim       = document.getElementById('btn-sim');
-  var btnRecomecar = document.getElementById('btn-recomecar');
-  var btnPP        = document.getElementById('btn-play-pause');
-  var iconPlay     = document.getElementById('icon-play');
-  var iconPause    = document.getElementById('icon-pause');
-  var fill         = document.getElementById('progress-fill');
-  var progressWrap = document.getElementById('progress-wrap');
+  function syncIcon(){var p=video.paused||video.ended;iconPlay.style.display=p?'':'none';iconPause.style.display=p?'none':'';}
 
-  if (!video) return;
+  overlay.addEventListener('click',function(){
+    video.muted=false; overlay.classList.add('hidden');
+    if(savedMax>10){resumeDlg.classList.remove('hidden');}
+    else{video.currentTime=0;maxW=0;video.play().catch(function(){});}
+  });
+  btnSim.addEventListener('click',function(){resumeDlg.classList.add('hidden');maxW=savedMax;video.currentTime=savedMax;video.play().catch(function(){});});
+  btnRe.addEventListener('click',function(){resumeDlg.classList.add('hidden');savedMax=0;maxW=0;ls.del('pt_max');video.currentTime=0;video.play().catch(function(){});});
+  btnPP.addEventListener('click',function(){if(video.paused||video.ended){video.play().catch(function(){});}else{video.pause();}});
 
-  // Set src & poster from CONFIG
-  video.src    = CONFIG.VIDEO_URL;
-  video.poster = CONFIG.POSTER_URL;
-
-  // State
-  var savedMax  = parseFloat(ls.get('pt_max') || '0') || 0;
-  var maxWatched = savedMax;
-  var isSeeking  = false;
-  var hasPlayed  = false;
-  var kwFired    = [false, false, false];
-  var pctFired   = { p25: false, p50: false, p75: false, p100: false };
-
-  // ── Sync play/pause icon ──────────────────────────
-  function syncIcon() {
-    var paused = video.paused || video.ended;
-    iconPlay.style.display  = paused ? '' : 'none';
-    iconPause.style.display = paused ? 'none' : '';
+  if(pw){
+    pw.addEventListener('click',function(e){e.stopPropagation();});
+    pw.addEventListener('mousedown',function(e){e.preventDefault();});
+    pw.addEventListener('touchstart',function(e){e.preventDefault();},{passive:false});
   }
 
-  // ── Overlay: tap to play with sound ──────────────
-  overlay.addEventListener('click', function() {
-    video.muted = false;
-    overlay.classList.add('hidden');
+  video.addEventListener('timeupdate',function(){
+    var t=video.currentTime,dur=video.duration;
+    if(t>maxW)maxW=t;
+    if(dur>0)fill.style.width=((t/dur)*100).toFixed(2)+'%';
+    if(dur>0){var pct=t/dur;
+      if(!pF.p25 &&pct>=.25){pF.p25 =true;trackEvent('vsl_25' );}
+      if(!pF.p50 &&pct>=.50){pF.p50 =true;trackEvent('vsl_50' );}
+      if(!pF.p75 &&pct>=.75){pF.p75 =true;trackEvent('vsl_75' );}
+      if(!pF.p100&&pct>=.99){pF.p100=true;trackEvent('vsl_100');}
+    }
+    CONFIG.KEYWORD_TIMES.forEach(function(ts,i){if(!kwF[i]&&maxW>=ts){kwF[i]=true;trackEvent('kw'+(i+1)+'_reached');}});
+    if(maxW>=CONFIG.CTA_TIME)unlockAndPersist();
+  });
 
-    if (savedMax > 10) {
-      // Show resume dialog; don't auto-start yet
-      resumeDlg.classList.remove('hidden');
-    } else {
-      video.currentTime = 0;
-      maxWatched = 0;
-      video.play().catch(function() {});
+  video.addEventListener('seeking',function(){
+    if(isSeeking)return;
+    if(video.currentTime>maxW+1){isSeeking=true;video.currentTime=maxW;setTimeout(function(){isSeeking=false;},100);}
+  });
+  video.addEventListener('ratechange',function(){if(video.playbackRate!==1)video.playbackRate=1;});
+  document.addEventListener('keydown',function(e){
+    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].indexOf(e.key)!==-1){
+      if(document.activeElement===video||document.activeElement===btnPP||document.activeElement===document.body)e.preventDefault();
     }
   });
-
-  // ── Resume Dialog ─────────────────────────────────
-  btnSim.addEventListener('click', function() {
-    resumeDlg.classList.add('hidden');
-    maxWatched = savedMax;
-    video.currentTime = savedMax;
-    video.play().catch(function() {});
-  });
-
-  btnRecomecar.addEventListener('click', function() {
-    resumeDlg.classList.add('hidden');
-    savedMax   = 0;
-    maxWatched = 0;
-    ls.del('pt_max');
-    video.currentTime = 0;
-    video.play().catch(function() {});
-  });
-
-  // ── Play/Pause button ─────────────────────────────
-  btnPP.addEventListener('click', function() {
-    if (video.paused || video.ended) {
-      video.play().catch(function() {});
-    } else {
-      video.pause();
-    }
-  });
-
-  // Block clicks on progress bar (no seeking via UI)
-  if (progressWrap) {
-    progressWrap.addEventListener('click', function(e) { e.stopPropagation(); });
-    progressWrap.addEventListener('mousedown', function(e) { e.preventDefault(); });
-    progressWrap.addEventListener('touchstart', function(e) { e.preventDefault(); });
-  }
-
-  // ── Time update ───────────────────────────────────
-  video.addEventListener('timeupdate', function() {
-    var t   = video.currentTime;
-    var dur = video.duration;
-
-    // Track maxWatched
-    if (t > maxWatched) maxWatched = t;
-
-    // Progress bar
-    if (dur && dur > 0) {
-      fill.style.width = ((t / dur) * 100).toFixed(2) + '%';
-    }
-
-    // Percentage events
-    if (dur > 0) {
-      var pct = t / dur;
-      if (!pctFired.p25  && pct >= 0.25) { pctFired.p25  = true; trackEvent('vsl_25');  }
-      if (!pctFired.p50  && pct >= 0.50) { pctFired.p50  = true; trackEvent('vsl_50');  }
-      if (!pctFired.p75  && pct >= 0.75) { pctFired.p75  = true; trackEvent('vsl_75');  }
-      if (!pctFired.p100 && pct >= 0.99) { pctFired.p100 = true; trackEvent('vsl_100'); }
-    }
-
-    // Keyword events (at KEYWORD_TIMES — event names only, never the words)
-    CONFIG.KEYWORD_TIMES.forEach(function(ts, i) {
-      if (!kwFired[i] && maxWatched >= ts) {
-        kwFired[i] = true;
-        trackEvent('kw' + (i + 1) + '_reached');
-      }
-    });
-
-    // CTA unlock
-    if (maxWatched >= CONFIG.CTA_TIME) {
-      unlockAndPersist();
-    }
-  });
-
-  // ── Anti-seek: block forward jumps ───────────────
-  video.addEventListener('seeking', function() {
-    if (isSeeking) return;
-    var target = video.currentTime;
-    if (target > maxWatched + 1) {
-      isSeeking = true;
-      video.currentTime = maxWatched;
-      setTimeout(function() { isSeeking = false; }, 100);
-    }
-  });
-
-  // ── Speed lock ────────────────────────────────────
-  video.addEventListener('ratechange', function() {
-    if (video.playbackRate !== 1) video.playbackRate = 1;
-  });
-
-  // ── Block keyboard seek ───────────────────────────
-  document.addEventListener('keydown', function(e) {
-    var seekKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
-    if (seekKeys.indexOf(e.key) !== -1) {
-      var active = document.activeElement;
-      if (active === video || active === btnPP || active === document.body) {
-        e.preventDefault();
-      }
-    }
-  });
-
-  // ── Disable context menu on video ─────────────────
-  video.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
-  // ── Play event ────────────────────────────────────
-  video.addEventListener('play', function() {
-    syncIcon();
-    if (!hasPlayed) { hasPlayed = true; trackEvent('vsl_play'); }
-  });
-
-  video.addEventListener('pause',  syncIcon);
-  video.addEventListener('ended',  syncIcon);
-  video.addEventListener('waiting', function() {});
-
-  // ── Persist maxWatched every 5s ───────────────────
-  setInterval(function() {
-    if (maxWatched > 0) ls.set('pt_max', maxWatched.toFixed(2));
-  }, 5000);
-
-  // ── Attempt autoplay (muted) ──────────────────────
-  // If blocked, overlay remains until user taps
-  video.play().catch(function() { /* overlay handles it */ });
+  video.addEventListener('contextmenu',function(e){e.preventDefault();});
+  video.addEventListener('play', function(){syncIcon();if(!hasPlayed){hasPlayed=true;trackEvent('vsl_play');}});
+  video.addEventListener('pause',syncIcon);
+  video.addEventListener('ended',syncIcon);
+  setInterval(function(){if(maxW>0)ls.set('pt_max',maxW.toFixed(2));},5000);
+  video.play().catch(function(){});
 })();
 
-/* ═══════════════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════════════ */
-(function init() {
-  applyWALinks();
-  renderStack();
-  renderBonuses();
-  renderChecklist();
-  renderTimeline();
-  renderInvestment();
-  renderTurmas();
-  renderFAQ();
-
-  // Restore unlocked state on return
-  if (ls.get('pt_unlocked') === '1') {
-    revealUnlocked(false);
-  }
+/* ── Init ────────────────────────────────────────────── */
+(function(){
+  applyWA();renderStack();renderBonuses();renderChecklist();
+  renderTimeline();renderInvestment();renderTurmas();renderFAQ();
+  if(ls.get('pt_unlocked')==='1')revealUnlocked(false);
 })();
 </script>
-
 </body>
 </html>
