@@ -420,8 +420,6 @@
 <!-- ── PARA QUEM É / NÃO É (light) ─────────────────── -->
 <section style="background:var(--bg);padding:5rem 0;">
   <div class="container">
-    <p class="section-label">Qualificação</p>
-    <h2>Esse programa é para você?</h2>
     <div class="qual-grid">
       <div class="qual-box yes">
         <h3>É para você se:</h3>
@@ -482,7 +480,6 @@
   <!-- STACK (light) -->
   <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
-      <p class="section-label">O que está incluso</p>
       <h2>O que eu instalo na sua clínica</h2>
       <div class="stack-grid" id="stack-grid"></div>
     </div>
@@ -493,7 +490,6 @@
   <!-- BONUS (trust bg) -->
   <section style="background:var(--bg-trust);padding:5rem 0;">
     <div class="container">
-      <p class="section-label">Bônus incluídos</p>
       <h2>E mais 3 bônus</h2>
       <div class="bonus-grid" id="bonus-grid"></div>
       <div class="total-line">Valor total: <strong>R$35.000</strong></div>
@@ -503,7 +499,6 @@
   <!-- A SUA PARTE (light) -->
   <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
-      <p class="section-label">Comprometimento</p>
       <h2>A minha parte e a sua</h2>
       <p class="section-intro" style="margin:1rem 0 2rem;">Não é mágica e eu não faço sozinho. Se você cumprir a sua parte, na semana 6 a sua clínica recebe a Liberação para Jogo e pode começar a anunciar.</p>
       <div class="checklist" id="checklist"></div>
@@ -515,8 +510,6 @@
   <!-- INVESTIMENTO (trust bg) -->
   <section class="investment">
     <div class="container">
-      <p class="section-label">Investimento</p>
-      <h2>O valor do programa</h2>
       <div id="investment-block" style="margin-top:2rem;"></div>
     </div>
   </section>
@@ -524,7 +517,6 @@
   <!-- GARANTIA (light) -->
   <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
-      <p class="section-label">Garantia</p>
       <h2>Garantia Pague-se em 90 Dias</h2>
       <div class="guarantee-box">
         <p>Se você cumpriu a sua parte e, em 90 dias, o sistema não trouxe de volta em tratamentos fechados pelo menos o valor investido — contando a Operação Rebote e tudo registrado no Placar — você recebe 100% de volta. E fica com as fotos e com o perfil do Google refeito.</p>
@@ -540,7 +532,6 @@
   <!-- VAGAS (trust bg) -->
   <section style="background:var(--bg-trust);padding:5rem 0;">
     <div class="container">
-      <p class="section-label">Exclusividade</p>
       <h2>Vagas e exclusividade</h2>
       <p class="vagas-text">15 vagas em 3 turmas de 5 — trabalho personalizado e dedicado a cada clínica.</p>
       <p class="vagas-text">1 clínica de implante por região. Se a vaga da sua região for preenchida, ela fecha.</p>
@@ -552,7 +543,6 @@
   <!-- FAQ (light) -->
   <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
-      <p class="section-label">Dúvidas</p>
       <h2>Perguntas frequentes</h2>
       <div class="faq-list" id="faq-list"></div>
     </div>
@@ -575,16 +565,17 @@
 <footer>
   <div class="container">
     <p>LK Digital · lkdigital.odo.br · São Paulo — SP</p>
-    <p><a href="/privacidade">Privacidade (LGPD)</a> &nbsp;·&nbsp; <a href="/termos">Termos de Uso</a></p>
+    <p><a href="/privacidade">Privacidade (LGPD)</a></p>
   </div>
 </footer>
 
 <script>
 /* ── CONFIG ─────────────────────────────────────────── */
 const CONFIG = {
-  VIDEO_URL:       "[VIDEO_URL_MP4]",
-  POSTER_URL:      "[POSTER_IMAGE]",
-  KEYWORD_TIMES:   [195, 420, 525],
+  VIDEO_URL:          "[VIDEO_URL_MP4]",
+  POSTER_URL:         "[POSTER_IMAGE]",
+  VIDEO_LENGTH_LABEL: "~10 min",
+  KEYWORD_TIMES:      [195, 420, 525],
   CTA_TIME:        570,
   WHATSAPP_NUMBER: "[55DDDNUMERO]",
   WHATSAPP_TEXT:   "Assisti ao vídeo da Pré-Temporada. Minhas 3 palavras: ",
