@@ -189,6 +189,12 @@
     .qual-box.yes .qi { color: var(--accent); }
     .qual-box.no  .qi { color: #ef4444; }
 
+    /* ── 90-day results list ─────────────────────────────── */
+    .results-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; margin-top: 1.5rem; }
+    .results-list li { display: flex; align-items: flex-start; gap: .75rem; font-size: .95rem; color: var(--text-muted); line-height: 1.55; }
+    .result-check { flex-shrink: 0; width: 20px; height: 20px; background: rgba(197,163,104,.1); border: 1px solid rgba(197,163,104,.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .result-check svg { width: 10px; height: 10px; stroke: var(--accent); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
     /* ── Unlocked content wrapper ──────────────────────── */
     #unlocked-content { display: none; opacity: 0; transition: opacity .6s ease; }
 
@@ -234,6 +240,8 @@
     .stack-card p  { font-size: .85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: .5rem; }
     .stack-card em { font-style: italic; opacity: .75; }
     .stack-value   { font-size: .75rem; color: var(--text-muted); opacity: .4; text-decoration: line-through; }
+    .stack-label   { font-size: .62rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: .35rem; opacity: .8; }
+    .stack-result  { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--text); margin-bottom: .4rem; line-height: 1.25; }
 
     /* ── Bonus cards (trust bg section) ───────────────── */
     .bonus-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
@@ -245,6 +253,8 @@
     }
     .bonus-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--accent-dark); margin-bottom: .5rem; }
     .bonus-card p  { font-size: .85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: .5rem; }
+    .bonus-result  { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--text); margin-bottom: .35rem; line-height: 1.25; }
+    .bonus-label   { font-size: .62rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: .35rem; opacity: .8; }
     .total-line    { text-align: right; font-size: .9rem; font-weight: 500; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
     .total-line strong { color: var(--text); }
 
@@ -477,10 +487,26 @@
     </div>
   </section>
 
+  <!-- RESULTS (light) -->
+  <section style="background:var(--bg);padding:5rem 0;">
+    <div class="container">
+      <p class="section-label">Resultado</p>
+      <h2>O que muda na sua clínica em 90 dias</h2>
+      <ul class="results-list">
+        <li><span class="result-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Contato respondido em minutos, não em horas</li>
+        <li><span class="result-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Secretária gastando tempo só com quem tem perfil</li>
+        <li><span class="result-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Orçamentos de implante parados voltando como tratamento</li>
+        <li><span class="result-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Os números da clínica na mão, toda semana</li>
+        <li><span class="result-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Clínica pronta para anunciar na semana 6 — numa estrutura que não vaza</li>
+      </ul>
+    </div>
+  </section>
+
   <!-- STACK (light) -->
   <section style="background:var(--bg);padding:5rem 0;">
     <div class="container">
-      <h2>O que eu instalo na sua clínica</h2>
+      <p class="section-label">O que você recebe</p>
+      <h2>Como a gente chega lá</h2>
       <div class="stack-grid" id="stack-grid"></div>
     </div>
   </section>
@@ -590,19 +616,19 @@ const CONFIG = {
 
 /* ── Static data ─────────────────────────────────────── */
 const STACK = [
-  {num:"01",nome:"RAIO-X Completo",desc:"Auditoria do sistema inteiro \u2014 do Google ao fechamento \u2014 com liga\u00e7\u00e3o oculta na recep\u00e7\u00e3o. Voc\u00ea recebe o mapa dos pontos cegos.",valor:"R$3.000"},
-  {num:"02",nome:"Titular no Google",desc:"Perfil do Google refeito: fotos, servi\u00e7os, bot\u00e3o de WhatsApp e fluxo de pedido de avalia\u00e7\u00f5es. Quem mora perto j\u00e1 v\u00ea sua cl\u00ednica; agora passa a escolher.",valor:"R$2.500"},
-  {num:"03",nome:"Ensaio da Cl\u00ednica",desc:"Ensaio fotogr\u00e1fico profissional + 10 a 20 fotos geolocalizadas + v\u00eddeo curto do(a) dentista se apresentando. <em>Cl\u00ednicas em S\u00e3o Paulo recebem o ensaio in loco. Demais cidades recebem guia de produ\u00e7\u00e3o e indica\u00e7\u00e3o de parceiro local.</em>",valor:"R$2.500"},
-  {num:"04",nome:"Site Pronto para IA",desc:"Site otimizado para convers\u00e3o e para aparecer em buscas e respostas de IA (Google, ChatGPT).",valor:"R$6.000"},
-  {num:"05",nome:"P\u00e1ginas de Implante A/B",desc:"Duas p\u00e1ginas de implante em teste. Os dados escolhem a vencedora.",valor:"R$4.000"},
-  {num:"06",nome:"Jogadas Ensaiadas",desc:"Roteiros e playbook de atendimento do primeiro \u201coi\u201d at\u00e9 a avalia\u00e7\u00e3o, com respostas para \u201ct\u00e1 caro\u201d, \u201cvou pensar\u201d e \u201cvou falar com meu marido\u201d. Treinamento ao vivo da equipe.",valor:"R$4.000"},
-  {num:"07",nome:"Sistema Zagueiro",desc:"Resposta imediata no WhatsApp, 24h, que qualifica cada contato. A secret\u00e1ria s\u00f3 entra quando a pessoa tem perfil.",valor:"R$3.000"},
-  {num:"08",nome:"Placar Semanal",desc:"6 n\u00fameros toda semana: contatos, qualificados, avalia\u00e7\u00f5es agendadas, comparecimento, implantes fechados, faturamento.",valor:"R$2.000"}
+  {num:"01",resultado:"Voc\u00ea descobre exatamente onde est\u00e1 perdendo paciente de implante",label:"RAIO-X Completo",como:"Auditoria do Google ao fechamento + liga\u00e7\u00e3o oculta na recep\u00e7\u00e3o.",valor:"R$3.000"},
+  {num:"02",resultado:"Quem j\u00e1 v\u00ea sua cl\u00ednica no Google passa a entrar em contato",label:"Titular no Google",como:"Perfil refeito: fotos, servi\u00e7os, bot\u00e3o de WhatsApp e fluxo de avalia\u00e7\u00f5es.",valor:"R$2.500"},
+  {num:"03",resultado:"Sua cl\u00ednica passa a parecer t\u00e3o boa quanto o seu trabalho",label:"Ensaio da Cl\u00ednica",como:"Ensaio fotogr\u00e1fico feito por n\u00f3s, 10 a 20 fotos geolocalizadas e v\u00eddeo seu se apresentando.",valor:"R$2.500"},
+  {num:"04",resultado:"Seu site vira um vendedor 24h \u2014 e aparece quando o paciente pergunta \u00e0 IA onde fazer implante",label:"Site Pronto para IA",como:"Site otimizado para convers\u00e3o e para buscas e respostas de IA.",valor:"R$6.000"},
+  {num:"05",resultado:"Voc\u00ea sabe qual mensagem faz o paciente de implante agir, antes de gastar em an\u00fancio",label:"P\u00e1ginas de Implante A/B",como:"Duas p\u00e1ginas em teste; os dados escolhem a vencedora.",valor:"R$4.000"},
+  {num:"06",resultado:"Sua secret\u00e1ria transforma mais contatos em avalia\u00e7\u00f5es, sem depender de voc\u00ea",label:"Jogadas Ensaiadas",como:"Roteiros do primeiro \u201coi\u201d \u00e0 avalia\u00e7\u00e3o, respostas para \u201ct\u00e1 caro\u201d, \u201cvou pensar\u201d e \u201cvou falar com meu marido\u201d, treino ao vivo.",valor:"R$4.000"},
+  {num:"07",resultado:"Nenhum contato fica sem resposta \u2014 e a secret\u00e1ria s\u00f3 atende quem tem perfil",label:"Sistema Zagueiro",como:"Resposta imediata no WhatsApp, 24h, qualificando cada contato.",valor:"R$3.000"},
+  {num:"08",resultado:"Voc\u00ea para de achar e passa a saber quanto cada etapa rende",label:"Placar Semanal",como:"6 n\u00fameros toda semana: contatos, qualificados, avalia\u00e7\u00f5es, comparecimento, fechados, faturamento.",valor:"R$2.000"}
 ];
 const BONUSES = [
-  {nome:"Opera\u00e7\u00e3o Rebote",desc:"Reativa\u00e7\u00e3o dos or\u00e7amentos de implante parados. O dinheiro mais r\u00e1pido que existe: essa pessoa j\u00e1 sentou na sua cadeira.",valor:"R$5.000"},
-  {nome:"Kit Concentra\u00e7\u00e3o",desc:"Antes de cada avalia\u00e7\u00e3o, o paciente recebe um \u00e1udio ou v\u00eddeo seu e os lembretes certos para comparecer.",valor:"R$1.500"},
-  {nome:"Olheiro Oculto",desc:"Liga\u00e7\u00f5es an\u00f4nimas mensais na recep\u00e7\u00e3o, com nota de 0 a 10.",valor:"R$1.500"}
+  {resultado:"Or\u00e7amentos parados viram tratamentos fechados \u2014 sem gastar em an\u00fancio",label:"Opera\u00e7\u00e3o Rebote",como:"Reativa\u00e7\u00e3o dos or\u00e7amentos de implante que ficaram na gaveta.",valor:"R$5.000"},
+  {resultado:"Menos cadeira vazia em avalia\u00e7\u00e3o marcada",label:"Kit Concentra\u00e7\u00e3o",como:"\u00c1udio ou v\u00eddeo seu + lembretes certos antes de cada avalia\u00e7\u00e3o.",valor:"R$1.500"},
+  {resultado:"Voc\u00ea sabe como sua recep\u00e7\u00e3o atende quando voc\u00ea n\u00e3o est\u00e1 olhando",label:"Olheiro Oculto",como:"Liga\u00e7\u00f5es an\u00f4nimas mensais com nota de 0 a 10.",valor:"R$1.500"}
 ];
 const CHECKLIST = [
   "Acessos entregues em at\u00e9 48h",
@@ -661,11 +687,11 @@ function applyWA(){
 /* ── Render helpers ──────────────────────────────────── */
 function renderStack(){
   var el=document.getElementById('stack-grid');if(!el)return;
-  el.innerHTML=STACK.map(function(s){return'<div class="stack-card"><div class="stack-num">'+s.num+'</div><h3>'+s.nome+'</h3><p>'+s.desc+'</p><div class="stack-value">'+s.valor+'</div></div>';}).join('');
+  el.innerHTML=STACK.map(function(s){return'<div class="stack-card"><div class="stack-num">'+s.num+'</div><p class="stack-result">'+s.resultado+'</p><div class="stack-label">'+s.label+'</div><p>'+s.como+'</p><div class="stack-value">'+s.valor+'</div></div>';}).join('');
 }
 function renderBonuses(){
   var el=document.getElementById('bonus-grid');if(!el)return;
-  el.innerHTML=BONUSES.map(function(b){return'<div class="bonus-card"><h3>'+b.nome+'</h3><p>'+b.desc+'</p><div class="stack-value">'+b.valor+'</div></div>';}).join('');
+  el.innerHTML=BONUSES.map(function(b){return'<div class="bonus-card"><p class="bonus-result">'+b.resultado+'</p><div class="bonus-label">'+b.label+'</div><p>'+b.como+'</p><div class="stack-value">'+b.valor+'</div></div>';}).join('');
 }
 function renderChecklist(){
   var el=document.getElementById('checklist');if(!el)return;
