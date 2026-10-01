@@ -371,6 +371,11 @@
     #lgpd-ok:hover { background: var(--accent-dark); }
 
     .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      #play-overlay, #resume-dialog { transition: none !important; }
+      #progress-fill { transition: none !important; }
+      .pulse-dot { animation: none !important; }
+    }
     .section-intro { color: var(--text-muted); max-width: 560px; line-height: 1.75; }
   </style>
 </head>
@@ -396,15 +401,15 @@
     <p class="subhead">Em 90 dias, a gente monta tudo em volta da sua clínica — e você começa a anunciar na semana 6, numa estrutura que não vaza.</p>
 
     <div class="player-section">
-      <p class="player-hint">Vídeo de ~10 min · Assista até o fim: no vídeo há 3 palavras. Você vai precisar delas.</p>
+      <p class="player-hint">Vídeo de ~12 min · Assista até o fim: no vídeo há 3 palavras. Você vai precisar delas.</p>
       <div id="player-container">
-        <video id="vsl" playsinline muted autoplay preload="metadata"></video>
+        <video id="vsl" playsinline muted autoplay preload="metadata" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback" x-webkit-airplay="deny"></video>
 
-        <div id="play-overlay">
+        <div id="play-overlay" role="button" aria-label="Toque para assistir com som">
           <div class="overlay-circle">
             <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
           </div>
-          <span class="overlay-label">Toque para assistir com som</span>
+          <span class="overlay-label">&#9654; Toque para assistir com som</span>
         </div>
 
         <div id="resume-dialog" class="hidden">
@@ -761,11 +766,14 @@ function unlockAndPersist(){
 
   function syncIcon(){var p=video.paused||video.ended;iconPlay.style.display=p?'':'none';iconPause.style.display=p?'none':'';}
 
-  overlay.addEventListener('click',function(){
+  function handleOverlayTap(e){
+    e.preventDefault();
     video.muted=false; overlay.classList.add('hidden');
     if(savedMax>10){resumeDlg.classList.remove('hidden');}
     else{video.currentTime=0;maxW=0;video.play().catch(function(){});}
-  });
+  }
+  overlay.addEventListener('click', handleOverlayTap);
+  overlay.addEventListener('touchend', handleOverlayTap, {passive:false});
   btnSim.addEventListener('click',function(){resumeDlg.classList.add('hidden');maxW=savedMax;video.currentTime=savedMax;video.play().catch(function(){});});
   btnRe.addEventListener('click',function(){resumeDlg.classList.add('hidden');savedMax=0;maxW=0;ls.del('pt_max');video.currentTime=0;video.play().catch(function(){});});
   btnPP.addEventListener('click',function(){if(video.paused||video.ended){video.play().catch(function(){});}else{video.pause();}});
@@ -795,10 +803,20 @@ function unlockAndPersist(){
     if(video.currentTime>maxW+1){isSeeking=true;video.currentTime=maxW;setTimeout(function(){isSeeking=false;},100);}
   });
   video.addEventListener('ratechange',function(){if(video.playbackRate!==1)video.playbackRate=1;});
+  // Fullscreen lockout — exits immediately if somehow triggered
+  function exitFS(){
+    if(document.fullscreenElement===video)document.exitFullscreen&&document.exitFullscreen();
+    if(document.webkitFullscreenElement===video)document.webkitExitFullscreen&&document.webkitExitFullscreen();
+  }
+  video.addEventListener('fullscreenchange',exitFS);
+  video.addEventListener('webkitfullscreenchange',exitFS);
+  video.addEventListener('webkitbeginfullscreen',function(){video.webkitExitFullscreen&&video.webkitExitFullscreen();});
   document.addEventListener('keydown',function(e){
-    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].indexOf(e.key)!==-1){
+    var blocked=['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'];
+    if(blocked.indexOf(e.key)!==-1){
       if(document.activeElement===video||document.activeElement===btnPP||document.activeElement===document.body)e.preventDefault();
     }
+    if(e.key===' '&&document.activeElement===video){e.preventDefault();}
   });
   video.addEventListener('contextmenu',function(e){e.preventDefault();});
   video.addEventListener('play', function(){syncIcon();if(!hasPlayed){hasPlayed=true;trackEvent('vsl_play');}});
