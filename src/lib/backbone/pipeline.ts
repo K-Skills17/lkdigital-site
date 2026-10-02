@@ -5,6 +5,7 @@
 import { generateText } from "./ai";
 import { leadEvent, sendCapiEvents } from "./capi";
 import { notifyTeam } from "./notify";
+import { hit, LIMITS } from "@/lib/ratelimit";
 import { isValidBrPhone, normalizeBrPhone } from "./phone";
 import { insertToolLead, updateToolLead } from "./store";
 import type { ToolAdapter } from "./types";
@@ -61,7 +62,11 @@ export async function runLeadPipeline<T>(
     report_url: lead.reportUrl,
   });
 
-  const prompt = adapter.prompt(lead, data);
+  // Cap reports per destination number so the forms can't be used to spam
+  // someone's WhatsApp (or burn AI credits). The lead itself is still stored.
+  const phoneAllowed = hasPhone ? (await hit(LIMITS.leadPhoneDaily, phone)).ok : true;
+
+  const prompt = phoneAllowed ? adapter.prompt(lead, data) : null;
   const [plan, capiSent] = await Promise.all([
     prompt
       ? generateText({
@@ -92,9 +97,9 @@ export async function runLeadPipeline<T>(
   let delivery: Awaited<ReturnType<typeof deliverWhatsApp>> = {
     sent: false,
     channel: null,
-    error: hasPhone ? null : "no phone provided",
+    error: !hasPhone ? "no phone provided" : !phoneAllowed ? "rate limited: daily reports to this number reached" : null,
   };
-  if (hasPhone) {
+  if (hasPhone && phoneAllowed) {
     delivery = await deliverWhatsApp({
       phone,
       name: lead.name,

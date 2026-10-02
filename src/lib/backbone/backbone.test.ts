@@ -141,7 +141,7 @@ describe("runLeadPipeline", () => {
 
   beforeEach(() => {
     calls.length = 0;
-    vi.stubEnv("SUPABASE_URL", "");
+    vi.stubEnv("DATABASE_URL", "");
     vi.stubEnv("ANTHROPIC_API_KEY", "");
     vi.stubEnv("LK_CHATBOT_URL", "https://bot.example");
     vi.stubEnv("LK_CHATBOT_API_KEY", "k");

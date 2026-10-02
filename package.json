@@ -13,11 +13,13 @@
     "blog:new": "node scripts/generate-blog-post.mjs",
     "indexnow:submit": "node scripts/submit-indexnow.mjs",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "db:copy-from-supabase": "node scripts/copy-supabase-to-neon.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
-    "@supabase/supabase-js": "^2.108.1",
+    "@neondatabase/serverless": "^1.2.0",
     "cheerio": "^1.2.0",
     "countup.js": "^2.10.0",
     "gsap": "^3.14.2",
@@ -33,6 +35,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

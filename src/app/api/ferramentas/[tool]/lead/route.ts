@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { runLeadPipeline } from "@/lib/backbone/pipeline";
 import { TOOL_ADAPTERS } from "@/lib/backbone/tools";
 import { obj, str } from "@/lib/backbone/types";
+import { clientIp, hitAll, LIMITS, tooManyRequests } from "@/lib/ratelimit";
 
 export const dynamic = "force-dynamic";
 // AI + WhatsApp delivery can take a few seconds.
@@ -14,6 +15,13 @@ export const maxDuration = 30;
 export async function POST(req: NextRequest, { params }: { params: { tool: string } }) {
   const adapter = TOOL_ADAPTERS[params.tool];
   if (!adapter) return NextResponse.json({ error: "Ferramenta desconhecida" }, { status: 404 });
+
+  const ip = clientIp(req.headers);
+  const limited = await hitAll([
+    [LIMITS.leadIpBurst, ip],
+    [LIMITS.leadIpDaily, ip],
+  ]);
+  if (!limited.ok) return tooManyRequests(limited.retryAfter);
 
   let body: unknown;
   try {
@@ -32,7 +40,7 @@ export async function POST(req: NextRequest, { params }: { params: { tool: strin
 
   try {
     const result = await runLeadPipeline(adapter, body, {
-      clientIp: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip"),
+      clientIp: ip || null,
       userAgent: req.headers.get("user-agent"),
       sourceUrl: str(meta.pageUrl) || req.headers.get("referer"),
       eventId: str(meta.eventId) || null,

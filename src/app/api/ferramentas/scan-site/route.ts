@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import * as cheerio from 'cheerio'
 import { lookup } from 'dns/promises'
 import { isIP } from 'net'
+import { clientIp, hit, LIMITS, tooManyRequests } from '@/lib/ratelimit'
 
 // Ported from K-Skills17/Fb-lead-audit-tool src/app/api/audit/route.ts.
 // Lead capture for this tool goes through /api/ferramentas/auditoria-site/lead.
@@ -715,6 +716,9 @@ async function checkPageSpeed(url: string): Promise<AuditCheck[]> {
 }
 
 export async function POST(request: NextRequest) {
+  const limited = await hit(LIMITS.scanIp, clientIp(request.headers))
+  if (!limited.ok) return tooManyRequests(limited.retryAfter)
+
   try {
     const body = await request.json()
     const { url: rawUrl } = body

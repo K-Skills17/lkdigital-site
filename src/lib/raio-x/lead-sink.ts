@@ -1,7 +1,7 @@
 // lib/raio-x/lead-sink.ts
-// Abstracts persistence (Supabase) + Telegram notifications behind a single interface.
+// Abstracts persistence (Neon) + Telegram notifications behind a single interface.
 
-import { getSupabase } from "@/lib/supabase-server";
+import { query } from "@/lib/db";
 import type { Route } from "./score";
 
 export interface LeadPayload {
@@ -20,29 +20,20 @@ export interface LeadPayload {
 
 export interface SinkResult { id: string; }
 
-/** Persist lead to Supabase and fire Telegram notifications. Returns the lead UUID. */
+/** Persist lead to the database and fire Telegram notifications. Returns the lead UUID. */
 export async function sinkLead(payload: LeadPayload): Promise<SinkResult> {
-  const { data, error } = await getSupabase()
-    .from("raio_x_scorecard_leads")
-    .insert({
-      name: payload.name,
-      clinic_name: payload.clinic_name,
-      whatsapp: payload.whatsapp,
-      email: payload.email,
-      answers: payload.answers,
-      vis_score: payload.vis_score,
-      vis_gap: payload.vis_gap,
-      op_score: payload.op_score,
-      op_gap: payload.op_gap,
-      route: payload.route,
-      consent: true,
-    })
-    .select("id")
-    .single();
+  const rows = await query<{ id: string }>(
+    `insert into raio_x_scorecard_leads
+       (name, clinic_name, whatsapp, email, answers, vis_score, vis_gap, op_score, op_gap, route, consent)
+     values ($1, $2, $3, $4, $5::jsonb, $6, $7, $8, $9, $10, true)
+     returning id`,
+    [
+      payload.name, payload.clinic_name, payload.whatsapp, payload.email, JSON.stringify(payload.answers),
+      payload.vis_score, payload.vis_gap, payload.op_score, payload.op_gap, payload.route,
+    ]
+  );
 
-  if (error) throw error;
-
-  const id = (data as { id: string }).id;
+  const id = rows[0].id;
 
   // Await before returning -- Vercel serverless kills pending promises on response
   const tasks = [

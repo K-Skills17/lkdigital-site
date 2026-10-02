@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getSupabase, CURRENT_COHORT, COHORT_LIMIT } from "@/lib/supabase-server";
+import { query } from "@/lib/db";
+import { CURRENT_COHORT, COHORT_LIMIT } from "@/lib/raiox-cohort";
+import { clientIp, hit, LIMITS, tooManyRequests } from "@/lib/ratelimit";
 
 const leadSchema = z.object({
   name: z.string().min(2, "Nome é obrigatório"),
@@ -29,6 +31,9 @@ const leadSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  const limited = await hit(LIMITS.formIp, clientIp(request.headers));
+  if (!limited.ok) return tooManyRequests(limited.retryAfter);
+
   let body: unknown;
   try {
     body = await request.json();
@@ -44,48 +49,39 @@ export async function POST(request: Request) {
 
   const data = result.data;
 
-  // Check for duplicate in current cohort
-  const { count: dupCount } = await getSupabase()
-    .from("raiox_leads")
-    .select("*", { count: "exact", head: true })
-    .eq("cohort", CURRENT_COHORT)
-    .eq("whatsapp", data.whatsapp);
-
-  if (dupCount && dupCount > 0) {
-    return NextResponse.json(
-      { error: "Esse WhatsApp já está cadastrado nesta turma." },
-      { status: 409 }
+  let isWaitlist: boolean;
+  try {
+    // Check for duplicate in current cohort
+    const [{ dup }] = await query<{ dup: number }>(
+      `select count(*)::int as dup from raiox_leads where cohort = $1 and whatsapp = $2`,
+      [CURRENT_COHORT, data.whatsapp]
     );
-  }
+    if (dup > 0) {
+      return NextResponse.json(
+        { error: "Esse WhatsApp já está cadastrado nesta turma." },
+        { status: 409 }
+      );
+    }
 
-  // Check remaining spots
-  const { count: totalCount } = await getSupabase()
-    .from("raiox_leads")
-    .select("*", { count: "exact", head: true })
-    .eq("cohort", CURRENT_COHORT)
-    .neq("status", "waitlist");
+    // Check remaining spots
+    const [{ taken }] = await query<{ taken: number }>(
+      `select count(*)::int as taken from raiox_leads where cohort = $1 and status <> 'waitlist'`,
+      [CURRENT_COHORT]
+    );
+    isWaitlist = COHORT_LIMIT - taken <= 0;
 
-  const remaining = COHORT_LIMIT - (totalCount ?? 0);
-  const isWaitlist = remaining <= 0;
-
-  const { error: insertError } = await getSupabase().from("raiox_leads").insert({
-    cohort: CURRENT_COHORT,
-    status: isWaitlist ? "waitlist" : "new",
-    name: data.name,
-    clinic_name: data.clinic_name,
-    city: data.city,
-    whatsapp: data.whatsapp,
-    instagram: data.instagram || null,
-    site_url: data.site_url || null,
-    role: data.role,
-    chairs: data.chairs,
-    procedures: data.procedures,
-    marketing_owner: data.marketing_owner,
-    utm: data.utm ?? null,
-  });
-
-  if (insertError) {
-    console.error("Supabase insert error:", insertError);
+    await query(
+      `insert into raiox_leads
+         (cohort, status, name, clinic_name, city, whatsapp, instagram, site_url, role, chairs, procedures, marketing_owner, utm)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13::jsonb)`,
+      [
+        CURRENT_COHORT, isWaitlist ? "waitlist" : "new", data.name, data.clinic_name, data.city, data.whatsapp,
+        data.instagram || null, data.site_url || null, data.role, data.chairs, data.procedures,
+        data.marketing_owner, data.utm ? JSON.stringify(data.utm) : null,
+      ]
+    );
+  } catch (err) {
+    console.error("[api/raiox/lead] database error:", err);
     return NextResponse.json({ error: "Erro interno ao salvar." }, { status: 500 });
   }
 

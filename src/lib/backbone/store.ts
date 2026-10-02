@@ -1,9 +1,10 @@
 // lib/backbone/store.ts
 // Persistence for the backbone: every tool lead lands in `tool_leads`, every
-// AI call in `ai_calls`. Storage failures are logged, never thrown — a Supabase
-// outage must not stop a lead from getting their WhatsApp report.
+// AI call in `ai_calls` (Neon, see db/schema.sql). Storage failures are logged,
+// never thrown — a database outage must not stop a lead from getting their
+// WhatsApp report.
 
-import { getSupabase } from "@/lib/supabase-server";
+import { isDbConfigured, query } from "@/lib/db";
 
 export interface ToolLeadInsert {
   tool: string;
@@ -38,39 +39,53 @@ export interface AiCallInsert {
   error: string | null;
 }
 
-function supabaseOrNull() {
-  try {
-    return getSupabase();
-  } catch {
-    return null;
-  }
-}
+const UPDATABLE = ["ai_plan", "whatsapp_sent", "whatsapp_channel", "whatsapp_error", "capi_sent"] as const;
 
 export async function insertToolLead(row: ToolLeadInsert): Promise<string | null> {
-  const db = supabaseOrNull();
-  if (!db) {
-    console.warn("[backbone/store] Supabase not configured — lead not persisted");
+  if (!isDbConfigured()) {
+    console.warn("[backbone/store] DATABASE_URL not set — lead not persisted");
     return null;
   }
-  const { data, error } = await db.from("tool_leads").insert(row).select("id").single();
-  if (error) {
-    console.error("[backbone/store] insert tool_leads failed:", error);
+  try {
+    const rows = await query<{ id: string }>(
+      `insert into tool_leads (tool, name, phone, email, clinic_name, city, score, headline, payload, utm, report_url)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9::jsonb, $10::jsonb, $11)
+       returning id`,
+      [
+        row.tool, row.name, row.phone, row.email, row.clinic_name, row.city, row.score, row.headline,
+        JSON.stringify(row.payload ?? {}), row.utm ? JSON.stringify(row.utm) : null, row.report_url,
+      ]
+    );
+    return rows[0]?.id ?? null;
+  } catch (err) {
+    console.error("[backbone/store] insert tool_leads failed:", err);
     return null;
   }
-  return (data as { id: string }).id;
 }
 
 export async function updateToolLead(id: string | null, patch: ToolLeadUpdate): Promise<void> {
-  if (!id) return;
-  const db = supabaseOrNull();
-  if (!db) return;
-  const { error } = await db.from("tool_leads").update(patch).eq("id", id);
-  if (error) console.error("[backbone/store] update tool_leads failed:", error);
+  if (!id || !isDbConfigured()) return;
+  const cols = UPDATABLE.filter((c) => patch[c] !== undefined);
+  if (!cols.length) return;
+  try {
+    await query(
+      `update tool_leads set ${cols.map((c, i) => `${c} = $${i + 2}`).join(", ")} where id = $1`,
+      [id, ...cols.map((c) => patch[c])]
+    );
+  } catch (err) {
+    console.error("[backbone/store] update tool_leads failed:", err);
+  }
 }
 
 export async function logAiCall(row: AiCallInsert): Promise<void> {
-  const db = supabaseOrNull();
-  if (!db) return;
-  const { error } = await db.from("ai_calls").insert(row);
-  if (error) console.error("[backbone/store] insert ai_calls failed:", error);
+  if (!isDbConfigured()) return;
+  try {
+    await query(
+      `insert into ai_calls (source, lead_id, model, input_tokens, output_tokens, latency_ms, ok, error)
+       values ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      [row.source, row.lead_id, row.model, row.input_tokens, row.output_tokens, row.latency_ms, row.ok, row.error]
+    );
+  } catch (err) {
+    console.error("[backbone/store] insert ai_calls failed:", err);
+  }
 }

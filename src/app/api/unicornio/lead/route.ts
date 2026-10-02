@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getSupabase } from "@/lib/supabase-server";
+import { query } from "@/lib/db";
+import { clientIp, hit, LIMITS, tooManyRequests } from "@/lib/ratelimit";
 
 const leverScoresSchema = z.object({
   posicionamento: z.number().int().min(0).max(6),
@@ -33,6 +34,9 @@ const schema = z.object({
 });
 
 export async function POST(request: Request) {
+  const limited = await hit(LIMITS.formIp, clientIp(request.headers));
+  if (!limited.ok) return tooManyRequests(limited.retryAfter);
+
   let body: unknown;
   try {
     body = await request.json();
@@ -51,25 +55,16 @@ export async function POST(request: Request) {
   const data = result.data;
 
   try {
-    const { error } = await getSupabase()
-      .from("unicornio_leads")
-      .insert({
-        nome: data.nome,
-        clinica: data.clinica,
-        especialidade: data.especialidade,
-        cidade: data.cidade,
-        whatsapp: data.whatsapp,
-        email: data.email || null,
-        total: data.total,
-        arquetipo: data.arquetipo,
-        scores: data.scores,
-        alavancas_fracas: data.alavancas_fracas,
-        respostas: data.respostas,
-        consent: data.consent,
-        source: data.source,
-      });
-
-    if (error) throw error;
+    await query(
+      `insert into unicornio_leads
+         (nome, clinica, especialidade, cidade, whatsapp, email, total, arquetipo, scores, alavancas_fracas, respostas, consent, source)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9::jsonb, $10, $11, $12, $13)`,
+      [
+        data.nome, data.clinica, data.especialidade, data.cidade, data.whatsapp, data.email || null,
+        data.total, data.arquetipo, JSON.stringify(data.scores), data.alavancas_fracas, data.respostas,
+        data.consent, data.source,
+      ]
+    );
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[/api/unicornio/lead]", err);

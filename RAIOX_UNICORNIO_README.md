@@ -12,13 +12,13 @@
    const WHATSAPP_NUMBER = "5511999999999"; // replace with Komando's real number
    ```
 
-2. **Database** — run the migration in Supabase SQL Editor:
+2. **Database** — apply the schema to Neon (creates `unicornio_leads` with the rest):
    ```
-   supabase/migrations/20260628_unicornio_leads.sql
+   npm run db:migrate   # applies db/schema.sql
    ```
-   This creates `unicornio_leads` with RLS enabled (no public policies — all writes go through the service role in the API route).
+   The database is only reachable server-side (`DATABASE_URL`); all writes go through the API route.
 
-3. **Env vars** — same as the existing raio-x setup (`SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` in `.env.local`).  
+3. **Env vars** — same as the existing raio-x setup (`DATABASE_URL` in `.env.local`).  
    No new variables needed.
 
 ---
@@ -27,14 +27,14 @@
 
 | Field | Where stored |
 |---|---|
-| Form data (nome, clínica, cidade…) | `unicornio_leads` table in Supabase |
+| Form data (nome, clínica, cidade…) | `unicornio_leads` table in Neon |
 | 7-lever scores | `scores` jsonb column |
 | 14 raw answers | `respostas` int[] column |
 | 2 weakest levers | `alavancas_fracas` text[] column |
 | Archetype name | `arquetipo` text column |
 | Total score | `total` int column |
 
-If the API call fails (network error, Supabase down), the payload is queued in the user's `localStorage` under the key `raiox_unicornio_pending_lead` and retried automatically on their next visit to `/unicornio`.
+If the API call fails (network error, database down), the payload is queued in the user's `localStorage` under the key `raiox_unicornio_pending_lead` and retried automatically on their next visit to `/unicornio`.
 
 ---
 

@@ -5,10 +5,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendCapiEvents, type CapiEvent } from "@/lib/backbone/capi";
 import { arr, obj, str } from "@/lib/backbone/types";
+import { clientIp, hit, LIMITS, tooManyRequests } from "@/lib/ratelimit";
 
 const ALLOWED = new Set(["PageView", "ViewContent", "InitiateCheckout", "Contact", "Schedule"]);
 
 export async function POST(req: NextRequest) {
+  const ip = clientIp(req.headers);
+  const limited = await hit(LIMITS.capiIp, ip);
+  if (!limited.ok) return tooManyRequests(limited.retryAfter);
+
   let body: unknown;
   try {
     body = await req.json();
@@ -25,7 +30,7 @@ export async function POST(req: NextRequest) {
 
   const ok = await sendCapiEvents(
     events,
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip"),
+    ip || null,
     req.headers.get("user-agent")
   );
   return NextResponse.json({ ok });

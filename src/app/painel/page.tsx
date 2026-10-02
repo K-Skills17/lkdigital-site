@@ -150,8 +150,8 @@ export default async function PainelPage() {
       <main className="mx-auto max-w-3xl p-8 font-body">
         <h1 className="text-2xl font-semibold">Painel indisponível</h1>
         <p className="mt-2 text-muted-foreground">
-          Não foi possível ler o Supabase. Verifique SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY e se a migração{" "}
-          <code>supabase/migrations/20261002_backbone.sql</code> foi aplicada.
+          Não foi possível ler o banco de dados. Verifique DATABASE_URL e se o schema foi aplicado com{" "}
+          <code>npm run db:migrate</code>.
         </p>
       </main>
     );

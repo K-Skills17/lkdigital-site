@@ -1,7 +1,7 @@
 // lib/backbone/dashboard.ts
 // Data for /painel: one view over every lead source + AI usage.
 
-import { getSupabase } from "@/lib/supabase-server";
+import { query } from "@/lib/db";
 import { MODEL_PRICING } from "./models";
 
 export const SOURCE_LABELS: Record<string, string> = {
@@ -136,24 +136,25 @@ export function aggregate(leads: LeadRow[], calls: AiCallRow[], now = Date.now()
 }
 
 export async function loadDashboard(): Promise<DashboardData> {
-  const db = getSupabase();
-  const since = new Date(Date.now() - 30 * DAY).toISOString();
-
   const [leads, calls] = await Promise.all([
-    db
-      .from("all_leads")
-      .select("id, created_at, source, name, whatsapp, email, clinic_name, city, score, headline, whatsapp_sent")
-      .gte("created_at", since)
-      .order("created_at", { ascending: false })
-      .limit(5000),
-    db
-      .from("ai_calls")
-      .select("created_at, source, model, input_tokens, output_tokens, latency_ms, ok")
-      .gte("created_at", since)
-      .limit(20000),
+    query<LeadRow>(
+      `select id, created_at, source, name, whatsapp, email, clinic_name, city, score, headline, whatsapp_sent
+         from all_leads
+        where created_at >= now() - interval '30 days'
+        order by created_at desc
+        limit 5000`
+    ),
+    query<AiCallRow>(
+      `select created_at, source, model, input_tokens, output_tokens, latency_ms, ok
+         from ai_calls
+        where created_at >= now() - interval '30 days'
+        limit 20000`
+    ),
   ]);
-  if (leads.error) throw leads.error;
-  if (calls.error) throw calls.error;
-
-  return aggregate((leads.data ?? []) as LeadRow[], (calls.data ?? []) as AiCallRow[]);
+  // The driver returns timestamptz as Date; aggregate() works on ISO strings.
+  const iso = (v: unknown) => (v instanceof Date ? v.toISOString() : String(v));
+  return aggregate(
+    leads.map((l) => ({ ...l, created_at: iso(l.created_at) })),
+    calls.map((c) => ({ ...c, created_at: iso(c.created_at) }))
+  );
 }
