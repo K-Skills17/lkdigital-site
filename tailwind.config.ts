@@ -5,6 +5,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/tools/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -23,6 +24,16 @@ const config: Config = {
         "card-foreground": "var(--card-foreground)",
         "hero-bg": "var(--hero-bg)",
         "trust-bg": "var(--trust-bg)",
+        // Free tools palette (src/tools/simulador-convenios)
+        brand: {
+          gold: "#C4A265",
+          "gold-light": "#D4B87A",
+          "gold-dark": "#A8894F",
+          bg: "#FAFAF8",
+          text: "#1A1A1A",
+          "text-secondary": "#6B6B6B",
+          border: "#E8E4DC",
+        },
       },
       fontFamily: {
         display: ["var(--font-display)", "serif"],

@@ -15,6 +15,7 @@ import {
   type TopicSeed,
   type Author,
 } from "./config";
+import { modelFor } from "../../src/lib/backbone/models";
 
 // ─── Output Interface ───
 export interface GeneratedArticle {
@@ -52,7 +53,7 @@ async function callAI(systemPrompt: string, userPrompt: string): Promise<string>
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
+      model: modelFor("smart"),
       max_tokens: 8000,
       system: systemPrompt,
       messages: [{ role: "user", content: userPrompt }],

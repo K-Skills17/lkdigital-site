@@ -39,6 +39,8 @@ if (!ANTHROPIC_API_KEY) {
 }
 
 const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
+// Same "smart" tier as src/lib/backbone/models.ts (plain .mjs can't import the .ts registry).
+const SMART_MODEL = process.env.AI_MODEL_SMART || "claude-sonnet-4-6";
 
 // ─── CLI args ─────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -63,7 +65,7 @@ async function research(topic) {
   console.log("📊 Call 1/2 — Building research brief...");
 
   const msg = await anthropic.messages.create({
-    model: "claude-sonnet-4-6",
+    model: SMART_MODEL,
     max_tokens: 3000,
     system: `Você é um analista de mercado especializado no setor odontológico brasileiro.
 Sua função é produzir briefings de pesquisa densos, com dados específicos e acionáveis.
@@ -118,7 +120,7 @@ async function writePost(topic, keyword, researchBrief) {
   console.log("✍️  Call 2/2 — Writing article as Stephen...");
 
   const msg = await anthropic.messages.create({
-    model: "claude-sonnet-4-6",
+    model: SMART_MODEL,
     max_tokens: 8000,
     system: `Você é Stephen Domingos Komando, fundador da LK Digital. Você escreve artigos sobre marketing para dentistas no Brasil.
 
