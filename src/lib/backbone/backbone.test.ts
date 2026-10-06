@@ -38,7 +38,15 @@ describe("modelFor", () => {
 });
 
 // One realistic payload per tool, in the exact shape each frontend sends.
+const LEAD_MAGNET = {
+  name: "Gabi", phone: "(11) 94685-1028", clinicName: "Clínica G", city: "Campinas", email: "", especialidade: "Implantes/Prótese",
+  consent: true, episode: "ep04", returning: false,
+};
+const RAIOX_ANSWERS = { especialidade: "Implantes/Prótese", particular: "50–80%", anuncios: "Não",
+  q1: 1, q2: 0, q3: 1, q4: 0, q5: 1, q6: 0, q7: 2, q8: 2, q9: 1, q10: 0, q11: 0, q12: 1 };
+
 const PAYLOADS: Record<string, unknown> = {
+  "raio-x": { ...LEAD_MAGNET, data: { total: 99, answers: RAIOX_ANSWERS, answer_labels: { q1: "Aparece, mas abaixo dos 3 primeiros" } } },
   "calculadora-agenda": {
     name: "Ana", phone: "(11) 94685-1028", clinicName: "Sorriso", email: "a@x.com", city: "SP", score: 23,
     topIssues: ["Receita atual: R$ 40.000,00/mes"],
@@ -117,8 +125,8 @@ describe("tool adapters", () => {
         const r = adapter.parse(payload);
         if (!r.ok) throw new Error(r.error);
         const prompt = adapter.prompt(r.lead, r.data);
-        expect(prompt).toBeTruthy();
-        expect(prompt).not.toMatch(/undefined|NaN|\[object Object\]/);
+        // Download-only lead magnets skip the AI plan (null); every other prompt must be complete.
+        if (prompt !== null) expect(prompt).not.toMatch(/undefined|NaN|\[object Object\]/);
         for (const plan of [null, "1. *Faça X*"]) {
           const msg = adapter.message(r.lead, r.data, plan);
           expect(msg).toContain(r.lead.name);
@@ -134,6 +142,37 @@ describe("tool adapters", () => {
       });
     });
   }
+});
+
+describe("raio-x adapter", () => {
+  const adapter = TOOL_ADAPTERS["raio-x"];
+  const body = PAYLOADS["raio-x"] as { data: { answers: Record<string, unknown> } };
+
+  it("re-scores the answers on the server (the browser's total is ignored)", () => {
+    const r = adapter.parse(body);
+    if (!r.ok) throw new Error(r.error);
+    // 9 of 36 points → 25 → "Vazamento crítico"; implant + 50–80% particular + ≤ 70 → oferta.
+    expect(r.lead.score).toBe(25);
+    expect(r.data).toMatchObject({ total: 25, band: "Vazamento crítico", segment: "oferta", weakest: "resposta" });
+    const msg = adapter.message(r.lead, r.data, null);
+    expect(msg).toContain("25/100");
+    expect(msg).toContain("/pre-temporada");
+    expect(msg).not.toMatch(/R\$|garantia|desconto/i);
+  });
+
+  it("points the nutrir segment to the free material for the weakest area", () => {
+    const answers = { ...body.data.answers, especialidade: "Ortodontia", q1: 0, q2: 0, q3: 3, q4: 3, q5: 3, q6: 3, q7: 3, q8: 3 };
+    const r = adapter.parse({ ...body, data: { answers } });
+    if (!r.ok) throw new Error(r.error);
+    expect(r.data).toMatchObject({ segment: "nutrir", weakest: "visibilidade" });
+    expect(adapter.message(r.lead, r.data, null)).toContain("https://lkdigital.odo.br/ferramentas/checklist-google");
+  });
+
+  it("rejects incomplete or out-of-range answers and missing consent", () => {
+    expect(adapter.parse({ ...body, data: { answers: { ...body.data.answers, q12: undefined } } }).ok).toBe(false);
+    expect(adapter.parse({ ...body, data: { answers: { ...body.data.answers, q3: 7 } } }).ok).toBe(false);
+    expect(adapter.parse({ ...body, consent: false }).ok).toBe(false);
+  });
 });
 
 describe("runLeadPipeline", () => {
@@ -238,6 +277,9 @@ describe("dashboard aggregate", () => {
     expect(d.whatsappFailed).toHaveLength(1);
     expect(d.bySource[0]).toMatchObject({ source: "calculadora-agenda", count: 2 });
     expect(d.bySource.find((s) => s.source === "auditoria-site")?.count).toBe(0);
+    // Retired funnels are listed only while they have rows in the window.
+    expect(d.bySource.find((s) => s.source === "unicornio")?.count).toBe(1);
+    expect(d.bySource.find((s) => s.source === "raio-x-scorecard")).toBeUndefined();
     expect(d.daily).toHaveLength(30);
     expect(d.daily.reduce((s, x) => s + x.count, 0)).toBe(5);
     expect(d.ai.costUsd).toBeCloseTo(1.5);

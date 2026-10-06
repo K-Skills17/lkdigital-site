@@ -39,3 +39,4 @@ list_models.py
 
 # chatbot backend (separate repo)
 /lk-chatbot
+/lead-magnets/node_modules

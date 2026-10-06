@@ -34,11 +34,11 @@ unchecked phase below.** Branch: `claude/kskillz-17-github-cloud-ldooi3`.
 ## Phases
 
 - [x] 1. Shared: ToolShell, lead-magnet config, lead form on the backbone, analytics helper
-- [ ] 2. RAIO-X at `/raio-x` + adapter; remove scorecard/Unicórnio/RAIO-X 2026 code; redirects
+- [x] 2. RAIO-X at `/raio-x` + adapter; remove scorecard/Unicórnio/RAIO-X 2026 code; redirects
 - [ ] 3. GBP checklist at `/ferramentas/checklist-google` + adapter; remove diagnostico-google
 - [ ] 4. Calculadora de CAC + adapter
 - [ ] 5. Dashboard da Clínica + adapter
 - [ ] 6. Scripts de WhatsApp + adapter
 - [ ] 7. Uniform shell on kept tools; remove diagnostico-clinica; `/ferramentas` index, sitemap, robots, Ep 10 props
-- [ ] 8. Data: legacy rows → `tool_leads`, `all_leads` view, painel labels, drop script
+- [x] 8. Data: legacy rows → `tool_leads`, `all_leads` view, painel labels, drop script (done with phase 2)
 - [ ] 9. Generator in `lead-magnets/`, assets in `public/ferramentas/arquivos/`, tests, Lighthouse, docs, PR

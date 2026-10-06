@@ -23,7 +23,13 @@ const nextConfig = {
         destination: "/raio-x",
         permanent: false,
       },
-            // Legacy /insights → /blog redirects
+      // Retired funnels and tools, replaced by the lead magnets (docs/lead-magnets-integration.md)
+      { source: "/unicornio", destination: "/raio-x", permanent: true },
+      { source: "/raio-x/resultado", destination: "/raio-x", permanent: true },
+      { source: "/raio-x/privacidade", destination: "/privacidade", permanent: true },
+      { source: "/ferramentas/diagnostico-google", destination: "/ferramentas/checklist-google", permanent: true },
+      { source: "/ferramentas/diagnostico-clinica", destination: "/raio-x", permanent: true },
+      // Legacy /insights → /blog redirects
       {
         source: "/insights",
         destination: "/blog",

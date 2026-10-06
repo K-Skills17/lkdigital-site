@@ -1,4 +1,5 @@
-// One-time copy of every lead table from Supabase into Neon.
+// One-time copy of every lead table from Supabase into Neon. The old per-funnel tables
+// (raiox_leads, unicornio_leads, raio_x_scorecard_leads) land in tool_leads, like every lead.
 // Safe to re-run: rows are matched on id and existing ones are skipped.
 //
 //   SUPABASE_URL=https://xxx.supabase.co SUPABASE_SERVICE_ROLE_KEY=… \
@@ -6,7 +7,7 @@
 //
 // Run `npm run db:migrate` first so the tables exist in Neon.
 import { neon } from "@neondatabase/serverless";
-import { buildInsert } from "../db/sql-utils.mjs";
+import { buildInsert, insertLegacyRows, LEGACY_LEAD_TABLES } from "../db/sql-utils.mjs";
 
 const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, DATABASE_URL } = process.env;
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !DATABASE_URL) {
@@ -15,7 +16,7 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !DATABASE_URL) {
 }
 
 // Order matters: ai_calls references tool_leads.
-const TABLES = ["raiox_leads", "unicornio_leads", "raio_x_scorecard_leads", "tool_leads", "ai_calls"];
+const TABLES = [...Object.keys(LEGACY_LEAD_TABLES), "tool_leads", "ai_calls"];
 const PAGE = 500;
 const sql = neon(DATABASE_URL);
 
@@ -30,11 +31,13 @@ async function fetchPage(table, offset) {
 }
 
 for (const table of TABLES) {
+  const legacy = table in LEGACY_LEAD_TABLES;
+  const target = legacy ? "tool_leads" : table;
   const typeRows = await sql.query(
     `select column_name, data_type from information_schema.columns where table_schema = 'public' and table_name = $1`,
-    [table]
+    [target]
   );
-  if (!typeRows.length) throw new Error(`${table} missing in Neon — run npm run db:migrate first`);
+  if (!typeRows.length) throw new Error(`${target} missing in Neon — run npm run db:migrate first`);
   const types = Object.fromEntries(typeRows.map((r) => [r.column_name, r.data_type]));
 
   let offset = 0;
@@ -46,12 +49,17 @@ for (const table of TABLES) {
       break;
     }
     if (!rows.length) break;
-    const { text, params } = buildInsert(table, rows, types);
-    const inserted = await sql.query(`${text} returning id`, params);
-    copied += inserted.length;
+    if (legacy) {
+      copied += await insertLegacyRows((text, params) => sql.query(text, params), table, rows);
+    } else {
+      const { text, params } = buildInsert(table, rows, types);
+      copied += (await sql.query(`${text} returning id`, params)).length;
+    }
     offset += rows.length;
     if (rows.length < PAGE) break;
   }
-  const [{ n }] = await sql.query(`select count(*)::int as n from ${table}`);
-  console.log(`✓ ${table}: ${copied} new rows copied (${n} total in Neon)`);
+  const [{ n }] = legacy
+    ? await sql.query(`select count(*)::int as n from tool_leads where tool = $1`, [LEGACY_LEAD_TABLES[table]])
+    : await sql.query(`select count(*)::int as n from ${table}`);
+  console.log(`✓ ${table} → ${target}: ${copied} new rows copied (${n} total in Neon)`);
 }

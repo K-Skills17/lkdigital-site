@@ -17,7 +17,7 @@ const m = 60;
 const h = 60 * m;
 
 export const LIMITS = {
-  /** Free-tool lead submissions per visitor IP. */
+  /** Lead submissions (free tools and lead magnets) per visitor IP. */
   leadIpBurst: { name: "lead-ip-10m", max: 5, windowSec: 10 * m },
   leadIpDaily: { name: "lead-ip-1d", max: 20, windowSec: 24 * h },
   /** WhatsApp reports + AI plans per destination number (stops using us to spam someone). */
@@ -26,8 +26,6 @@ export const LIMITS = {
   scanIp: { name: "scan-ip-10m", max: 10, windowSec: 10 * m },
   /** Browser funnel events proxied to Meta. */
   capiIp: { name: "capi-ip-10m", max: 60, windowSec: 10 * m },
-  /** RAIO-X / Unicórnio / scorecard forms. */
-  formIp: { name: "form-ip-10m", max: 5, windowSec: 10 * m },
 } satisfies Record<string, Limit>;
 
 export interface LimitResult {
