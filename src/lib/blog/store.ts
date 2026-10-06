@@ -166,7 +166,7 @@ async function ensureSeeded(): Promise<void> {
 }
 
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
-let warnedBuild = false;
+let warnedFallback = false;
 
 /**
  * Read live posts from the database. Without DATABASE_URL, use the seed file.
@@ -181,13 +181,26 @@ async function fromDbOrSeed<T>(fromDb: () => Promise<T>, fromSeed: () => T): Pro
     await ensureSeeded();
     return await fromDb();
   } catch (err) {
-    if (!IS_BUILD) throw err;
-    if (!warnedBuild) {
-      warnedBuild = true;
-      console.warn("[blog] database unavailable during build — using db/seed/blog-posts.json:", err instanceof Error ? err.message : err);
+    // Tables not created yet (db/schema.sql not run since this release): keep
+    // the public blog up from the seed instead of a 500. Any other runtime error
+    // is thrown so Next keeps serving the last good version of the page.
+    if (!IS_BUILD && !isMissingTable(err)) throw err;
+    if (!warnedFallback) {
+      warnedFallback = true;
+      console.warn(
+        isMissingTable(err)
+          ? "[blog] blog tables missing — run db/schema.sql (or use /painel/blog). Serving db/seed/blog-posts.json meanwhile."
+          : "[blog] database unavailable during build — using db/seed/blog-posts.json:",
+        err instanceof Error ? err.message : err
+      );
     }
     return fromSeed();
   }
+}
+
+/** Postgres "undefined_table": the schema hasn't been applied to this database yet. */
+export function isMissingTable(err: unknown): boolean {
+  return (err as { code?: string } | null)?.code === "42P01";
 }
 
 // Listings don't need the (large) HTML body.
