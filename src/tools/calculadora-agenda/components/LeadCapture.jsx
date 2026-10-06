@@ -12,7 +12,6 @@ export default function LeadCapture({ results, onSubmit }) {
 
   return (
     <div className="landing lead-gate">
-      <div className="landing-logo">LK <span>Digital</span></div>
 
       <div className="lead-gate-teaser fade-up">
         <div className="teaser-label">Seu resultado está pronto!</div>

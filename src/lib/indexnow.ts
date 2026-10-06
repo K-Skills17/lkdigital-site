@@ -50,6 +50,14 @@ export async function getAllSiteUrls(): Promise<string[]> {
     "/blog",
     "/faq",
     "/raio-x",
+    "/ferramentas/checklist-google",
+    "/ferramentas/calculadora-cac",
+    "/ferramentas/dashboard-clinica",
+    "/ferramentas/scripts-whatsapp",
+    "/ferramentas/auditoria-site",
+    "/ferramentas/simulador-convenios",
+    "/ferramentas/calculadora-precificacao",
+    "/ferramentas/calculadora-agenda",
   ];
 
   const cities = [

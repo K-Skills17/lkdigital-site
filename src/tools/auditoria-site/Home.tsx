@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { trackAuditSubmit } from './analytics'
 
 export default function Home() {
@@ -43,22 +42,10 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       {/* Hero Section */}
       <div className="gradient-bg text-[#1A1A1A]">
         <div className="max-w-4xl mx-auto px-4 py-20 text-center">
-          {/* Logo */}
-          <div className="mb-10">
-            <Image
-              src="/ferramentas/lk-logo.png"
-              alt="LK Digital"
-              width={180}
-              height={60}
-              className="mx-auto"
-              priority
-            />
-          </div>
-
           <div className="inline-flex items-center gap-2 bg-[#C4A265]/10 rounded-full px-4 py-1.5 text-sm mb-8 border border-[#C4A265]/20">
             <span className="w-2 h-2 bg-[#C4A265] rounded-full animate-pulse" />
             <span className="text-[#6B6B6B]">Auditoria gratuita e instantanea — sem cadastro</span>
@@ -218,12 +205,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-[#E8E4DC] py-8 px-4 bg-[#FAFAF8]">
-        <div className="max-w-5xl mx-auto text-center text-sm text-[#999999]">
-          <p>LK Digital — Ferramenta Gratuita de Auditoria de Sites</p>
-        </div>
-      </footer>
-    </main>
+    </div>
   )
 }

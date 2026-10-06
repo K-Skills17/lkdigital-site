@@ -229,11 +229,6 @@ export default function TeaserGate({ results, onLeadSubmitted }) {
           </div>
         </div>
 
-        <div className="footer">
-          Ferramenta gratuita por{' '}
-          <a href="https://lkdigital.odo.br" target="_blank" rel="noopener noreferrer">LK Digital</a>
-          {' '}— Sistemas que funcionam para dentistas
-        </div>
       </div>
     </div>
   );

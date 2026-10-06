@@ -1,0 +1,29 @@
+/* LK Digital tokens for the printed and image assets (PDFs, OG images), built by build.mjs.
+   Same values as the site (src/app/globals.css, src/tools/shared/lead-magnets.css), so a PDF
+   looks like the page it came from. Gold is an accent, never a large fill behind body text. */
+:root {
+  --gold: #c5a368;
+  --ink: #1a1a1a;
+  --paper: #fafafa;
+  --line: #e5e5e5;
+  --muted: #6b6b6b;
+
+  --lk-bg: var(--paper);
+  --lk-surface: #ffffff;
+  --lk-surface-2: #f9f6f0;
+  --lk-border: var(--line);
+  --lk-accent: var(--gold);
+  --lk-accent-text: #7d6233;
+  --lk-text: var(--ink);
+  --lk-muted: var(--muted);
+  --lk-btn: var(--gold);
+  --lk-btn-text: var(--ink);
+  --lk-ok: #2e7d4f;
+  --lk-warn: #b7791f;
+  --lk-bad: #b3261e;
+  --lk-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --lk-font-heading: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --lk-weight-heading: 600;
+  --lk-radius: 8px;
+  --lk-max: 720px;
+}

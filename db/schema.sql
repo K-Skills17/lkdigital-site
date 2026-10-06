@@ -1,77 +1,11 @@
 -- LK Digital — complete database schema (Neon / Postgres 15+).
 -- Idempotent: safe to run on every deploy with `npm run db:migrate`.
--- Replaces the old supabase/migrations/*.sql (same tables and columns, so data
--- copied from Supabase with scripts/copy-supabase-to-neon.mjs fits as-is).
+-- Every lead, from every tool and lead magnet, lives in tool_leads. The old per-funnel
+-- tables (raiox_leads, unicornio_leads, raio_x_scorecard_leads) are no longer created:
+-- migrateLegacyLeads() in db/sql-utils.mjs copies their rows into tool_leads, and
+-- db/drop-legacy-lead-tables.sql removes them once the copy is checked.
 
--- ─── RAIO-X Digital (manual audit, 50-spot cohorts) ─────────────────────────
-create table if not exists raiox_leads (
-  id               uuid primary key default gen_random_uuid(),
-  created_at       timestamptz default now(),
-  cohort           text not null default 'jun-jul-2026',
-  status           text not null default 'new',
-  name             text not null,
-  clinic_name      text not null,
-  city             text not null,
-  whatsapp         text not null,
-  instagram        text,
-  site_url         text,
-  role             text not null,
-  chairs           text not null,
-  procedures       text[] not null,
-  marketing_owner  text not null,
-  lead_score       int,
-  lead_tier        text,
-  trojan_signal    text,
-  trojan_predicted text,
-  nota_final       int,
-  utm              jsonb,
-  notes            text
-);
-create index if not exists raiox_leads_cohort_status_idx on raiox_leads (cohort, status);
-
--- ─── Raio-X da Clínica Unicórnio (scorecard quiz) ───────────────────────────
-create table if not exists unicornio_leads (
-  id               uuid        primary key default gen_random_uuid(),
-  created_at       timestamptz not null default now(),
-  nome             text        not null,
-  clinica          text        not null,
-  especialidade    text        not null,
-  cidade           text        not null,
-  whatsapp         text        not null,
-  email            text,
-  total            int         not null check (total between 0 and 42),
-  arquetipo        text        not null,
-  scores           jsonb       not null,
-  alavancas_fracas text[]      not null,
-  respostas        int[]       not null,
-  consent          boolean     not null default true,
-  source           text        not null default 'raio-x'
-);
-create index if not exists unicornio_leads_created_at_idx on unicornio_leads (created_at desc);
-create index if not exists unicornio_leads_arquetipo_idx  on unicornio_leads (arquetipo);
-
--- ─── RAIO-X Scorecard funnel ────────────────────────────────────────────────
-create table if not exists raio_x_scorecard_leads (
-  id          uuid primary key default gen_random_uuid(),
-  created_at  timestamptz not null default now(),
-  name        text not null,
-  clinic_name text not null,
-  whatsapp    text,
-  email       text,
-  vis_score   numeric(4,3) not null check (vis_score between 0 and 1),
-  vis_gap     boolean not null,
-  op_score    numeric(4,3) not null check (op_score between 0 and 1),
-  op_gap      boolean not null,
-  route       text not null check (route in ('lk', 'marcos', 'dual', 'optimize')),
-  answers     jsonb not null default '{}',
-  consent     boolean not null default true,
-  consent_at  timestamptz not null default now(),
-  constraint at_least_one_contact check (whatsapp is not null or email is not null)
-);
-create index if not exists idx_raiox_leads_route      on raio_x_scorecard_leads (route);
-create index if not exists idx_raiox_leads_created_at on raio_x_scorecard_leads (created_at desc);
-
--- ─── Free tools (/ferramentas/*) — one table for all of them ────────────────
+-- ─── Every lead (free tools, lead magnets, legacy funnels) — one table ──────
 create table if not exists tool_leads (
   id               uuid        primary key default gen_random_uuid(),
   created_at       timestamptz not null default now(),
@@ -179,16 +113,4 @@ create table if not exists app_meta (
 create or replace view all_leads as
   select id, created_at, tool as source, name, phone as whatsapp, email, clinic_name, city,
          score, headline, whatsapp_sent, status
-    from tool_leads
-  union all
-  select id, created_at, 'raio-x', name, whatsapp, null, clinic_name, city,
-         lead_score, coalesce(lead_tier, '') || ' · ' || role, null, status
-    from raiox_leads
-  union all
-  select id, created_at, 'unicornio', nome, whatsapp, email, clinica, cidade,
-         total, arquetipo, null, 'new'
-    from unicornio_leads
-  union all
-  select id, created_at, 'raio-x-scorecard', name, whatsapp, email, clinic_name, null,
-         round(((vis_score + op_score) / 2) * 100), 'rota: ' || route, null, 'new'
-    from raio_x_scorecard_leads;
+    from tool_leads;

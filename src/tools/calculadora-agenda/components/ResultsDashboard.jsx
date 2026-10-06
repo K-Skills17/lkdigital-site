@@ -262,11 +262,6 @@ export default function ResultsDashboard({ results, inputs, leadData }) {
           </div>
         </div>
 
-        <div className="footer">
-          Ferramenta gratuita por{' '}
-          <a href="https://lkdigital.odo.br" target="_blank" rel="noopener noreferrer">LK Digital</a>
-          {' '}&mdash; Sistemas que funcionam para dentistas
-        </div>
       </div>
     </div>
   );

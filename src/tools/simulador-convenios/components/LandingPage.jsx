@@ -1,9 +1,6 @@
 export default function LandingPage({ onStart }) {
   return (
     <div className="landing">
-      <div className="landing-logo">
-        LK <span>Digital</span>
-      </div>
 
       <h1 className="fade-up">
         Seus convênios são <em>lucrativos</em> ou você está pagando para trabalhar?

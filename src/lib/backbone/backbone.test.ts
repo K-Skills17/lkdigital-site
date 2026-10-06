@@ -6,6 +6,7 @@ import { isValidBrPhone, normalizeBrPhone } from "./phone";
 import { modelFor } from "./models";
 import { runLeadPipeline } from "./pipeline";
 import { TOOL_ADAPTERS } from "./tools";
+import type { ToolAdapter } from "./types";
 import { aggregate, type LeadRow } from "./dashboard";
 
 describe("normalizeBrPhone", () => {
@@ -38,7 +39,15 @@ describe("modelFor", () => {
 });
 
 // One realistic payload per tool, in the exact shape each frontend sends.
+const LEAD_MAGNET = {
+  name: "Gabi", phone: "(11) 94685-1028", clinicName: "Clínica G", city: "Campinas", email: "", especialidade: "Implantes/Prótese",
+  consent: true, episode: "ep04", returning: false,
+};
+const RAIOX_ANSWERS = { especialidade: "Implantes/Prótese", particular: "50–80%", anuncios: "Não",
+  q1: 1, q2: 0, q3: 1, q4: 0, q5: 1, q6: 0, q7: 2, q8: 2, q9: 1, q10: 0, q11: 0, q12: 1 };
+
 const PAYLOADS: Record<string, unknown> = {
+  "raio-x": { ...LEAD_MAGNET, data: { total: 99, answers: RAIOX_ANSWERS, answer_labels: { q1: "Aparece, mas abaixo dos 3 primeiros" } } },
   "calculadora-agenda": {
     name: "Ana", phone: "(11) 94685-1028", clinicName: "Sorriso", email: "a@x.com", city: "SP", score: 23,
     topIssues: ["Receita atual: R$ 40.000,00/mes"],
@@ -65,25 +74,19 @@ const PAYLOADS: Record<string, unknown> = {
     ],
     reportUrl: "https://lkdigital.odo.br/ferramentas/simulador-convenios#results=x",
   },
-  "diagnostico-clinica": {
-    lead: { nome: "Davi", clinica: "Clin D", whatsapp: "11946851028", email: "d@x.com", cidade: "Recife" },
-    inputs: { pacientesAgendados: 200, taxaFaltas: 15, ticketMedio: 350, taxaAceite: 50, gastoMarketing: 3000 },
-    results: {
-      perdaTotal: 25000, perdaAnual: 300000, perdaFaltas: 10500, perdaOrcamentos: 8000, perdaRetorno: 4000,
-      desperdicioMarketing: 2500, receitaAtual: 60000, receitaPotencial: 85000, custoPorPaciente: 150,
-      faltasPorMes: 30, orcamentosRecusados: 20, pacientesQueNaoVoltam: 12,
-    },
-    resultsUrl: "https://lkdigital.odo.br/ferramentas/diagnostico-clinica#abc",
-  },
-  "diagnostico-google": {
-    name: "Eva", phone: "", clinicName: "Clin E", email: "e@x.com", city: "Natal",
-    results: {
-      totalScore: 42, gradeLabel: "Precisa de Atenção",
-      sectionScores: [{ title: "Fotos e Visual", percent: 30 }, { title: "Avaliações", percent: 60 }],
-      actionItems: [{ text: "Adicione pelo menos 15 fotos profissionais", impact: "Alto" }],
-      answers: { verificado: "sim" },
+  "calculadora-cac": {
+    ...LEAD_MAGNET,
+    data: {
+      inputs: {
+        invest: 3000, fixos: 2000, salario: "", pctSec: "", leads: 300, qual: 120, agend: 45, comp: 30, fech: 10, volta: 50, retorno: 350, anos: 3,
+        procs: [{ nome: "Implante unitário", fech: 4, ticket: 5000, margem: 40 }, { nome: "Protocolo", fech: 1, ticket: 25000, margem: 40 },
+          { nome: "Clínica geral", fech: 5, ticket: 350, margem: 40 }],
+      },
     },
   },
+  "dashboard-clinica": { ...LEAD_MAGNET, data: {} },
+  "scripts-whatsapp": { ...LEAD_MAGNET, data: {} },
+  "checklist-google": { ...LEAD_MAGNET, data: { done: 9, total: 27 } },
   "auditoria-site": {
     name: "Fabio", phone: "11946851028", clinicName: "Clin F", siteUrl: "https://clinf.com.br", score: 61,
     topIssues: ["Formulario de contato"],
@@ -117,13 +120,13 @@ describe("tool adapters", () => {
         const r = adapter.parse(payload);
         if (!r.ok) throw new Error(r.error);
         const prompt = adapter.prompt(r.lead, r.data);
-        expect(prompt).toBeTruthy();
-        expect(prompt).not.toMatch(/undefined|NaN|\[object Object\]/);
+        // Download-only lead magnets skip the AI plan (null); every other prompt must be complete.
+        if (prompt !== null) expect(prompt).not.toMatch(/undefined|NaN|\[object Object\]/);
         for (const plan of [null, "1. *Faça X*"]) {
           const msg = adapter.message(r.lead, r.data, plan);
           expect(msg).toContain(r.lead.name);
           expect(msg).not.toMatch(/undefined|NaN|\[object Object\]/);
-          if (plan) expect(msg).toContain(plan);
+          if (plan && prompt !== null) expect(msg).toContain(plan);
         }
         const audit = adapter.auditData(r.lead, r.data);
         expect(audit.source).toMatch(/^[a-z_]+$/);
@@ -134,6 +137,55 @@ describe("tool adapters", () => {
       });
     });
   }
+});
+
+describe("raio-x adapter", () => {
+  const adapter = TOOL_ADAPTERS["raio-x"];
+  const body = PAYLOADS["raio-x"] as { data: { answers: Record<string, unknown> } };
+
+  it("re-scores the answers on the server (the browser's total is ignored)", () => {
+    const r = adapter.parse(body);
+    if (!r.ok) throw new Error(r.error);
+    // 9 of 36 points → 25 → "Vazamento crítico"; implant + 50–80% particular + ≤ 70 → oferta.
+    expect(r.lead.score).toBe(25);
+    expect(r.data).toMatchObject({ total: 25, band: "Vazamento crítico", segment: "oferta", weakest: "resposta" });
+    const msg = adapter.message(r.lead, r.data, null);
+    expect(msg).toContain("25/100");
+    expect(msg).toContain("/pre-temporada");
+    expect(msg).not.toMatch(/R\$|garantia|desconto/i);
+  });
+
+  it("points the nutrir segment to the free material for the weakest area", () => {
+    const answers = { ...body.data.answers, especialidade: "Ortodontia", q1: 0, q2: 0, q3: 3, q4: 3, q5: 3, q6: 3, q7: 3, q8: 3 };
+    const r = adapter.parse({ ...body, data: { answers } });
+    if (!r.ok) throw new Error(r.error);
+    expect(r.data).toMatchObject({ segment: "nutrir", weakest: "visibilidade" });
+    expect(adapter.message(r.lead, r.data, null)).toContain("https://lkdigital.odo.br/ferramentas/checklist-google");
+  });
+
+  it("rejects incomplete or out-of-range answers and missing consent", () => {
+    expect(adapter.parse({ ...body, data: { answers: { ...body.data.answers, q12: undefined } } }).ok).toBe(false);
+    expect(adapter.parse({ ...body, data: { answers: { ...body.data.answers, q3: 7 } } }).ok).toBe(false);
+    expect(adapter.parse({ ...body, consent: false }).ok).toBe(false);
+  });
+});
+
+describe("calculadora-cac adapter", () => {
+  const adapter = TOOL_ADAPTERS["calculadora-cac"];
+  it("re-computes the spec's acceptance values from the inputs", () => {
+    const r = adapter.parse(PAYLOADS["calculadora-cac"]);
+    if (!r.ok) throw new Error(r.error);
+    expect(r.data).toMatchObject({ hasNumbers: true, cacAds: 300, cacReal: 500 });
+    expect(r.lead.headline).toContain("CAC real R$");
+    expect(adapter.message(r.lead, r.data, null)).toContain("calculadora-cac.xlsx");
+  });
+  it("sends only the downloads (no AI) for the example clinic", () => {
+    const r = adapter.parse({ ...(PAYLOADS["calculadora-cac"] as object), data: { example: true } });
+    if (!r.ok) throw new Error(r.error);
+    expect(r.data.hasNumbers).toBe(false);
+    expect(adapter.prompt(r.lead, r.data)).toBeNull();
+    expect(adapter.message(r.lead, r.data, null)).toContain("https://lkdigital.odo.br/ferramentas/arquivos/calculadora-cac.xlsx");
+  });
 });
 
 describe("runLeadPipeline", () => {
@@ -160,7 +212,7 @@ describe("runLeadPipeline", () => {
   });
 
   it("sends CAPI Lead (with shared event id) and the WhatsApp report via the chatbot", async () => {
-    const res = await runLeadPipeline(TOOL_ADAPTERS["diagnostico-clinica"], PAYLOADS["diagnostico-clinica"], { eventId: "evt_1" });
+    const res = await runLeadPipeline(TOOL_ADAPTERS["raio-x"], PAYLOADS["raio-x"], { eventId: "evt_1" });
     expect(res.status).toBe(200);
     expect(res.body.messageSent).toBe(true);
 
@@ -173,9 +225,8 @@ describe("runLeadPipeline", () => {
     const bot = calls.find((c) => c.url === "https://bot.example/webhook/audit-lead");
     const botBody = bot!.body as { phone: string; auditData: { source: string }; reportMessage: string };
     expect(botBody.phone).toBe("5511946851028");
-    // The old repo sent `diagnosticData`, which the chatbot ignored.
-    expect(botBody.auditData.source).toBe("diagnostico_clinica");
-    expect(botBody.reportMessage).toContain("Clin D");
+    expect(botBody.auditData.source).toBe("raio_x");
+    expect(botBody.reportMessage).toContain("Clínica G");
   });
 
   it("falls back to Evolution when the chatbot fails", async () => {
@@ -198,7 +249,13 @@ describe("runLeadPipeline", () => {
   });
 
   it("accepts e-mail-only leads where the tool allows it, without a WhatsApp send", async () => {
-    const res = await runLeadPipeline(TOOL_ADAPTERS["diagnostico-google"], PAYLOADS["diagnostico-google"]);
+    // No current tool is e-mail-only; the pipeline still supports adapters that opt in.
+    const emailOnly: ToolAdapter<object> = {
+      id: "teste", label: "Teste", requiresPhone: false,
+      parse: () => ({ ok: true, data: {}, lead: { name: "Eva", phone: "", email: "e@x.com", clinic: "C", city: null, score: null, headline: "h", reportUrl: null } }),
+      prompt: () => null, message: () => "m", auditData: () => ({ source: "teste" }),
+    };
+    const res = await runLeadPipeline(emailOnly, {});
     expect(res.status).toBe(200);
     expect(res.body.messageSent).toBe(false);
     expect(calls.some((c) => c.url.includes("bot.example"))).toBe(false);
@@ -238,6 +295,9 @@ describe("dashboard aggregate", () => {
     expect(d.whatsappFailed).toHaveLength(1);
     expect(d.bySource[0]).toMatchObject({ source: "calculadora-agenda", count: 2 });
     expect(d.bySource.find((s) => s.source === "auditoria-site")?.count).toBe(0);
+    // Retired funnels are listed only while they have rows in the window.
+    expect(d.bySource.find((s) => s.source === "unicornio")?.count).toBe(1);
+    expect(d.bySource.find((s) => s.source === "raio-x-scorecard")).toBeUndefined();
     expect(d.daily).toHaveLength(30);
     expect(d.daily.reduce((s, x) => s + x.count, 0)).toBe(5);
     expect(d.ai.costUsd).toBeCloseTo(1.5);

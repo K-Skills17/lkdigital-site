@@ -57,33 +57,14 @@ function App() {
 
   return (
     <div className="min-h-screen bg-brand-bg">
-      {/* Header */}
-      <header className="border-b border-brand-border bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src="/ferramentas/lk-logo.png" alt="LK Digital" className="h-8 w-8 rounded" onError={(e) => { e.target.style.display = 'none'; }} />
-            <span className="font-semibold text-brand-text">LK Digital</span>
-          </div>
-          <span className="text-xs text-brand-text-secondary hidden sm:block">Simulador de Convenios Odontologicos</span>
-        </div>
-      </header>
-
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <div className="max-w-5xl mx-auto px-4 py-8">
         {step === 'form' && <ConvenioForm onCalculate={handleCalculate} />}
         {step === 'teaser' && (
           <TeaserGate results={results} formInputs={formInputs} onLeadSubmitted={handleLeadSubmitted} />
         )}
         {step === 'results' && <ResultsDashboard results={results} />}
-      </main>
+      </div>
 
-      {/* Footer */}
-      <footer className="border-t border-brand-border py-6 text-center text-sm text-brand-text-secondary">
-        Ferramenta gratuita por{' '}
-        <a href="https://lkdigital.odo.br" target="_blank" rel="noopener noreferrer" className="text-brand-gold hover:underline">
-          LK Digital
-        </a>
-        {' '} — Sistemas que funcionam para dentistas
-      </footer>
     </div>
   );
 }

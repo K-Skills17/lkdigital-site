@@ -3,11 +3,9 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
-Disallow: /raio-x/resultado
-Disallow: /raio-x/privacidade
 Disallow: /demo
-Disallow: /unicornio
 Disallow: /painel
+Disallow: /exemplos/
 Disallow: /ferramentas/auditoria-site/relatorio
 
 # GPTBot

@@ -1,6 +1,5 @@
 // Runs the real SQL (db/schema.sql, rate limiter, backbone storage, dashboard,
-// RAIO-X/Unicórnio routes, Supabase copy) against an in-memory Postgres (PGlite)
-// standing in for Neon.
+// legacy lead tables → tool_leads) against an in-memory Postgres (PGlite) standing in for Neon.
 
 import { readFileSync } from "fs";
 import path from "path";
@@ -13,7 +12,7 @@ import { loadDashboard } from "./backbone/dashboard";
 import { runLeadPipeline } from "./backbone/pipeline";
 import { TOOL_ADAPTERS } from "./backbone/tools";
 // Plain ESM helpers shared with the node scripts in scripts/.
-import { buildInsert, splitStatements } from "../../db/sql-utils.mjs";
+import { migrateLegacyLeads, splitStatements } from "../../db/sql-utils.mjs";
 
 let pg: PGlite;
 
@@ -28,7 +27,7 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await pg.exec(
-    "truncate rate_limits, ai_calls, tool_leads, raiox_leads, unicornio_leads, raio_x_scorecard_leads cascade"
+    "truncate rate_limits, ai_calls, tool_leads cascade"
   );
 });
 
@@ -50,7 +49,7 @@ describe("rate limiter", () => {
     setQueryFnForTests(async () => {
       throw new Error("db down");
     });
-    expect((await hit(LIMITS.formIp, "x")).ok).toBe(true);
+    expect((await hit(LIMITS.leadIpBurst, "x")).ok).toBe(true);
     setQueryFnForTests(async (text, params = []) => (await pg.query(text, params)).rows as Record<string, unknown>[]);
   });
 });
@@ -64,18 +63,19 @@ describe("backbone storage + dashboard", () => {
     expect(id).toMatch(/^[0-9a-f-]{36}$/);
     await updateToolLead(id, { ai_plan: "1. faça X", whatsapp_sent: true, whatsapp_channel: "chatbot", capi_sent: true });
     await logAiCall({ source: "calculadora-agenda", lead_id: id, model: "claude-haiku-4-5-20251001", input_tokens: 500, output_tokens: 200, latency_ms: 1500, ok: true, error: null });
-    await query(
-      `insert into unicornio_leads (nome, clinica, especialidade, cidade, whatsapp, total, arquetipo, scores, alavancas_fracas, respostas)
-       values ('Bia', 'C', 'orto', 'SP', '11999998888', 30, 'A', '{}', '{a,b}', '{1,2}')`
-    );
+    await insertToolLead({
+      tool: "raio-x", name: "Bia", phone: "5511999998888", email: null, clinic_name: "C", city: "SP", score: 42,
+      headline: "42/100 · Sistema parcial", payload: {}, utm: null, report_url: null,
+    });
 
     const [row] = await query<{ payload: unknown; utm: unknown; whatsapp_sent: boolean }>("select payload, utm, whatsapp_sent from tool_leads");
     expect(row).toMatchObject({ payload: { a: [1, 2] }, utm: { utm_source: "ig" }, whatsapp_sent: true });
 
     const d = await loadDashboard();
     expect(d.leads30d).toBe(2);
-    expect(d.bySource.find((s) => s.source === "unicornio")?.count).toBe(1);
-    expect(d.whatsappRate).toBe(1);
+    expect(d.bySource.find((s) => s.source === "raio-x")?.count).toBe(1);
+    // The RAIO-X lead has a phone but no delivery yet: 1 of 2 attempts delivered.
+    expect(d.whatsappRate).toBe(0.5);
     expect(d.ai.calls).toBe(1);
     expect(d.recent[0].created_at).toMatch(/^\d{4}-\d{2}-\d{2}T/);
   });
@@ -112,80 +112,58 @@ describe("pipeline per-number limit", () => {
   });
 });
 
-describe("RAIO-X / Unicórnio routes on Neon", () => {
-  const post = (body: unknown, ip = "9.9.9.9") =>
-    new Request("http://x/api", { method: "POST", body: JSON.stringify(body), headers: { "x-real-ip": ip } });
+describe("legacy lead tables → tool_leads", () => {
+  it("copies every legacy row once, keeping id, date and the full row, and leaves the tables in place", async () => {
+    await pg.exec(`
+      create table if not exists raiox_leads (id uuid primary key default gen_random_uuid(), created_at timestamptz default now(),
+        cohort text, status text not null default 'new', name text not null, clinic_name text not null, city text not null,
+        whatsapp text not null, role text not null, procedures text[], lead_score int, lead_tier text, utm jsonb);
+      create table if not exists unicornio_leads (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(),
+        nome text not null, clinica text not null, especialidade text, cidade text, whatsapp text not null, email text,
+        total int, arquetipo text, scores jsonb, alavancas_fracas text[], respostas int[]);
+      create table if not exists raio_x_scorecard_leads (id uuid primary key default gen_random_uuid(), created_at timestamptz not null default now(),
+        name text not null, clinic_name text not null, whatsapp text, email text, vis_score numeric(4,3), op_score numeric(4,3),
+        route text, answers jsonb);
+      truncate raiox_leads, unicornio_leads, raio_x_scorecard_leads;
+      insert into raiox_leads (created_at, status, name, clinic_name, city, whatsapp, role, procedures, lead_score, lead_tier, utm)
+        values ('2026-06-01T10:00:00Z', 'contacted', 'Caio', 'Clin', 'SP', '11988887777', 'Gerente', '{Implantes,HOF}', 70, 'A', '{"utm_source":"ig"}');
+      insert into unicornio_leads (nome, clinica, especialidade, cidade, whatsapp, total, arquetipo, scores, alavancas_fracas, respostas)
+        values ('Bia', 'C', 'Orto', 'SP', '11999998888', 30, 'B', '{"oferta":3}', '{oferta,marca}', '{1,2,3}');
+      insert into raio_x_scorecard_leads (name, clinic_name, email, vis_score, op_score, route, answers)
+        values ('Davi', 'Clin D', 'd@x.com', 0.5, 0.7, 'lk', '{"q1":1}');
+    `);
+    const run = async (text: string, params: unknown[]) => (await pg.query(text, params)).rows as Record<string, unknown>[];
+    const first = await migrateLegacyLeads(run);
+    expect(first).toEqual({
+      raiox_leads: { rows: 1, inserted: 1 },
+      unicornio_leads: { rows: 1, inserted: 1 },
+      raio_x_scorecard_leads: { rows: 1, inserted: 1 },
+    });
+    // Idempotent: a second migrate copies nothing.
+    const second = await migrateLegacyLeads(run);
+    expect(Object.values(second).every((r) => (r as { inserted: number }).inserted === 0)).toBe(true);
 
-  it("unicornio/lead inserts and rate-limits per IP", async () => {
-    const { POST } = await import("@/app/api/unicornio/lead/route");
-    const body = {
-      timestamp: "now", nome: "Bia", clinica: "Clin", especialidade: "Orto", cidade: "SP", whatsapp: "(11) 99999-8888",
-      email: "", total: 30, arquetipo: "A",
-      scores: { posicionamento: 1, oferta: 2, modelo: 3, marca: 4, aquisicao: 5, experiencia: 6, sistemas: 0 },
-      alavancas_fracas: ["oferta", "marca"], respostas: Array(14).fill(2), consent: true,
-    };
-    const statuses = [];
-    for (let i = 0; i < LIMITS.formIp.max + 1; i++) statuses.push((await POST(post(body))).status);
-    expect(statuses).toEqual([...Array(LIMITS.formIp.max).fill(200), 429]);
-    const [row] = await query<{ respostas: number[]; alavancas_fracas: string[]; scores: Record<string, number> }>(
-      "select respostas, alavancas_fracas, scores from unicornio_leads limit 1"
+    const rows = await query<{ tool: string; name: string; phone: string; score: string | null; headline: string; status: string; payload: Record<string, unknown>; utm: unknown; created_at: Date }>(
+      "select tool, name, phone, score, headline, status, payload, utm, created_at from tool_leads order by tool"
     );
-    expect(row.respostas).toHaveLength(14);
-    expect(row.alavancas_fracas).toEqual(["oferta", "marca"]);
-    expect(row.scores.sistemas).toBe(0);
+    expect(rows.map((r) => r.tool)).toEqual(["raio-x-2026", "raio-x-scorecard", "unicornio"]);
+    const [rx, sc, un] = rows;
+    expect(rx).toMatchObject({ name: "Caio", phone: "11988887777", headline: "A · Gerente", status: "contacted", utm: { utm_source: "ig" } });
+    expect(rx.payload.procedures).toEqual(["Implantes", "HOF"]);
+    expect(new Date(rx.created_at).toISOString()).toBe("2026-06-01T10:00:00.000Z");
+    expect(sc).toMatchObject({ name: "Davi", phone: "", headline: "rota: lk" });
+    expect(Number(sc.score)).toBe(60);
+    expect(un).toMatchObject({ name: "Bia", headline: "Arquétipo B · 30/42" });
+    expect(un.payload).toMatchObject({ scores: { oferta: 3 }, respostas: [1, 2, 3] });
+
+    const all = await query<{ source: string }>("select source from all_leads order by source");
+    expect(all.map((r) => r.source)).toEqual(["raio-x-2026", "raio-x-scorecard", "unicornio"]);
+    // Nothing is dropped automatically.
+    expect((await query<{ n: number }>("select count(*)::int as n from unicornio_leads"))[0].n).toBe(1);
   });
 
-  it("raiox/lead enforces duplicate + cohort waitlist; vagas counts spots", async () => {
-    vi.stubGlobal("fetch", vi.fn(async () => new Response("{}", { status: 200 })));
-    const { POST } = await import("@/app/api/raiox/lead/route");
-    const { GET } = await import("@/app/api/raiox/vagas/route");
-    const body = {
-      name: "Caio", clinic_name: "Clin", city: "SP", whatsapp: "11988887777", role: "Gerente", chairs: "2–3",
-      procedures: ["Implantes", "HOF"], marketing_owner: "Agência", utm: { utm_source: "ig" },
-    };
-    expect((await POST(post(body, "1.1.1.1"))).status).toBe(200);
-    expect((await POST(post(body, "1.1.1.2"))).status).toBe(409);
-    expect(await (await GET()).json()).toEqual({ remaining: 49 });
-    const [row] = await query<{ procedures: string[]; utm: unknown }>("select procedures, utm from raiox_leads");
-    expect(row.procedures).toEqual(["Implantes", "HOF"]);
-    expect(row.utm).toEqual({ utm_source: "ig" });
-    vi.unstubAllGlobals();
-  });
-
-  it("raio-x/submit persists the scorecard lead", async () => {
-    vi.stubGlobal("fetch", vi.fn(async () => new Response("{}", { status: 200 })));
-    const { POST } = await import("@/app/api/raio-x/submit/route");
-    const { raioXConfig } = await import("@/lib/raio-x/config");
-    const answers = Object.fromEntries(raioXConfig.questions.map((q) => [q.id, 1]));
-    const res = await POST(post({ name: "Davi", clinic_name: "Clin D", whatsapp: "", email: "d@x.com", answers, consent: true }));
-    expect(res.status).toBe(200);
-    const json = await res.json();
-    expect(json.id).toMatch(/^[0-9a-f-]{36}$/);
-    const [row] = await query<{ answers: number[] }>("select answers from raio_x_scorecard_leads");
-    expect(Array.isArray(row.answers)).toBe(true);
-    vi.unstubAllGlobals();
-  });
-});
-
-describe("Supabase → Neon copy", () => {
-  it("inserts rows shaped like PostgREST output and is idempotent", async () => {
-    const types = Object.fromEntries(
-      (await query<{ column_name: string; data_type: string }>(
-        "select column_name, data_type from information_schema.columns where table_name = 'unicornio_leads'"
-      )).map((r) => [r.column_name, r.data_type])
-    );
-    const rows = [{
-      id: "11111111-1111-1111-1111-111111111111", created_at: "2026-07-01T10:00:00+00:00", nome: "Eva", clinica: "C",
-      especialidade: "Orto", cidade: "Natal", whatsapp: "84999990000", email: null, total: 20, arquetipo: "B",
-      scores: { oferta: 3 }, alavancas_fracas: ["oferta", "marca"], respostas: [1, 2, 3], consent: true, source: "raio-x",
-    }];
-    for (let i = 0; i < 2; i++) {
-      const { text, params } = buildInsert("unicornio_leads", rows, types);
-      await query(text, params);
-    }
-    const copied = await query<{ n: number }>("select count(*)::int as n from unicornio_leads");
-    expect(copied[0].n).toBe(1);
-    const [r] = await query<{ scores: unknown; respostas: number[] }>("select scores, respostas from unicornio_leads");
-    expect(r).toEqual({ scores: { oferta: 3 }, respostas: [1, 2, 3] });
+  it("does nothing on a fresh database without legacy tables", async () => {
+    await pg.exec("drop table if exists raiox_leads; drop table if exists unicornio_leads; drop table if exists raio_x_scorecard_leads;");
+    expect(await migrateLegacyLeads(async (t: string, p: unknown[]) => (await pg.query(t, p)).rows as Record<string, unknown>[])).toEqual({});
   });
 });

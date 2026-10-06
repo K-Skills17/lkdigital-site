@@ -1,0 +1,20 @@
+/* Scripts de WhatsApp landing (scoped to .tool-scripts-whatsapp). Tokens: src/tools/shared/lead-magnets.css. */
+.wrap{max-width:var(--lk-max);margin:0 auto;padding:0 16px 56px}
+.wrap *{box-sizing:border-box}
+.sw-head{padding:30px 0 8px}
+.kicker{margin:0 0 10px;color:var(--lk-accent-text);font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.sw-head h1{font-family:var(--lk-font-heading);font-size:clamp(2rem,8vw,2.9rem);line-height:1.08;font-weight:var(--lk-weight-heading);margin:0 0 14px}
+.lead{color:var(--lk-muted);font-size:1.05rem;margin:0 0 10px}
+.wrap > h2{font-family:var(--lk-font-heading);font-size:1.7rem;font-weight:var(--lk-weight-heading);margin:28px 0 10px}
+.wrap > .rules{margin:0;padding-left:22px}
+.wrap > .rules li{margin-bottom:10px}
+.wrap > .rules li::marker{color:var(--lk-accent-text);font-weight:var(--lk-weight-heading)}
+.wrap > .rules span{color:var(--lk-muted)}
+.bb{background:#E7F7DC;border:1px solid #CBE8B8;border-radius:4px 16px 16px 16px;padding:12px 14px;max-width:34em;font-size:.97rem}
+.ph{background:#F6EEDC;color:#5C4520;border-radius:3px;padding:0 2px;font-weight:600}
+.list{list-style:none;padding:0;margin:0}
+.list li{position:relative;padding:0 0 10px 28px}
+.list li::before{content:"";position:absolute;left:0;top:.45em;width:14px;height:14px;border-radius:3px;background:var(--lk-accent)}
+.list span{color:var(--lk-muted)}
+#baixar{margin-top:30px}
+.foot{padding:30px 0 0;color:var(--lk-muted);font-size:.8rem;text-align:center}

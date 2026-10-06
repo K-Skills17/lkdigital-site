@@ -1,7 +1,6 @@
 export default function LandingPage({ onStart }) {
   return (
     <div className="landing">
-      <div className="landing-logo">LK <span>Digital</span></div>
 
       <h1 className="fade-up">
         Trabalhe <em>menos horas</em> e ganhe mais com a agenda certa

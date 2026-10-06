@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { toolFontVars } from "@/tools/shared/fonts";
+import ToolShell from "@/components/tools/ToolShell";
 import App from "@/tools/calculadora-precificacao/App";
 import "@/tools/calculadora-precificacao/index.css";
 
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className={`${toolFontVars} tool-calculadora-precificacao`} style={{ minHeight: "100vh" }}>
+    <ToolShell slug="calculadora-precificacao">
       <App />
-    </div>
+    </ToolShell>
   );
 }

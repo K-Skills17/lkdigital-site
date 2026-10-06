@@ -7,12 +7,14 @@ import { readFileSync } from "fs";
 import path from "path";
 import { query } from "@/lib/db";
 // Plain ESM helper shared with scripts/db-migrate.mjs.
-import { splitStatements } from "../../db/sql-utils.mjs";
+import { migrateLegacyLeads, splitStatements } from "../../db/sql-utils.mjs";
 
 export async function applySchema(): Promise<number> {
   const sql = readFileSync(path.join(process.cwd(), "db", "schema.sql"), "utf8");
   const statements: string[] = splitStatements(sql);
   // One at a time, in order: later statements (the view) depend on earlier ones.
   for (const stmt of statements) await query(stmt);
+  // Rows left in the old per-funnel lead tables move into tool_leads (idempotent).
+  await migrateLegacyLeads((text: string, params: unknown[]) => query(text, params));
   return statements.length;
 }

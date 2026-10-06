@@ -5,16 +5,27 @@ import { query } from "@/lib/db";
 import { MODEL_PRICING } from "./models";
 
 export const SOURCE_LABELS: Record<string, string> = {
+  // Lead magnets (series "O Sistema Operacional da Clínica Odontológica")
+  "raio-x": "RAIO-X da Clínica",
+  "checklist-google": "Checklist do Google",
+  "calculadora-cac": "Calculadora de CAC",
+  "dashboard-clinica": "Dashboard da Clínica",
+  "scripts-whatsapp": "Scripts de WhatsApp",
+  // Free tools
   "auditoria-site": "Auditoria de Site",
-  "diagnostico-google": "Diagnóstico Google",
   "simulador-convenios": "Simulador de Convênios",
   "calculadora-precificacao": "Calculadora de Precificação",
-  "diagnostico-clinica": "Diagnóstico de Clínica",
   "calculadora-agenda": "Calculadora de Agenda",
-  "raio-x": "RAIO-X (auditoria manual)",
-  "raio-x-scorecard": "RAIO-X Scorecard",
-  unicornio: "Clínica Unicórnio",
+  // Retired funnels (rows kept in tool_leads)
+  "diagnostico-google": "Diagnóstico Google (antigo)",
+  "diagnostico-clinica": "Diagnóstico de Clínica (antigo)",
+  "raio-x-2026": "RAIO-X Digital 2026 (antigo)",
+  "raio-x-scorecard": "RAIO-X Scorecard (antigo)",
+  unicornio: "Clínica Unicórnio (antigo)",
 };
+
+/** Sources that no longer capture leads: listed only when they have rows. */
+const RETIRED_SOURCES = new Set(["diagnostico-google", "diagnostico-clinica", "raio-x-2026", "raio-x-scorecard", "unicornio"]);
 
 export interface LeadRow {
   id: string;
@@ -84,8 +95,8 @@ export function aggregate(leads: LeadRow[], calls: AiCallRow[], now = Date.now()
 
   const counts = new Map<string, number>();
   for (const l of in30) counts.set(l.source, (counts.get(l.source) ?? 0) + 1);
-  // Every known source appears, even at zero — a dead funnel should be visible.
-  for (const s of Object.keys(SOURCE_LABELS)) if (!counts.has(s)) counts.set(s, 0);
+  // Every live source appears, even at zero — a dead funnel should be visible.
+  for (const s of Object.keys(SOURCE_LABELS)) if (!counts.has(s) && !RETIRED_SOURCES.has(s)) counts.set(s, 0);
   const bySource = Array.from(counts, ([source, count]) => ({
     source,
     label: SOURCE_LABELS[source] ?? source,

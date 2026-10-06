@@ -1,16 +1,25 @@
 # LK Backbone
 
-All six free tools that used to live in separate repos and separate `*.vercel.app`
-deployments now run inside this site, on one shared backend.
+Every free tool and every lead magnet runs inside this site, on one shared backend, and every lead
+lands in one table (`tool_leads`).
 
 | Tool | Route | Came from |
 |---|---|---|
+| RAIO-X da Clínica | `/raio-x` | `K-Skills17/lk-lead-magnets` (replaced the scorecard, Unicórnio and RAIO-X 2026 funnels) |
+| Checklist do Perfil do Google | `/ferramentas/checklist-google` | `K-Skills17/lk-lead-magnets` (replaced Diagnóstico Google) |
+| Calculadora de CAC | `/ferramentas/calculadora-cac` | `K-Skills17/lk-lead-magnets` |
+| Dashboard da Clínica | `/ferramentas/dashboard-clinica` | `K-Skills17/lk-lead-magnets` |
+| Scripts de WhatsApp | `/ferramentas/scripts-whatsapp` | `K-Skills17/lk-lead-magnets` |
 | Auditoria de Site | `/ferramentas/auditoria-site` | `K-Skills17/Fb-lead-audit-tool` |
-| Diagnóstico Google Meu Negócio | `/ferramentas/diagnostico-google` | `K-Skills17/diagnostico-google` |
 | Simulador de Convênios | `/ferramentas/simulador-convenios` | `K-Skills17/simulador-convenio` |
 | Calculadora de Precificação | `/ferramentas/calculadora-precificacao` | `K-Skills17/Calculadora-precificac-o` |
-| Diagnóstico de Clínica | `/ferramentas/diagnostico-clinica` | `K-Skills17/LK-diagnostico-clinica` |
 | Calculadora de Agenda | `/ferramentas/calculadora-agenda` | `K-Skills17/calculadora-agenda` |
+
+Retired and redirected (old links keep working): `/unicornio`, `/raio-x/resultado`, `/raio-x/privacidade`,
+`/ferramentas/diagnostico-google` → `/ferramentas/checklist-google`, `/ferramentas/diagnostico-clinica` → `/raio-x`.
+
+The first five are the lead magnets of the YouTube series "O Sistema Operacional da Clínica
+Odontológica". How they were moved in, and why, is in [`docs/lead-magnets-integration.md`](docs/lead-magnets-integration.md).
 
 The WhatsApp chatbot (`K-Skills17/lk-chatbot`) stays a separate service on Railway.
 It's a long-running Fastify + Postgres + Redis/BullMQ worker that can't run on
@@ -39,9 +48,13 @@ Storage, AI, CAPI, delivery, alerts and logging are shared.
 
 1. Put the frontend in `src/tools/<slug>/`. Its CSS is automatically scoped to
    `.tool-<slug>` by `postcss-tool-scope.cjs`, so it can't leak into the site.
-2. Add `src/app/ferramentas/<slug>/page.tsx` that wraps it in
-   `<div className={`${toolFontVars} tool-<slug>`}>`.
-3. Submit leads with `submitLead('<slug>', payload)`.
+2. Add `src/app/ferramentas/<slug>/page.tsx` that wraps it in `<ToolShell slug="<slug>">`
+   (`src/components/tools/ToolShell.tsx`: the site Navbar and Footer, the tool fonts and the
+   `.tool-<slug>` scope). Every tool looks like the rest of the site, so the tool itself has no
+   logo, header or footer.
+3. Submit leads with `submitLead('<slug>', payload)`. A lead magnet uses the shared form instead
+   (`mountLeadForm` in `src/tools/shared/lead-form.js`: name, clinic, city, WhatsApp, e-mail,
+   specialty, unchecked LGPD consent) and its page uses `leadMagnetMetadata()`.
 4. Write `src/lib/backbone/tools/<slug>.ts` and register it in `tools/index.ts`.
 5. Add a fixture to `src/lib/backbone/backbone.test.ts` (the test fails until you do).
 
@@ -52,7 +65,7 @@ draft assistant) goes through `src/lib/backbone/llm.ts`, which supports **Claude
 
 | Tier | Claude default | OpenAI default | Used by |
 |---|---|---|---|
-| `fast` | `claude-haiku-4-5-20251001` | `gpt-5.4-mini` | every tool's WhatsApp action plan |
+| `fast` | `claude-haiku-4-5-20251001` | `gpt-5.4-mini` | the WhatsApp action plans (tools, RAIO-X, CAC calculator; the download-only lead magnets skip AI) |
 | `smart` | `claude-sonnet-4-6` | `gpt-5.5` | blog draft assistant (`/painel/blog/gerar`) |
 
 - **Which provider:** `AI_PROVIDER=anthropic` (default) or `openai` picks which one is tried
@@ -68,9 +81,16 @@ show "—" until you add their prices there.
 
 ## Database: Neon
 
-Everything — tool leads, AI calls, RAIO-X, scorecard, Unicórnio and rate limits — lives in one
-Neon Postgres database at `DATABASE_URL`, queried through `src/lib/db.ts` with Neon's HTTP
-driver (no connection pool to manage on Vercel). The full schema is `db/schema.sql`.
+Everything — every lead, AI calls, rate limits and the blog — lives in one Neon Postgres database at
+`DATABASE_URL`, queried through `src/lib/db.ts` with Neon's HTTP driver (no connection pool to
+manage on Vercel). The full schema is `db/schema.sql`.
+
+**One lead table.** Every lead, from every tool and lead magnet, is a row in `tool_leads` (`tool` =
+the source). The old per-funnel tables (`raiox_leads`, `unicornio_leads`, `raio_x_scorecard_leads`)
+are no longer created or written: `npm run db:migrate` (and the "Criar tabelas" button) copies any
+rows still in them into `tool_leads` — same id and date, the whole original row in `payload`, under
+the sources `raio-x-2026`, `unicornio` and `raio-x-scorecard` — and never deletes anything. Once
+the counts match, drop the old tables by hand with [`db/drop-legacy-lead-tables.sql`](db/drop-legacy-lead-tables.sql).
 
 ## Rate limiting
 
@@ -80,19 +100,19 @@ database is unreachable it fails open, so an outage never blocks a real lead.
 
 | What | Limit | Over the limit |
 |---|---|---|
-| Tool lead form, per IP | 5 per 10 min, 20 per day | 429 (results still show; nothing is sent) |
+| Lead form (tools and lead magnets), per IP | 5 per 10 min, 20 per day | 429 (results still show; nothing is sent) |
 | WhatsApp report + AI plan, per destination number | 4 per day | lead is stored, no message or AI call |
 | Site scanner, per IP | 10 per 10 min | 429 with a message on screen |
 | Meta event proxy, per IP | 60 per 10 min | 429 |
-| RAIO-X / scorecard / Unicórnio forms, per IP | 5 per 10 min | 429 with a message on screen |
 
 Tune the numbers in `LIMITS` in `src/lib/ratelimit.ts`.
 
 ## Dashboard: `/painel`
 
-One view across **every** lead source: the six tools, RAIO-X, the RAIO-X scorecard
-and Unicórnio. It shows leads by source and by day, recent leads, leads whose
-WhatsApp report failed (contact them by hand), and AI usage and cost by model.
+One view across **every** lead source: the five lead magnets, the four tools, and the rows kept from
+the retired funnels (listed only while they have leads in the window). It shows leads by source and
+by day, recent leads, leads whose WhatsApp report failed (contact them by hand), and AI usage and
+cost by model.
 
 It reads the `all_leads` view and the `ai_calls` table in Neon. It's protected by HTTP Basic auth
 (`PAINEL_USERS`, one login per admin, or `PAINEL_USER` / `PAINEL_PASSWORD`) and stays closed until
@@ -131,8 +151,8 @@ Step-by-step version with every env var and where to find it: [`GO-LIVE.md`](GO-
    table, the rate-limit table and the `all_leads` view. It's idempotent, so re-running it is safe.
 2. **Copy the existing leads out of Supabase** (once):
    `SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… DATABASE_URL=… npm run db:copy-from-supabase`.
-   It copies RAIO-X, scorecard and Unicórnio leads (plus tool leads and AI calls if they exist)
-   and skips rows already copied, so it can be re-run. Afterwards, remove `SUPABASE_*` from Vercel.
+   It copies RAIO-X, scorecard and Unicórnio leads into `tool_leads` (plus tool leads and AI calls
+   if they exist) and skips rows already copied, so it can be re-run. Afterwards, remove `SUPABASE_*` from Vercel.
 3. **Set env vars in Vercel** (see `.env.example`): `DATABASE_URL`, `ANTHROPIC_API_KEY`, `LK_CHATBOT_URL`, `LK_CHATBOT_API_KEY`, `LK_CHATBOT_TENANT_ID`,
    `FB_PIXEL_ID`, `FB_ACCESS_TOKEN`, `PAINEL_PASSWORD`, and optionally
    `GOOGLE_PAGESPEED_API_KEY` and the `EVOLUTION_*` fallback. Copy the values from the old
@@ -151,14 +171,9 @@ Step-by-step version with every env var and where to find it: [`GO-LIVE.md`](GO-
 
 - **Google Sheets are gone.** Leads go to Neon (`tool_leads`) and show up in `/painel`.
   The old Apps Script sheets stop receiving new rows.
-- **Diagnóstico Google** had no backend before. It now gets the same routine as the other
-  tools: AI plan, CAPI, and a WhatsApp report when a number is given (WhatsApp stays optional
-  on that form).
 - **One WhatsApp CTA number:** (11) 94685-1028, set in `src/tools/shared/config.js` and used
   site-wide. Agenda, Precificação, Google and the audit report used to point at an old number.
 - **Fixed on the way in:**
-  - The clinic diagnostic sent its data as `diagnosticData`, which the chatbot
-    ignores. It now sends `auditData`, so the bot has the lead's context.
   - The audit report's WhatsApp button linked to `wa.me/11959041799`, which has no
     country code, so it didn't open a valid chat.
   - The simulator sent a report link without the results in it.
