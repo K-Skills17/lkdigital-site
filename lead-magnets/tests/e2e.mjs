@@ -152,6 +152,26 @@ suites['calculadora-cac'] = async (browser) => {
   await ctx.close();
 };
 
+suites['dashboard-clinica'] = async (browser) => {
+  const { ctx, page, posts, errors } = await newPage(browser);
+  await page.goto(BASE + '/ferramentas/dashboard-clinica', { waitUntil: 'networkidle' });
+  check('title', (await page.title()).startsWith('Dashboard da clínica odontológica'));
+  check('one screenshot, labelled fictitious', (await page.locator('.shot img').count()) === 1 && (await page.textContent('.shot figcaption')).includes('Clínica fictícia'));
+  check('screenshot loads', await page.locator('.shot img').evaluate((i) => i.complete && i.naturalWidth > 0));
+  await fillLead(page, '#lead');
+  await page.locator('#lead button[type=submit]').click();
+  await page.waitForSelector('#lead a[download]');
+  const hrefs = await page.locator('#lead a[download]').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+  check('both files unlocked', hrefs.join() === '/ferramentas/arquivos/dashboard-clinica.xlsx,/ferramentas/arquivos/dashboard-clinica-demo.xlsx', hrefs);
+  check('lead POST to dashboard-clinica', posts.length === 1 && posts[0].url.endsWith('/api/ferramentas/dashboard-clinica/lead'));
+  for (const h of hrefs) {
+    const res = await page.request.get(BASE + h);
+    check('file served: ' + h, res.ok() && (await res.body()).length > 10000);
+  }
+  check('no page errors', errors.length === 0, errors);
+  await ctx.close();
+};
+
 const browser = await chromium.launch();
 for (const [name, run] of Object.entries(suites)) {
   if (only && name !== only) continue;

@@ -94,6 +94,7 @@ const PAYLOADS: Record<string, unknown> = {
       },
     },
   },
+  "dashboard-clinica": { ...LEAD_MAGNET, data: {} },
   "checklist-google": { ...LEAD_MAGNET, data: { done: 9, total: 27 } },
   "auditoria-site": {
     name: "Fabio", phone: "11946851028", clinicName: "Clin F", siteUrl: "https://clinf.com.br", score: 61,

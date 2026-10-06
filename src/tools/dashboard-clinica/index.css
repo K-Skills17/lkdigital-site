@@ -1,0 +1,19 @@
+/* Dashboard da Clínica landing (scoped to .tool-dashboard-clinica). Tokens: src/tools/shared/lead-magnets.css. */
+.wrap{max-width:var(--lk-max);margin:0 auto;padding:0 16px 56px}
+.wrap *{box-sizing:border-box}
+.dash-head{padding:30px 0 8px}
+.kicker{margin:0 0 10px;color:var(--lk-accent-text);font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.dash-head h1{font-family:var(--lk-font-heading);font-size:clamp(2rem,8vw,2.9rem);line-height:1.08;font-weight:var(--lk-weight-heading);margin:0 0 14px}
+.lead{color:var(--lk-muted);font-size:1.05rem;margin:0 0 18px}
+.shot{margin:8px 0 24px}
+.shot img{display:block;width:100%;height:auto;border-radius:var(--lk-radius);border:1px solid var(--lk-border);background:#fff}
+.shot figcaption{margin-top:8px;font-size:.8rem;color:var(--lk-muted)}
+.shot figcaption b{color:#3A2E00;background:#FFE680;padding:1px 6px;border-radius:4px;font-weight:var(--lk-weight-heading)}
+.wrap > h2{font-family:var(--lk-font-heading);font-size:1.6rem;font-weight:var(--lk-weight-heading);margin:0 0 10px}
+.list{list-style:none;padding:0;margin:0 0 26px}
+.list li{position:relative;padding:0 0 10px 28px}
+.list li::before{content:"";position:absolute;left:0;top:.45em;width:12px;height:12px;border-radius:2px;background:var(--lk-accent)}
+.list b{color:var(--lk-text)}
+.list span{color:var(--lk-muted)}
+.note{font-size:.88rem;color:var(--lk-muted);margin:14px 0 0}
+.foot{padding:30px 0 0;color:var(--lk-muted);font-size:.8rem;text-align:center}
