@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Clínica Modelo Odonto — Implantes e reabilitação oral em São Paulo (clínica fictícia)</title>
+<title>{{demo.clinica.nome}} — Implantes e reabilitação oral em São Paulo (clínica fictícia)</title>
 <meta name="description" content="Clínica fictícia usada como exemplo de página inicial de clínica odontológica. Dados ilustrativos.">
 <meta name="theme-color" content="#0E3B43">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%279%27 fill=%27%230E3B43%27/%3E%3C/svg%3E">
@@ -102,9 +102,9 @@ footer.site p{margin:0 0 6px}
 
 <header>
   <div class="wrap">
-    <a class="logo" href="#topo" aria-label="Clínica Modelo Odonto">
+    <a class="logo" href="#topo" aria-label="{{demo.clinica.nome}}">
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0E3B43"/><path d="M10 9c2.2-1.3 4-.6 6 .6 2-1.2 3.8-1.9 6-.6 2.6 1.6 2.4 5.3 1.3 8.2-.9 2.4-1.4 6.8-3.1 6.8-1.6 0-1.6-4.6-4.2-4.6s-2.6 4.6-4.2 4.6c-1.7 0-2.2-4.4-3.1-6.8C7.6 14.3 7.4 10.6 10 9z" fill="#fff"/></svg>
-      <span>Clínica Modelo Odonto</span>
+      <span>{{demo.clinica.nome}}</span>
     </a>
     <nav aria-label="Seções">
       <a href="#como-funciona">Como funciona</a>
@@ -119,14 +119,14 @@ footer.site p{margin:0 0 6px}
   <section class="hero">
     <div class="wrap">
       <div>
-        <p class="kicker">Implantes e prótese · Vila Mariana, SP</p>
+        <p class="kicker">Implantes e prótese · {{demo.clinica.bairro}}, SP</p>
         <h1>Perdeu dentes ou a prótese incomoda? Comece por uma avaliação do seu caso.</h1>
         <p class="lead">Para adultos que perderam dentes ou usam prótese e não estão satisfeitos. Na avaliação você entende as opções para o seu caso, sem compromisso.</p>
         <div class="doc" aria-label="Responsável técnica">
           <div class="slot">Foto da dentista</div>
           <div>
-            <b>Dra. Ana Modelo</b>
-            <small>Responsável técnica · CRO-SP 00000 (fictício)</small>
+            <b>{{demo.clinica.responsavel_tecnica}}</b>
+            <small>Responsável técnica · {{demo.clinica.cro}}</small>
             <small>Implantodontia e prótese dentária</small>
           </div>
         </div>
@@ -139,7 +139,7 @@ footer.site p{margin:0 0 6px}
         </div>
         <ul class="trust">
           <li>Tomografia na própria clínica</li>
-          <li>Seg a sex, 8h–19h · Sáb, 8h–12h</li>
+          <li>{{demo.clinica.horarios}}</li>
         </ul>
       </div>
       <div class="slot hero-photo" aria-hidden="true">Foto da dentista no consultório</div>
@@ -160,7 +160,7 @@ footer.site p{margin:0 0 6px}
 
   <section class="alt" aria-labelledby="video-t">
     <div class="wrap">
-      <h2 id="video-t">Conheça a Dra. Ana Modelo</h2>
+      <h2 id="video-t">Conheça a {{demo.clinica.responsavel_tecnica}}</h2>
       <p class="sub">Um minuto sobre como ela conduz a avaliação.</p>
       <button class="video" type="button" id="video" aria-label="Vídeo de apresentação">
         <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6 4l14 8-14 8z"/></svg></span>
@@ -182,7 +182,7 @@ footer.site p{margin:0 0 6px}
       </div>
       <h3 class="sub-h">Equipe</h3>
       <div class="grid">
-        <figure><div class="slot">Foto: dentista</div><figcaption>Dra. Ana Modelo</figcaption></figure>
+        <figure><div class="slot">Foto: dentista</div><figcaption>{{demo.clinica.responsavel_tecnica}}</figcaption></figure>
         <figure><div class="slot">Foto: dentista</div><figcaption>Dentista da equipe</figcaption></figure>
         <figure><div class="slot">Foto: recepção</div><figcaption>Recepção</figcaption></figure>
         <figure><div class="slot">Foto: auxiliar</div><figcaption>Auxiliar de saúde bucal</figcaption></figure>
@@ -229,8 +229,8 @@ footer.site p{margin:0 0 6px}
       <h2>Como chegar</h2>
       <div class="map slot" role="img" aria-label="Espaço para o mapa">Mapa: espaço para o Google Maps da clínica</div>
       <div class="visit">
-        <div class="card"><h3>Endereço</h3><p>Rua Exemplo, 123 — Vila Mariana, São Paulo – SP (endereço fictício)</p></div>
-        <div class="card"><h3>Horários</h3><p>Seg a sex, 8h–19h · Sáb, 8h–12h</p></div>
+        <div class="card"><h3>Endereço</h3><p>{{demo.clinica.endereco}}</p></div>
+        <div class="card"><h3>Horários</h3><p>{{demo.clinica.horarios}}</p></div>
         <div class="card"><h3>Estacionamento</h3><p>Estacionamento conveniado ao lado. Acesso sem escadas.</p></div>
       </div>
     </div>
@@ -247,8 +247,8 @@ footer.site p{margin:0 0 6px}
 
 <footer class="site">
   <div class="wrap">
-    <p><b>Clínica Modelo Odonto</b> · Rua Exemplo, 123 — Vila Mariana, São Paulo – SP (endereço fictício)</p>
-    <p>Responsável técnica: Dra. Ana Modelo · CRO-SP 00000 (fictício)</p>
+    <p><b>{{demo.clinica.nome}}</b> · {{demo.clinica.endereco}}</p>
+    <p>Responsável técnica: {{demo.clinica.responsavel_tecnica}} · {{demo.clinica.cro}}</p>
     <p><b>Clínica fictícia — dados ilustrativos.</b> Página de demonstração da LK Digital.</p>
   </div>
 </footer>
@@ -260,7 +260,7 @@ footer.site p{margin:0 0 6px}
 
 <script>
 (function () {
-  var num = ''.replace(/\D/g, '');
+  var num = '{{demo.clinica.whatsapp}}'.replace(/\D/g, '');
   var href = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Olá! Vim pelo site e quero agendar uma avaliação.');
   var links = document.querySelectorAll('.js-wa');
   for (var i = 0; i < links.length; i++) { links[i].href = href; links[i].target = '_blank'; }

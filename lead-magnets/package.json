@@ -4,8 +4,10 @@
   "type": "module",
   "description": "Offline builder for the lead-magnet downloads (PDF, xlsx, md, OG images) and the end-to-end tests of the lead-magnet pages.",
   "scripts": {
-    "build": "node build.mjs",
-    "test:e2e": "node tests/e2e.mjs"
+    "build": "node --no-warnings build.mjs",
+    "test:assets": "node --no-warnings tests/assets.mjs",
+    "test:e2e": "node tests/e2e.mjs",
+    "test": "npm run test:assets && npm run test:e2e"
   },
   "devDependencies": {
     "playwright": "1.56.1"
