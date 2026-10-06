@@ -6,6 +6,7 @@ import { isValidBrPhone, normalizeBrPhone } from "./phone";
 import { modelFor } from "./models";
 import { runLeadPipeline } from "./pipeline";
 import { TOOL_ADAPTERS } from "./tools";
+import type { ToolAdapter } from "./types";
 import { aggregate, type LeadRow } from "./dashboard";
 
 describe("normalizeBrPhone", () => {
@@ -83,15 +84,7 @@ const PAYLOADS: Record<string, unknown> = {
     },
     resultsUrl: "https://lkdigital.odo.br/ferramentas/diagnostico-clinica#abc",
   },
-  "diagnostico-google": {
-    name: "Eva", phone: "", clinicName: "Clin E", email: "e@x.com", city: "Natal",
-    results: {
-      totalScore: 42, gradeLabel: "Precisa de Atenção",
-      sectionScores: [{ title: "Fotos e Visual", percent: 30 }, { title: "Avaliações", percent: 60 }],
-      actionItems: [{ text: "Adicione pelo menos 15 fotos profissionais", impact: "Alto" }],
-      answers: { verificado: "sim" },
-    },
-  },
+  "checklist-google": { ...LEAD_MAGNET, data: { done: 9, total: 27 } },
   "auditoria-site": {
     name: "Fabio", phone: "11946851028", clinicName: "Clin F", siteUrl: "https://clinf.com.br", score: 61,
     topIssues: ["Formulario de contato"],
@@ -131,7 +124,7 @@ describe("tool adapters", () => {
           const msg = adapter.message(r.lead, r.data, plan);
           expect(msg).toContain(r.lead.name);
           expect(msg).not.toMatch(/undefined|NaN|\[object Object\]/);
-          if (plan) expect(msg).toContain(plan);
+          if (plan && prompt !== null) expect(msg).toContain(plan);
         }
         const audit = adapter.auditData(r.lead, r.data);
         expect(audit.source).toMatch(/^[a-z_]+$/);
@@ -199,7 +192,7 @@ describe("runLeadPipeline", () => {
   });
 
   it("sends CAPI Lead (with shared event id) and the WhatsApp report via the chatbot", async () => {
-    const res = await runLeadPipeline(TOOL_ADAPTERS["diagnostico-clinica"], PAYLOADS["diagnostico-clinica"], { eventId: "evt_1" });
+    const res = await runLeadPipeline(TOOL_ADAPTERS["raio-x"], PAYLOADS["raio-x"], { eventId: "evt_1" });
     expect(res.status).toBe(200);
     expect(res.body.messageSent).toBe(true);
 
@@ -212,9 +205,8 @@ describe("runLeadPipeline", () => {
     const bot = calls.find((c) => c.url === "https://bot.example/webhook/audit-lead");
     const botBody = bot!.body as { phone: string; auditData: { source: string }; reportMessage: string };
     expect(botBody.phone).toBe("5511946851028");
-    // The old repo sent `diagnosticData`, which the chatbot ignored.
-    expect(botBody.auditData.source).toBe("diagnostico_clinica");
-    expect(botBody.reportMessage).toContain("Clin D");
+    expect(botBody.auditData.source).toBe("raio_x");
+    expect(botBody.reportMessage).toContain("Clínica G");
   });
 
   it("falls back to Evolution when the chatbot fails", async () => {
@@ -237,7 +229,13 @@ describe("runLeadPipeline", () => {
   });
 
   it("accepts e-mail-only leads where the tool allows it, without a WhatsApp send", async () => {
-    const res = await runLeadPipeline(TOOL_ADAPTERS["diagnostico-google"], PAYLOADS["diagnostico-google"]);
+    // No current tool is e-mail-only; the pipeline still supports adapters that opt in.
+    const emailOnly: ToolAdapter<object> = {
+      id: "teste", label: "Teste", requiresPhone: false,
+      parse: () => ({ ok: true, data: {}, lead: { name: "Eva", phone: "", email: "e@x.com", clinic: "C", city: null, score: null, headline: "h", reportUrl: null } }),
+      prompt: () => null, message: () => "m", auditData: () => ({ source: "teste" }),
+    };
+    const res = await runLeadPipeline(emailOnly, {});
     expect(res.status).toBe(200);
     expect(res.body.messageSent).toBe(false);
     expect(calls.some((c) => c.url.includes("bot.example"))).toBe(false);

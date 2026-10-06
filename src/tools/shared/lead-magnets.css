@@ -24,7 +24,9 @@
   --lk-font: var(--tool-font-body), "Inter", system-ui, sans-serif;
   --lk-font-heading: var(--tool-font-display), "Cormorant Garamond", Georgia, serif;
   --lk-weight-heading: 600;
+  --lk-nav-h: 64px;                  /* site Navbar (fixed): h-16, md:h-20 */
 }
+@media (min-width: 768px) { :root { --lk-nav-h: 80px; } }
 
 .lk-tool { background: var(--lk-bg); color: var(--lk-text); font-family: var(--lk-font); min-height: 60vh; }
 

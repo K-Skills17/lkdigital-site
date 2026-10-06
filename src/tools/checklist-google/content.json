@@ -1,0 +1,340 @@
+{
+  "_nota": "Fonte única do checklist (HTML e PDF). Todo o texto é rascunho para revisão do Komando. Títulos e aberturas passam pelo hook-point.",
+  "titulo": "Checklist do Perfil da Empresa no Google para clínicas odontológicas",
+  "subtitulo": "27 itens para o seu Perfil trazer ligações, rotas e mensagens, mais o kit de avaliações pronto para usar.",
+  "abertura": "O paciente que procura dentista no Google decide em segundos, olhando o seu Perfil. Este checklist mostra o que precisa estar lá e como fazer, item por item.",
+  "como_usar": [
+    "Abra o seu Perfil (pesquise o nome da clínica no Google, logado na conta que administra o Perfil).",
+    "Passe item por item e marque o que já está feito.",
+    "O que ficar sem marcar é a sua lista de tarefas da semana."
+  ],
+  "secoes": [
+    {
+      "id": "base",
+      "titulo": "Base do perfil",
+      "itens": [
+        {
+          "id": "nome",
+          "t": "Nome igual ao nome real da clínica",
+          "por": "Palavras-chave extras no nome violam as diretrizes do Google e podem levar à suspensão do Perfil.",
+          "como": "Use exatamente o nome da fachada, sem “implante”, bairro ou cidade junto."
+        },
+        {
+          "id": "categoria",
+          "t": "Categoria principal específica, secundárias por especialidade",
+          "por": "A categoria principal é um dos sinais mais fortes para você aparecer nas buscas certas.",
+          "como": "Escolha a categoria mais específica que existir para o seu foco e adicione as outras especialidades como secundárias."
+        },
+        {
+          "id": "endereco",
+          "t": "Endereço e área atendida corretos",
+          "por": "Pin no lugar errado manda o paciente para a porta errada.",
+          "como": "Confira número, complemento e andar, e arraste o pin até a entrada real no mapa."
+        },
+        {
+          "id": "verificacao",
+          "t": "Verificação concluída",
+          "por": "Perfil não verificado aparece menos e fica vulnerável a edições de terceiros.",
+          "como": "No painel, clique em “Verificar” e siga o método que o Google oferecer."
+        }
+      ]
+    },
+    {
+      "id": "contato",
+      "titulo": "Contato e horários",
+      "itens": [
+        {
+          "id": "telefone",
+          "t": "Telefone que atende de verdade (ou WhatsApp)",
+          "por": "Quem liga pelo Perfil está pronto para agendar. Se ninguém atende, liga para a próxima clínica.",
+          "como": "Cadastre o número que a recepção atende e teste ligando de outro celular."
+        },
+        {
+          "id": "site-utm",
+          "t": "Link do site com UTM",
+          "por": "Sem UTM, as visitas que vêm do Perfil se misturam com o resto e você não mede o canal.",
+          "como": "No campo Site, use: seusite.com.br/?utm_source=google&utm_medium=organic&utm_campaign=gbp"
+        },
+        {
+          "id": "horarios",
+          "t": "Horários normais e especiais (feriados)",
+          "por": "Horário errado gera paciente na porta fechada e avaliação negativa.",
+          "como": "Preencha os horários da semana e cadastre cada feriado em “Horário especial”."
+        },
+        {
+          "id": "agendamento",
+          "t": "Link de agendamento",
+          "por": "Tira um passo entre a busca e a conversa com a recepção.",
+          "como": "Em “Link de agendamento”, use o link wa.me da clínica com uma mensagem pronta."
+        }
+      ]
+    },
+    {
+      "id": "servicos",
+      "titulo": "Serviços",
+      "itens": [
+        {
+          "id": "servicos-lista",
+          "t": "Todos os serviços listados, agrupados por especialidade",
+          "por": "Ajuda o Google a entender o que você faz e mostra ao paciente que você resolve o caso dele.",
+          "como": "Em “Serviços”, crie um grupo por especialidade e adicione cada procedimento."
+        },
+        {
+          "id": "servicos-descricao",
+          "t": "Descrições sem valores e sem promessa de resultado",
+          "por": "As regras de publicidade do CFO proíbem, e o valor só é definido depois da avaliação.",
+          "como": "Descreva para quem é o serviço e como é a avaliação. Deixe o campo de valor em branco."
+        }
+      ]
+    },
+    {
+      "id": "fotos",
+      "titulo": "Fotos",
+      "nota": "Colocar localização (geotag) nas fotos não é um fator de ranqueamento comprovado. Não conte com isso.",
+      "itens": [
+        {
+          "id": "logo-capa",
+          "t": "Logo e foto de capa",
+          "por": "É a primeira impressão do Perfil, antes de qualquer texto.",
+          "como": "Logo quadrado e nítido; capa com a fachada ou a recepção."
+        },
+        {
+          "id": "fachada",
+          "t": "Fachada e entrada",
+          "por": "O paciente precisa achar a porta sem ligar pedindo ajuda.",
+          "como": "Fotografe de dia, da calçada, mostrando o número e a entrada."
+        },
+        {
+          "id": "ambientes",
+          "t": "Recepção e consultório",
+          "por": "Reduz a ansiedade de quem nunca veio à clínica.",
+          "como": "Ambiente arrumado, luz natural, sem pacientes na foto."
+        },
+        {
+          "id": "equipe",
+          "t": "Equipe e equipamentos",
+          "por": "Gente e estrutura reais geram confiança.",
+          "como": "Uma foto de cada dentista e da recepção, mais os principais equipamentos."
+        },
+        {
+          "id": "fotos-reais",
+          "t": "Só fotos reais, sem banco de imagem",
+          "por": "Foto de banco de imagem passa a impressão de que a clínica esconde algo.",
+          "como": "Use o celular com boa luz; qualidade honesta vale mais que perfeição."
+        },
+        {
+          "id": "sem-comparativos",
+          "t": "Nenhuma foto comparativa de casos de pacientes",
+          "por": "As regras do CFO restringem imagens de resultado de pacientes na publicidade.",
+          "como": "Mostre estrutura e equipe, nunca casos de pacientes."
+        }
+      ]
+    },
+    {
+      "id": "avaliacoes",
+      "titulo": "Avaliações",
+      "itens": [
+        {
+          "id": "recencia",
+          "t": "Avaliações novas toda semana",
+          "por": "O paciente lê as mais recentes; um Perfil parado há meses passa desconfiança.",
+          "como": "Peça no fluxo de saída de todo atendimento, com o link direto (modelos no kit)."
+        },
+        {
+          "id": "todos",
+          "t": "Pedido feito a todos os pacientes, sem filtrar",
+          "por": "Pedir só para quem gostou (filtro de avaliações) viola as políticas do Google.",
+          "como": "O pedido faz parte do atendimento padrão e vai para todo paciente atendido."
+        },
+        {
+          "id": "sem-incentivo",
+          "t": "Nenhum incentivo em troca de avaliação",
+          "por": "Brinde ou benefício em troca de avaliação viola as políticas do Google e pode remover avaliações.",
+          "como": "Peça com gentileza e pare por aí. Nunca escreva avaliação no lugar de alguém."
+        },
+        {
+          "id": "responder-48h",
+          "t": "Todas as avaliações respondidas em até 48h",
+          "por": "Quem pesquisa lê as respostas e percebe se a clínica cuida das pessoas.",
+          "como": "Duas vezes por semana, responda tudo usando os modelos de resposta."
+        },
+        {
+          "id": "sigilo",
+          "t": "Respostas sem confirmar tratamento nem dados do paciente",
+          "por": "Sigilo profissional e LGPD: a resposta é pública.",
+          "como": "Agradeça, fale da clínica em geral e leve qualquer detalhe para um canal privado."
+        }
+      ]
+    },
+    {
+      "id": "atualizacoes",
+      "titulo": "Atualizações",
+      "itens": [
+        {
+          "id": "postagem",
+          "t": "Uma postagem por semana",
+          "por": "Mostra que a clínica está ativa e dá ao paciente um motivo a mais para escolher você.",
+          "como": "Alterne novidade, equipe, tecnologia e dica. Foto real e 2 a 3 frases, sem valores."
+        }
+      ]
+    },
+    {
+      "id": "atributos",
+      "titulo": "Atributos",
+      "itens": [
+        {
+          "id": "acessibilidade",
+          "t": "Acessibilidade",
+          "por": "Para quem tem mobilidade reduzida, isso decide a escolha.",
+          "como": "Marque entrada, elevador e banheiro acessíveis, só o que for verdade."
+        },
+        {
+          "id": "estacionamento",
+          "t": "Estacionamento",
+          "por": "É uma das primeiras dúvidas de quem vem de carro.",
+          "como": "Informe se há estacionamento próprio, conveniado ou na rua."
+        },
+        {
+          "id": "pagamento",
+          "t": "Formas de pagamento (sem valores)",
+          "por": "Responde a dúvida sem entrar em negociação pelo Perfil.",
+          "como": "Marque as formas aceitas (cartão, Pix etc.), sem mencionar valores ou parcelas."
+        }
+      ]
+    },
+    {
+      "id": "consistencia",
+      "titulo": "Consistência",
+      "itens": [
+        {
+          "id": "nap",
+          "t": "Nome, endereço e telefone idênticos em todo lugar",
+          "por": "Dados diferentes confundem o Google e o paciente.",
+          "como": "Copie o bloco exato do Perfil para o site, a bio do Instagram e os diretórios."
+        }
+      ]
+    },
+    {
+      "id": "acompanhamento",
+      "titulo": "Acompanhamento mensal",
+      "itens": [
+        {
+          "id": "metricas",
+          "t": "Ligações, pedidos de rota e cliques no site anotados",
+          "por": "É o resultado real do Perfil; sem anotar, você não sabe se está melhorando.",
+          "como": "No dia 1 de cada mês, abra “Desempenho” no Perfil e anote os números no Dashboard da Clínica.",
+          "link": {
+            "texto": "Dashboard da Clínica",
+            "caminho": "/ferramentas/dashboard-clinica"
+          }
+        }
+      ]
+    }
+  ],
+  "kit": {
+    "titulo": "Kit de avaliações",
+    "abertura": "Avaliação nova toda semana vem de um processo, não de sorte. Pedido para todos, resposta para todos, 10 minutos por semana.",
+    "link": {
+      "titulo": "1. Como pegar o link de avaliação",
+      "passos": [
+        "Entre na conta do Google que administra o Perfil da clínica.",
+        "Pesquise o nome da clínica no Google para abrir o painel do Perfil.",
+        "Clique em “Pedir avaliações” (ou “Receber mais avaliações”).",
+        "Copie o link curto que aparece. Ele substitui {{link_avaliacao}} nos modelos abaixo.",
+        "Teste o link numa aba anônima antes de enviar para os pacientes."
+      ]
+    },
+    "pedidos": {
+      "titulo": "2. Pedidos de avaliação pelo WhatsApp",
+      "regras": [
+        "Enviar para todos os pacientes atendidos, sem escolher quem recebe.",
+        "Nenhum incentivo, e nunca pedir uma nota específica.",
+        "Parar a sequência quando o paciente avaliar ou pedir para não receber."
+      ],
+      "modelos": [
+        {
+          "id": "pedido-apos",
+          "quando": "Logo após a consulta",
+          "texto": "Oi, {{nome_paciente}}! Obrigado por vir à {{clinica}} hoje.\nSe puder, conte no Google como foi o seu atendimento, leva 1 minuto: {{link_avaliacao}}\nSua opinião ajuda outras pessoas a escolherem. Equipe {{clinica}}"
+        },
+        {
+          "id": "pedido-24h",
+          "quando": "24h depois",
+          "texto": "Oi, {{nome_paciente}}, tudo bem?\nSe tiver 1 minutinho, contar no Google como foi o atendimento ajuda muito: {{link_avaliacao}}\nObrigado! Equipe {{clinica}}"
+        },
+        {
+          "id": "pedido-7d",
+          "quando": "Lembrete de 7 dias",
+          "texto": "Oi, {{nome_paciente}}! Passando só para lembrar, sem pressa:\nse quiser contar como foi o atendimento na {{clinica}}, o link é este: {{link_avaliacao}}\nQualquer dúvida, estamos por aqui. Equipe {{clinica}}"
+        }
+      ]
+    },
+    "respostas": {
+      "titulo": "3. Respostas às avaliações",
+      "regras": [
+        "Nunca confirmar que a pessoa é paciente.",
+        "Nunca citar tratamento, procedimento, data ou qualquer dado clínico.",
+        "Nunca discutir em público; leve o assunto para um canal privado.",
+        "Avaliação falsa ou ofensiva: use “Denunciar avaliação” no Perfil, sem rebater."
+      ],
+      "modelos": [
+        {
+          "id": "resp-positiva",
+          "quando": "Positiva",
+          "texto": "Obrigado pelas palavras, {{nome_autor}}! Ficamos muito felizes com o seu comentário. A equipe da {{clinica}} segue à disposição."
+        },
+        {
+          "id": "resp-neutra",
+          "quando": "Neutra",
+          "texto": "Obrigado pelo comentário, {{nome_autor}}. Levamos cada opinião a sério e queremos entender o que podemos melhorar. Se quiser conversar, fale com a gente pelo {{telefone_clinica}}."
+        },
+        {
+          "id": "resp-negativa",
+          "quando": "Negativa",
+          "texto": "{{nome_autor}}, lamentamos que você tenha ficado com essa impressão. Por respeito à privacidade, não tratamos detalhes em público. Pedimos que fale com a nossa gerência pelo {{telefone_clinica}} para entendermos e resolvermos."
+        },
+        {
+          "id": "resp-nao-paciente",
+          "quando": "De quem não é paciente",
+          "texto": "Olá, {{nome_autor}}. Não conseguimos entender o contexto deste comentário. Se quiser, fale com a gente pelo {{telefone_clinica}} para conversarmos."
+        }
+      ]
+    },
+    "rotina": {
+      "titulo": "4. Rotina semanal de 10 minutos",
+      "linhas": [
+        {
+          "quando": "Todo atendimento",
+          "quem": "Recepção",
+          "oque": "Envia o pedido “logo após a consulta” a todo paciente atendido.",
+          "tempo": "segundos"
+        },
+        {
+          "quando": "Segunda",
+          "quem": "Recepção",
+          "oque": "Envia os pedidos de 24h e de 7 dias pendentes.",
+          "tempo": "3 min"
+        },
+        {
+          "quando": "Segunda e quinta",
+          "quem": "Recepção",
+          "oque": "Responde todas as avaliações novas com os modelos.",
+          "tempo": "3 min"
+        },
+        {
+          "quando": "Quarta",
+          "quem": "Gestor(a)",
+          "oque": "Publica a postagem da semana no Perfil.",
+          "tempo": "3 min"
+        },
+        {
+          "quando": "Sexta",
+          "quem": "Gestor(a)",
+          "oque": "Confere quantas avaliações novas entraram na semana.",
+          "tempo": "1 min"
+        }
+      ]
+    },
+    "chaves": "Troque as {{chaves}} antes de enviar: {{nome_paciente}}, {{clinica}}, {{link_avaliacao}} e, nas respostas, {{nome_autor}} (nome que aparece na avaliação) e {{telefone_clinica}}."
+  }
+}

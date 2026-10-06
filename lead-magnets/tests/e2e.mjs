@@ -90,6 +90,34 @@ suites['raio-x'] = async (browser) => {
   await ctx.close();
 };
 
+suites['checklist-google'] = async (browser) => {
+  const { ctx, page, posts, errors } = await newPage(browser);
+  await page.goto(BASE + '/ferramentas/checklist-google', { waitUntil: 'networkidle' });
+  check('title', (await page.title()).startsWith('Checklist do Perfil da Empresa no Google'));
+  const items = await page.locator('.cl-main input[data-id]').count();
+  check('27 items in 9 sections', items === 27 && (await page.locator('.cl-main .sec').count()) === 9, items);
+  check('every item has por quê + como', (await page.locator('.cl-main .item').evaluateAll((els) => els.every((e) => e.querySelectorAll('p').length >= 2))));
+  await page.locator('.cl-main .item label').nth(0).click();
+  await page.locator('.cl-main .item label').nth(1).click();
+  check('live score', (await page.textContent('#done')) === '2' && (await page.textContent('#pct')) === '7');
+  await page.reload({ waitUntil: 'networkidle' });
+  check('ticks saved across reloads', (await page.textContent('#done')) === '2');
+  check('progress bar sticks below the navbar', (await page.locator('.progress').evaluate((e) => getComputedStyle(e).top)) === '64px');
+  check('templates have copy buttons', (await page.locator('.copy').count()) >= 4);
+  const tplText = (await page.locator('.tpl pre').allTextContents()).join('\n');
+  check('templates: no star request, no incentive', !/5 estrelas|cinco estrelas|desconto|brinde|sorteio/i.test(tplText));
+  check('PDF link not shown before the form', (await page.locator('a[href$="checklist-google.pdf"]').count()) === 0);
+  await fillLead(page, '#lead');
+  await page.locator('#lead button[type=submit]').click();
+  await page.waitForSelector('#lead a[href$="checklist-google.pdf"]');
+  check('lead POST to checklist-google with progress', posts.length === 1 && posts[0].url.endsWith('/api/ferramentas/checklist-google/lead') && posts[0].body.data.done === 2, posts.map((p) => p.body.data));
+  check('PDF link → /ferramentas/arquivos/', (await page.locator('#lead a[download]').getAttribute('href')) === '/ferramentas/arquivos/checklist-google.pdf');
+  check('RAIO-X CTA on thank-you', (await page.locator('#lead a[href="/raio-x"]').count()) === 1);
+  check('WhatsApp sent note', await page.locator('#lead [data-wa-note]').isVisible());
+  check('no page errors', errors.length === 0, errors);
+  await ctx.close();
+};
+
 const browser = await chromium.launch();
 for (const [name, run] of Object.entries(suites)) {
   if (only && name !== only) continue;
