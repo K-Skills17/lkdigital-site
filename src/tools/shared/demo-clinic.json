@@ -1,0 +1,607 @@
+{
+  "_aviso": "Clínica fictícia — dados ilustrativos",
+  "clinica": {
+    "nome": "Clínica Modelo Odonto",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "bairro": "Vila Mariana",
+    "endereco": "Rua Exemplo, 123 — Vila Mariana, São Paulo – SP (endereço fictício)",
+    "foco": "Implantes e reabilitação oral",
+    "responsavel_tecnica": "Dra. Ana Modelo",
+    "cro": "CRO-SP 00000 (fictício)",
+    "whatsapp": "",
+    "horarios": "Seg a sex, 8h–19h · Sáb, 8h–12h"
+  },
+  "mes_base": {
+    "investimento_anuncios": 3000,
+    "custos_fixos_marketing": 2000,
+    "leads": 300,
+    "qualificados": 120,
+    "agendados": 45,
+    "compareceram": 30,
+    "fechados": 10,
+    "margem_bruta": 0.4
+  },
+  "procedimentos": [
+    {
+      "nome": "Implante unitário",
+      "chave": "implante",
+      "fechamentos": 4,
+      "ticket_medio": 5000
+    },
+    {
+      "nome": "Protocolo",
+      "chave": "protocolo",
+      "fechamentos": 1,
+      "ticket_medio": 25000
+    },
+    {
+      "nome": "Clínica geral",
+      "chave": "geral",
+      "fechamentos": 5,
+      "ticket_medio": 350
+    }
+  ],
+  "canais": [
+    "Meta",
+    "Google",
+    "GBP/orgânico",
+    "Indicação",
+    "Instagram orgânico"
+  ],
+  "semanas": [
+    "2026-08-10",
+    "2026-08-17",
+    "2026-08-24",
+    "2026-08-31",
+    "2026-09-07",
+    "2026-09-14",
+    "2026-09-21",
+    "2026-09-28"
+  ],
+  "semanal": [
+    {
+      "semana": "2026-08-10",
+      "canal": "Meta",
+      "investimento": 450,
+      "leads": 42,
+      "qualificados": 14,
+      "agendados": 5,
+      "compareceram": 3,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-08-10",
+      "canal": "Google",
+      "investimento": 300,
+      "leads": 17,
+      "qualificados": 8,
+      "agendados": 3,
+      "compareceram": 2,
+      "fechados": 1,
+      "procedimentos": [
+        "implante"
+      ],
+      "receita_fechada": 5000
+    },
+    {
+      "semana": "2026-08-10",
+      "canal": "GBP/orgânico",
+      "investimento": 0,
+      "leads": 6,
+      "qualificados": 3,
+      "agendados": 2,
+      "compareceram": 1,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-10",
+      "canal": "Indicação",
+      "investimento": 0,
+      "leads": 3,
+      "qualificados": 3,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-08-10",
+      "canal": "Instagram orgânico",
+      "investimento": 0,
+      "leads": 4,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 0,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-17",
+      "canal": "Meta",
+      "investimento": 450,
+      "leads": 48,
+      "qualificados": 16,
+      "agendados": 5,
+      "compareceram": 3,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-17",
+      "canal": "Google",
+      "investimento": 300,
+      "leads": 18,
+      "qualificados": 8,
+      "agendados": 3,
+      "compareceram": 2,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-17",
+      "canal": "GBP/orgânico",
+      "investimento": 0,
+      "leads": 7,
+      "qualificados": 4,
+      "agendados": 2,
+      "compareceram": 2,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-08-17",
+      "canal": "Indicação",
+      "investimento": 0,
+      "leads": 2,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-17",
+      "canal": "Instagram orgânico",
+      "investimento": 0,
+      "leads": 3,
+      "qualificados": 1,
+      "agendados": 0,
+      "compareceram": 0,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-24",
+      "canal": "Meta",
+      "investimento": 450,
+      "leads": 44,
+      "qualificados": 15,
+      "agendados": 5,
+      "compareceram": 3,
+      "fechados": 1,
+      "procedimentos": [
+        "implante"
+      ],
+      "receita_fechada": 5000
+    },
+    {
+      "semana": "2026-08-24",
+      "canal": "Google",
+      "investimento": 300,
+      "leads": 16,
+      "qualificados": 7,
+      "agendados": 3,
+      "compareceram": 2,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-08-24",
+      "canal": "GBP/orgânico",
+      "investimento": 0,
+      "leads": 5,
+      "qualificados": 3,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-24",
+      "canal": "Indicação",
+      "investimento": 0,
+      "leads": 3,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 0,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-24",
+      "canal": "Instagram orgânico",
+      "investimento": 0,
+      "leads": 4,
+      "qualificados": 1,
+      "agendados": 0,
+      "compareceram": 0,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-08-31",
+      "canal": "Meta",
+      "investimento": 450,
+      "leads": 46,
+      "qualificados": 15,
+      "agendados": 5,
+      "compareceram": 3,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-08-31",
+      "canal": "Google",
+      "investimento": 300,
+      "leads": 19,
+      "qualificados": 9,
+      "agendados": 3,
+      "compareceram": 3,
+      "fechados": 1,
+      "procedimentos": [
+        "implante"
+      ],
+      "receita_fechada": 5000
+    },
+    {
+      "semana": "2026-08-31",
+      "canal": "GBP/orgânico",
+      "investimento": 0,
+      "leads": 7,
+      "qualificados": 3,
+      "agendados": 2,
+      "compareceram": 1,
+      "fechados": 1,
+      "procedimentos": [
+        "implante"
+      ],
+      "receita_fechada": 5000
+    },
+    {
+      "semana": "2026-08-31",
+      "canal": "Indicação",
+      "investimento": 0,
+      "leads": 2,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 1,
+      "procedimentos": [
+        "protocolo"
+      ],
+      "receita_fechada": 25000
+    },
+    {
+      "semana": "2026-08-31",
+      "canal": "Instagram orgânico",
+      "investimento": 0,
+      "leads": 4,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-07",
+      "canal": "Meta",
+      "investimento": 450,
+      "leads": 42,
+      "qualificados": 14,
+      "agendados": 5,
+      "compareceram": 3,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-09-07",
+      "canal": "Google",
+      "investimento": 300,
+      "leads": 17,
+      "qualificados": 8,
+      "agendados": 3,
+      "compareceram": 2,
+      "fechados": 1,
+      "procedimentos": [
+        "implante"
+      ],
+      "receita_fechada": 5000
+    },
+    {
+      "semana": "2026-09-07",
+      "canal": "GBP/orgânico",
+      "investimento": 0,
+      "leads": 6,
+      "qualificados": 3,
+      "agendados": 2,
+      "compareceram": 1,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-07",
+      "canal": "Indicação",
+      "investimento": 0,
+      "leads": 3,
+      "qualificados": 3,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-09-07",
+      "canal": "Instagram orgânico",
+      "investimento": 0,
+      "leads": 4,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 0,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-14",
+      "canal": "Meta",
+      "investimento": 450,
+      "leads": 48,
+      "qualificados": 16,
+      "agendados": 5,
+      "compareceram": 3,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-14",
+      "canal": "Google",
+      "investimento": 300,
+      "leads": 18,
+      "qualificados": 8,
+      "agendados": 3,
+      "compareceram": 2,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-14",
+      "canal": "GBP/orgânico",
+      "investimento": 0,
+      "leads": 7,
+      "qualificados": 4,
+      "agendados": 2,
+      "compareceram": 2,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-09-14",
+      "canal": "Indicação",
+      "investimento": 0,
+      "leads": 2,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-14",
+      "canal": "Instagram orgânico",
+      "investimento": 0,
+      "leads": 3,
+      "qualificados": 1,
+      "agendados": 0,
+      "compareceram": 0,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-21",
+      "canal": "Meta",
+      "investimento": 450,
+      "leads": 44,
+      "qualificados": 15,
+      "agendados": 5,
+      "compareceram": 3,
+      "fechados": 1,
+      "procedimentos": [
+        "implante"
+      ],
+      "receita_fechada": 5000
+    },
+    {
+      "semana": "2026-09-21",
+      "canal": "Google",
+      "investimento": 300,
+      "leads": 16,
+      "qualificados": 7,
+      "agendados": 3,
+      "compareceram": 2,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-09-21",
+      "canal": "GBP/orgânico",
+      "investimento": 0,
+      "leads": 5,
+      "qualificados": 3,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-21",
+      "canal": "Indicação",
+      "investimento": 0,
+      "leads": 3,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 0,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-21",
+      "canal": "Instagram orgânico",
+      "investimento": 0,
+      "leads": 4,
+      "qualificados": 1,
+      "agendados": 0,
+      "compareceram": 0,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    },
+    {
+      "semana": "2026-09-28",
+      "canal": "Meta",
+      "investimento": 450,
+      "leads": 46,
+      "qualificados": 15,
+      "agendados": 5,
+      "compareceram": 3,
+      "fechados": 1,
+      "procedimentos": [
+        "geral"
+      ],
+      "receita_fechada": 350
+    },
+    {
+      "semana": "2026-09-28",
+      "canal": "Google",
+      "investimento": 300,
+      "leads": 19,
+      "qualificados": 9,
+      "agendados": 3,
+      "compareceram": 3,
+      "fechados": 1,
+      "procedimentos": [
+        "implante"
+      ],
+      "receita_fechada": 5000
+    },
+    {
+      "semana": "2026-09-28",
+      "canal": "GBP/orgânico",
+      "investimento": 0,
+      "leads": 7,
+      "qualificados": 3,
+      "agendados": 2,
+      "compareceram": 1,
+      "fechados": 1,
+      "procedimentos": [
+        "implante"
+      ],
+      "receita_fechada": 5000
+    },
+    {
+      "semana": "2026-09-28",
+      "canal": "Indicação",
+      "investimento": 0,
+      "leads": 2,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 1,
+      "procedimentos": [
+        "protocolo"
+      ],
+      "receita_fechada": 25000
+    },
+    {
+      "semana": "2026-09-28",
+      "canal": "Instagram orgânico",
+      "investimento": 0,
+      "leads": 4,
+      "qualificados": 2,
+      "agendados": 1,
+      "compareceram": 1,
+      "fechados": 0,
+      "procedimentos": [],
+      "receita_fechada": 0
+    }
+  ],
+  "ltv_exemplo": {
+    "pct_retorno_ano": 0.5,
+    "receita_retorno_ano": 350,
+    "horizonte_anos": 3
+  },
+  "campanhas_ep5": [
+    {
+      "nome": "Campanha A",
+      "cliques": 1000,
+      "cpc": 2,
+      "fechados": 0,
+      "procedimento": "implante",
+      "receita_fechada": 0
+    },
+    {
+      "nome": "Campanha B",
+      "cliques": 100,
+      "cpc": 12,
+      "fechados": 3,
+      "procedimento": "protocolo",
+      "receita_fechada": 75000
+    }
+  ]
+}

@@ -118,6 +118,40 @@ suites['checklist-google'] = async (browser) => {
   await ctx.close();
 };
 
+suites['calculadora-cac'] = async (browser) => {
+  const { ctx, page, posts, errors } = await newPage(browser);
+  const txt = (sel) => page.locator(sel).first().textContent();
+  await page.goto(BASE + '/ferramentas/calculadora-cac', { waitUntil: 'networkidle' });
+  check('title', (await page.title()).startsWith('Calculadora de CAC'));
+  check('empty calculator shows "–" (results not gated)', (await txt('[data-out="cacReal"]')) === '–');
+  await page.click('#exemplo');
+  const want = { cpl: 'R$ 10,00', custoQual: 'R$ 25,00', custoAgend: 'R$ 66,67', custoComp: 'R$ 100,00', cacAds: 'R$ 300,00', cacReal: 'R$ 500,00',
+    receita: 'R$ 46.750,00', lucro: 'R$ 18.700,00', roi: '274%', roas: '15,6' };
+  for (const [k, v] of Object.entries(want)) check('acceptance ' + k + ' = ' + v, (await txt('[data-out="' + k + '"]')) === v, await txt('[data-out="' + k + '"]'));
+  check('"1 em cada 30"', (await txt('[data-out="umEmCada"]')).includes('1 em cada 30'));
+  check('example labelled fictitious', await page.isVisible('#demo-flag') && await page.isVisible('#demo-flag-2'));
+  check('gap explained', (await txt('#cac-msg')).includes('R$ 200,00 a mais'));
+  check('biggest lever: fechamento', (await page.locator('#onde-out li.best').getAttribute('data-step')) === 'fechamento');
+  // Live recalculation.
+  await page.fill('#invest', '6000');
+  check('live recalculation', (await txt('[data-out="cacAds"]')) === 'R$ 600,00');
+  // URL prefill.
+  await page.goto(BASE + '/ferramentas/calculadora-cac?invest=3000&fixos=2000&leads=300&qual=120&agend=45&comp=30&fech=10&proc=Implante:4:5000:40', { waitUntil: 'networkidle' });
+  check('URL prefill', (await txt('[data-out="cacReal"]')) === 'R$ 500,00' && !(await page.isVisible('#demo-flag')));
+  await page.goto(BASE + '/ferramentas/calculadora-cac#ltv', { waitUntil: 'networkidle' });
+  check('#ltv opens the LTV section', await page.locator('#ltv-box').evaluate((e) => e.open));
+  check('sticky CAC bar', await page.isVisible('.sticky'));
+  // Lead: real numbers are sent as inputs.
+  await fillLead(page, '#lead');
+  await page.locator('#lead button[type=submit]').click();
+  await page.waitForSelector('#lead a[download]');
+  const b = posts[0] ? posts[0].body : {};
+  check('lead POST to calculadora-cac with the inputs', posts.length === 1 && posts[0].url.endsWith('/api/ferramentas/calculadora-cac/lead') && b.data.inputs && b.data.inputs.fech === 10, b.data);
+  check('xlsx link', (await page.locator('#lead a[download]').getAttribute('href')) === '/ferramentas/arquivos/calculadora-cac.xlsx');
+  check('no page errors', errors.length === 0, errors);
+  await ctx.close();
+};
+
 const browser = await chromium.launch();
 for (const [name, run] of Object.entries(suites)) {
   if (only && name !== only) continue;

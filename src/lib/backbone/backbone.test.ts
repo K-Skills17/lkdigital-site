@@ -84,6 +84,16 @@ const PAYLOADS: Record<string, unknown> = {
     },
     resultsUrl: "https://lkdigital.odo.br/ferramentas/diagnostico-clinica#abc",
   },
+  "calculadora-cac": {
+    ...LEAD_MAGNET,
+    data: {
+      inputs: {
+        invest: 3000, fixos: 2000, salario: "", pctSec: "", leads: 300, qual: 120, agend: 45, comp: 30, fech: 10, volta: 50, retorno: 350, anos: 3,
+        procs: [{ nome: "Implante unitário", fech: 4, ticket: 5000, margem: 40 }, { nome: "Protocolo", fech: 1, ticket: 25000, margem: 40 },
+          { nome: "Clínica geral", fech: 5, ticket: 350, margem: 40 }],
+      },
+    },
+  },
   "checklist-google": { ...LEAD_MAGNET, data: { done: 9, total: 27 } },
   "auditoria-site": {
     name: "Fabio", phone: "11946851028", clinicName: "Clin F", siteUrl: "https://clinf.com.br", score: 61,
@@ -165,6 +175,24 @@ describe("raio-x adapter", () => {
     expect(adapter.parse({ ...body, data: { answers: { ...body.data.answers, q12: undefined } } }).ok).toBe(false);
     expect(adapter.parse({ ...body, data: { answers: { ...body.data.answers, q3: 7 } } }).ok).toBe(false);
     expect(adapter.parse({ ...body, consent: false }).ok).toBe(false);
+  });
+});
+
+describe("calculadora-cac adapter", () => {
+  const adapter = TOOL_ADAPTERS["calculadora-cac"];
+  it("re-computes the spec's acceptance values from the inputs", () => {
+    const r = adapter.parse(PAYLOADS["calculadora-cac"]);
+    if (!r.ok) throw new Error(r.error);
+    expect(r.data).toMatchObject({ hasNumbers: true, cacAds: 300, cacReal: 500 });
+    expect(r.lead.headline).toContain("CAC real R$");
+    expect(adapter.message(r.lead, r.data, null)).toContain("calculadora-cac.xlsx");
+  });
+  it("sends only the downloads (no AI) for the example clinic", () => {
+    const r = adapter.parse({ ...(PAYLOADS["calculadora-cac"] as object), data: { example: true } });
+    if (!r.ok) throw new Error(r.error);
+    expect(r.data.hasNumbers).toBe(false);
+    expect(adapter.prompt(r.lead, r.data)).toBeNull();
+    expect(adapter.message(r.lead, r.data, null)).toContain("https://lkdigital.odo.br/ferramentas/arquivos/calculadora-cac.xlsx");
   });
 });
 
