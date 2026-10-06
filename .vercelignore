@@ -1,3 +1,4 @@
 scripts/
-*.pdf
+# Root-level PDFs only (working files). PDFs under public/ are served downloads.
+/*.pdf
 generate-keyword-pdf.py
