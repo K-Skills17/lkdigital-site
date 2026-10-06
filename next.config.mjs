@@ -3,11 +3,11 @@ const nextConfig = {
   // Prevent trailing slash redirects — Google wastes crawl budget on /path/ → /path
   trailingSlash: false,
   experimental: {
-    // The blog reads db/seed/blog-posts.json at runtime (first-use import into
-    // the database, and the fallback when DATABASE_URL isn't set) — make sure
-    // it's bundled with the serverless functions.
+    // Read at runtime, so they must be bundled with the serverless functions:
+    // db/seed/blog-posts.json (first-use import + fallback) and db/schema.sql
+    // (the "Criar tabelas" button in /painel/blog).
     outputFileTracingIncludes: {
-      "/**/*": ["./db/seed/**/*"],
+      "/**/*": ["./db/seed/**/*", "./db/schema.sql"],
     },
   },
   images: {

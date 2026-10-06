@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { listAllPosts } from "@/lib/blog/store";
+import SetupDatabase from "@/components/painel/SetupDatabase";
+import { isMissingTable, listAllPosts } from "@/lib/blog/store";
 import { displayStatus, type DisplayStatus } from "@/lib/blog/types";
 
 export const dynamic = "force-dynamic";
@@ -28,12 +29,14 @@ export default async function BlogAdminPage({ searchParams }: { searchParams: { 
   try {
     posts = await listAllPosts();
   } catch (err) {
+    if (isMissingTable(err)) return <SetupDatabase />;
     console.error("[painel/blog] list failed:", err);
     return (
       <main className="mx-auto max-w-3xl p-8">
         <h1 className="text-2xl font-semibold">Blog indisponível</h1>
         <p className="mt-2 text-muted-foreground">
-          Não foi possível ler o banco de dados. Verifique DATABASE_URL e rode <code>npm run db:migrate</code>.
+          Não foi possível ler o banco de dados. Verifique se DATABASE_URL está configurada no Vercel e tente de novo
+          em instantes.
         </p>
       </main>
     );
