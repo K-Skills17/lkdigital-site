@@ -1,30 +1,4 @@
 /** @type {import('next-sitemap').IConfig} */
-const fs = require("fs");
-const path = require("path");
-
-// ─── Auto-read blog posts from content/blog/*.json ───
-function getEngineBlogPages() {
-  const dir = path.join(__dirname, "content", "blog");
-  if (!fs.existsSync(dir)) return [];
-
-  return fs
-    .readdirSync(dir)
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => {
-      try {
-        const data = JSON.parse(fs.readFileSync(path.join(dir, f), "utf-8"));
-        return {
-          loc: `/blog/${data.slug}`,
-          changefreq: "monthly",
-          priority: 0.8,
-          lastmod: data.dateModified || data.datePublished,
-        };
-      } catch {
-        return null;
-      }
-    })
-    .filter(Boolean);
-}
 
 // ─── Static pages (non-blog) ───
 const staticPages = [
@@ -43,16 +17,6 @@ const staticPages = [
   { loc: "/blog", changefreq: "daily", priority: 0.9, lastmod: "2026-07-14T12:00:00-03:00" },
   { loc: "/faq", changefreq: "monthly", priority: 0.6, lastmod: "2026-06-05T12:00:00-03:00" },
   // privacidade and termos are noindex — excluded from sitemap
-];
-
-// ─── Static blog posts (initial 6, before engine existed) ───
-const staticBlogPosts = [
-  { loc: "/blog/seo-local-dentistas-guia-completo", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-28T14:00:00-03:00" },
-  { loc: "/blog/google-meu-negocio-dentista", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-25T10:00:00-03:00" },
-  { loc: "/blog/google-ads-odontologia", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-22T10:00:00-03:00" },
-  { loc: "/blog/marketing-implantodontia", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-20T10:00:00-03:00" },
-  { loc: "/blog/regras-cfo-publicidade", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-18T10:00:00-03:00" },
-  { loc: "/blog/ia-busca-dentistas", changefreq: "monthly", priority: 0.8, lastmod: "2026-03-18T10:00:00-03:00" },
 ];
 
 // ─── City pages ───
@@ -76,7 +40,7 @@ module.exports = {
   // Exclude everything from auto-discovery (we define all paths manually + dynamically)
   exclude: ["/**"],
   robotsTxtOptions: {
-    additionalSitemaps: [],
+    additionalSitemaps: ["https://lkdigital.odo.br/sitemap-blog.xml"],
     policies: [
       { userAgent: "*", allow: "/", disallow: ["/api/", "/_next/", "/raio-x/resultado", "/raio-x/privacidade", "/demo", "/unicornio", "/painel", "/ferramentas/auditoria-site/relatorio"] },
       { userAgent: "GPTBot", allow: "/" },
@@ -86,18 +50,11 @@ module.exports = {
       { userAgent: "anthropic-ai", allow: "/" },
     ],
   },
+  // Blog posts live in the database and change without a deploy, so they get
+  // their own live sitemap (src/app/sitemap-blog.xml/route.ts).
   additionalPaths: async () => {
-    // Auto-discover engine blog posts + merge with everything else
-    const engineBlogPages = getEngineBlogPages();
-
-    // Deduplicate: engine posts take precedence for lastmod accuracy
-    const engineSlugs = new Set(engineBlogPages.map((p) => p.loc));
-    const dedupedStaticBlog = staticBlogPosts.filter((p) => !engineSlugs.has(p.loc));
-
     return [
       ...staticPages,
-      ...dedupedStaticBlog,
-      ...engineBlogPages,
       { loc: "/cidades", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
       ...cityPages,
     ];

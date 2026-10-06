@@ -47,13 +47,13 @@ Storage, AI, CAPI, delivery, alerts and logging are shared.
 
 ## AI models
 
-One registry: `src/lib/backbone/models.ts`. Every AI call (tools, daily blog engine,
-`npm run blog:new`) goes through `src/lib/backbone/llm.ts`, which supports **Claude and OpenAI**.
+One registry: `src/lib/backbone/models.ts`. Every AI call (tools, and the blog's "Rascunho com IA"
+draft assistant) goes through `src/lib/backbone/llm.ts`, which supports **Claude and OpenAI**.
 
 | Tier | Claude default | OpenAI default | Used by |
 |---|---|---|---|
 | `fast` | `claude-haiku-4-5-20251001` | `gpt-5.4-mini` | every tool's WhatsApp action plan |
-| `smart` | `claude-sonnet-4-6` | `gpt-5.5` | blog engine (`scripts/blog-engine`), `npm run blog:new` |
+| `smart` | `claude-sonnet-4-6` | `gpt-5.5` | blog draft assistant (`/painel/blog/gerar`) |
 
 - **Which provider:** `AI_PROVIDER=anthropic` (default) or `openai` picks which one is tried
   first. If the other provider's key is also set, it's used automatically when the first one
@@ -95,7 +95,32 @@ and Unicórnio. It shows leads by source and by day, recent leads, leads whose
 WhatsApp report failed (contact them by hand), and AI usage and cost by model.
 
 It reads the `all_leads` view and the `ai_calls` table in Neon. It's protected by HTTP Basic auth
-(`PAINEL_USER` / `PAINEL_PASSWORD`) and stays closed until a password is set.
+(`PAINEL_USERS`, one login per admin, or `PAINEL_USER` / `PAINEL_PASSWORD`) and stays closed until
+a login is configured.
+
+## Blog: `/painel/blog`
+
+Blog posts live in Neon (`blog_posts`) and are written by people in `/painel/blog`. The old daily
+blog engine (GitHub Actions + `scripts/blog-engine`) has been removed; nothing publishes on its own.
+
+- **Write manually:** "+ Novo artigo" opens the editor (visual editor, or HTML for posts with
+  custom blocks; those open in HTML automatically so nothing is stripped).
+- **Semi-automatic:** "Rascunho com IA" asks the AI (Claude/OpenAI, same keys as above) for a first
+  draft following the editorial rules carried over from the old engine. It only ever creates a
+  **draft**, flagged as AI-generated, and it can't be published until a signed-in admin clicks
+  "Revisei este conteúdo".
+- **Quality checklist** (`src/lib/blog/quality.ts`), live in the editor. Errors block publishing:
+  missing title/summary, too short, invented sources, the banned "340%" stat, `<h1>` in the body.
+  Warnings are left to the editor's judgment: CFO phrases, AI-sounding phrases, keyword
+  stuffing, SEO lengths, FAQ.
+- **Publish now or schedule:** a scheduled post appears by itself at its time (within 5 minutes).
+  Publishing refreshes the cached pages immediately and pings IndexNow.
+- **Safety:** every save keeps the previous version (restore from "Histórico de versões"); a live
+  post's URL can't be changed; live posts can't be deleted (unpublish or archive first); all HTML
+  is sanitized on save; every edit records who made it.
+- Posts appear on `/blog`, the home page, the author page and the live `/sitemap-blog.xml`
+  (listed in robots.txt).
+
 
 ## Go-live checklist
 

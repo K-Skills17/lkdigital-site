@@ -1,8 +1,10 @@
 // Provider selection and fallback between Claude and OpenAI (both SDKs mocked).
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { complete } from "./llm";
+import { modelFor, providerOrder } from "./models";
 
-const anthropicCreate = vi.fn();
-const openaiCreate = vi.fn();
+// vi.mock is hoisted above the imports, so the mocks must be hoisted too.
+const { anthropicCreate, openaiCreate } = vi.hoisted(() => ({ anthropicCreate: vi.fn(), openaiCreate: vi.fn() }));
 
 vi.mock("@anthropic-ai/sdk", () => ({
   default: class {
@@ -15,8 +17,6 @@ vi.mock("openai", () => ({
   },
 }));
 
-const { complete } = await import("./llm");
-const { modelFor, providerOrder } = await import("./models");
 
 beforeEach(() => {
   anthropicCreate.mockReset().mockResolvedValue({
