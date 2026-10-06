@@ -324,6 +324,16 @@
     .turma-fecha { font-size: .78rem; color: var(--text-muted); }
     .turma-encerrada { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); }
     .vagas-note  { font-size: .83rem; color: var(--text-muted); font-style: italic; }
+    /* ── Contador de vagas ─────────────────────────────── */
+    .spots { display: inline-flex; flex-direction: column; align-items: center; gap: .45rem; margin: .75rem 0 1.25rem; }
+    .spots-dots { display: flex; gap: .4rem; }
+    .spot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent); background: transparent; }
+    .spot.taken { background: var(--accent); }
+    .spots-text { font-size: .85rem; color: var(--text); font-weight: 500; }
+    .spots-text b { color: var(--accent-dark); }
+    .turma-card .spots { margin: .6rem 0 0; align-items: flex-start; }
+    .turma-card .spot { width: 11px; height: 11px; }
+    .turma-card .spots-text { font-size: .78rem; }
 
     /* ── FAQ ───────────────────────────────────────────── */
     .faq-list { display: flex; flex-direction: column; gap: .5rem; margin-top: 2rem; }
@@ -395,7 +405,7 @@
   <div class="container hero-inner">
     <span class="eyebrow">
       <span class="pulse-dot"></span>
-      Para implantodontistas · 15 vagas · 1 clínica por região
+      <span id="hero-vagas">Para implantodontistas · 15 vagas · 1 clínica por região</span>
     </span>
     <h1>Não anuncie sua clínica de implante. Ainda.</h1>
     <p class="subhead">Em 90 dias, a gente monta tudo em volta da sua clínica — e você começa a anunciar na semana 6, numa estrutura que não vaza.</p>
@@ -611,6 +621,9 @@ const CONFIG = {
   WHATSAPP_NUMBER: "5511946851028",
   WHATSAPP_TEXT:   "Assisti ao vídeo da Pré-Temporada. Minhas 3 palavras: ",
   TURMA_ATUAL:     0,
+  /* Vagas da turma atual: atualize VAGAS_OCUPADAS a cada clínica fechada (e zere ao abrir a próxima turma). */
+  VAGAS_POR_TURMA: 5,
+  VAGAS_OCUPADAS:  1,
   PRECO_CHEIO:     "R\$5.997",
   TURMAS: [
     { nome:"Turma 1 \u00b7 Fundadora", fecha:"[DD/MM]", avista:"R\$2.997", parcelado:"3x de R\$1.097" },
@@ -707,6 +720,23 @@ function renderTimeline(){
   var el=document.getElementById('timeline');if(!el)return;
   el.innerHTML=TIMELINE.map(function(t){return'<div class="tl-item'+(t.h?' highlight':'')+'"><div class="tl-label">'+t.label+'</div><p class="tl-desc">'+t.desc+'</p></div>';}).join('');
 }
+/* Vagas ocupadas na turma atual: bolinhas + "1 de 5 vagas ocupadas · restam 4". */
+function vagasInfo(){
+  var total=CONFIG.VAGAS_POR_TURMA,ocup=Math.max(0,Math.min(total,CONFIG.VAGAS_OCUPADAS)),rest=total-ocup;
+  return{total:total,ocup:ocup,rest:rest};
+}
+function spotsHtml(){
+  var v=vagasInfo(),dots='';
+  for(var i=0;i<v.total;i++)dots+='<span class="spot'+(i<v.ocup?' taken':'')+'"></span>';
+  var txt=v.rest===0?'<b>Turma esgotada</b> \u00b7 '+v.ocup+' de '+v.total+' vagas ocupadas'
+    :v.ocup+' de '+v.total+' vagas ocupadas \u00b7 <b>'+(v.rest===1?'resta 1 vaga':'restam '+v.rest+' vagas')+'</b>';
+  return'<div class="spots" role="status" aria-label="'+v.ocup+' de '+v.total+' vagas ocupadas na turma atual"><div class="spots-dots" aria-hidden="true">'+dots+'</div><div class="spots-text">'+txt+'</div></div>';
+}
+function renderHeroVagas(){
+  var el=document.getElementById('hero-vagas');if(!el)return;
+  var v=vagasInfo(),t=CONFIG.TURMAS[CONFIG.TURMA_ATUAL];
+  el.textContent='Para implantodontistas \u00b7 '+t.nome.split(' \u00b7 ')[0]+': '+(v.rest===0?'esgotada':(v.rest===1?'resta 1 vaga':'restam '+v.rest+' de '+v.total+' vagas'))+' \u00b7 1 cl\u00ednica por regi\u00e3o';
+}
 function renderInvestment(){
   var el=document.getElementById('investment-block');if(!el)return;
   var t=CONFIG.TURMAS[CONFIG.TURMA_ATUAL],isLast=CONFIG.TURMA_ATUAL===CONFIG.TURMAS.length-1;
@@ -717,13 +747,13 @@ function renderInvestment(){
     var r=i<CONFIG.TURMA_ATUAL?'<span class="ladder-status">encerrada</span>':'<span class="ladder-price">'+tu.avista+'</span>';
     return'<div class="ladder-item '+cls+'"><span class="ladder-name">'+tu.nome+'</span>'+r+'</div>';
   }).join('');
-  el.innerHTML='<p class="price-strike-total">R$35.000</p>'+sf+'<p class="price-turma-label">'+t.nome+'</p><p class="price-main">'+t.avista+' \u00e0 vista</p><p class="price-installment">ou '+t.parcelado+'</p>'+fn+'<div class="price-ladder">'+ld+'</div><p class="price-compare">Compare com um \u00fanico caso de implante fechado na sua cl\u00ednica.</p>';
+  el.innerHTML='<p class="price-strike-total">R$35.000</p>'+sf+'<p class="price-turma-label">'+t.nome+'</p>'+spotsHtml()+'<p class="price-main">'+t.avista+' \u00e0 vista</p><p class="price-installment">ou '+t.parcelado+'</p>'+fn+'<div class="price-ladder">'+ld+'</div><p class="price-compare">Compare com um \u00fanico caso de implante fechado na sua cl\u00ednica.</p>';
 }
 function renderTurmas(){
   var el=document.getElementById('turmas-grid');if(!el)return;
   el.innerHTML=CONFIG.TURMAS.map(function(t,i){
     var cls=i<CONFIG.TURMA_ATUAL?'past':i===CONFIG.TURMA_ATUAL?'current':'future';
-    var b=i<CONFIG.TURMA_ATUAL?'<div class="turma-encerrada">Encerrada</div>':'<div class="turma-price">'+t.avista+'</div><div class="turma-fecha">Fecha em '+t.fecha+'</div>';
+    var b=i<CONFIG.TURMA_ATUAL?'<div class="turma-encerrada">Encerrada</div>':'<div class="turma-price">'+t.avista+'</div><div class="turma-fecha">Fecha em '+t.fecha+'</div>'+(i===CONFIG.TURMA_ATUAL?spotsHtml():'');
     return'<div class="turma-card '+cls+'"><div class="turma-name">'+t.nome+'</div>'+b+'</div>';
   }).join('');
 }
@@ -829,7 +859,7 @@ function unlockAndPersist(){
 /* ── Init ────────────────────────────────────────────── */
 (function(){
   applyWA();renderStack();renderBonuses();renderChecklist();
-  renderTimeline();renderInvestment();renderTurmas();renderFAQ();
+  renderTimeline();renderInvestment();renderTurmas();renderHeroVagas();renderFAQ();
   if(ls.get('pt_unlocked')==='1')revealUnlocked(false);
 })();
 </script>
