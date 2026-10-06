@@ -74,6 +74,19 @@ const PAYLOADS: Record<string, unknown> = {
     ],
     reportUrl: "https://lkdigital.odo.br/ferramentas/simulador-convenios#results=x",
   },
+  "calculadora-cac": {
+    ...LEAD_MAGNET,
+    data: {
+      inputs: {
+        invest: 3000, fixos: 2000, salario: "", pctSec: "", leads: 300, qual: 120, agend: 45, comp: 30, fech: 10, volta: 50, retorno: 350, anos: 3,
+        procs: [{ nome: "Implante unitário", fech: 4, ticket: 5000, margem: 40 }, { nome: "Protocolo", fech: 1, ticket: 25000, margem: 40 },
+          { nome: "Clínica geral", fech: 5, ticket: 350, margem: 40 }],
+      },
+    },
+  },
+  "dashboard-clinica": { ...LEAD_MAGNET, data: {} },
+  "scripts-whatsapp": { ...LEAD_MAGNET, data: {} },
+  "checklist-google": { ...LEAD_MAGNET, data: { done: 9, total: 27 } },
   "auditoria-site": {
     name: "Fabio", phone: "11946851028", clinicName: "Clin F", siteUrl: "https://clinf.com.br", score: 61,
     topIssues: ["Formulario de contato"],
