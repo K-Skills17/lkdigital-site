@@ -74,29 +74,6 @@ const PAYLOADS: Record<string, unknown> = {
     ],
     reportUrl: "https://lkdigital.odo.br/ferramentas/simulador-convenios#results=x",
   },
-  "diagnostico-clinica": {
-    lead: { nome: "Davi", clinica: "Clin D", whatsapp: "11946851028", email: "d@x.com", cidade: "Recife" },
-    inputs: { pacientesAgendados: 200, taxaFaltas: 15, ticketMedio: 350, taxaAceite: 50, gastoMarketing: 3000 },
-    results: {
-      perdaTotal: 25000, perdaAnual: 300000, perdaFaltas: 10500, perdaOrcamentos: 8000, perdaRetorno: 4000,
-      desperdicioMarketing: 2500, receitaAtual: 60000, receitaPotencial: 85000, custoPorPaciente: 150,
-      faltasPorMes: 30, orcamentosRecusados: 20, pacientesQueNaoVoltam: 12,
-    },
-    resultsUrl: "https://lkdigital.odo.br/ferramentas/diagnostico-clinica#abc",
-  },
-  "calculadora-cac": {
-    ...LEAD_MAGNET,
-    data: {
-      inputs: {
-        invest: 3000, fixos: 2000, salario: "", pctSec: "", leads: 300, qual: 120, agend: 45, comp: 30, fech: 10, volta: 50, retorno: 350, anos: 3,
-        procs: [{ nome: "Implante unitário", fech: 4, ticket: 5000, margem: 40 }, { nome: "Protocolo", fech: 1, ticket: 25000, margem: 40 },
-          { nome: "Clínica geral", fech: 5, ticket: 350, margem: 40 }],
-      },
-    },
-  },
-  "dashboard-clinica": { ...LEAD_MAGNET, data: {} },
-  "scripts-whatsapp": { ...LEAD_MAGNET, data: {} },
-  "checklist-google": { ...LEAD_MAGNET, data: { done: 9, total: 27 } },
   "auditoria-site": {
     name: "Fabio", phone: "11946851028", clinicName: "Clin F", siteUrl: "https://clinf.com.br", score: 61,
     topIssues: ["Formulario de contato"],

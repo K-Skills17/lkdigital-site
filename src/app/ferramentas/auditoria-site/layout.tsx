@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import ToolShell from "@/components/tools/ToolShell";
 import "@/tools/auditoria-site/tool.css";
-import { toolFontVars } from "@/tools/shared/fonts";
 
 // Ported from the standalone Fb-lead-audit-tool app. Scanning runs on
 // /api/ferramentas/scan-site; leads go through the shared backbone.
@@ -19,9 +19,5 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className={`${toolFontVars} tool-auditoria-site`} style={{ minHeight: "100vh" }}>
-      {children}
-    </div>
-  );
+  return <ToolShell slug="auditoria-site">{children}</ToolShell>;
 }

@@ -7,19 +7,21 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: { absolute: "Ferramentas Gratuitas | LK Digital" },
   description:
-    "6 ferramentas gratuitas para dentistas: auditoria de site, Google Meu Negócio, simulador de convênios, calculadora de preços e mais.",
+    "9 ferramentas gratuitas para dentistas: RAIO-X da clínica, checklist do Google, calculadora de CAC, dashboard, scripts de WhatsApp, auditoria de site e mais.",
   keywords: [
     "ferramentas para dentistas",
     "calculadora odontologia",
     "auditoria site dentista",
     "simulador convênio odontológico",
     "precificação odontologia",
-    "diagnóstico clínica odontológica",
+    "raio-x clínica odontológica",
+    "CAC clínica odontológica",
+    "scripts whatsapp recepção dentista",
   ],
   openGraph: {
     title: "Ferramentas Gratuitas Para Dentistas — LK Digital",
     description:
-      "Audite seu site, calcule preços, simule convênios e otimize sua agenda. 6 ferramentas criadas exclusivamente para dentistas.",
+      "Faça o RAIO-X da clínica, calcule o CAC real, organize o Google e o WhatsApp. 9 ferramentas criadas exclusivamente para dentistas.",
     url: "https://lkdigital.odo.br/ferramentas",
     type: "website",
     images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
@@ -31,8 +33,78 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    name: "RAIO-X da Clínica",
+    href: "/raio-x",
+    category: "Diagnóstico",
+    description:
+      "12 perguntas sobre o caminho entre o primeiro contato e a cadeira: visibilidade, resposta, qualificação, comparecimento, retenção e números.",
+    benefit:
+      "Descubra em 3 minutos em que etapa sua clínica perde mais pacientes — com um plano de ação por área.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+      </svg>
+    ),
+  },
+  {
+    name: "Checklist do Perfil do Google",
+    href: "/ferramentas/checklist-google",
+    category: "Google",
+    description:
+      "27 itens para o Perfil da Empresa no Google, com pontuação ao vivo, kit de avaliações e modelos de pedido e resposta.",
+    benefit:
+      "Saiba exatamente o que falta no seu Perfil para aparecer para quem procura dentista no bairro.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Calculadora de CAC",
+    href: "/ferramentas/calculadora-cac",
+    category: "Financeiro",
+    description:
+      "Calcula o CAC real (não só o dos anúncios), o custo de cada etapa do funil, ROI, ROAS e LTV com os números do seu mês.",
+    benefit:
+      "Veja quanto custa, de verdade, cada paciente que fecha tratamento — e qual etapa do funil mais pesa.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+      </svg>
+    ),
+  },
+  {
+    name: "Dashboard da Clínica",
+    href: "/ferramentas/dashboard-clinica",
+    category: "Gestão",
+    description:
+      "Planilha semanal (Excel e Google Sheets) com investimento, leads, agendamentos e receita por canal, CAC e ROAS automáticos.",
+    benefit:
+      "10 minutos toda segunda para saber qual canal traz receita, não só cliques.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Scripts de WhatsApp",
+    href: "/ferramentas/scripts-whatsapp",
+    category: "Atendimento",
+    description:
+      "Livreto para a recepção: primeira resposta, qualificação, “quanto custa?”, objeções, lembretes, faltas e follow-up.",
+    benefit:
+      "Mensagens prontas para levar o paciente do primeiro “oi” até a avaliação.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+      </svg>
+    ),
+  },
+  {
     name: "Auditoria de Site",
-    slug: "auditoria-site",
+    href: "/ferramentas/auditoria-site",
     category: "Website",
     description:
       "Analisa seu site em SEO, captação de leads, mobile, visibilidade em IA e prontidão para conversão.",
@@ -45,23 +117,8 @@ const tools = [
     ),
   },
   {
-    name: "Diagnóstico Google Meu Negócio",
-    slug: "diagnostico-google",
-    category: "Google",
-    description:
-      "Avalia seu Perfil da Empresa no Google em fotos, avaliações, postagens e completude do perfil.",
-    benefit:
-      "Descubra se seu perfil no Google está ajudando ou prejudicando o fluxo de pacientes.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-      </svg>
-    ),
-  },
-  {
     name: "Simulador de Convênios",
-    slug: "simulador-convenios",
+    href: "/ferramentas/simulador-convenios",
     category: "Financeiro",
     description:
       "Calcula se seus convênios odontológicos são realmente lucrativos ou estão dando prejuízo.",
@@ -75,7 +132,7 @@ const tools = [
   },
   {
     name: "Calculadora de Precificação",
-    slug: "calculadora-precificacao",
+    href: "/ferramentas/calculadora-precificacao",
     category: "Financeiro",
     description:
       "Determina o preço correto dos seus procedimentos com base em custos, tempo e margem desejada.",
@@ -88,22 +145,8 @@ const tools = [
     ),
   },
   {
-    name: "Diagnóstico de Clínica",
-    slug: "diagnostico-clinica",
-    category: "Gestão",
-    description:
-      "Identifica perdas ocultas de receita: faltas, orçamentos rejeitados, evasão de pacientes e desperdício em marketing.",
-    benefit:
-      "Veja exatamente quanto dinheiro sua clínica está deixando na mesa todo mês.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
-      </svg>
-    ),
-  },
-  {
     name: "Calculadora de Agenda",
-    slug: "calculadora-agenda",
+    href: "/ferramentas/calculadora-agenda",
     category: "Produtividade",
     description:
       "Otimiza sua agenda analisando mix de procedimentos, alocação de tempo e receita por cadeira-hora.",
@@ -123,6 +166,8 @@ const categoryColors: Record<string, string> = {
   Financeiro: "bg-amber-500/10 text-amber-400 border-amber-500/20",
   "Gestão": "bg-purple-500/10 text-purple-400 border-purple-500/20",
   Produtividade: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+  "Diagnóstico": "bg-accent/10 text-accent border-accent/20",
+  Atendimento: "bg-teal-500/10 text-teal-400 border-teal-500/20",
 };
 
 function CollectionPageSchema() {
@@ -131,7 +176,7 @@ function CollectionPageSchema() {
     "@type": "CollectionPage",
     name: "Ferramentas Gratuitas Para Dentistas",
     description:
-      "6 ferramentas gratuitas para dentistas: auditoria de site, diagnóstico Google Meu Negócio, simulador de convênios, calculadora de preços, diagnóstico de clínica e calculadora de agenda.",
+      "9 ferramentas gratuitas para dentistas: RAIO-X da clínica, checklist do Perfil do Google, calculadora de CAC, dashboard da clínica, scripts de WhatsApp, auditoria de site, simulador de convênios, calculadora de precificação e calculadora de agenda.",
     url: "https://lkdigital.odo.br/ferramentas",
     inLanguage: "pt-BR",
     isPartOf: {
@@ -146,7 +191,7 @@ function CollectionPageSchema() {
         "@type": "ListItem",
         position: i + 1,
         name: tool.name,
-        url: `https://lkdigital.odo.br/ferramentas/${tool.slug}`,
+        url: `https://lkdigital.odo.br${tool.href}`,
         description: tool.description,
       })),
     },
@@ -176,7 +221,7 @@ export default function FerramentasPage() {
           eyebrow="Ferramentas Gratuitas"
           title="Diagnostique, Calcule e Otimize"
           titleAccent="Sua Clínica."
-          subtitle="6 ferramentas criadas exclusivamente para dentistas. Sem cadastro, sem custo — só resultados práticos para tomar decisões melhores hoje."
+          subtitle="9 ferramentas criadas exclusivamente para dentistas. Sem custo — resultados práticos para tomar decisões melhores hoje."
         />
 
         {/* Tools Grid */}
@@ -199,7 +244,7 @@ export default function FerramentasPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {tools.map((tool) => (
                 <article
-                  key={tool.slug}
+                  key={tool.href}
                   className="group relative flex flex-col p-6 md:p-8 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/5"
                 >
                   {/* Category Badge */}
@@ -238,7 +283,7 @@ export default function FerramentasPage() {
 
                   {/* CTA Button */}
                   <Link
-                    href={`/ferramentas/${tool.slug}`}
+                    href={tool.href}
                     className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:shadow-lg hover:shadow-accent/20"
                   >
                     Usar Ferramenta Gratis

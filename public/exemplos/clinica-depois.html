@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Clínica Modelo Odonto — Implantes e reabilitação oral em São Paulo (clínica fictícia)</title>
+<meta name="description" content="Clínica fictícia usada como exemplo de página inicial de clínica odontológica. Dados ilustrativos.">
+<meta name="theme-color" content="#0E3B43">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%279%27 fill=%27%230E3B43%27/%3E%3C/svg%3E">
+<!-- Demo prop for Ep 10: the "after" homepage. System fonts, inline SVG, no external requests. -->
+<style>
+:root{--ink:#10232A;--muted:#4D6168;--bg:#FFFFFF;--soft:#F2F7F7;--brand:#0E3B43;--brand-2:#1F6F78;--wa:#0B7A3E;--line:#DCE6E7;--r:14px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;padding-top:26px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+.demo{position:fixed;inset:0 0 auto 0;z-index:50;background:#FFE680;color:#3A2E00;font:600 12px/1.2 system-ui,sans-serif;text-align:center;padding:6px 8px;letter-spacing:.02em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:26px;z-index:40;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;text-decoration:none;color:var(--brand)}
+.logo svg{width:30px;height:30px}
+nav a{display:none}
+.btn-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:12px 20px;min-height:48px;font-size:1rem}
+.btn-wa svg{width:20px;height:20px;flex:none}
+.btn-wa.sm{padding:9px 14px;min-height:40px;font-size:.9rem}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border-radius:999px;border:1.5px solid var(--brand);color:var(--brand);text-decoration:none;font-weight:700}
+.hero{padding:24px 0 36px;background:linear-gradient(180deg,var(--soft),#fff)}
+.hero .wrap{display:grid;gap:28px}
+.kicker{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand-2);margin:0 0 8px}
+h1{font-size:clamp(1.55rem,6vw,3rem);line-height:1.15;margin:0 0 10px;color:var(--brand);letter-spacing:-.01em}
+.lead{font-size:1.02rem;color:var(--muted);margin:0 0 14px;max-width:36em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.trust{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0;padding:0;list-style:none;font-size:.92rem;color:var(--muted)}
+.trust li::before{content:"✓ ";color:var(--brand-2);font-weight:800}
+.doc{display:grid;grid-template-columns:60px 1fr;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;margin:0 0 14px;max-width:420px}
+.slot{background:repeating-linear-gradient(135deg,#E6EFF0 0 10px,#EDF4F4 10px 20px);border:1.5px dashed #9DB6B9;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;color:#4D6168;font-size:.8rem;font-weight:600;padding:8px}
+.doc .slot{width:60px;height:68px;font-size:.62rem;padding:4px}
+.hero-photo{display:none}
+.doc b{display:block;font-size:1rem;line-height:1.3}
+.doc small{display:block;color:var(--muted);font-size:.85rem;line-height:1.35}
+section{padding:52px 0}
+section.alt{background:var(--soft)}
+h2{font-size:clamp(1.4rem,4.6vw,2rem);line-height:1.2;margin:0 0 10px;color:var(--brand)}
+.sub{color:var(--muted);margin:0 0 26px;max-width:40em}
+.steps{display:grid;gap:14px;counter-reset:s;padding:0;margin:0;list-style:none}
+.steps li{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 18px 64px;position:relative}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:18px;width:32px;height:32px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps b{display:block;margin-bottom:2px}
+.steps span{color:var(--muted);font-size:.95rem}
+.video{position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;text-align:center;padding:16px;border:0;width:100%;font:inherit;cursor:pointer}
+.video .play{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center}
+.video .play svg{width:30px;height:30px;margin-left:4px}
+.video small{opacity:.8}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid figure{margin:0}
+.grid .slot{aspect-ratio:4/3;width:100%}
+.grid figcaption{font-size:.88rem;color:var(--muted);margin-top:6px}
+.eq{display:grid;gap:12px;padding:0;margin:0;list-style:none}
+.eq li{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.eq b{display:block}
+.eq span{color:var(--muted);font-size:.93rem}
+.quotes{display:grid;gap:14px}
+blockquote{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+blockquote p{margin:0 0 10px}
+blockquote footer{font-size:.88rem;color:var(--muted)}
+.note{font-size:.82rem;color:var(--muted);margin-top:14px}
+details{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
+summary{font-weight:700;cursor:pointer}
+details p{margin:10px 0 0;color:var(--muted)}
+.visit{display:grid;gap:14px}
+.map{aspect-ratio:16/7;width:100%;margin:0 0 14px}
+.sub-h{margin:26px 0 12px;font-size:1.1rem;color:var(--brand)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.card h3{margin:0 0 6px;font-size:1.05rem}
+.card p{margin:0;color:var(--muted)}
+.final{background:var(--brand);color:#fff;text-align:center}
+.final h2{color:#fff}
+.final .sub{color:#CFE3E5;margin-left:auto;margin-right:auto}
+footer.site{padding:30px 0 110px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line)}
+footer.site p{margin:0 0 6px}
+.float{position:fixed;right:16px;bottom:16px;z-index:45;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+@media (min-width:760px){
+  nav{display:flex;gap:22px}
+  nav a{display:inline;text-decoration:none;color:var(--muted);font-weight:600;font-size:.95rem}
+  .hero .wrap{grid-template-columns:1.25fr .75fr;align-items:center}
+  .hero{padding:56px 0}
+  .hero-photo{display:flex;aspect-ratio:4/5;width:100%}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .grid{grid-template-columns:repeat(4,1fr)}
+  .eq{grid-template-columns:repeat(3,1fr)}
+  .quotes{grid-template-columns:repeat(3,1fr)}
+  .visit{grid-template-columns:repeat(3,1fr)}
+  .float{display:none}
+}
+</style>
+</head>
+<body>
+<div class="demo" role="note">Clínica fictícia — dados ilustrativos</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#topo" aria-label="Clínica Modelo Odonto">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0E3B43"/><path d="M10 9c2.2-1.3 4-.6 6 .6 2-1.2 3.8-1.9 6-.6 2.6 1.6 2.4 5.3 1.3 8.2-.9 2.4-1.4 6.8-3.1 6.8-1.6 0-1.6-4.6-4.2-4.6s-2.6 4.6-4.2 4.6c-1.7 0-2.2-4.4-3.1-6.8C7.6 14.3 7.4 10.6 10 9z" fill="#fff"/></svg>
+      <span>Clínica Modelo Odonto</span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#estrutura">Estrutura</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a class="btn-wa sm js-wa" href="#" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="kicker">Implantes e prótese · Vila Mariana, SP</p>
+        <!-- HOOK: review -->
+        <h1>Perdeu dentes ou a prótese incomoda? Comece por uma avaliação do seu caso.</h1>
+        <p class="lead">Para adultos que perderam dentes ou usam prótese e não estão satisfeitos. Na avaliação você entende as opções para o seu caso, sem compromisso.</p>
+        <div class="doc" aria-label="Responsável técnica">
+          <div class="slot">Foto da dentista</div>
+          <div>
+            <b>Dra. Ana Modelo</b>
+            <small>Responsável técnica · CRO-SP 00000 (fictício)</small>
+            <small>Implantodontia e prótese dentária</small>
+          </div>
+        </div>
+        <div class="ctas">
+          <a class="btn-wa js-wa" href="#" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.5 3.9 1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+            Agendar avaliação pelo WhatsApp
+          </a>
+          <a class="btn-ghost" href="#como-funciona">Como funciona</a>
+        </div>
+        <ul class="trust">
+          <li>Tomografia na própria clínica</li>
+          <li>Seg a sex, 8h–19h · Sáb, 8h–12h</li>
+        </ul>
+      </div>
+      <div class="slot hero-photo" aria-hidden="true">Foto da dentista no consultório</div>
+    </div>
+  </section>
+
+  <section id="como-funciona">
+    <div class="wrap">
+      <h2>Como funciona o primeiro atendimento</h2>
+      <p class="sub">Três passos, sem surpresa. O plano e as condições são apresentados pessoalmente, depois da avaliação.</p>
+      <ol class="steps">
+        <li><b>Avaliação diagnóstica</b><span>Conversa, exame clínico e, se indicado, tomografia. Você conta o que incomoda.</span></li>
+        <li><b>Plano explicado</b><span>A dentista mostra as opções possíveis para o seu caso e responde às suas dúvidas.</span></li>
+        <li><b>Tratamento com acompanhamento</b><span>Se decidir seguir, agendamos as etapas e acompanhamos cada consulta.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="video-t">
+    <div class="wrap">
+      <h2 id="video-t">Conheça a Dra. Ana Modelo</h2>
+      <p class="sub">Um minuto sobre como ela conduz a avaliação.</p>
+      <button class="video" type="button" id="video" aria-label="Vídeo de apresentação">
+        <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6 4l14 8-14 8z"/></svg></span>
+        <b>Vídeo de apresentação (60–90s)</b>
+        <small>Espaço para o vídeo da dentista</small>
+      </button>
+    </div>
+  </section>
+
+  <section id="estrutura">
+    <div class="wrap">
+      <h2>Nossa estrutura</h2>
+      <p class="sub">Fotos reais da clínica: você já chega sabendo onde é a entrada.</p>
+      <div class="grid">
+        <figure><div class="slot">Foto: fachada</div><figcaption>Fachada e entrada</figcaption></figure>
+        <figure><div class="slot">Foto: recepção</div><figcaption>Recepção</figcaption></figure>
+        <figure><div class="slot">Foto: consultório</div><figcaption>Consultório</figcaption></figure>
+        <figure><div class="slot">Foto: esterilização</div><figcaption>Central de esterilização</figcaption></figure>
+      </div>
+      <h3 class="sub-h">Equipe</h3>
+      <div class="grid">
+        <figure><div class="slot">Foto: dentista</div><figcaption>Dra. Ana Modelo</figcaption></figure>
+        <figure><div class="slot">Foto: dentista</div><figcaption>Dentista da equipe</figcaption></figure>
+        <figure><div class="slot">Foto: recepção</div><figcaption>Recepção</figcaption></figure>
+        <figure><div class="slot">Foto: auxiliar</div><figcaption>Auxiliar de saúde bucal</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <h2>Equipamentos</h2>
+      <p class="sub">Para planejar cada caso com mais informação.</p>
+      <ul class="eq">
+        <li><b>Tomografia computadorizada</b><span>Imagem em 3D do osso para o planejamento, feita na própria clínica.</span></li>
+        <li><b>Scanner intraoral</b><span>Moldagem digital, sem a massa de moldagem tradicional.</span></li>
+        <li><b>Sedação consciente</b><span>Opção avaliada caso a caso, para quem tem medo de dentista.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>O que dizem sobre o atendimento</h2>
+      <div class="quotes">
+        <blockquote><p>“A dentista explicou tudo com calma e desenhou as opções. Saí sabendo exatamente o que ia acontecer.”</p><footer>— M. S., Vila Mariana</footer></blockquote>
+        <blockquote><p>“Fui atendida no horário e a secretária me lembrou da consulta no dia anterior. Tudo muito organizado.”</p><footer>— R. A., Saúde</footer></blockquote>
+        <blockquote><p>“Eu tinha muito medo e ninguém me apressou. Me senti respeitado do começo ao fim.”</p><footer>— J. P., Ipiranga</footer></blockquote>
+      </div>
+      <p class="note">Depoimentos fictícios, apenas para ilustração. Relatos sobre o atendimento; cada caso clínico é diferente.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="duvidas">
+    <div class="wrap">
+      <h2>Dúvidas frequentes</h2>
+      <details><summary>Quanto custa?</summary><p>Depende do seu caso. Cada boca é diferente, por isso o plano e as condições são apresentados depois da avaliação, pessoalmente.</p></details>
+      <details><summary>Atendem convênio?</summary><p>Somos uma clínica particular. Na avaliação explicamos as formas de pagamento.</p></details>
+      <details><summary>Tenho medo de dentista. E agora?</summary><p>Conte isso para a gente já no WhatsApp. A avaliação é só conversa e exame, sem pressa.</p></details>
+      <details><summary>Quanto tempo dura a avaliação?</summary><p>Em média uma hora, incluindo a conversa e os exames necessários.</p></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Como chegar</h2>
+      <div class="map slot" role="img" aria-label="Espaço para o mapa">Mapa: espaço para o Google Maps da clínica</div>
+      <div class="visit">
+        <div class="card"><h3>Endereço</h3><p>Rua Exemplo, 123 — Vila Mariana, São Paulo – SP (endereço fictício)</p></div>
+        <div class="card"><h3>Horários</h3><p>Seg a sex, 8h–19h · Sáb, 8h–12h</p></div>
+        <div class="card"><h3>Estacionamento</h3><p>Estacionamento conveniado ao lado. Acesso sem escadas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Quer entender as opções para o seu caso?</h2>
+      <p class="sub">Mande uma mensagem. A secretária responde e sugere dois horários para a sua avaliação.</p>
+      <a class="btn-wa js-wa" href="#" rel="noopener">Agendar avaliação pelo WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><b>Clínica Modelo Odonto</b> · Rua Exemplo, 123 — Vila Mariana, São Paulo – SP (endereço fictício)</p>
+    <p>Responsável técnica: Dra. Ana Modelo · CRO-SP 00000 (fictício)</p>
+    <p><b>Clínica fictícia — dados ilustrativos.</b> Página de demonstração da LK Digital.</p>
+  </div>
+</footer>
+
+<a class="btn-wa float js-wa" href="#" rel="noopener" aria-label="Agendar avaliação pelo WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+  WhatsApp
+</a>
+
+<script>
+(function () {
+  var num = ''.replace(/\D/g, '');
+  var href = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Olá! Vim pelo site e quero agendar uma avaliação.');
+  var links = document.querySelectorAll('.js-wa');
+  for (var i = 0; i < links.length; i++) { links[i].href = href; links[i].target = '_blank'; }
+
+  // Optional intro video: set a YouTube id in data-yt to load the player on click only.
+  var v = document.getElementById('video');
+  v.addEventListener('click', function () {
+    var id = v.getAttribute('data-yt');
+    if (!id) return;
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1';
+    f.title = 'Vídeo de apresentação';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture';
+    f.allowFullscreen = true;
+    f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0';
+    v.appendChild(f);
+  });
+})();
+</script>
+</body>
+</html>

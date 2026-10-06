@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<meta name="description" content="Clínica fictícia — dados ilustrativos. Página de demonstração (versão antes).">
+<!-- Demo prop for Ep 10: the weak "before" homepage, built on purpose. It looks dated: generic
+     slider, the clinic name as the only thing above the fold, stock-style image blocks, a long
+     9-field form, no WhatsApp button. It is NOT artificially slowed down. Nothing is sent anywhere. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900|Open+Sans:300,400,600,700,800|Great+Vibes|Montserrat:100,200,300,400,500,600,700,800,900">
+<style>
+body{margin:0;padding-top:26px;font-family:"Open Sans",Arial,sans-serif;color:#555;background:#fff}
+.demo{position:fixed;inset:0 0 auto 0;z-index:9999;background:#FFE680;color:#3A2E00;font:600 12px/1.2 system-ui,sans-serif;text-align:center;padding:6px 8px}
+.topbar{background:#2b2b2b;color:#aaa;font-size:11px;padding:6px 10px;text-align:right}
+.brand{text-align:center;padding:60px 10px 70px;background:#f7f7f7;border-bottom:4px solid #8a6a33}
+.brand h1{font-family:"Great Vibes",cursive;font-weight:400;font-size:58px;color:#8a6a33;margin:0;line-height:1.1}
+.brand p{font-family:"Montserrat",sans-serif;font-weight:200;letter-spacing:6px;font-size:12px;text-transform:uppercase;margin:14px 0 0}
+.menu{background:#8a6a33;text-align:center;padding:0}
+.menu a{display:inline-block;color:#fff;text-decoration:none;font-family:"Montserrat";font-size:12px;letter-spacing:2px;padding:14px 10px;text-transform:uppercase}
+.slider{position:relative;overflow:hidden;background:#333}
+.slide{display:none;color:#fff;text-align:center;padding:120px 20px;background-size:cover}
+.slide.on{display:block}
+.slide h2{font-family:"Playfair Display",serif;font-size:36px;font-weight:900;margin:0 0 10px}
+.slide p{font-family:"Open Sans";font-weight:300;font-size:16px;margin:0}
+.s1{background:linear-gradient(120deg,#8e9eab,#eef2f3)}
+.s2{background:linear-gradient(120deg,#8a6a33,#6b5b3e)}
+.s3{background:linear-gradient(120deg,#355c7d,#6c5b7b)}
+.dots{position:absolute;bottom:12px;left:0;right:0;text-align:center}
+.dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#fff;opacity:.4;margin:0 4px}
+.dots span.on{opacity:1}
+.sec{padding:50px 20px;max-width:900px;margin:0 auto;text-align:center}
+.sec h3{font-family:"Playfair Display";font-size:28px;color:#333;margin:0 0 20px}
+.sec p{font-size:15px;line-height:1.8}
+.cols{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+.col{flex:1 1 220px;border:1px solid #eee;padding:30px 20px}
+.col .ico{width:70px;height:70px;border-radius:50%;background:#8a6a33;margin:0 auto 14px}
+form{max-width:560px;margin:0 auto;text-align:left}
+form label{display:block;font-size:13px;margin:12px 0 4px;color:#333}
+form input,form select,form textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;font:inherit}
+form textarea{height:140px}
+form button{margin-top:20px;background:#8a6a33;color:#fff;border:0;padding:14px 40px;font-family:"Montserrat";letter-spacing:3px;text-transform:uppercase}
+footer{background:#2b2b2b;color:#888;text-align:center;font-size:12px;padding:30px 10px}
+.stock{height:220px;background:linear-gradient(135deg,#e8eef3,#cfd9e2);color:#7a8794;display:flex;align-items:center;justify-content:center;font-style:italic;font-size:14px}
+</style>
+</head>
+<body>
+<div class="demo" role="note">Clínica fictícia — dados ilustrativos</div>
+<div class="topbar">Seg a Sex · Siga-nos nas redes sociais</div>
+
+<div class="brand">
+  <h1>Clínica Modelo Odonto</h1>
+  <p>Odontologia de excelência</p>
+</div>
+
+<div class="menu">
+  <a href="#">Home</a><a href="#">Quem somos</a><a href="#">Tratamentos</a><a href="#">Blog</a><a href="#">Galeria</a><a href="#contato">Contato</a>
+</div>
+
+<div class="slider" id="slider">
+  <div class="slide s1 on"><h2>Bem-vindo à nossa clínica</h2><p>Cuidando do seu sorriso com carinho</p></div>
+  <div class="slide s2"><h2>Excelência em odontologia</h2><p>Tradição e qualidade</p></div>
+  <div class="slide s3"><h2>Sorria mais</h2><p>Venha nos conhecer</p></div>
+  <div class="dots"><span class="on"></span><span></span><span></span></div>
+</div>
+
+<div class="sec">
+  <h3>Quem somos</h3>
+  <p>Somos uma clínica comprometida com a excelência, oferecendo um atendimento humanizado e de qualidade, sempre buscando o melhor para nossos pacientes, com uma equipe altamente qualificada e em constante atualização, em um ambiente moderno e aconchegante, pensado para o seu conforto e bem-estar.</p>
+</div>
+
+<div class="sec">
+  <div class="stock">[ imagem de banco: modelo sorrindo com fundo branco ]</div>
+</div>
+
+<div class="sec">
+  <h3>Nossos tratamentos</h3>
+  <div class="cols">
+    <div class="col"><div class="stock" style="height:90px;font-size:11px">[ foto de banco ]</div><b>Odontologia geral</b><p>Saiba mais</p></div>
+    <div class="col"><div class="ico"></div><b>Estética</b><p>Saiba mais</p></div>
+    <div class="col"><div class="ico"></div><b>Implantes</b><p>Saiba mais</p></div>
+    <div class="col"><div class="ico"></div><b>Ortodontia</b><p>Saiba mais</p></div>
+  </div>
+</div>
+
+<div class="sec" id="contato">
+  <h3>Entre em contato</h3>
+  <p>Preencha o formulário abaixo e retornaremos assim que possível.</p>
+  <form id="f">
+    <label for="f1">Nome completo *</label><input id="f1" required>
+    <label for="f2">E-mail *</label><input id="f2" type="email" required>
+    <label for="f3">Confirme seu e-mail *</label><input id="f3" type="email" required>
+    <label for="f4">Telefone *</label><input id="f4" type="tel" required>
+    <label for="f5">CPF *</label><input id="f5" required>
+    <label for="f6">Data de nascimento *</label><input id="f6" type="date" required>
+    <label for="f7">Possui convênio? *</label><select id="f7" required><option></option><option>Sim</option><option>Não</option></select>
+    <label for="f8">Como nos conheceu? *</label><select id="f8" required><option></option><option>Google</option><option>Indicação</option><option>Redes sociais</option><option>Outro</option></select>
+    <label for="f9">Mensagem *</label><textarea id="f9" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
+<footer>© Clínica Modelo Odonto · Todos os direitos reservados<br><b>Clínica fictícia — dados ilustrativos</b></footer>
+
+<script>
+(function () {
+  // Auto slider.
+  var s = document.querySelectorAll('.slide'), d = document.querySelectorAll('.dots span'), i = 0;
+  setInterval(function () {
+    s[i].classList.remove('on'); d[i].classList.remove('on');
+    i = (i + 1) % s.length;
+    s[i].classList.add('on'); d[i].classList.add('on');
+  }, 3500);
+
+  document.getElementById('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    alert('Formulário de demonstração. Nenhum dado foi enviado.');
+  });
+})();
+</script>
+</body>
+</html>

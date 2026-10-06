@@ -189,6 +189,41 @@ suites['scripts-whatsapp'] = async (browser) => {
   await ctx.close();
 };
 
+suites['site'] = async (browser) => {
+  const { ctx, page, errors } = await newPage(browser);
+  const redirects = {
+    '/unicornio': '/raio-x', '/raio-x/resultado': '/raio-x', '/raio-x/privacidade': '/privacidade',
+    '/ferramentas/diagnostico-google': '/ferramentas/checklist-google', '/ferramentas/diagnostico-clinica': '/raio-x', '/diagnostico': '/raio-x',
+  };
+  for (const [from, to] of Object.entries(redirects)) {
+    const res = await page.request.get(BASE + from, { maxRedirects: 0 });
+    check('redirect ' + from + ' → ' + to, [307, 308].includes(res.status()) && new URL(res.headers().location, BASE).pathname === to, [res.status(), res.headers().location]);
+  }
+  for (const [path, marker] of [['/exemplos/clinica-antes', 'Clínica fictícia'], ['/exemplos/clinica-depois', 'Clínica fictícia']]) {
+    const res = await page.request.get(BASE + path);
+    const html = await res.text();
+    check('Ep 10 prop ' + path + ' (noindex, labelled fictitious)', res.ok() && html.includes(marker) && html.includes('noindex'));
+  }
+  await page.goto(BASE + '/ferramentas', { waitUntil: 'networkidle' });
+  const links = await page.locator('main article a').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+  check('/ferramentas lists 9 tools, RAIO-X first, no retired tools', links.length === 9 && links[0] === '/raio-x' && !links.some((l) => /diagnostico/.test(l)), links);
+  // Every tool page renders inside the same shell: one navbar, one footer, one <main>, no tool-specific brand bar.
+  for (const path of ['/raio-x', ...links.slice(1)]) {
+    await page.goto(BASE + path, { waitUntil: 'domcontentloaded' });
+    const shell = await page.evaluate(() => ({
+      main: document.querySelectorAll('main').length,
+      footer: document.querySelectorAll('footer').length,
+      cta: !!document.querySelector('nav a[href="/raio-x"], header a[href="/raio-x"]'),
+      logos: document.querySelectorAll('main img[alt="LK Digital"], main .landing-logo').length,
+    }));
+    check('uniform shell ' + path, shell.main === 1 && shell.footer === 1 && shell.cta && shell.logos === 0, shell);
+  }
+  const sitemap = await (await page.request.get(BASE + '/sitemap.xml')).text();
+  check('sitemap lists the lead magnets, not retired tools', sitemap.includes('/raio-x<') && sitemap.includes('/ferramentas/scripts-whatsapp<') && !sitemap.includes('diagnostico'));
+  check('no page errors', errors.length === 0, errors);
+  await ctx.close();
+};
+
 const browser = await chromium.launch();
 for (const [name, run] of Object.entries(suites)) {
   if (only && name !== only) continue;

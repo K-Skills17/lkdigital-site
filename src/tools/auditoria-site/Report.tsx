@@ -2,7 +2,6 @@
 
 import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import Image from 'next/image'
 import { trackAuditResult, trackLeadCapture, trackWhatsAppClick, trackCalendlyClick, trackShareCopy } from './analytics'
 import { submitLead } from '../shared/backbone-client'
 import { WHATSAPP_NUMBER } from '../shared/config'
@@ -500,11 +499,6 @@ function LeadCaptureForm({ result, onComplete }: { result: AuditResult; onComple
   return (
     <div className="min-h-screen gradient-bg flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-6">
-          <Image src="/ferramentas/lk-logo.png" alt="LK Digital" width={140} height={47} className="mx-auto" />
-        </div>
-
         {/* Score teaser */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-24 h-24 rounded-full border-4 mb-4"
@@ -776,7 +770,7 @@ function ReportContent() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FAFAF8]">
+    <div className="min-h-screen bg-[#FAFAF8]">
       {/* Header */}
       <div className="gradient-bg text-[#1A1A1A]">
         <div className="max-w-4xl mx-auto px-4 py-10 md:py-14">
@@ -787,7 +781,6 @@ function ReportContent() {
               </svg>
               Nova Auditoria
             </button>
-            <Image src="/ferramentas/lk-logo.png" alt="LK Digital" width={120} height={40} />
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
@@ -940,13 +933,7 @@ function ReportContent() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-[#E8E4DC] py-8 px-4">
-        <div className="max-w-5xl mx-auto text-center text-sm text-[#999999]">
-          <p>LK Digital — Ferramenta Gratuita de Auditoria de Sites</p>
-        </div>
-      </footer>
-    </main>
+    </div>
   )
 }
 

@@ -51,6 +51,9 @@ const nextConfig = {
       { source: "/apple-touch-icon-precomposed.png", destination: "/icon.svg" },
       { source: "/apple-touch-icon-120x120.png", destination: "/icon.svg" },
       { source: "/apple-touch-icon-152x152.png", destination: "/icon.svg" },
+      // Ep 10 props: fictitious clinic homepages (static, noindex, not linked anywhere)
+      { source: "/exemplos/clinica-antes", destination: "/exemplos/clinica-antes.html" },
+      { source: "/exemplos/clinica-depois", destination: "/exemplos/clinica-depois.html" },
     ];
   },
 };
