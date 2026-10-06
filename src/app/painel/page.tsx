@@ -182,7 +182,7 @@ export default async function PainelPage() {
           <Tile
             label="Chamadas de IA (30 dias)"
             value={fmtInt.format(data.ai.calls)}
-            sub={`≈ US$ ${data.ai.costUsd.toFixed(2)}${data.ai.failed ? ` · ${data.ai.failed} falharam` : ""}`}
+            sub={`≈ US$ ${data.ai.costUsd.toFixed(2)}${data.ai.costIncomplete ? "+ (modelos sem preço)" : ""}${data.ai.failed ? ` · ${data.ai.failed} falharam` : ""}`}
           />
         </div>
 
@@ -227,7 +227,9 @@ export default async function PainelPage() {
                       <td className="py-2 pr-3 text-right">{fmtInt.format(m.inputTokens)}</td>
                       <td className="py-2 pr-3 text-right">{fmtInt.format(m.outputTokens)}</td>
                       <td className="py-2 pr-3 text-right">{(m.avgLatencyMs / 1000).toFixed(1)} s</td>
-                      <td className="py-2 text-right">{m.costUsd.toFixed(2)}</td>
+                      <td className="py-2 text-right" title={m.priced ? undefined : "Sem preço em MODEL_PRICING (src/lib/backbone/models.ts)"}>
+                        {m.priced ? m.costUsd.toFixed(2) : "—"}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

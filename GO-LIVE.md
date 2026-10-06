@@ -34,7 +34,7 @@ Set each for **Production** and **Preview**.
 | Variable | Where to get the value |
 |---|---|
 | `DATABASE_URL` | Neon console → your project → **Connect** → choose the **pooled** connection string (host contains `-pooler`) |
-| `ANTHROPIC_API_KEY` | console.anthropic.com → API Keys (the old tool projects in Vercel already have one you can copy) |
+| `ANTHROPIC_API_KEY` and/or `OPENAI_API_KEY` | At least one is needed for the AI action plans and the blog. Claude: console.anthropic.com → API Keys (the old tool projects in Vercel already have one). OpenAI: platform.openai.com → API keys. With both set, the second one is an automatic backup. |
 | `LK_CHATBOT_URL` | `https://lk-chatbot-production.up.railway.app` |
 | `LK_CHATBOT_API_KEY` | Copy from any old tool project in Vercel (e.g. `calculadora-agenda`), or from the lk-chatbot service on Railway |
 | `LK_CHATBOT_TENANT_ID` | Same place as above |
@@ -50,7 +50,8 @@ Set each for **Production** and **Preview**.
 | `GOOGLE_PAGESPEED_API_KEY` | Speed check in the site audit tool; works without it but Google rate-limits it. Copy from the old `fb-lead-audit-tool` project. |
 | `PAINEL_USER` | Change the `/painel` username (default `lk`). |
 | `NOTIFY_MARCOS_CHAT_ID` | Telegram alerts to Marcos for RAIO-X scorecard leads. |
-| `AI_MODEL_FAST`, `AI_MODEL_SMART` | Switch AI models without a code change. Leave unset to use the defaults. |
+| `AI_PROVIDER` | `anthropic` (default) or `openai` — which AI is tried first when both keys are set. |
+| `AI_MODEL_FAST`, `AI_MODEL_SMART`, `OPENAI_MODEL_FAST`, `OPENAI_MODEL_SMART` | Switch Claude / OpenAI models without a code change. Leave unset to use the defaults (see `BACKBONE.md`). |
 
 ### Already set — keep
 
@@ -60,6 +61,12 @@ Set each for **Production** and **Preview**.
 ### Remove after step 2 is done
 
 `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — the site no longer reads them.
+
+### GitHub (daily blog engine)
+
+The daily blog runs in GitHub Actions, not Vercel. In the GitHub repo → **Settings → Secrets and
+variables → Actions**: keep the `ANTHROPIC_API_KEY` secret, add an `OPENAI_API_KEY` secret if you
+use OpenAI, and optionally a **variable** (not secret) `AI_PROVIDER` = `openai` to make it go first.
 
 ## 4. Deploy and test
 

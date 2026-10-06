@@ -84,6 +84,7 @@ describe("backbone storage + dashboard", () => {
 describe("pipeline per-number limit", () => {
   beforeEach(() => {
     vi.stubEnv("ANTHROPIC_API_KEY", "");
+    vi.stubEnv("OPENAI_API_KEY", "");
     vi.stubEnv("LK_CHATBOT_URL", "https://bot.example");
     vi.stubEnv("LK_CHATBOT_API_KEY", "k");
     vi.stubEnv("LK_CHATBOT_TENANT_ID", "t");

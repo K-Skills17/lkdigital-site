@@ -2,7 +2,7 @@
 /**
  * LK Digital — Blog Post Generator
  * ─────────────────────────────────
- * Two-call Claude pipeline. No external APIs needed beyond Anthropic.
+ * Two-call AI pipeline (Claude or OpenAI — see src/lib/backbone/models.ts).
  *
  * Call 1 — Research: Claude acts as a market research analyst.
  *   Produces a structured brief with specific stats, market data, CFO rules,
@@ -14,14 +14,15 @@
  * Call 3 — Save: JSON lands in content/blog/[slug].json, live on site.
  *
  * Usage:
- *   node scripts/generate-blog-post.mjs "marketing para ortodontia invisalign"
- *   node scripts/generate-blog-post.mjs "SEO local dentista bairro" --keyword="seo local dentista"
+ *   npx tsx scripts/generate-blog-post.mjs "marketing para ortodontia invisalign"
+ *   npx tsx scripts/generate-blog-post.mjs "SEO local dentista bairro" --keyword="seo local dentista"
  *
  * Env vars required (.env.local):
- *   ANTHROPIC_API_KEY=sk-ant-...
+ *   ANTHROPIC_API_KEY=sk-ant-...  and/or  OPENAI_API_KEY=sk-...  (AI_PROVIDER picks which goes first)
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { complete } from "../src/lib/backbone/llm.ts";
+import { providerOrder } from "../src/lib/backbone/models.ts";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -31,16 +32,17 @@ const ROOT = path.join(__dirname, "..");
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 
 // ─── Config ───────────────────────────────────────────────────────────────
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-
-if (!ANTHROPIC_API_KEY) {
-  console.error("Missing ANTHROPIC_API_KEY in environment");
+if (providerOrder().length === 0) {
+  console.error("Missing ANTHROPIC_API_KEY or OPENAI_API_KEY in environment");
   process.exit(1);
 }
 
-const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
-// Same "smart" tier as src/lib/backbone/models.ts (plain .mjs can't import the .ts registry).
-const SMART_MODEL = process.env.AI_MODEL_SMART || "claude-sonnet-4-6";
+// Same provider order and "smart" tier as the rest of the site (src/lib/backbone).
+async function generate({ max_tokens, system, messages }) {
+  const { text, attempts } = await complete({ tier: "smart", maxTokens: max_tokens, system, prompt: messages[0].content });
+  if (text === null) throw new Error(`AI generation failed: ${attempts.map((a) => `${a.model}: ${a.error}`).join(" | ")}`);
+  return text;
+}
 
 // ─── CLI args ─────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -64,8 +66,7 @@ console.log(`🎯 Keyword: "${targetKeyword}" | Date: ${TODAY}\n`);
 async function research(topic) {
   console.log("📊 Call 1/2 — Building research brief...");
 
-  const msg = await anthropic.messages.create({
-    model: SMART_MODEL,
+  const msg = await generate({
     max_tokens: 3000,
     system: `Você é um analista de mercado especializado no setor odontológico brasileiro.
 Sua função é produzir briefings de pesquisa densos, com dados específicos e acionáveis.
@@ -112,15 +113,14 @@ Seja específico. Sem generalidades.`
     }],
   });
 
-  return msg.content[0].type === "text" ? msg.content[0].text : "";
+  return msg;
 }
 
 // ─── Step 2: Writing call ──────────────────────────────────────────────────
 async function writePost(topic, keyword, researchBrief) {
   console.log("✍️  Call 2/2 — Writing article as Stephen...");
 
-  const msg = await anthropic.messages.create({
-    model: SMART_MODEL,
+  const msg = await generate({
     max_tokens: 8000,
     system: `Você é Stephen Domingos Komando, fundador da LK Digital. Você escreve artigos sobre marketing para dentistas no Brasil.
 
@@ -196,7 +196,7 @@ Apenas JSON. Nada mais.`
     }],
   });
 
-  const raw = msg.content[0].type === "text" ? msg.content[0].text : "";
+  const raw = msg;
   const clean = raw.replace(/^```(?:json)?\n?/m, "").replace(/\n?```$/m, "").trim();
   return JSON.parse(clean);
 }

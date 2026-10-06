@@ -15,7 +15,7 @@ import {
   type TopicSeed,
   type Author,
 } from "./config";
-import { modelFor } from "../../src/lib/backbone/models";
+import { complete } from "../../src/lib/backbone/llm";
 
 // ─── Output Interface ───
 export interface GeneratedArticle {
@@ -41,32 +41,14 @@ export interface GeneratedArticle {
 }
 
 // ─── AI Provider ───
+// Claude or OpenAI, same provider order and "smart" model as the rest of the site.
 async function callAI(systemPrompt: string, userPrompt: string): Promise<string> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error("ANTHROPIC_API_KEY is required");
-
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      model: modelFor("smart"),
-      max_tokens: 8000,
-      system: systemPrompt,
-      messages: [{ role: "user", content: userPrompt }],
-    }),
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Claude API error ${res.status}: ${err}`);
+  const { text, attempts } = await complete({ tier: "smart", system: systemPrompt, prompt: userPrompt, maxTokens: 8000 });
+  if (attempts.length === 0) throw new Error("ANTHROPIC_API_KEY or OPENAI_API_KEY is required");
+  if (text === null) {
+    throw new Error(`AI error: ${attempts.map((a) => `${a.provider}/${a.model}: ${a.error}`).join(" | ")}`);
   }
-
-  const data = await res.json();
-  return data.content[0].text;
+  return text;
 }
 
 // ─── System Prompt ───

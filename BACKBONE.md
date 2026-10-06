@@ -47,16 +47,24 @@ Storage, AI, CAPI, delivery, alerts and logging are shared.
 
 ## AI models
 
-One registry: `src/lib/backbone/models.ts`.
+One registry: `src/lib/backbone/models.ts`. Every AI call (tools, daily blog engine,
+`npm run blog:new`) goes through `src/lib/backbone/llm.ts`, which supports **Claude and OpenAI**.
 
-| Tier | Default | Used by |
-|---|---|---|
-| `fast` | `claude-haiku-4-5-20251001` | every tool's WhatsApp action plan |
-| `smart` | `claude-sonnet-4-6` | blog engine (`scripts/blog-engine`), `npm run blog:new` |
+| Tier | Claude default | OpenAI default | Used by |
+|---|---|---|---|
+| `fast` | `claude-haiku-4-5-20251001` | `gpt-5.4-mini` | every tool's WhatsApp action plan |
+| `smart` | `claude-sonnet-4-6` | `gpt-5.5` | blog engine (`scripts/blog-engine`), `npm run blog:new` |
 
-To change a model everywhere, set `AI_MODEL_FAST` / `AI_MODEL_SMART` in Vercel (no deploy of
-code needed) or edit the defaults. Every tool call is logged to `ai_calls` with tokens,
-latency and errors.
+- **Which provider:** `AI_PROVIDER=anthropic` (default) or `openai` picks which one is tried
+  first. If the other provider's key is also set, it's used automatically when the first one
+  errors or returns nothing. With only one key set, only that provider is used.
+- **Which model:** `AI_MODEL_FAST` / `AI_MODEL_SMART` override the Claude models;
+  `OPENAI_MODEL_FAST` / `OPENAI_MODEL_SMART` override the OpenAI ones. Env vars only, no code
+  change needed.
+
+Every attempt, including failed ones and fallbacks, is logged to `ai_calls` with model, tokens,
+latency and errors. The `/painel` cost estimate covers models listed in `MODEL_PRICING`; others
+show "—" until you add their prices there.
 
 ## Database: Neon
 
