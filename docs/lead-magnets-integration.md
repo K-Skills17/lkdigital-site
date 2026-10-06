@@ -33,7 +33,7 @@ unchecked phase below.** Branch: `claude/kskillz-17-github-cloud-ldooi3`.
 
 ## Phases
 
-- [ ] 1. Shared: ToolShell, lead-magnet config, lead form on the backbone, analytics helper
+- [x] 1. Shared: ToolShell, lead-magnet config, lead form on the backbone, analytics helper
 - [ ] 2. RAIO-X at `/raio-x` + adapter; remove scorecard/Unicórnio/RAIO-X 2026 code; redirects
 - [ ] 3. GBP checklist at `/ferramentas/checklist-google` + adapter; remove diagnostico-google
 - [ ] 4. Calculadora de CAC + adapter

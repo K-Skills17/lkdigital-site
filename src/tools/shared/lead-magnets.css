@@ -1,0 +1,52 @@
+/* Lead magnets (RAIO-X, checklist, calculator, dashboard, scripts): tokens mapped onto the site's
+   design system (globals.css) plus the shared lead form. Imported by each lead-magnet page. */
+:root {
+  --ink: #1a1a1a;
+  --paper: #fafafa;
+  --gold: #c5a368;
+  --line: #e5e5e5;
+
+  --lk-bg: var(--paper);
+  --lk-surface: #ffffff;
+  --lk-surface-2: #f9f6f0;          /* site --trust-bg */
+  --lk-border: var(--line);
+  --lk-accent: var(--gold);          /* borders, progress, highlights */
+  --lk-accent-text: #7d6233;         /* gold-toned small text, 5.5:1 on paper */
+  --lk-text: var(--ink);
+  --lk-muted: #6b6b6b;
+  --lk-btn: var(--gold);             /* site buttons are gold; ink text keeps 8:1 contrast */
+  --lk-btn-text: var(--ink);
+  --lk-ok: #2e7d4f;
+  --lk-warn: #b7791f;
+  --lk-bad: #b3261e;
+  --lk-radius: 8px;
+  --lk-max: 720px;
+  --lk-font: var(--tool-font-body), "Inter", system-ui, sans-serif;
+  --lk-font-heading: var(--tool-font-display), "Cormorant Garamond", Georgia, serif;
+  --lk-weight-heading: 600;
+}
+
+.lk-tool { background: var(--lk-bg); color: var(--lk-text); font-family: var(--lk-font); min-height: 60vh; }
+
+/* ── Shared lead form ── */
+.lkl{font-family:var(--lk-font);color:var(--lk-text);background:var(--lk-surface);border:1px solid var(--lk-border);border-top:3px solid var(--lk-accent);border-radius:var(--lk-radius);padding:20px}
+.lkl h3{margin:0 0 4px;font-family:var(--lk-font-heading);font-size:1.6rem;font-weight:600;line-height:1.15}
+.lkl p{margin:0 0 14px;color:var(--lk-muted);font-size:.95rem}
+.lkl label{display:block;font-size:.85rem;font-weight:500;margin:0 0 4px}
+.lkl .f{margin-bottom:12px}
+.lkl input[type=text],.lkl input[type=tel],.lkl input[type=email],.lkl select{box-sizing:border-box;width:100%;font:inherit;font-size:16px;color:var(--lk-text);background:#fff;border:1px solid #d6d1c7;border-radius:6px;padding:11px 12px;min-height:46px}
+.lkl input:focus,.lkl select:focus{outline:2px solid var(--lk-accent);outline-offset:1px}
+.lkl .opt{font-weight:400;color:var(--lk-muted)}
+.lkl .consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;font-weight:400;color:var(--lk-muted);margin:14px 0 4px}
+.lkl .consent input{width:22px;height:22px;margin:0;flex:none;accent-color:var(--ink)}
+.lkl .consent a{color:var(--lk-text);text-decoration:underline}
+.lkl .err{color:var(--lk-bad);font-size:.8rem;margin-top:4px}
+.lkl .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.lkl .btn{display:block;box-sizing:border-box;width:100%;text-align:center;font:inherit;font-weight:600;font-size:1rem;border:0;border-radius:6px;padding:14px 16px;cursor:pointer;text-decoration:none;background:var(--lk-btn);color:var(--lk-btn-text);margin-top:12px;transition:background .2s}
+.lkl .btn:hover{background:#d4b87a}
+.lkl .btn[disabled]{opacity:.6;cursor:wait}
+.lkl .btn.sec{background:transparent;color:var(--lk-text);border:1px solid var(--lk-text)}
+.lkl .btn.sec:hover{background:var(--lk-surface-2)}
+.lkl .done{text-align:center}
+.lkl .wa-note{margin:10px 0 0;font-size:.85rem;color:var(--lk-ok)}
+.lkl .again{display:inline-block;margin-top:12px;font-size:.85rem;color:var(--lk-muted);background:none;border:0;text-decoration:underline;cursor:pointer;font-family:inherit}
