@@ -91,6 +91,8 @@ It reads the `all_leads` view and the `ai_calls` table in Neon. It's protected b
 
 ## Go-live checklist
 
+Step-by-step version with every env var and where to find it: [`GO-LIVE.md`](GO-LIVE.md).
+
 1. **Create the schema in Neon.** Set `DATABASE_URL` (the pooled connection string from the
    Neon console) and run `npm run db:migrate`. It applies `db/schema.sql`, which creates every
    table, the rate-limit table and the `all_leads` view. It's idempotent, so re-running it is safe.
