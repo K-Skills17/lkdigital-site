@@ -3,8 +3,8 @@
 Moves the `K-Skills17/lk-lead-magnets` build (spec v2) into this site so every lead magnet is a page on
 lkdigital.odo.br, shares the site shell, and sends leads through the backbone (`tool_leads` in Neon).
 Owner instruction: do every move now, unify overlapping tools/data (keep the most important, discard the
-rest), make the site uniform, reuse the site's GTM. **If a session stops midway, resume from the first
-unchecked phase below.** Branch: `claude/kskillz-17-github-cloud-ldooi3`.
+rest), make the site uniform, reuse the site's GTM. **Status: done** (all phases below). If a session stops midway in a later change, resume from the
+first unchecked phase below. Branch: `claude/kskillz-17-github-cloud-ldooi3`.
 
 ## Decisions (made without asking, per the owner's instruction)
 
@@ -41,4 +41,19 @@ unchecked phase below.** Branch: `claude/kskillz-17-github-cloud-ldooi3`.
 - [x] 6. Scripts de WhatsApp + adapter
 - [x] 7. Uniform shell on kept tools; remove diagnostico-clinica; `/ferramentas` index, sitemap, robots, Ep 10 props
 - [x] 8. Data: legacy rows → `tool_leads`, `all_leads` view, painel labels, drop script (done with phase 2)
-- [ ] 9. Generator in `lead-magnets/`, assets in `public/ferramentas/arquivos/`, tests, Lighthouse, docs, PR
+- [x] 9. Generator in `lead-magnets/`, assets in `public/ferramentas/arquivos/`, tests, Lighthouse, docs, PR
+
+## Result
+
+- Pages: `/raio-x` and `/ferramentas/{checklist-google,calculadora-cac,dashboard-clinica,scripts-whatsapp}`,
+  plus the four kept tools, all in `ToolShell`. `/ferramentas` lists the 9 tools.
+- Leads: `POST /api/ferramentas/<slug>/lead` → `tool_leads` → WhatsApp (chatbot / Evolution), Telegram,
+  Meta CAPI. AI plan for the RAIO-X and the CAC calculator (with real numbers); the downloads go out
+  on WhatsApp as links.
+- The calculator sends its inputs (clinic economics, no personal data) with the spreadsheet request,
+  for the analysis; the page says so. Every number is re-computed on the server, and the RAIO-X is
+  re-scored on the server, so stored values can't be tampered with.
+- Downloads: built by `lead-magnets/` (see its README) into `public/ferramentas/arquivos/`.
+- Tests: `npm test` (vitest: logic, adapters, legacy-lead migration), `lead-magnets` `test:assets`,
+  `test:e2e` and `test:lighthouse` (≥ 90 performance and accessibility on every lead magnet).
+- Still to fill in by the owner: YouTube episode URLs in `src/tools/shared/lead-magnets.ts`.
