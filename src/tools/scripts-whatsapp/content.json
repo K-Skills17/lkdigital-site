@@ -1,0 +1,485 @@
+{
+  "_nota": "Fonte única do livreto (PDF A5), da versão .md e da cola rápida. Todo o texto é rascunho para revisão do Komando. Scripts com \"hook\": true são aberturas e passam pelo hook-point review (<!-- HOOK: review -->). \"assina\": true = mensagem que começa uma conversa ou é enviada sozinha; leva o nome da secretária e da clínica.",
+  "titulo": "Scripts de WhatsApp para a recepção da clínica odontológica",
+  "subtitulo": "Do primeiro “oi” até a avaliação: mensagens prontas para copiar, colar e agendar.",
+  "abertura": "A conversa no WhatsApp tem um objetivo só: marcar a avaliação. Estes scripts fazem isso com gentileza, em mensagens curtas, sem falar de valores por mensagem.",
+  "chaves": [
+    {
+      "chave": "{{nome_paciente}}",
+      "exemplo": "Maria"
+    },
+    {
+      "chave": "{{nome_secretaria}}",
+      "exemplo": "Juliana"
+    },
+    {
+      "chave": "{{clinica}}",
+      "exemplo": "Clínica Sorriso"
+    },
+    {
+      "chave": "{{dentista}}",
+      "exemplo": "a Dra. Ana"
+    },
+    {
+      "chave": "{{dia}}",
+      "exemplo": "terça"
+    },
+    {
+      "chave": "{{horario}}",
+      "exemplo": "10h"
+    },
+    {
+      "chave": "{{dia_2}}",
+      "exemplo": "quinta"
+    },
+    {
+      "chave": "{{horario_2}}",
+      "exemplo": "16h"
+    }
+  ],
+  "regras": [
+    {
+      "t": "Um objetivo só: marcar a avaliação.",
+      "d": "O tratamento se vende pessoalmente, na avaliação diagnóstica. A conversa no WhatsApp existe para chegar lá."
+    },
+    {
+      "t": "Nunca passe valor por mensagem.",
+      "d": "O valor é definido depois da avaliação, porque cada caso é diferente."
+    },
+    {
+      "t": "Responda rápido.",
+      "d": "Meta: menos de 5 minutos no horário de atendimento. Lead que espera procura outra clínica."
+    },
+    {
+      "t": "Mensagens curtas.",
+      "d": "No máximo 3 linhas e uma pergunta por mensagem."
+    },
+    {
+      "t": "Sem promessas e sem negociar valor por mensagem.",
+      "d": "Nada de prometer resultado clínico e nada de abatimento ou condição especial por WhatsApp."
+    }
+  ],
+  "tom": [
+    "Cordial e próximo, sempre “você”.",
+    "No máximo um emoji por mensagem.",
+    "Mensagem que começa uma conversa leva o seu nome e o nome da clínica.",
+    "Sempre ofereça dois horários. Nunca pergunte “quando você pode?”."
+  ],
+  "secoes": [
+    {
+      "id": "primeira-resposta",
+      "titulo": "Primeira resposta por origem",
+      "intro": "A primeira mensagem define o ritmo. Responda em até 5 minutos e já termine com uma pergunta.",
+      "scripts": [
+        {
+          "id": "meta",
+          "titulo": "Anúncio Meta (Instagram/Facebook)",
+          "hook": true,
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}} 😊\nVi que você se interessou pelo nosso anúncio.\nMe conta: o que você gostaria de resolver no seu sorriso?"
+        },
+        {
+          "id": "google",
+          "titulo": "Google (anúncio ou site)",
+          "hook": true,
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nRecebi o seu contato pelo nosso site, que bom falar com você.\nPara eu te ajudar melhor: o que você gostaria de resolver?"
+        },
+        {
+          "id": "gbp",
+          "titulo": "Perfil do Google",
+          "hook": true,
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nQue bom que você nos encontrou no Google 😊\nMe conta: o que você está buscando resolver?"
+        },
+        {
+          "id": "indicacao",
+          "titulo": "Indicação",
+          "hook": true,
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nQue bom que você chegou até nós por indicação 😊\nMe conta: o que você gostaria de resolver?"
+        },
+        {
+          "id": "direct",
+          "titulo": "Direct do Instagram",
+          "hook": true,
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nPosso continuar a conversa com você pelo WhatsApp? Lá eu consigo te responder mais rápido.\nSe preferir, seguimos por aqui mesmo 😊"
+        },
+        {
+          "id": "ligacao-perdida",
+          "titulo": "Ligação perdida (mensagem automática)",
+          "hook": true,
+          "assina": true,
+          "texto": "Oi! Aqui é {{nome_secretaria}}, da {{clinica}}.\nVi que você ligou e não conseguimos atender agora, desculpe.\nPosso te ajudar por aqui? Me conta o que você precisa."
+        }
+      ]
+    },
+    {
+      "id": "qualificacao",
+      "titulo": "As 3 perguntas de qualificação",
+      "intro": "Uma pergunta por mensagem. Espere a resposta antes da próxima. Depois, ofereça dois horários.",
+      "grupos": [
+        {
+          "titulo": "Versão implantes e prótese",
+          "scripts": [
+            {
+              "id": "q1-implante",
+              "titulo": "1. O que quer resolver",
+              "texto": "Para eu entender o seu caso: hoje falta algum dente, a prótese está incomodando ou é outra coisa?"
+            },
+            {
+              "id": "q2-implante",
+              "titulo": "2. Urgência",
+              "texto": "Entendi. Há quanto tempo está assim?\nIsso tem atrapalhado para comer ou sorrir no dia a dia?"
+            },
+            {
+              "id": "q3-implante",
+              "titulo": "3. O que impediu até agora",
+              "texto": "E o que fez você deixar para resolver agora, e não antes?"
+            }
+          ]
+        },
+        {
+          "titulo": "Versão geral",
+          "scripts": [
+            {
+              "id": "q1-geral",
+              "titulo": "1. O que quer resolver",
+              "texto": "Para eu entender melhor: o que você gostaria de resolver no seu sorriso ou na sua saúde bucal?"
+            },
+            {
+              "id": "q2-geral",
+              "titulo": "2. Urgência",
+              "texto": "Isso te incomoda há quanto tempo?\nEstá sentindo dor agora?"
+            },
+            {
+              "id": "q3-geral",
+              "titulo": "3. O que impediu até agora",
+              "texto": "E o que fez você adiar até agora?"
+            }
+          ]
+        },
+        {
+          "titulo": "Depois das 3 perguntas: dois horários",
+          "scripts": [
+            {
+              "id": "oferta-horarios",
+              "titulo": "Oferta de horários",
+              "texto": "Obrigado por me contar, {{nome_paciente}}. O primeiro passo é uma avaliação com {{dentista}} para entender o seu caso.\nTenho {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}.\nQual fica melhor para você?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quanto-custa",
+      "titulo": "“Quanto custa?”",
+      "intro": "Acolha a pergunta, explique por que o valor depende da avaliação e ofereça dois horários. Três jeitos de dizer:",
+      "scripts": [
+        {
+          "id": "custa-a",
+          "titulo": "Variação A",
+          "texto": "Entendo, é uma dúvida muito justa!\nO valor depende do seu caso, porque cada boca é diferente, e isso a gente define na avaliação.\nTenho {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}. Qual prefere?"
+        },
+        {
+          "id": "custa-b",
+          "titulo": "Variação B",
+          "texto": "Ótima pergunta. Dois casos parecidos podem precisar de tratamentos bem diferentes, por isso {{dentista}} precisa avaliar antes.\nNa avaliação você sai com o plano e as condições explicados.\nPosso reservar {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}?"
+        },
+        {
+          "id": "custa-c",
+          "titulo": "Variação C",
+          "texto": "Eu entendo, ninguém quer ir sem ter ideia do investimento.\nA avaliação existe para isso: você entende o que precisa e quanto vai investir, sem compromisso.\nPrefere {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}?"
+        }
+      ]
+    },
+    {
+      "id": "objecoes",
+      "titulo": "Matriz de objeções",
+      "intro": "Duas respostas para cada objeção. Escolha a que combina com o tom da conversa.",
+      "objecoes": [
+        {
+          "objecao": "“Só quero o valor”",
+          "scripts": [
+            {
+              "id": "valor-1",
+              "texto": "Entendo! Não consigo te passar um valor por aqui porque ele depende do que a avaliação mostrar.\nNa avaliação você sai com o valor exato do seu caso.\nFica melhor {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}?"
+            },
+            {
+              "id": "valor-2",
+              "texto": "Faz sentido querer saber antes. Qualquer número agora seria um chute, e chute não te ajuda a decidir.\nA avaliação é para você sair com o plano e o valor na mão.\nPosso reservar {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}?"
+            }
+          ]
+        },
+        {
+          "objecao": "“Vou pensar”",
+          "scripts": [
+            {
+              "id": "pensar-1",
+              "texto": "Claro, é uma decisão importante!\nFicou alguma dúvida que eu possa esclarecer agora?"
+            },
+            {
+              "id": "pensar-2",
+              "texto": "Sem problema, {{nome_paciente}}. Posso te mandar uma mensagem na {{dia}} para saber como você está?\nSe surgir qualquer dúvida antes, é só me chamar."
+            }
+          ]
+        },
+        {
+          "objecao": "“Está caro” (depois da consulta)",
+          "scripts": [
+            {
+              "id": "caro-1",
+              "texto": "Entendo, {{nome_paciente}}, e agradeço a sinceridade.\nO que pesou mais para você: o valor total ou a forma de pagamento?\nAssim eu te explico melhor as opções que foram apresentadas na avaliação."
+            },
+            {
+              "id": "caro-2",
+              "texto": "Faz sentido olhar com cuidado. Se quiser, {{dentista}} revê o plano com você e mostra o que é prioridade agora e o que pode esperar.\nPosso marcar essa conversa para {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}?"
+            }
+          ]
+        },
+        {
+          "objecao": "“Tenho medo”",
+          "scripts": [
+            {
+              "id": "medo-1",
+              "texto": "É muito comum, e você fez bem em me contar.\nA avaliação é conversa e exame, sem pressa, e você pode pedir para parar a qualquer momento.\nQuer que eu avise a equipe para ir com calma com você?"
+            },
+            {
+              "id": "medo-2",
+              "texto": "Obrigado pela confiança em me contar. Muita gente chega assim, e a equipe está acostumada a ir no seu ritmo.\nPosso anotar isso na sua ficha para {{dentista}} saber?"
+            }
+          ]
+        },
+        {
+          "objecao": "“É longe”",
+          "scripts": [
+            {
+              "id": "longe-1",
+              "texto": "Entendo! Posso ver um horário com menos trânsito para você.\nTenho {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}. Algum deles fica mais fácil?"
+            },
+            {
+              "id": "longe-2",
+              "texto": "Faz sentido pensar no deslocamento. Se ajudar, te mando a localização e as opções de estacionamento aqui perto.\nE a gente agenda no horário mais fácil para você chegar."
+            }
+          ]
+        },
+        {
+          "objecao": "“Sou de convênio”",
+          "scripts": [
+            {
+              "id": "convenio-1",
+              "texto": "Entendo! Somos uma clínica particular e não atendemos convênio.\nMuita gente nos procura para tratamentos que o convênio não cobre.\nQuer conhecer as opções para o seu caso na avaliação?"
+            },
+            {
+              "id": "convenio-2",
+              "texto": "Aqui o atendimento é particular. Na avaliação você entende o seu caso e as formas de pagamento, sem compromisso.\nPosso reservar {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}?"
+            }
+          ]
+        },
+        {
+          "objecao": "“Já fiz orçamento em outro lugar”",
+          "scripts": [
+            {
+              "id": "orcamento-1",
+              "texto": "Que bom que você já está se cuidando! Cada clínica planeja de um jeito, então vale comparar com calma.\nQuer fazer a avaliação aqui para ter uma segunda opinião sobre o seu caso?"
+            },
+            {
+              "id": "orcamento-2",
+              "texto": "Ótimo, isso ajuda! Se quiser, traga o plano que você recebeu, e {{dentista}} explica o que recomendaria para o seu caso.\nTenho {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}."
+            }
+          ]
+        },
+        {
+          "objecao": "“Parcela?”",
+          "nota": "As condições de pagamento são apresentadas na avaliação. Nunca passe números por mensagem.",
+          "scripts": [
+            {
+              "id": "parcela-1",
+              "texto": "Temos sim formas de pagamento facilitadas, {{nome_paciente}}.\nAs condições são apresentadas na avaliação, junto com o plano, porque dependem do tratamento.\nQuer que eu reserve {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}?"
+            },
+            {
+              "id": "parcela-2",
+              "texto": "Trabalhamos com opções de pagamento, e a equipe te apresenta tudo na avaliação, com o plano na mão.\nPor mensagem eu não passo números para não te informar nada errado. Posso reservar um horário?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "confirmacao",
+      "titulo": "Confirmação e lembretes",
+      "intro": "Três mensagens entre o agendamento e a consulta. Sempre peça uma resposta para confirmar.",
+      "scripts": [
+        {
+          "id": "ao-agendar",
+          "titulo": "Ao agendar",
+          "assina": true,
+          "texto": "Perfeito, {{nome_paciente}}! Sua avaliação na {{clinica}} está marcada para {{dia}} às {{horario}}.\nTe mando a localização logo abaixo.\nPode me confirmar respondendo SIM? {{nome_secretaria}}"
+        },
+        {
+          "id": "d-1",
+          "titulo": "D-1 (véspera)",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nPassando para lembrar da sua avaliação amanhã, {{dia}}, às {{horario}}.\nPode me confirmar respondendo SIM? 😊"
+        },
+        {
+          "id": "manha",
+          "titulo": "Manhã da consulta",
+          "assina": true,
+          "texto": "Bom dia, {{nome_paciente}}! Hoje é o dia da sua avaliação na {{clinica}}, às {{horario}}.\nEstamos te esperando.\nResponda OK para confirmar, por favor. {{nome_secretaria}}"
+        }
+      ]
+    },
+    {
+      "id": "falta",
+      "titulo": "Recuperação de falta",
+      "intro": "Faltou? Sem bronca. O objetivo é remarcar.",
+      "scripts": [
+        {
+          "id": "falta-d0",
+          "titulo": "No mesmo dia",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}, aqui é {{nome_secretaria}}, da {{clinica}}. Sentimos a sua falta hoje, está tudo bem?\nPosso remarcar para {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}.\nQual fica melhor?"
+        },
+        {
+          "id": "falta-d1",
+          "titulo": "D+1",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nImagino que ontem foi corrido. Ainda quer fazer a sua avaliação?\nTenho {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}."
+        },
+        {
+          "id": "falta-d7",
+          "titulo": "D+7",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}, tudo bem? Aqui é {{nome_secretaria}}, da {{clinica}}.\nA sua avaliação continua à disposição quando for um bom momento para você.\nÉ só me responder aqui que eu te passo os horários da semana."
+        }
+      ]
+    },
+    {
+      "id": "sem-resposta",
+      "titulo": "Lead que parou de responder",
+      "intro": "Quatro mensagens, cada uma diferente, nenhuma insistente. A última encerra a conversa com elegância.",
+      "scripts": [
+        {
+          "id": "sr-d1",
+          "titulo": "D+1",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nNossa conversa parou ontem. Ficou alguma dúvida que eu possa responder?"
+        },
+        {
+          "id": "sr-d3",
+          "titulo": "D+3",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}, tudo bem? Aqui é {{nome_secretaria}}, da {{clinica}}.\nSó para você saber: a avaliação é para entender o seu caso com calma, sem compromisso.\nSe fizer sentido, tenho {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}."
+        },
+        {
+          "id": "sr-d7",
+          "titulo": "D+7",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nNão quero te incomodar. Se agora não é o momento, tudo bem.\nQuer que eu te procure mais para frente?"
+        },
+        {
+          "id": "sr-d30",
+          "titulo": "D+30 (encerramento)",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}, aqui é {{nome_secretaria}}, da {{clinica}}.\nComo não tivemos retorno, vou encerrar por aqui para não te incomodar.\nQuando quiser cuidar disso, é só me chamar que eu te ajudo 😊"
+        }
+      ]
+    },
+    {
+      "id": "pos-avaliacao",
+      "titulo": "Depois da avaliação, plano ainda não fechado",
+      "intro": "Ofereça ajuda para tirar dúvidas. Nada de pressão e nada de negociar valor por mensagem.",
+      "scripts": [
+        {
+          "id": "pa-d2",
+          "titulo": "D+2",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nFicou alguma dúvida sobre o plano que {{dentista}} te explicou? Estou aqui para ajudar."
+        },
+        {
+          "id": "pa-d7",
+          "titulo": "D+7",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}, tudo bem? Aqui é {{nome_secretaria}}, da {{clinica}}.\nSe quiser, {{dentista}} conversa de novo com você para tirar qualquer dúvida sobre o plano.\nPosso marcar {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}?"
+        },
+        {
+          "id": "pa-d21",
+          "titulo": "D+21",
+          "assina": true,
+          "texto": "Oi, {{nome_paciente}}! Aqui é {{nome_secretaria}}, da {{clinica}}.\nPassando para saber como você está e se ainda pensa em fazer o tratamento.\nO seu plano continua aqui quando quiser retomar."
+        }
+      ]
+    },
+    {
+      "id": "ligar",
+      "titulo": "Quando ligar em vez de escrever",
+      "intro": "Texto é ótimo para agendar. Voz é melhor quando a conversa trava.",
+      "quando": [
+        "O lead pediu para ligar ou mandou áudio.",
+        "Três mensagens trocadas e ainda sem agendar, mas ele continua respondendo.",
+        "Dúvida longa ou medo: voz acalma mais que texto.",
+        "Ligação perdida da clínica: retorne em até 5 minutos.",
+        "Paciente faltou e não respondeu no mesmo dia."
+      ],
+      "scripts": [
+        {
+          "id": "audio",
+          "titulo": "Áudio de até 30 segundos",
+          "assina": true,
+          "audio": true,
+          "texto": "Oi, {{nome_paciente}}, aqui é {{nome_secretaria}}, da {{clinica}}. Mandei um áudio rapidinho porque às vezes é mais fácil ouvir do que ler.\nPelo que você me contou, o melhor primeiro passo é a avaliação: você conversa com {{dentista}} e entende as opções, sem compromisso.\nTenho {{dia}} às {{horario}} ou {{dia_2}} às {{horario_2}}. Me diz qual fica melhor, tá bom? Um abraço!"
+        }
+      ]
+    }
+  ],
+  "crm": {
+    "titulo": "Etapas do CRM e prazos",
+    "intro": "Cada lead está em uma etapa. Mova o cartão assim que a etapa mudar.",
+    "etapas": [
+      {
+        "nome": "Novo",
+        "sla": "",
+        "criterio": "Chegou o contato."
+      },
+      {
+        "nome": "Contatado",
+        "sla": "até 5 min",
+        "criterio": "Primeira resposta enviada."
+      },
+      {
+        "nome": "Qualificado",
+        "sla": "no mesmo dia",
+        "criterio": "Respondeu às 3 perguntas e tem perfil."
+      },
+      {
+        "nome": "Agendado",
+        "sla": "na mesma conversa",
+        "criterio": "Avaliação marcada com dia e hora."
+      },
+      {
+        "nome": "Compareceu",
+        "sla": "lembretes D-1 e no dia",
+        "criterio": "Veio à avaliação."
+      },
+      {
+        "nome": "Fechado",
+        "sla": "retorno D+2, D+7, D+21",
+        "criterio": "Aprovou o plano de tratamento."
+      }
+    ],
+    "perdido": {
+      "nome": "Perdido",
+      "criterio": "Sempre com um motivo:",
+      "motivos": [
+        "preço",
+        "sem resposta",
+        "outra clínica",
+        "sem indicação clínica",
+        "outro"
+      ]
+    }
+  },
+  "fechamento": "Você já sabe o que fazer. Se quiser que alguém instale esse processo na sua clínica, fale com a LK Digital."
+}

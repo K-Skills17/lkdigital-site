@@ -6,6 +6,8 @@ import * as RX from "./raio-x/raiox";
 import demo from "./shared/demo-clinic.json";
 import checklist from "./checklist-google/content.json";
 import { itemCount } from "./checklist-google/render.mjs";
+import scripts from "./scripts-whatsapp/content.json";
+import { allScripts, markdown } from "./scripts-whatsapp/render.mjs";
 
 const near = (a: number | null, b: number, t = 0.005) => typeof a === "number" && Math.abs(a - b) <= Math.max(t, b * 0.001);
 
@@ -80,5 +82,19 @@ describe("checklist content", () => {
     expect(checklist.secoes).toHaveLength(9);
     expect(itemCount(checklist)).toBe(27);
     expect(checklist.secoes.flatMap((s) => s.itens).every((i) => i.por && i.como)).toBe(true);
+  });
+});
+
+describe("scripts de WhatsApp", () => {
+  const all = allScripts(scripts);
+  it("short scripts: ≤ 3 lines (audio scripts excepted) and ≤ 1 emoji", () => {
+    for (const sc of all) {
+      if (!sc.audio) expect(sc.texto.split("\n").length, sc.texto).toBeLessThanOrEqual(3);
+      expect((sc.texto.match(new RegExp("\\p{Extended_Pictographic}", "gu")) || []).length, sc.texto).toBeLessThanOrEqual(1);
+    }
+  });
+  it("no prices, discounts or guarantees, in the scripts or the .md", () => {
+    const text = all.map((s) => s.texto).join("\n") + markdown(scripts);
+    expect(text).not.toMatch(/R\$|a partir de|desconto|garantia/i);
   });
 });

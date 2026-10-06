@@ -38,7 +38,7 @@ unchecked phase below.** Branch: `claude/kskillz-17-github-cloud-ldooi3`.
 - [x] 3. GBP checklist at `/ferramentas/checklist-google` + adapter; remove diagnostico-google
 - [x] 4. Calculadora de CAC + adapter
 - [x] 5. Dashboard da Clínica + adapter
-- [ ] 6. Scripts de WhatsApp + adapter
+- [x] 6. Scripts de WhatsApp + adapter
 - [ ] 7. Uniform shell on kept tools; remove diagnostico-clinica; `/ferramentas` index, sitemap, robots, Ep 10 props
 - [x] 8. Data: legacy rows → `tool_leads`, `all_leads` view, painel labels, drop script (done with phase 2)
 - [ ] 9. Generator in `lead-magnets/`, assets in `public/ferramentas/arquivos/`, tests, Lighthouse, docs, PR

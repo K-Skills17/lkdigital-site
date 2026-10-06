@@ -172,6 +172,23 @@ suites['dashboard-clinica'] = async (browser) => {
   await ctx.close();
 };
 
+suites['scripts-whatsapp'] = async (browser) => {
+  const { ctx, page, posts, errors } = await newPage(browser);
+  await page.goto(BASE + '/ferramentas/scripts-whatsapp', { waitUntil: 'networkidle' });
+  check('title', (await page.title()).startsWith('Scripts de WhatsApp'));
+  check('5 rules + sample script', (await page.locator('.wrap > .rules li').count()) === 5 && (await page.locator('.bb').count()) === 1);
+  check('no R$/desconto/garantia on the page', !/R\$|desconto|garantia/i.test(await page.textContent('main')));
+  await fillLead(page, '#lead');
+  await page.locator('#lead button[type=submit]').click();
+  await page.waitForSelector('#lead a[download]');
+  const hrefs = await page.locator('#lead a[download]').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+  check('three files unlocked', hrefs.length === 3, hrefs);
+  for (const h of hrefs) check('file served: ' + h, (await page.request.get(BASE + h)).ok());
+  check('lead POST to scripts-whatsapp', posts.length === 1 && posts[0].url.endsWith('/api/ferramentas/scripts-whatsapp/lead'));
+  check('no page errors', errors.length === 0, errors);
+  await ctx.close();
+};
+
 const browser = await chromium.launch();
 for (const [name, run] of Object.entries(suites)) {
   if (only && name !== only) continue;
