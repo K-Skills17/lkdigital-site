@@ -7,6 +7,8 @@ import { z } from "zod";
 import { raioXConfig } from "@/lib/raio-x/config";
 import { computeScores } from "@/lib/raio-x/score";
 import { sinkLead } from "@/lib/raio-x/lead-sink";
+import { isDbConfigured } from "@/lib/db";
+import { clientIp, hit, LIMITS, tooManyRequests } from "@/lib/ratelimit";
 
 const questionIds = raioXConfig.questions.map((q) => q.id);
 
@@ -31,6 +33,9 @@ const submitSchema = z
   );
 
 export async function POST(request: Request) {
+  const limited = await hit(LIMITS.formIp, clientIp(request.headers));
+  if (!limited.ok) return tooManyRequests(limited.retryAfter);
+
   let body: unknown;
   try {
     body = await request.json();
@@ -52,11 +57,11 @@ export async function POST(request: Request) {
   const { visibilidade, operacao, route } = computeScores(answers, raioXConfig);
 
   // Persist + notify (non-blocking for notifications)
-  // If Supabase is not configured (e.g. during testing), skip persistence and return scores.
-  const supabaseReady = !!(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+  // If the database is not configured (e.g. during testing), skip persistence and return scores.
+  const dbReady = isDbConfigured();
   let id = "local-" + Date.now();
 
-  if (supabaseReady) {
+  if (dbReady) {
     try {
       const result = await sinkLead({
         name,
@@ -77,7 +82,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Erro ao salvar. Tente novamente." }, { status: 500 });
     }
   } else {
-    console.warn("[raio-x/submit] Supabase not configured — skipping persistence");
+    console.warn("[raio-x/submit] DATABASE_URL not set — skipping persistence");
   }
 
   return NextResponse.json({

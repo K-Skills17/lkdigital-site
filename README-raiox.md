@@ -6,8 +6,7 @@ Copy `.env.example` to `.env.local` and fill in:
 
 | Variable | Description |
 |---|---|
-| `SUPABASE_URL` | Your Supabase project URL |
-| `SUPABASE_SERVICE_ROLE_KEY` | Service role key (server-side only, never exposed to client) |
+| `DATABASE_URL` | Neon Postgres connection string (server-side only, never exposed to client) |
 | `EVOLUTION_API_URL` | Evolution API base URL (self-hosted) |
 | `EVOLUTION_API_KEY` | Evolution API key |
 | `EVOLUTION_INSTANCE` | Evolution API instance name |
@@ -15,13 +14,13 @@ Copy `.env.example` to `.env.local` and fill in:
 
 ## Database Setup
 
-Run the migration in your Supabase SQL editor:
+Apply the schema to Neon (creates every table, idempotent):
 
 ```bash
-supabase/migrations/20260610_raiox_leads.sql
+DATABASE_URL=postgres://… npm run db:migrate
 ```
 
-RLS is enabled with no public policies — all access goes through the service role key in API route handlers.
+All access goes through server-side route handlers using `DATABASE_URL`.
 
 ## How the Spot Counter Works
 

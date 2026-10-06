@@ -50,7 +50,7 @@ export default function PrivacidadePage() {
           </h2>
           <p>
             Não compartilhamos, vendemos ou alugamos seus dados pessoais a terceiros. Os dados são
-            armazenados em servidores seguros (Supabase) e acessados apenas pela equipe da LK
+            armazenados em servidores seguros (Neon) e acessados apenas pela equipe da LK
             Digital.
           </p>
 

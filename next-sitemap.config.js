@@ -34,7 +34,12 @@ const staticPages = [
   { loc: "/segmentos", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/casos", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/contato", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
-  { loc: "/ferramentas", changefreq: "monthly", priority: 0.9, lastmod: "2026-06-05T12:00:00-03:00" },
+  { loc: "/ferramentas", changefreq: "monthly", priority: 0.9, lastmod: "2026-10-02T12:00:00-03:00" },
+  // Free tools — migrated from standalone *.vercel.app projects onto the site
+  ...[
+    "auditoria-site", "diagnostico-google", "simulador-convenios",
+    "calculadora-precificacao", "diagnostico-clinica", "calculadora-agenda",
+  ].map((slug) => ({ loc: `/ferramentas/${slug}`, changefreq: "monthly", priority: 0.8, lastmod: "2026-10-02T12:00:00-03:00" })),
   { loc: "/blog", changefreq: "daily", priority: 0.9, lastmod: "2026-07-14T12:00:00-03:00" },
   { loc: "/faq", changefreq: "monthly", priority: 0.6, lastmod: "2026-06-05T12:00:00-03:00" },
   // privacidade and termos are noindex — excluded from sitemap
@@ -73,7 +78,7 @@ module.exports = {
   robotsTxtOptions: {
     additionalSitemaps: [],
     policies: [
-      { userAgent: "*", allow: "/", disallow: ["/api/", "/_next/", "/raio-x/resultado", "/raio-x/privacidade", "/demo", "/unicornio"] },
+      { userAgent: "*", allow: "/", disallow: ["/api/", "/_next/", "/raio-x/resultado", "/raio-x/privacidade", "/demo", "/unicornio", "/painel", "/ferramentas/auditoria-site/relatorio"] },
       { userAgent: "GPTBot", allow: "/" },
       { userAgent: "Google-Extended", allow: "/" },
       { userAgent: "PerplexityBot", allow: "/" },
