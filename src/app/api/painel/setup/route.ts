@@ -1,5 +1,6 @@
 // POST /api/painel/setup — create any missing tables (applies db/schema.sql,
-// which is safe to re-run) and import the existing blog posts if needed.
+// which is safe to re-run), copy old per-funnel leads into tool_leads, and
+// import the existing blog posts if needed.
 // Admin-only (src/middleware.ts guards /api/painel/*).
 import { NextResponse } from "next/server";
 import { applySchema } from "@/lib/db-setup";
@@ -10,9 +11,9 @@ export const maxDuration = 60;
 
 export async function POST() {
   try {
-    const statements = await applySchema();
+    const { statements, legacy } = await applySchema();
     const posts = (await listAllPosts()).length; // also runs the one-time post import
-    return NextResponse.json({ ok: true, statements, posts });
+    return NextResponse.json({ ok: true, statements, posts, legacy });
   } catch (err) {
     console.error("[painel/setup] failed:", err);
     return NextResponse.json(

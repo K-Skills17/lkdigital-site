@@ -14,7 +14,7 @@ It creates every table (`tool_leads`, `ai_calls`, `rate_limits`, `blog_posts`,
 than once.
 
 Every lead lives in `tool_leads`. If your database still has the old `raiox_leads`,
-`unicornio_leads` or `raio_x_scorecard_leads` tables, `npm run db:migrate` (or **Criar tabelas** in
+`unicornio_leads` or `raio_x_scorecard_leads` tables, `npm run db:migrate` (or **Atualizar banco de dados** at the top of
 `/painel`) copies their rows into `tool_leads` and leaves the old tables alone. (The SQL Editor route
 doesn't run this copy: use one of those two.) When `/painel` shows the old leads, you can drop the
 old tables with [`db/drop-legacy-lead-tables.sql`](db/drop-legacy-lead-tables.sql); it lists the

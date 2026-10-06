@@ -87,7 +87,7 @@ manage on Vercel). The full schema is `db/schema.sql`.
 
 **One lead table.** Every lead, from every tool and lead magnet, is a row in `tool_leads` (`tool` =
 the source). The old per-funnel tables (`raiox_leads`, `unicornio_leads`, `raio_x_scorecard_leads`)
-are no longer created or written: `npm run db:migrate` (and the "Criar tabelas" button) copies any
+are no longer created or written: `npm run db:migrate` (and the **Atualizar banco de dados** button at the top of `/painel`) copies any
 rows still in them into `tool_leads` — same id and date, the whole original row in `payload`, under
 the sources `raio-x-2026`, `unicornio` and `raio-x-scorecard` — and never deletes anything. Once
 the counts match, drop the old tables by hand with [`db/drop-legacy-lead-tables.sql`](db/drop-legacy-lead-tables.sql).

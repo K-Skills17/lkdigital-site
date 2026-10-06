@@ -1,8 +1,9 @@
 // /painel — internal operations dashboard (Basic-auth gated in middleware.ts).
-// One view over every funnel on the site: free tools, RAIO-X, Unicórnio,
+// One view over every lead on the site (tool_leads: lead magnets, free tools, retired funnels),
 // WhatsApp delivery health and AI usage across all backends.
 
 import type { Metadata } from "next";
+import UpdateDatabase from "@/components/painel/UpdateDatabase";
 import { loadDashboard, SOURCE_LABELS, type DashboardData, type LeadRow } from "@/lib/backbone/dashboard";
 
 export const dynamic = "force-dynamic";
@@ -150,9 +151,12 @@ export default async function PainelPage() {
       <main className="mx-auto max-w-3xl p-8 font-body">
         <h1 className="text-2xl font-semibold">Painel indisponível</h1>
         <p className="mt-2 text-muted-foreground">
-          Não foi possível ler o banco de dados. Verifique DATABASE_URL e se o schema foi aplicado com{" "}
-          <code>npm run db:migrate</code>.
+          Não foi possível ler o banco de dados. Verifique DATABASE_URL no Vercel e clique abaixo para criar as
+          tabelas que faltam (ou rode <code>npm run db:migrate</code>).
         </p>
+        <div className="mt-6">
+          <UpdateDatabase />
+        </div>
       </main>
     );
   }
@@ -162,9 +166,12 @@ export default async function PainelPage() {
   return (
     <main className="min-h-screen bg-background font-body">
       <div className="mx-auto max-w-6xl space-y-6 px-4 py-8 sm:px-6">
-        <header>
-          <h1 className="font-display text-3xl font-semibold text-foreground">Painel LK Digital</h1>
-          <p className="text-sm text-muted-foreground">Todas as origens de lead, entrega no WhatsApp e uso de IA — últimos 30 dias.</p>
+        <header className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="font-display text-3xl font-semibold text-foreground">Painel LK Digital</h1>
+            <p className="text-sm text-muted-foreground">Todas as origens de lead, entrega no WhatsApp e uso de IA — últimos 30 dias.</p>
+          </div>
+          <UpdateDatabase />
         </header>
 
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
