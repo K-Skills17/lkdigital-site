@@ -1,0 +1,141 @@
+// lib/blog/editorial.ts
+// Editorial rules for LK Digital blog posts — carried over from the retired
+// daily blog engine. Used by the AI draft assistant (ai-draft.ts) and the
+// quality checklist shown to editors before publishing (quality.ts).
+
+export const BANNED_PHRASES = [
+  "neste artigo",
+  "é importante ressaltar",
+  "é fundamental destacar",
+  "vale a pena mencionar",
+  "em suma",
+  "em conclusão",
+  "sem mais delongas",
+  "nos dias de hoje",
+  "cada vez mais",
+  "diante disso",
+  "sendo assim",
+  "nesse sentido",
+  "por fim",
+  "em primeiro lugar",
+  "não é segredo que",
+  "como já mencionado",
+  "cabe ressaltar",
+  "pode-se afirmar",
+  "é notório que",
+  "no mundo atual",
+];
+
+export const BANNED_SOURCES = [
+  "Instituto Brasileiro de Odontologia Digital",
+  "Associação Brasileira de Marketing Odontológico",
+  "Brazilian Dental Performance Association",
+  "Dental Growth Institute",
+  "Dental Analytics",
+  "Dental Marketing Association",
+  "Associação Brasileira de Odontologia Digital",
+  "Instituto Nacional de Odontologia Digital",
+  "Brazilian Dental Marketing Institute",
+  "Dental Intelligence Institute",
+  "Pesquisa Gestão Odontológica",
+];
+
+export const DENTIST_PROBLEMS_CONTEXT = `
+PROBLEMAS REAIS DE DENTISTAS NO BRASIL (use como contexto para escrever com empatia e precisão):
+
+STATUS:
+- Não ser percebido como autoridade na especialidade
+- Ser visto como "mais uma clínica" ao invés de premium
+- Preços questionados porque paciente não vê valor
+- Presença online desatualizada que danifica credibilidade
+- Concorrentes com branding melhor parecendo mais premium
+- Medo de parecer amador ou desesperado por pacientes
+
+NEGÓCIO:
+- Sem fluxo previsível de leads qualificados
+- Receita inconsistente mês a mês
+- Dependência de indicações
+- Leads que não podem pagar, não aparecem, só querem orçamento
+- Sem processo estruturado de vendas ou scripts
+- Sem follow-up multi-etapa
+- Agenda caótica com consultas de baixo valor
+- Recepção não treinada causando vazamento de vendas
+- Sem CRM ou dashboard de performance
+
+RELACIONAMENTOS:
+- Pacientes somem depois da primeira consulta
+- Sem estratégia de fidelização ou retenção
+- Recepcionistas que não lidam bem com leads
+- Equipe não segue scripts ou protocolos
+
+MEDOS PROFUNDOS:
+- "Vou gastar dinheiro e não vai ter retorno"
+- "Agência promete muito e entrega pouco"
+- "Já tentei marketing e deu errado"
+- Se sentir inferior a concorrentes com agendas cheias
+- Medo de perder relevância no mercado
+- Ser ultrapassado por dentistas mais jovens com redes sociais fortes
+`;
+
+export const PERSUASION_PRINCIPLES = `
+PRINCÍPIOS DE PERSUASÃO (aplicar sutilmente em todo conteúdo):
+
+1. AUTORIDADE INVISÍVEL: Nunca venda diretamente. Eduque de forma que a única conclusão lógica do leitor seja "preciso de marketing digital profissional". O artigo deve parecer informação neutra de um especialista, não propaganda de uma agência.
+
+2. CRISTALIZAÇÃO DE OPINIÃO: Apresente dados e realidades que FORMEM a opinião do dentista. Exemplo: não diga "contrate marketing digital". Diga "82% dos pacientes buscam no Google — consultórios invisíveis online perdem esses pacientes para concorrentes que investem R$2k/mês em presença digital."
+
+3. APELO AO INCONSCIENTE: Escreva para os desejos profundos (status, respeito, ser o melhor da cidade, não ser ultrapassado) — não apenas para ROI e métricas. Dentistas compram SENTIMENTOS: confiança, controle, prestígio.
+
+4. REVELAÇÃO, NÃO MARKETING: Cada artigo deve parecer uma descoberta ou revelação. "O dado que ninguém mostra", "A estratégia que 95% ignora", "O erro invisível que custa R$X/mês". Crie a sensação de acesso exclusivo a informação valiosa.
+
+5. AUTORIDADE DE TERCEIROS: Cite SEMPRE fontes externas — Google, pesquisas de mercado, CFO, universidades. Nunca diga "nós acreditamos que". Diga "Segundo pesquisa do BrightLocal com 4.000 consumidores..." A credibilidade vem de fora.
+
+6. SIMPLICIDADE RADICAL: Reduza conceitos complexos a frameworks simples com 3-5 passos. Dentistas são brilhantes em odontologia mas não em marketing. Faça-os sentir que ENTENDEM o que precisa ser feito (e depois perceber que preferem delegar).
+
+7. REPETIÇÃO COM VARIAÇÃO: O tema central é sempre o mesmo — visibilidade digital = pacientes = receita. Mas cada artigo aborda de um ângulo diferente. O leitor que lê 5 artigos deve ter a mesma conclusão reforçada 5 vezes de formas distintas.
+
+8. LIDERANÇA DE OPINIÃO: Escreva para o dentista que influencia outros (donos de clínicas, palestrantes, referências locais). Se convencer o líder, ele influencia o grupo.
+
+9. URGÊNCIA IMPLÍCITA: Sem pressão explícita. Use dados que criam urgência natural: "Buscas por dentistas em IA crescem 340% ao ano", "Consultórios que não aparecem no Google Maps perdem em média 47 pacientes/mês para concorrentes que aparecem."
+
+10. IDENTIDADE, NÃO PRODUTO: Posicione marketing digital como parte da identidade de um "dentista moderno e bem-sucedido" — não como um serviço. O dentista que investe em presença digital é o profissional inteligente e visionário; o que não investe está ficando para trás.
+`;
+
+export const FRAMEWORK_CONTEXTS: Record<string, string> = {
+  "Hormozi Value Equation": `
+FRAMEWORK: Equação de Valor (Alex Hormozi, $100M Offers)
+Valor = (Resultado Desejado × Probabilidade Percebida) ÷ (Tempo de Espera × Esforço do Cliente)
+- Aumentar o resultado desejado (agenda cheia, pacientes premium, autoridade)
+- Aumentar probabilidade percebida (provas, casos, garantias, sistemas)
+- Reduzir tempo de espera (resultados em semanas, não meses)
+- Reduzir esforço do cliente (nós fazemos tudo, dentista só atende)
+Aplicar ao contexto odontológico brasileiro com exemplos específicos.`,
+
+  "Hormozi $100M Offers": `
+FRAMEWORK: Grand Slam Offer (Alex Hormozi, $100M Offers)
+Uma oferta irresistível tem: resultado claro + probabilidade alta + tempo curto + esforço zero do cliente.
+Componentes: Dream Outcome + Perceived Likelihood + Time Delay reduction + Effort & Sacrifice removal.
+Adicionar: escassez real, urgência genuína, bônus que aumentam valor, garantias que removem risco.
+Aplicar para ofertas de consultórios odontológicos (avaliação premium, planejamento 3D, etc.)`,
+
+  "Hormozi $100M Leads": `
+FRAMEWORK: Core 4 Lead Generation (Alex Hormozi, $100M Leads)
+4 métodos de gerar leads: Warm Outreach, Cold Outreach, Content, Paid Ads.
+Warm = indicações sistematizadas. Cold = Google Ads, Meta Ads. Content = blog, redes, YouTube. Paid = tráfego pago otimizado.
+O poder está em combinar múltiplos métodos. Aplicar ao contexto de captação de pacientes odontológicos.`,
+
+  "Kennedy Wealth Magnet": `
+FRAMEWORK: Wealth Magnets (Dan Kennedy, No B.S. Wealth Attraction)
+Princípios aplicáveis: Be Somebody (autoridade), Be Somewhere (presença), Do Something (ação),
+Demonstration (mostrar, não dizer), Follow-Up (persistência), Integrity (confiança),
+No Fear (investir sem medo), No Excuses (parar de justificar), Speak Money (linguagem de investimento).
+Aplicar ao mindset de dentistas brasileiros que querem crescer.`,
+
+  "Meadows Thinking in Systems": `
+FRAMEWORK: Pensamento Sistêmico (Donella Meadows, Thinking in Systems)
+Consultório é um SISTEMA com loops de feedback, gargalos e pontos de alavancagem.
+Loops de reforço: marketing → pacientes → avaliações → mais pacientes.
+Loops de equilíbrio: capacidade limitada, tempo do dentista, equipe.
+Pontos de alavancagem: visibilidade digital (topo do funil), conversão da recepção (meio), retenção (fundo).
+Identificar ONDE está o gargalo antes de investir.`,
+};

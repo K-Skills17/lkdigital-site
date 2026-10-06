@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const urls = body.all ? getAllSiteUrls() : (body.urls ?? []);
+  const urls = body.all ? await getAllSiteUrls() : (body.urls ?? []);
 
   if (urls.length === 0) {
     return Response.json({ error: "No URLs provided. Send { all: true } or { urls: [...] }" }, { status: 400 });

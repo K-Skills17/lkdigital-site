@@ -10,8 +10,12 @@ The SQL is in [`db/schema.sql`](db/schema.sql). Either:
 - **Terminal:** `DATABASE_URL="<your Neon connection string>" npm run db:migrate`
 
 It creates every table (`tool_leads`, `ai_calls`, `raiox_leads`, `unicornio_leads`,
-`raio_x_scorecard_leads`, `rate_limits`) and the `all_leads` view used by `/painel`.
-It's safe to run more than once.
+`raio_x_scorecard_leads`, `rate_limits`, `blog_posts`, `blog_post_revisions`, `app_meta`) and the
+`all_leads` view used by `/painel`. It's safe to run more than once.
+
+The 75 existing blog posts are imported into `blog_posts` automatically: by `npm run db:migrate`,
+or, if you used the SQL Editor, on the first visit to the blog. Either way it happens once; posts
+you delete later don't come back.
 
 ## 2. Copy your existing leads from Supabase (once)
 
@@ -34,13 +38,13 @@ Set each for **Production** and **Preview**.
 | Variable | Where to get the value |
 |---|---|
 | `DATABASE_URL` | Neon console → your project → **Connect** → choose the **pooled** connection string (host contains `-pooler`) |
-| `ANTHROPIC_API_KEY` | console.anthropic.com → API Keys (the old tool projects in Vercel already have one you can copy) |
+| `ANTHROPIC_API_KEY` and/or `OPENAI_API_KEY` | At least one is needed for the AI action plans and the blog. Claude: console.anthropic.com → API Keys (the old tool projects in Vercel already have one). OpenAI: platform.openai.com → API keys. With both set, the second one is an automatic backup. |
 | `LK_CHATBOT_URL` | `https://lk-chatbot-production.up.railway.app` |
 | `LK_CHATBOT_API_KEY` | Copy from any old tool project in Vercel (e.g. `calculadora-agenda`), or from the lk-chatbot service on Railway |
 | `LK_CHATBOT_TENANT_ID` | Same place as above |
 | `FB_PIXEL_ID` | `812107305229720` |
 | `FB_ACCESS_TOKEN` | Copy from an old tool project (named `FB_ACCESS_TOKEN` or `CAPI_ACCESS_TOKEN` there), or Meta Events Manager → your pixel → Settings → Conversions API → Generate access token |
-| `PAINEL_PASSWORD` | Make one up — it's the password for `/painel` (username is `lk`) |
+| `PAINEL_USERS` | One login per admin for `/painel` (dashboard + blog), as `name:password` pairs separated by commas, e.g. `stephen:uma-senha-forte,ana:outra-senha-forte`. The name is recorded on every edit and publish. (Alternative: a single shared login with `PAINEL_PASSWORD`, username `lk` or `PAINEL_USER`.) |
 
 ### Add these (optional)
 
@@ -48,9 +52,9 @@ Set each for **Production** and **Preview**.
 |---|---|
 | `EVOLUTION_API_URL`, `EVOLUTION_API_KEY`, `EVOLUTION_INSTANCE` | WhatsApp fallback when the chatbot is down. Also needed for the RAIO-X confirmation message, which is currently not set in Vercel. Copy from an old tool project (`EVOLUTION_INSTANCE` is called `EVOLUTION_API_INSTANCE` there). |
 | `GOOGLE_PAGESPEED_API_KEY` | Speed check in the site audit tool; works without it but Google rate-limits it. Copy from the old `fb-lead-audit-tool` project. |
-| `PAINEL_USER` | Change the `/painel` username (default `lk`). |
 | `NOTIFY_MARCOS_CHAT_ID` | Telegram alerts to Marcos for RAIO-X scorecard leads. |
-| `AI_MODEL_FAST`, `AI_MODEL_SMART` | Switch AI models without a code change. Leave unset to use the defaults. |
+| `AI_PROVIDER` | `anthropic` (default) or `openai` — which AI is tried first when both keys are set. |
+| `AI_MODEL_FAST`, `AI_MODEL_SMART`, `OPENAI_MODEL_FAST`, `OPENAI_MODEL_SMART` | Switch Claude / OpenAI models without a code change. Leave unset to use the defaults (see `BACKBONE.md`). |
 
 ### Already set — keep
 
@@ -61,11 +65,19 @@ Set each for **Production** and **Preview**.
 
 `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — the site no longer reads them.
 
+### GitHub
+
+The daily blog engine (GitHub Actions) has been removed, so GitHub no longer needs any AI keys.
+You can delete the `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` secrets under the repo's
+**Settings → Secrets and variables → Actions**.
+
 ## 4. Deploy and test
 
 1. Merge the branch / redeploy so the new env vars are picked up.
-2. Open `/painel` (user `lk` + your password) — your old leads should be there.
-3. Go through each tool at `/ferramentas` once with your own WhatsApp number and confirm the
+2. Open `/painel` with one of your `PAINEL_USERS` logins — your old leads should be there.
+3. Open `/painel/blog` — the 75 existing posts should be listed as published. Create a test
+   article, save it, open **Pré-visualizar**, then delete it.
+4. Go through each tool at `/ferramentas` once with your own WhatsApp number and confirm the
    report arrives and the lead shows up in `/painel`.
 
 ## 5. Redirect the old tool apps

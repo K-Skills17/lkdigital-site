@@ -2,6 +2,14 @@
 const nextConfig = {
   // Prevent trailing slash redirects — Google wastes crawl budget on /path/ → /path
   trailingSlash: false,
+  experimental: {
+    // The blog reads db/seed/blog-posts.json at runtime (first-use import into
+    // the database, and the fallback when DATABASE_URL isn't set) — make sure
+    // it's bundled with the serverless functions.
+    outputFileTracingIncludes: {
+      "/**/*": ["./db/seed/**/*"],
+    },
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],

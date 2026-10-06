@@ -3,6 +3,12 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Disallow: /raio-x/resultado
+Disallow: /raio-x/privacidade
+Disallow: /demo
+Disallow: /unicornio
+Disallow: /painel
+Disallow: /ferramentas/auditoria-site/relatorio
 
 # GPTBot
 User-agent: GPTBot
@@ -29,3 +35,4 @@ Host: https://lkdigital.odo.br
 
 # Sitemaps
 Sitemap: https://lkdigital.odo.br/sitemap.xml
+Sitemap: https://lkdigital.odo.br/sitemap-blog.xml

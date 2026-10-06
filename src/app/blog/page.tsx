@@ -37,12 +37,12 @@ function formatDate(iso: string) {
   });
 }
 
-export default function Blog({
+export default async function Blog({
   searchParams,
 }: {
   searchParams: { page?: string };
 }) {
-  const allPosts = getAllListItems();
+  const allPosts = await getAllListItems();
   const currentPage = Math.max(1, parseInt(searchParams.page ?? "1", 10));
   const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
   const posts = allPosts.slice(

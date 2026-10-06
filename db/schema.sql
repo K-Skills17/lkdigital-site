@@ -121,6 +121,60 @@ create table if not exists rate_limits (
 );
 create index if not exists rate_limits_window_idx on rate_limits (window_start);
 
+-- ─── Blog (written and published by admins in /painel/blog) ─────────────────
+create table if not exists blog_posts (
+  id               uuid        primary key default gen_random_uuid(),
+  slug             text        not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
+  title            text        not null,
+  seo_title        text        not null default '',
+  seo_description  text        not null default '',
+  excerpt          text        not null default '',
+  content          text        not null default '',   -- sanitized HTML
+  tldr             text        not null default '',
+  category         text        not null default '',
+  tags             text[]      not null default '{}',
+  keywords         text[]      not null default '{}',
+  faq_items        jsonb       not null default '[]',
+  author_slug      text        not null default 'stephen-domingos-komando',
+  cta_heading      text        not null default '',
+  cta_description  text        not null default '',
+  cta_button       text        not null default '',
+  related_slugs    text[]      not null default '{}',
+  noindex          boolean     not null default false,
+  reading_time     int         not null default 1,
+  -- draft → published (published_at in the future = scheduled) → archived
+  status           text        not null default 'draft' check (status in ('draft', 'published', 'archived')),
+  published_at     timestamptz,
+  created_at       timestamptz not null default now(),
+  updated_at       timestamptz not null default now(),
+  created_by       text,
+  updated_by       text,
+  -- Human-in-the-loop: AI drafts must be marked reviewed before publishing.
+  ai_generated     boolean     not null default false,
+  ai_model         text,
+  reviewed_by      text,
+  reviewed_at      timestamptz,
+  constraint published_has_date check (status <> 'published' or published_at is not null)
+);
+create index if not exists blog_posts_live_idx on blog_posts (status, published_at desc);
+
+-- Snapshot of a post before every save, so any edit can be undone.
+create table if not exists blog_post_revisions (
+  id        uuid        primary key default gen_random_uuid(),
+  post_id   uuid        not null references blog_posts (id) on delete cascade,
+  saved_at  timestamptz not null default now(),
+  saved_by  text,
+  snapshot  jsonb       not null
+);
+create index if not exists blog_post_revisions_post_idx on blog_post_revisions (post_id, saved_at desc);
+
+-- Small key/value table for one-time jobs (e.g. "blog seeded").
+create table if not exists app_meta (
+  key   text primary key,
+  value text not null,
+  at    timestamptz not null default now()
+);
+
 -- ─── Every lead on the site, whatever the funnel, in one shape (/painel) ───
 create or replace view all_leads as
   select id, created_at, tool as source, name, phone as whatsapp, email, clinic_name, city,

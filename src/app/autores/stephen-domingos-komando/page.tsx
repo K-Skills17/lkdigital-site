@@ -4,6 +4,9 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { getAllListItems } from "@/lib/blog";
 
+// Re-read posts every 5 minutes (publishing also refreshes this page immediately).
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: { absolute: "Stephen Domingos Komando — Fundador, LK Digital" },
   description:
@@ -24,11 +27,9 @@ function formatDate(iso: string) {
   });
 }
 
-export default function AuthorPage() {
-  const allPosts = getAllListItems();
-  const authorPosts = allPosts.filter(
-    (p) => p.authorName === "Stephen Domingos Komando" || p.source === "static"
-  );
+export default async function AuthorPage() {
+  const allPosts = await getAllListItems();
+  const authorPosts = allPosts.filter((p) => p.authorSlug === "stephen-domingos-komando");
 
   const schema = {
     "@context": "https://schema.org",

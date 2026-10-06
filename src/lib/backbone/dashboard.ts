@@ -55,7 +55,9 @@ export interface DashboardData {
     calls: number;
     failed: number;
     costUsd: number;
-    byModel: Array<{ model: string; calls: number; inputTokens: number; outputTokens: number; costUsd: number; avgLatencyMs: number }>;
+    /** Some calls used a model with no entry in MODEL_PRICING, so costUsd is a lower bound. */
+    costIncomplete: boolean;
+    byModel: Array<{ model: string; calls: number; inputTokens: number; outputTokens: number; costUsd: number; priced: boolean; avgLatencyMs: number }>;
     bySource: Array<{ source: string; calls: number }>;
   };
 }
@@ -104,7 +106,7 @@ export function aggregate(leads: LeadRow[], calls: AiCallRow[], now = Date.now()
   const models = new Map<string, DashboardData["ai"]["byModel"][number]>();
   const aiSources = new Map<string, number>();
   for (const c of calls) {
-    const m = models.get(c.model) ?? { model: c.model, calls: 0, inputTokens: 0, outputTokens: 0, costUsd: 0, avgLatencyMs: 0 };
+    const m = models.get(c.model) ?? { model: c.model, calls: 0, inputTokens: 0, outputTokens: 0, costUsd: 0, priced: c.model in MODEL_PRICING, avgLatencyMs: 0 };
     m.avgLatencyMs = (m.avgLatencyMs * m.calls + c.latency_ms) / (m.calls + 1);
     m.calls++;
     m.inputTokens += c.input_tokens;
@@ -129,6 +131,7 @@ export function aggregate(leads: LeadRow[], calls: AiCallRow[], now = Date.now()
       calls: calls.length,
       failed: calls.filter((c) => !c.ok).length,
       costUsd: byModel.reduce((s, m) => s + m.costUsd, 0),
+      costIncomplete: byModel.some((m) => !m.priced),
       byModel,
       bySource: Array.from(aiSources, ([source, n]) => ({ source, calls: n })).sort((a, b) => b.calls - a.calls),
     },

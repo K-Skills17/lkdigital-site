@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { getAllListItems } from "@/lib/blog";
 
-export default function LatestPosts() {
-  const posts = getAllListItems().slice(0, 3);
+export default async function LatestPosts() {
+  const posts = (await getAllListItems()).slice(0, 3);
 
   if (posts.length === 0) return null;
 

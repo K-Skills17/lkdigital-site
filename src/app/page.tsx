@@ -1,4 +1,8 @@
 import { Metadata } from "next";
+
+// The home page lists the latest blog posts; refresh every 5 minutes
+// (publishing in /painel/blog also refreshes it immediately).
+export const revalidate = 300;
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";

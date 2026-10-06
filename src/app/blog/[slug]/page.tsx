@@ -1,804 +1,85 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import {
-  BreadcrumbSchema,
-  FAQSchema,
-  ArticleSchema,
-} from "@/components/StructuredData";
-import { blogPosts, getBlogPost, getAllSlugs } from "@/data/blog-posts";
-import type { BlogPost } from "@/data/blog-posts";
-import { getBlogPostBySlug, getAllBlogSlugs, getRelatedPosts } from "@/lib/blog";
-import type { BlogArticle } from "@/lib/blog";
+import { BreadcrumbSchema, FAQSchema, ArticleSchema } from "@/components/StructuredData";
+import ArticleView from "@/components/blog/ArticleView";
+import { getPublishedPost, getRelatedPosts, listPublishedPosts } from "@/lib/blog/store";
 
-// Engine-generated posts that are strong enough to index.
-// All others get noindex to protect crawl budget until content quality improves.
-const INDEXED_ENGINE_SLUGS = new Set([
-  "agenda-caotica-dentista-como-organizar",
-  "atracao-riqueza-dentista-mentalidade-crescimento",
-  "avaliacoes-google-dentista-como-conseguir",
-  "cadeiras-vazias-consultorio-como-resolver",
-  "chatgpt-recomendando-dentistas-como-aparecer",
-  "como-dentista-aparecer-primeira-pagina-google",
-  "como-medir-resultados-marketing-dentista",
-  "concorrente-dominando-google-como-competir",
-  "crm-dentista-gestao-pacientes-leads",
-  "custo-por-lead-dentista-quanto-pagar",
-  "dados-mercado-odontologico-brasil-2025",
-  "demonstracao-resultados-dentista-marketing",
-  "dentista-acao-supera-perfeicao",
-  "dentista-autoridade-como-ser-referencia",
-  "dentista-branding-marca-premium",
-  "dentista-burnout-trabalho-demais-como-resolver",
-  "dentista-cobrar-mais-sem-perder-pacientes",
-  "dentista-depende-indicacao-como-mudar",
-  "dentista-equipe-nao-funciona-como-resolver",
-  "dentista-falar-linguagem-dinheiro",
-  "dentista-leads-nao-podem-pagar",
-  "dentista-medo-investir-marketing-como-superar",
-  "dentista-nao-aparece-online-como-resolver",
-  "dentista-oportunidade-mercado-como-aproveitar",
-  "dentista-pacientes-somem-depois-primeira-consulta",
-  "dentista-prova-social-como-construir",
-  "dentista-sem-desculpas-crescimento",
-  "email-marketing-dentista-reativacao-pacientes",
-  "escassez-urgencia-consultorio-odontologico",
-  "expectativa-paciente-resultado-como-gerenciar",
-  "financiamento-tratamento-dentario-como-oferecer",
-  "follow-up-pacientes-sistema-dentista",
-  "garantias-consultorio-odontologico-confianca",
-  "google-ads-vs-seo-dentista-qual-melhor",
-  "google-maps-dentista-como-aparecer-top-3",
-  "instagram-dentista-conteudo-que-converte",
-  "integridade-marketing-dentista-confianca",
-  "inteligencia-artificial-odontologia-2025",
-  "landing-page-dentista-alta-conversao",
-  "leads-estranhos-dentista-como-atrair",
-  "leads-nao-aparecem-consulta-no-show-dentista",
-  "marketing-clinica-odontologica-multiespecialidade",
-  "marketing-dentista-clinico-geral",
-  "marketing-digital-dentista-roi-retorno-investimento",
-  "marketing-endodontia-emergencia-dental",
-  "marketing-estetica-dental-lentes-contato",
-  "marketing-harmonizacao-orofacial-captar-pacientes",
-  "marketing-implantes-dentarios-captar-pacientes",
-  "marketing-odontopediatria-captar-pais",
-  "marketing-ortodontia-invisalign-captar-pacientes",
-  "marketing-periodontia-educar-pacientes",
-  "marketing-protese-dentaria-pacientes-idosos",
-  "oferta-irresistivel-dentista-como-criar",
-  "pacientes-so-querem-preco-como-lidar",
-  "parcerias-estrategicas-dentista-indicacoes",
-  "pensamento-sistemico-consultorio-odontologico",
-  "perplexity-gemini-dentista-como-aparecer",
-  "recepcao-consultorio-perdendo-pacientes",
-  "regulamentacao-cfo-publicidade-odontologica-2025",
-  "sazonalidade-odontologia-como-manter-faturamento",
-  "schema-markup-dentista-seo-tecnico",
-  "script-venda-consultorio-dentista",
-  "seo-local-dentista-bairro-regiao",
-  "site-consultorio-odontologico-elementos-essenciais",
-  "tendencias-marketing-odontologico-2025",
-  "tiktok-reels-dentista-vale-a-pena",
-  "valor-percebido-dentista-como-cobrar-mais",
-  "whatsapp-business-dentista-converter-leads",
-  "whatsapp-paciente-nao-responde-como-recuperar",
-]);
+// Posts live in the database and are published from /painel/blog. Pages are
+// cached and re-checked every 5 minutes; publishing refreshes them instantly,
+// and a scheduled post appears within 5 minutes of its time.
+export const revalidate = 300;
 
-// ─── Static Params (merge initial + engine-generated) ───
-export function generateStaticParams() {
-  const initialSlugs = getAllSlugs();
-  const engineSlugs = getAllBlogSlugs();
-  const allSlugs = Array.from(new Set([...initialSlugs, ...engineSlugs]));
-  return allSlugs.map((slug) => ({ slug }));
+// Pre-render live posts at build time when the database is reachable;
+// anything else (new posts, or no DB at build) renders on first request.
+export async function generateStaticParams() {
+  try {
+    return (await listPublishedPosts()).map((p) => ({ slug: p.slug }));
+  } catch (err) {
+    console.warn("[blog] could not list posts at build time — rendering on demand:", err);
+    return [];
+  }
 }
 
-// ─── Dynamic Metadata ───
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getBlogPost(slug);
-  const enginePost = !post ? getBlogPostBySlug(slug) : null;
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await getPublishedPost(params.slug);
+  if (!post) return { title: "Artigo não encontrado" };
 
-  if (!post && !enginePost) return { title: "Artigo não encontrado" };
+  const title = post.seoTitle || post.title;
+  const description = post.seoDescription || post.excerpt;
 
-  // Noindex engine posts not in the allowlist — protects crawl budget
-  if (enginePost && !post && !INDEXED_ENGINE_SLUGS.has(slug)) {
-    return {
-      title: enginePost.seoTitle ?? enginePost.title,
-      robots: { index: false, follow: true },
-    };
-  }
-
-  const title = post?.title ?? enginePost!.seoTitle ?? enginePost!.title;
-  const description =
-    post?.description ??
-    enginePost!.seoDescription ??
-    enginePost!.excerpt;
-  const datePublished = post?.datePublished ?? enginePost!.datePublished;
-  const dateModified = post?.dateModified ?? enginePost!.dateModified;
-
-  // Keep final <title> under 60 chars for Google SERP display
+  // Keep the final <title> under 60 chars for Google's results page.
   const withBrand = `${title} | LK Digital`;
   const finalTitle = withBrand.length <= 60 ? withBrand : title;
 
   return {
-    title: {
-      absolute: finalTitle,
-    },
+    title: { absolute: finalTitle },
     description,
+    ...(post.noindex ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       type: "article",
       title,
       description,
       locale: "pt_BR",
       siteName: "LK Digital",
-      publishedTime: datePublished,
-      modifiedTime: dateModified,
-      authors: ["LK Digital"],
+      publishedTime: post.publishedAt ?? undefined,
+      modifiedTime: post.updatedAt,
+      authors: [post.author.name],
       images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
     },
-    alternates: {
-      canonical: `/blog/${slug}`,
-    },
+    alternates: { canonical: `/blog/${post.slug}` },
   };
 }
 
-// ─── Helper: format date ───
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("pt-BR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-
-// ─── Page Component ───
-export default async function BlogPostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const post = getBlogPost(slug);
-  const enginePost = !post ? getBlogPostBySlug(slug) : null;
-
-  if (!post && !enginePost) notFound();
-
-  // If it's an engine-generated post, render it differently
-  if (enginePost && !post) {
-    const related = getRelatedPosts(enginePost.slug, 3);
-    return <EnginePostPage article={enginePost} relatedPosts={related} />;
-  }
-
-  // Original initial-6-articles rendering (post is guaranteed non-null here)
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const safePost = post!;
-
-  // Calculate word count for SEO schema
-  const wordCount = safePost.content.reduce(
-    (acc, s) =>
-      acc +
-      s.content.split(" ").length +
-      (s.subsections?.reduce(
-        (a, ss) => a + ss.content.split(" ").length,
-        0
-      ) ?? 0),
-    0
-  );
-
-  const relatedPosts = safePost.relatedSlugs
-    .map((s) => blogPosts.find((p) => p.slug === s))
-    .filter(Boolean) as BlogPost[];
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await getPublishedPost(params.slug);
+  if (!post) notFound();
+  const related = await getRelatedPosts(post, 3);
 
   return (
     <>
-      {/* Structured Data — SEO + GEO (speakable) */}
       <ArticleSchema
-        title={safePost.title}
-        description={safePost.description}
-        slug={safePost.slug}
-        datePublished={safePost.datePublished}
-        dateModified={safePost.dateModified}
-        category={safePost.category}
-        wordCount={wordCount}
+        title={post.seoTitle || post.title}
+        description={post.seoDescription || post.excerpt}
+        slug={post.slug}
+        datePublished={post.publishedAt!}
+        dateModified={post.updatedAt}
+        category={post.category}
+        keywords={post.keywords}
+        authorName={post.author.name}
         speakable
       />
-      <FAQSchema faqs={safePost.faqs} />
+      {post.faqItems.length > 0 && <FAQSchema faqs={post.faqItems} />}
       <BreadcrumbSchema
         items={[
           { name: "Home", href: "/" },
           { name: "Blog", href: "/blog" },
-          { name: safePost.title, href: `/blog/${safePost.slug}` },
+          { name: post.title, href: `/blog/${post.slug}` },
         ]}
       />
-
       <Navbar />
-
-      <main className="pt-20 md:pt-24">
-        {/* ─── Article Header ─── */}
-        <header className="border-b border-border">
-          <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-20">
-            {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="mb-6 md:mb-8">
-              <ol className="flex items-center gap-2 text-xs text-muted-foreground">
-                <li>
-                  <Link
-                    href="/"
-                    className="hover:text-foreground transition-colors"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link
-                    href="/blog"
-                    className="hover:text-foreground transition-colors"
-                  >
-                    Blog
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-foreground truncate max-w-[200px]">
-                  {safePost.title}
-                </li>
-              </ol>
-            </nav>
-
-            {/* Category + Read Time */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-2.5 py-1 text-[10px] font-medium text-accent bg-accent/10 rounded uppercase tracking-wider">
-                {safePost.category}
-              </span>
-              <span className="text-xs text-muted-foreground">
-                {safePost.readTime} de leitura
-              </span>
-            </div>
-
-            {/* Title */}
-            <h1
-              className="font-display text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.1] tracking-tight text-foreground max-w-4xl"
-              data-speakable
-            >
-              {safePost.title}
-            </h1>
-
-            {/* Author Byline */}
-            <div className="mt-6 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center">
-                <span className="text-sm font-medium text-accent">SK</span>
-              </div>
-              <div>
-                <Link href="/autores/stephen-domingos-komando" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
-                  Stephen Domingos Komando
-                </Link>
-                <p className="text-xs text-muted-foreground">
-                  Fundador, LK Digital &middot; {formatDate(safePost.datePublished)}
-                  {safePost.dateModified !== safePost.datePublished && (
-                    <>
-                      {" "}&middot; Atualizado em {formatDate(safePost.dateModified)}
-                    </>
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* ─── Article Body ─── */}
-        <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12 lg:gap-16">
-            {/* Content */}
-            <article className="max-w-prose">
-              {/* AEO: Excerpt as citable lead */}
-              <p
-                className="text-lg text-muted-foreground leading-relaxed mb-10 border-l-2 border-accent/40 pl-5"
-                data-speakable
-              >
-                {safePost.excerpt}
-              </p>
-
-              {/* Sections */}
-              {safePost.content.map((section, i) => (
-                <section key={i} className="mb-10" id={`section-${i}`}>
-                  <h2
-                    className="font-display text-display-sm text-foreground mb-4"
-                    data-speakable
-                  >
-                    {section.heading}
-                  </h2>
-                  <div className="prose-content">
-                    {section.content.split("\n\n").map((para, j) => (
-                      <p
-                        key={j}
-                        className="text-[15px] text-muted-foreground leading-[1.8] mb-4"
-                      >
-                        {para}
-                      </p>
-                    ))}
-                  </div>
-
-                  {/* Subsections */}
-                  {section.subsections?.map((sub, k) => (
-                    <div key={k} className="mt-6 ml-0">
-                      <h3 className="font-display text-lg text-foreground mb-3">
-                        {sub.heading}
-                      </h3>
-                      <div className="prose-content">
-                        {sub.content.split("\n\n").map((para, l) => (
-                          <p
-                            key={l}
-                            className="text-[15px] text-muted-foreground leading-[1.8] mb-4"
-                          >
-                            {para}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </section>
-              ))}
-
-              {/* ─── FAQ Section (AEO: prominent, accessible) ─── */}
-              <section className="mt-16 pt-10 border-t border-border">
-                <h2 className="font-display text-display-sm text-foreground mb-8">
-                  Perguntas Frequentes
-                </h2>
-                <div className="space-y-6">
-                  {safePost.faqs.map((faq, i) => (
-                    <details
-                      key={i}
-                      className="group bg-card rounded-lg border border-border/60 overflow-hidden"
-                    >
-                      <summary className="flex items-center justify-between cursor-pointer px-5 py-4 text-sm font-medium text-foreground hover:text-accent transition-colors list-none [&::-webkit-details-marker]:hidden">
-                        {faq.question}
-                        <svg
-                          className="w-4 h-4 text-muted-foreground group-open:rotate-180 transition-transform flex-shrink-0 ml-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={2}
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                          />
-                        </svg>
-                      </summary>
-                      <div className="px-5 pb-4">
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    </details>
-                  ))}
-                </div>
-              </section>
-
-              {/* ─── CTA ─── */}
-              <section className="mt-16 p-8 rounded-xl bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
-                <h2 className="font-display text-display-sm text-foreground mb-3">
-                  {safePost.cta?.heading ??
-                    "Quer Mais Pacientes Pelo Google?"}
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-lg">
-                  {safePost.cta?.description ??
-                    "A LK Digital é especializada exclusivamente em marketing para dentistas. Fazemos diagnóstico gratuito da sua presença digital e mostramos exatamente onde estão as oportunidades."}
-                </p>
-                <Link
-                  href="/contato"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
-                >
-                  {safePost.cta?.buttonText ??
-                    "Agendar Diagnóstico Gratuito"}
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                    />
-                  </svg>
-                </Link>
-              </section>
-            </article>
-
-            {/* ─── Sidebar: Table of Contents ─── */}
-            <aside className="hidden lg:block">
-              <div className="sticky top-28">
-                <p className="text-[10px] font-medium text-accent uppercase tracking-[0.25em] mb-4">
-                  Neste artigo
-                </p>
-                <nav aria-label="Sumário do artigo">
-                  <ol className="space-y-2 border-l border-border/60 pl-4">
-                    {safePost.content.map((section, i) => (
-                      <li key={i}>
-                        <a
-                          href={`#section-${i}`}
-                          className="block text-xs text-muted-foreground hover:text-accent transition-colors leading-snug py-1"
-                        >
-                          {section.heading}
-                        </a>
-                      </li>
-                    ))}
-                  </ol>
-                </nav>
-
-                {/* Sidebar CTA */}
-                <div className="mt-8 p-4 rounded-lg bg-card border border-border/60">
-                  <p className="text-xs font-medium text-foreground mb-2">
-                    {safePost.cta?.heading
-                      ? safePost.cta.heading.length > 50
-                        ? "Diagnóstico Gratuito"
-                        : safePost.cta.heading
-                      : "Diagnóstico Gratuito"}
-                  </p>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed mb-3">
-                    {safePost.cta?.description
-                      ? safePost.cta.description.substring(0, 120) +
-                        (safePost.cta.description.length > 120 ? "..." : "")
-                      : "Descubra o que está impedindo seu consultório de aparecer no Google."}
-                  </p>
-                  <Link
-                    href="/contato"
-                    className="block w-full text-center px-3 py-2 bg-accent hover:bg-accent-dark text-white text-xs font-medium rounded transition-colors"
-                  >
-                    {safePost.cta?.buttonText ?? "Quero o Diagnóstico"}
-                  </Link>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </div>
-
-        {/* ─── Related Articles ─── */}
-        {relatedPosts.length > 0 && (
-          <section className="py-16 md:py-20 bg-muted border-t border-border">
-            <div className="max-w-content mx-auto px-4 sm:px-6">
-              <h2 className="font-display text-display-md text-foreground mb-10">
-                Artigos Relacionados
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {relatedPosts.map((related) => (
-                  <Link
-                    key={related.slug}
-                    href={`/blog/${related.slug}`}
-                    className="group bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 overflow-hidden flex flex-col"
-                  >
-                    <div className="aspect-[16/9] bg-gradient-to-br from-accent/5 to-accent/10 flex items-center justify-center">
-                      <span className="text-xs text-accent/40 uppercase tracking-[0.25em] font-medium">
-                        {related.category}
-                      </span>
-                    </div>
-                    <div className="p-5 flex flex-col flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="px-2 py-0.5 text-[10px] font-medium text-accent bg-accent/10 rounded">
-                          {related.category}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          {related.readTime}
-                        </span>
-                      </div>
-                      <h3 className="font-display text-base font-medium text-foreground group-hover:text-accent transition-colors line-clamp-2">
-                        {related.title}
-                      </h3>
-                      <div className="mt-3 pt-3 border-t border-border/60">
-                        <span className="inline-flex items-center gap-1 text-xs font-medium text-accent group-hover:gap-2 transition-all">
-                          Ler artigo
-                          <svg
-                            className="w-3.5 h-3.5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-      </main>
-
-      <Footer />
-    </>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════
-// Engine-Generated Post Page (reads from content/blog/*.json)
-// ═══════════════════════════════════════════════════════════════
-function EnginePostPage({ article, relatedPosts = [] }: { article: BlogArticle; relatedPosts?: BlogArticle[] }) {
-  const readTime =
-    typeof article.readingTime === "number"
-      ? `${article.readingTime} min`
-      : article.readingTime;
-
-  return (
-    <>
-      {/* SEO + GEO: Enhanced Article schema with speakable */}
-      <ArticleSchema
-        title={article.seoTitle ?? article.title}
-        description={article.seoDescription ?? article.excerpt}
-        slug={article.slug}
-        datePublished={article.datePublished}
-        dateModified={article.dateModified}
-        category={article.category}
-        keywords={article.keywords}
-        authorName={article.author.name}
-        speakable
-      />
-      {article.faqItems.length > 0 && <FAQSchema faqs={article.faqItems} />}
-      <BreadcrumbSchema
-        items={[
-          { name: "Home", href: "/" },
-          { name: "Blog", href: "/blog" },
-          { name: article.title, href: `/blog/${article.slug}` },
-        ]}
-      />
-
-      <Navbar />
-
-      <main className="pt-20 md:pt-24">
-        {/* Header */}
-        <header className="border-b border-border">
-          <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-20">
-            <nav aria-label="Breadcrumb" className="mb-6 md:mb-8">
-              <ol className="flex items-center gap-2 text-xs text-muted-foreground">
-                <li>
-                  <Link
-                    href="/"
-                    className="hover:text-foreground transition-colors"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link
-                    href="/blog"
-                    className="hover:text-foreground transition-colors"
-                  >
-                    Blog
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-foreground truncate max-w-[200px]">
-                  {article.title}
-                </li>
-              </ol>
-            </nav>
-
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-2.5 py-1 text-[10px] font-medium text-accent bg-accent/10 rounded uppercase tracking-wider">
-                {article.category}
-              </span>
-              <span className="text-xs text-muted-foreground">
-                {readTime} de leitura
-              </span>
-            </div>
-
-            <h1
-              className="font-display text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.1] tracking-tight text-foreground max-w-4xl"
-              data-speakable
-            >
-              {article.title}
-            </h1>
-
-            <div className="mt-6 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center">
-                <span className="text-sm font-medium text-accent">SK</span>
-              </div>
-              <div>
-                <Link href={`/autores/${article.author.slug ?? "stephen-domingos-komando"}`} className="text-sm font-medium text-foreground hover:text-accent transition-colors">
-                  {article.author.name}
-                </Link>
-                <p className="text-xs text-muted-foreground">
-                  {article.author.title} &middot; {formatDate(article.datePublished)}
-                  {article.dateModified !== article.datePublished && (
-                    <>
-                      {" "}&middot; Atualizado em {formatDate(article.dateModified)}
-                    </>
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Body */}
-        <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12 lg:gap-16">
-            <article className="max-w-prose">
-              {/* AEO: TLDR / Quick Answer box */}
-              {article.tldr && (
-                <div
-                  className="answer-box mb-10 p-5 rounded-lg bg-accent/5 border border-accent/20"
-                  data-speakable
-                >
-                  <p className="text-xs font-medium text-accent uppercase tracking-wider mb-2">
-                    Resumo
-                  </p>
-                  <p className="text-sm text-foreground leading-relaxed">
-                    {article.tldr}
-                  </p>
-                </div>
-              )}
-
-              {/* Excerpt */}
-              <p
-                className="text-lg text-muted-foreground leading-relaxed mb-10 border-l-2 border-accent/40 pl-5"
-                data-speakable
-              >
-                {article.excerpt}
-              </p>
-
-              {/* HTML Content */}
-              <div
-                className="prose-content [&_h2]:font-display [&_h2]:text-display-sm [&_h2]:text-foreground [&_h2]:mb-4 [&_h2]:mt-10 [&_h3]:font-display [&_h3]:text-lg [&_h3]:text-foreground [&_h3]:mb-3 [&_h3]:mt-6 [&_p]:text-[15px] [&_p]:text-muted-foreground [&_p]:leading-[1.8] [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul_li]:text-[15px] [&_ul_li]:text-muted-foreground [&_ul_li]:mb-1.5 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol_li]:text-[15px] [&_ol_li]:text-muted-foreground [&_ol_li]:mb-1.5 [&_table]:w-full [&_table]:mb-6 [&_table]:text-sm [&_th]:text-left [&_th]:p-3 [&_th]:bg-muted [&_th]:text-foreground [&_th]:font-medium [&_td]:p-3 [&_td]:border-t [&_td]:border-border/60 [&_td]:text-muted-foreground [&_blockquote]:border-l-2 [&_blockquote]:border-accent/40 [&_blockquote]:pl-5 [&_blockquote]:italic [&_blockquote]:text-muted-foreground [&_strong]:text-foreground [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2"
-                dangerouslySetInnerHTML={{ __html: article.content }}
-              />
-
-              {/* FAQ */}
-              {article.faqItems.length > 0 && (
-                <section className="mt-16 pt-10 border-t border-border">
-                  <h2 className="font-display text-display-sm text-foreground mb-8">
-                    Perguntas Frequentes
-                  </h2>
-                  <div className="space-y-6">
-                    {article.faqItems.map((faq, i) => (
-                      <details
-                        key={i}
-                        className="group bg-card rounded-lg border border-border/60 overflow-hidden"
-                      >
-                        <summary className="flex items-center justify-between cursor-pointer px-5 py-4 text-sm font-medium text-foreground hover:text-accent transition-colors list-none [&::-webkit-details-marker]:hidden">
-                          {faq.question}
-                          <svg
-                            className="w-4 h-4 text-muted-foreground group-open:rotate-180 transition-transform flex-shrink-0 ml-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                            />
-                          </svg>
-                        </summary>
-                        <div className="px-5 pb-4">
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {faq.answer}
-                          </p>
-                        </div>
-                      </details>
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {/* CTA */}
-              <section className="mt-16 p-8 rounded-xl bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
-                <h2 className="font-display text-display-sm text-foreground mb-3">
-                  {article.ctaHeading ??
-                    "Quer Mais Pacientes Pelo Google?"}
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-lg">
-                  {article.ctaDescription ??
-                    "A LK Digital é especializada exclusivamente em marketing para dentistas. Fazemos diagnóstico gratuito da sua presença digital."}
-                </p>
-                <Link
-                  href="/contato"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
-                >
-                  {article.ctaButton ?? "Agendar Diagnóstico Gratuito"}
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                    />
-                  </svg>
-                </Link>
-              </section>
-            </article>
-
-            {/* Sidebar */}
-            <aside className="hidden lg:block">
-              <div className="sticky top-28">
-                <div className="p-4 rounded-lg bg-card border border-border/60">
-                  <p className="text-xs font-medium text-foreground mb-2">
-                    {article.ctaHeading &&
-                    article.ctaHeading.length <= 50
-                      ? article.ctaHeading
-                      : "Diagnóstico Gratuito"}
-                  </p>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed mb-3">
-                    {article.ctaDescription
-                      ? article.ctaDescription.substring(0, 120) +
-                        (article.ctaDescription.length > 120 ? "..." : "")
-                      : "Descubra o que está impedindo seu consultório de aparecer no Google."}
-                  </p>
-                  <Link
-                    href="/contato"
-                    className="block w-full text-center px-3 py-2 bg-accent hover:bg-accent-dark text-white text-xs font-medium rounded transition-colors"
-                  >
-                    {article.ctaButton ?? "Quero o Diagnóstico"}
-                  </Link>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </div>
-
-        {/* Related Posts — internal linking for SEO */}
-        {relatedPosts.length > 0 && (
-          <section className="border-t border-border">
-            <div className="max-w-narrow mx-auto px-4 sm:px-6 py-12 md:py-16">
-              <h2 className="font-display text-display-sm text-foreground mb-8">
-                Artigos Relacionados
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {relatedPosts.map((related) => {
-                  const relReadTime =
-                    typeof related.readingTime === "number"
-                      ? `${related.readingTime} min`
-                      : related.readingTime;
-                  return (
-                    <Link
-                      key={related.slug}
-                      href={`/blog/${related.slug}`}
-                      className="group block p-5 rounded-xl border border-border/60 bg-card hover:border-accent/40 transition-colors"
-                    >
-                      <span className="inline-block px-2 py-0.5 text-[10px] font-medium text-accent bg-accent/10 rounded uppercase tracking-wider mb-3">
-                        {related.category}
-                      </span>
-                      <h3 className="font-display text-base text-foreground group-hover:text-accent transition-colors leading-snug mb-2 line-clamp-2">
-                        {related.title}
-                      </h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mb-3">
-                        {related.excerpt}
-                      </p>
-                      <span className="text-xs text-muted-foreground">
-                        {relReadTime} de leitura
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-      </main>
-
+      <ArticleView post={post} relatedPosts={related} />
       <Footer />
     </>
   );
