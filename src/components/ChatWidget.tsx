@@ -9,6 +9,7 @@ const STORAGE_KEY = `lk_chat_session_${TENANT_ID}`;
 interface Message {
   content: string;
   role: "user" | "assistant";
+  imageDataUrl?: string;
 }
 
 export default function ChatWidget() {
@@ -21,6 +22,13 @@ export default function ChatWidget() {
   const [showTooltip, setShowTooltip] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [pendingImage, setPendingImage] = useState<{
+    base64: string;
+    mimeType: string;
+    dataUrl: string;
+    name: string;
+  } | null>(null);
 
   // Show bubble after delay
   useEffect(() => {
@@ -82,10 +90,12 @@ export default function ChatWidget() {
 
   const sendMessage = async () => {
     const text = input.trim();
-    if (!text || loading) return;
+    const image = pendingImage;
+    if ((!text && !image) || loading) return;
 
     setInput("");
-    setMessages((prev) => [...prev, { content: text, role: "user" }]);
+    setPendingImage(null);
+    setMessages((prev) => [...prev, { content: text, role: "user", imageDataUrl: image?.dataUrl }]);
     setLoading(true);
 
     try {
@@ -94,10 +104,16 @@ export default function ChatWidget() {
         sid = await createSession();
       }
 
+      const body: Record<string, string> = { sessionId: sid, text };
+      if (image) {
+        body.imageBase64 = image.base64;
+        body.imageMimeType = image.mimeType;
+      }
+
       const res = await fetch(`${API_BASE}/${TENANT_ID}/message`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId: sid, text }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -128,6 +144,24 @@ export default function ChatWidget() {
       e.preventDefault();
       sendMessage();
     }
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 8 * 1024 * 1024) {
+      alert("Imagem muito grande. Máximo 8MB.");
+      e.target.value = "";
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const dataUrl = ev.target?.result as string;
+      const base64 = dataUrl.split(",")[1];
+      setPendingImage({ base64, mimeType: file.type, dataUrl, name: file.name });
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
   };
 
   // Convert URLs to links
@@ -227,7 +261,10 @@ export default function ChatWidget() {
                       : "bg-muted text-foreground rounded-bl-sm"
                   }`}
                 >
-                  {formatText(msg.content)}
+                  {msg.imageDataUrl && (
+                    <img src={msg.imageDataUrl} alt="imagem enviada" className="w-40 rounded-lg mb-2 block" />
+                  )}
+                  {msg.content && formatText(msg.content)}
                 </div>
               </div>
             ))}
@@ -249,7 +286,38 @@ export default function ChatWidget() {
 
           {/* Input */}
           <div className="px-4 py-3 border-t border-border bg-card">
+            {/* Image preview */}
+            {pendingImage && (
+              <div className="flex items-center gap-2 mb-2 bg-muted rounded-xl px-3 py-2 text-xs text-muted-foreground">
+                <img src={pendingImage.dataUrl} alt="preview" className="w-8 h-8 object-cover rounded" />
+                <span className="flex-1 truncate">{pendingImage.name}</span>
+                <button
+                  onClick={() => setPendingImage(null)}
+                  className="text-muted-foreground hover:text-red-500 transition-colors font-bold text-base leading-none"
+                  aria-label="Remover imagem"
+                >
+                  ×
+                </button>
+              </div>
+            )}
             <div className="flex items-end gap-2">
+              {/* Image button */}
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="w-10 h-10 rounded-xl bg-muted hover:bg-muted/80 text-muted-foreground hover:text-accent flex items-center justify-center transition-colors flex-shrink-0"
+                aria-label="Enviar imagem"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                </svg>
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleFileSelect}
+              />
               <textarea
                 ref={inputRef}
                 value={input}
@@ -261,7 +329,7 @@ export default function ChatWidget() {
               />
               <button
                 onClick={sendMessage}
-                disabled={!input.trim() || loading}
+                disabled={(!input.trim() && !pendingImage) || loading}
                 className="w-10 h-10 rounded-xl bg-accent hover:bg-accent-dark text-white flex items-center justify-center transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
                 aria-label="Enviar mensagem"
               >
