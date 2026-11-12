@@ -149,8 +149,8 @@ export default function ChatWidget() {
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 8 * 1024 * 1024) {
-      alert("Imagem muito grande. Máximo 8MB.");
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Imagem muito grande. Máximo 5MB.");
       e.target.value = "";
       return;
     }
