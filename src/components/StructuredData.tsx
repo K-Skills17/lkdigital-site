@@ -14,6 +14,8 @@ export function OrganizationSchema() {
     serviceType: [
       "SEO para Dentistas",
       "Google Ads para Odontologia",
+      "Meta Ads (Instagram e Facebook) para Odontologia",
+      "TikTok Ads para Odontologia",
       "Marketing Digital para Clínicas Odontológicas",
       "Gestão de Google Meu Negócio",
       "GEO - Generative Engine Optimization",

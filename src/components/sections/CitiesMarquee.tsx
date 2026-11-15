@@ -64,16 +64,17 @@ export default function CitiesMarquee() {
       <Container>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <SectionLabel tone="dark" as="span">Atendemos · 15 capitais</SectionLabel>
+            <SectionLabel tone="dark" as="span">Atendemos todo o Brasil</SectionLabel>
             <h2
               id="cities-marquee-heading"
               className="mt-6 font-display text-4xl font-normal leading-[1.05] tracking-tight text-white md:text-6xl"
             >
-              Onde estamos hoje.
+              Mercados que acompanhamos de perto.
             </h2>
             <p className="mt-6 max-w-md text-lg font-light leading-relaxed text-white/70">
-              Sistema dental-only operando em quinze capitais brasileiras — dos
-              grandes centros aos polos regionais.
+              Atendemos consultórios odontológicos em qualquer cidade do Brasil.
+              Estas são as capitais que já analisamos em detalhe: concorrência,
+              buscas e especialidades em alta.
             </p>
             <Link
               href="/cidades"
