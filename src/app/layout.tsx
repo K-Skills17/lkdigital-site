@@ -5,6 +5,7 @@ import Script from "next/script";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import MobileContactBar from "@/components/MobileContactBar";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -83,6 +84,7 @@ export default function RootLayout({
         <div id="global-widgets">
           <ChatWidget />
           <WhatsAppButton />
+          <MobileContactBar />
         </div>
 
         {/* Google Tag Manager — afterInteractive keeps it non-blocking */}

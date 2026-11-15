@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { usePathname } from "next/navigation";
+import { OPEN_CHAT_EVENT, hasMobileBar } from "./mobileBar";
 
 const API_BASE = "https://lk-chatbot-production.up.railway.app/api/webchat";
 const TENANT_ID = "38610ffd-cb80-4938-8b3b-be6230991592";
@@ -29,6 +31,18 @@ export default function ChatWidget() {
     dataUrl: string;
     name: string;
   } | null>(null);
+
+  // Below md on marketing pages the bottom bar opens the chat instead of the bubble.
+  const barMode = hasMobileBar(usePathname());
+  useEffect(() => {
+    const openChat = () => {
+      setShowBubble(true);
+      setShowTooltip(false);
+      setOpen(true);
+    };
+    window.addEventListener(OPEN_CHAT_EVENT, openChat);
+    return () => window.removeEventListener(OPEN_CHAT_EVENT, openChat);
+  }, []);
 
   // Show bubble after delay
   useEffect(() => {
@@ -188,7 +202,7 @@ export default function ChatWidget() {
   if (!showBubble) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-3">
+    <div className={`fixed right-6 z-[9999] flex flex-col items-end gap-3 ${barMode ? "bottom-[5.5rem] md:bottom-6" : "bottom-6"}`}>
       {/* Chat Window */}
       {open && (
         <div className="w-[360px] max-w-[calc(100vw-1.5rem)] sm:max-w-[calc(100vw-2rem)] h-[480px] sm:h-[520px] max-h-[calc(100vh-7rem)] bg-card rounded-2xl shadow-2xl border border-border flex flex-col overflow-hidden animate-fade-up">
@@ -347,7 +361,7 @@ export default function ChatWidget() {
 
       {/* Tooltip */}
       {!open && showTooltip && (
-        <div className="bg-card text-foreground text-sm px-4 py-2.5 rounded-lg shadow-xl border border-border max-w-[220px] animate-fade-up relative">
+        <div className={`bg-card text-foreground text-sm px-4 py-2.5 rounded-lg shadow-xl border border-border max-w-[220px] animate-fade-up relative ${barMode ? "hidden md:block" : ""}`}>
           <p className="font-medium text-xs leading-relaxed">
             Tire suas dúvidas com nosso
             <span className="text-accent"> assistente IA</span>
@@ -363,7 +377,7 @@ export default function ChatWidget() {
           setShowTooltip(false);
         }}
         aria-label={open ? "Fechar chat" : "Abrir chat com assistente IA"}
-        className="group w-14 h-14 rounded-full bg-accent hover:bg-accent-dark text-white shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 hover:scale-105 flex items-center justify-center"
+        className={`${barMode ? "hidden md:flex" : "flex"} group w-14 h-14 rounded-full bg-accent hover:bg-accent-dark text-white shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 hover:scale-105 items-center justify-center`}
       >
         {open ? (
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">

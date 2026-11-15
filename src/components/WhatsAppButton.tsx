@@ -1,13 +1,18 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { WHATSAPP_HREF, hasMobileBar } from "./mobileBar";
+
 export default function WhatsAppButton() {
+  // Below md on marketing pages the bottom bar (MobileContactBar) replaces this bubble.
+  const display = hasMobileBar(usePathname()) ? "hidden md:flex" : "flex";
   return (
     <a
-      href="https://wa.me/5511946851028?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20LK%20Digital."
+      href={WHATSAPP_HREF}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Fale conosco pelo WhatsApp"
-      className="fixed bottom-[104px] right-6 z-[9998] flex items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-lg shadow-green-500/30 hover:shadow-green-500/40 transition-all duration-300 hover:scale-105"
+      className={`fixed bottom-[104px] right-6 z-[9998] ${display} items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-lg shadow-green-500/30 hover:shadow-green-500/40 transition-all duration-300 hover:scale-105`}
     >
       <svg
         className="w-7 h-7 text-white"
