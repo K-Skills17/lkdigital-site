@@ -1,5 +1,21 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Brand colours live in CSS variables (src/app/globals.css). A plain
+ * "var(--x)" gives Tailwind no channels, so opacity modifiers such as
+ * border-foreground/15 or bg-accent/10 silently generated no CSS. This
+ * returns color-mix() when an opacity is requested.
+ */
+const v = (name: string): string => {
+  const color = ({ opacityValue }: { opacityValue?: string }) =>
+    opacityValue === undefined || opacityValue === "1"
+      ? `var(${name})`
+      : `color-mix(in srgb, var(${name}) calc(${opacityValue} * 100%), transparent)`;
+  // Function colours are supported by Tailwind 3 at runtime, but its Config
+  // type only declares strings; this cast bridges that typing gap.
+  return color as unknown as string;
+};
+
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,21 +26,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: v("--background"),
+        foreground: v("--foreground"),
         accent: {
-          DEFAULT: "var(--accent)",
-          dark: "var(--accent-dark)",
-          light: "var(--accent-light)",
-          ink: "var(--accent-ink)",
+          DEFAULT: v("--accent"),
+          dark: v("--accent-dark"),
+          light: v("--accent-light"),
+          ink: v("--accent-ink"),
         },
-        muted: "var(--muted)",
-        "muted-foreground": "var(--muted-foreground)",
-        border: "var(--border)",
-        card: "var(--card)",
-        "card-foreground": "var(--card-foreground)",
-        "hero-bg": "var(--hero-bg)",
-        "trust-bg": "var(--trust-bg)",
+        muted: v("--muted"),
+        "muted-foreground": v("--muted-foreground"),
+        border: v("--border"),
+        card: v("--card"),
+        "card-foreground": v("--card-foreground"),
+        "hero-bg": v("--hero-bg"),
+        "trust-bg": v("--trust-bg"),
         // Free tools palette (src/tools/simulador-convenios)
         brand: {
           gold: "#C4A265",
