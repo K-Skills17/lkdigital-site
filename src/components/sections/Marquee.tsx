@@ -1,3 +1,10 @@
+import { Container } from "@/components/home/primitives";
+
+/**
+ * Service index on the brand black. Was a continuously scrolling marquee;
+ * now static so every item is readable and nothing moves without purpose.
+ * (Component name kept so imports elsewhere keep working.)
+ */
 export default function Marquee() {
   const tags = [
     "Google Ads",
@@ -16,22 +23,22 @@ export default function Marquee() {
     "Remarketing",
   ];
 
-  // Duplicate for seamless loop
-  const allTags = [...tags, ...tags];
-
   return (
-    <section className="py-6 bg-[#060810] border-y border-white/5 overflow-hidden">
-      <div className="marquee-track" aria-label="Serviços oferecidos">
-        {allTags.map((tag, i) => (
-          <span
-            key={i}
-            className="flex-shrink-0 px-6 py-2 text-sm text-white/40 font-medium whitespace-nowrap"
-          >
-            {tag}
-            <span className="ml-6 text-accent/30">·</span>
-          </span>
-        ))}
-      </div>
+    <section className="bg-hero-bg py-10" aria-label="Serviços oferecidos">
+      <Container>
+        <ul className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/70">
+          {tags.map((tag, i) => (
+            <li key={tag} className="flex items-center gap-6">
+              {tag}
+              {i < tags.length - 1 && (
+                <span aria-hidden="true" className="text-accent">
+                  /
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Container>
     </section>
   );
 }

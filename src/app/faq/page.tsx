@@ -37,7 +37,7 @@ export default function FAQPage() {
         { question: "Vocês respeitam as regras do CFO para publicidade odontológica?", answer: "Toda a nossa estratégia é desenvolvida em conformidade com as resoluções do Conselho Federal de Odontologia." },
       ]} />
       <Navbar />
-      <main>
+      <main id="main-content">
         <PageHero
           variant="minimal"
           eyebrow="FAQ"

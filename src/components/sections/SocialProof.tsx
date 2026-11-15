@@ -1,3 +1,5 @@
+import { Container } from "@/components/home/primitives";
+
 export default function SocialProof() {
   const proofs = [
     {
@@ -18,36 +20,33 @@ export default function SocialProof() {
   ];
 
   return (
-    <section className="relative py-16 bg-trust-bg border-y border-border/60">
-      <div className="max-w-content mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="border-b border-border bg-trust-bg py-16 md:py-20">
+      <Container>
+        <ul className="grid md:grid-cols-3">
           {proofs.map((proof, i) => (
-            <div
+            <li
               key={i}
-              className="social-proof-card flex flex-col gap-3"
+              className={`social-proof-card flex flex-col justify-between gap-6 border-t border-foreground/15 py-8 md:border-t-0 md:py-0 ${
+                i > 0 ? "md:border-l md:pl-8" : ""
+              } ${i < 2 ? "md:pr-8" : ""} ${i === 0 ? "border-t-0 pt-0" : ""}`}
             >
-              <p className="text-sm text-foreground/80 italic leading-relaxed">
+              <blockquote className="font-display text-xl italic leading-snug text-foreground md:text-2xl">
                 &ldquo;{proof.quote}&rdquo;
+              </blockquote>
+              <p className="text-xs text-muted-foreground">
+                <span className="font-medium text-foreground/80">{proof.role}</span>
+                <span className="mx-2 text-accent-ink" aria-hidden="true">·</span>
+                {proof.detail}
               </p>
-              <div>
-                <p className="text-xs text-muted-foreground font-medium">
-                  — {proof.role}
-                </p>
-                <p className="text-[10px] text-muted-foreground/60 mt-0.5">
-                  {proof.detail}
-                </p>
-              </div>
-            </div>
+            </li>
           ))}
-        </div>
-        <div className="mt-8 flex items-center justify-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-          <p className="text-xs text-muted-foreground font-medium">
-            Vagas limitadas por cidade — aceitamos apenas 1 consultório por
-            especialidade por região
-          </p>
-        </div>
-      </div>
+        </ul>
+
+        <p className="mt-12 border-t border-foreground/15 pt-6 text-xs font-medium text-muted-foreground">
+          Vagas limitadas por cidade — aceitamos apenas 1 consultório por
+          especialidade por região
+        </p>
+      </Container>
     </section>
   );
 }

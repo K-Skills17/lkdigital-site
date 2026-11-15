@@ -1,93 +1,64 @@
-import Link from "next/link";
 import dynamic from "next/dynamic";
+import { ButtonLink, Container, SectionLabel } from "@/components/home/primitives";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
+
+const stats = [
+  { value: "24h", label: "Ativos para você" },
+  { value: "100%", label: "Foco em odontologia" },
+  { value: "Zero", label: "Gestão da sua parte" },
+];
 
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen flex items-center overflow-hidden bg-hero-bg"
+      className="relative flex min-h-[92svh] items-end overflow-hidden bg-hero-bg"
       aria-label="Seção principal"
     >
-      {/* WebGL Canvas — lazy loaded, no SSR */}
+      {/* WebGL canvas — lazy loaded, no SSR. Solid brand black until it paints. */}
       <div id="hero-canvas-container" className="absolute inset-0 z-0" aria-hidden="true">
-        <div className="w-full h-full bg-gradient-to-br from-[#0f0f0f] via-[#1a1510] to-[#0f0f0f]" />
         <HeroCanvas />
       </div>
 
-      {/* Grain overlay */}
-      <div className="absolute inset-0 grain-overlay z-[1]" />
+      {/* Content — visible without JS for fast LCP; CSS-only entrance */}
+      <Container className="relative z-10 pb-14 pt-32 md:pb-20 md:pt-40">
+        <div className="animate-hero-fade-in">
+          <SectionLabel tone="dark">Marketing Digital para Dentistas</SectionLabel>
+        </div>
 
-      {/* Content — visible immediately for fast LCP, CSS animations for entrance */}
-      <div className="relative z-10 max-w-narrow mx-auto px-4 sm:px-6 pt-24 pb-16 md:pt-36 md:pb-28 text-center">
-        {/* Eyebrow */}
-        <p
-          className="hero-eyebrow inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 text-accent text-[11px] sm:text-xs font-medium tracking-[0.25em] uppercase mb-5 md:mb-6 animate-hero-fade-in"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-          Marketing Digital para Dentistas
-        </p>
-
-        {/* H1 — LCP element, must be visible without JS */}
-        <h1
-          className="hero-title font-display text-[clamp(1.75rem,5vw,4.5rem)] leading-[1.1] text-white text-balance max-w-4xl mx-auto mb-4 md:mb-6 animate-hero-fade-in [animation-delay:150ms]"
-        >
+        <h1 className="mt-8 max-w-5xl font-display text-[clamp(2.5rem,1.3rem+5vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.01em] text-white text-balance animate-hero-fade-in [animation-delay:150ms]">
           Pacientes de Alto Valor Encontram Você Primeiro.{" "}
-          <span className="text-accent">Sem Você Gerenciar Nada.</span>
+          <span className="italic text-accent">Sem Você Gerenciar Nada.</span>
         </h1>
 
-        {/* Subheadline */}
-        <p
-          className="hero-sub text-base md:text-xl text-white/60 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed animate-hero-fade-in [animation-delay:300ms]"
-        >
-          Posicionamos seu consultório como a primeira opção na sua região
-          — enquanto você foca no que faz de melhor: cuidar de sorrisos.
-        </p>
+        <div className="mt-10 grid gap-10 border-t border-white/15 pt-10 md:mt-14 lg:grid-cols-12 lg:gap-8">
+          <p className="text-lg leading-relaxed text-white/70 lg:col-span-5 animate-hero-fade-in [animation-delay:300ms]">
+            Posicionamos seu consultório como a primeira opção na sua região
+            — enquanto você foca no que faz de melhor: cuidar de sorrisos.
+          </p>
 
-        {/* CTAs */}
-        <div className="hero-ctas flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 md:mb-16 animate-hero-fade-in [animation-delay:450ms]">
-          <Link
-            href="/contato"
-            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25 text-center"
-          >
-            Agendar Diagnóstico Gratuito
-          </Link>
-          <Link
-            href="/solucoes"
-            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-accent/40 text-accent hover:bg-accent hover:text-white font-medium rounded-md transition-all duration-200 text-center"
-          >
-            Ver Soluções
-          </Link>
+          <div className="flex flex-col items-stretch gap-3 sm:flex-row lg:col-span-4 lg:col-start-6 lg:flex-col lg:items-start animate-hero-fade-in [animation-delay:450ms]">
+            <ButtonLink href="/contato" tone="dark">
+              Agendar Diagnóstico Gratuito
+            </ButtonLink>
+            <ButtonLink href="/solucoes" variant="secondary" tone="dark">
+              Ver Soluções
+            </ButtonLink>
+          </div>
+
+          <dl className="grid grid-cols-3 lg:col-span-3 lg:grid-cols-1 lg:gap-4 animate-hero-fade-in [animation-delay:600ms]">
+            {stats.map((s, i) => (
+              <div
+                key={s.label}
+                className={`flex flex-col gap-1 lg:flex-row lg:items-baseline lg:gap-4 ${i > 0 ? "border-l border-white/15 pl-4 lg:border-l-0 lg:pl-0" : ""}`}
+              >
+                <dt className="order-2 text-xs text-white/60">{s.label}</dt>
+                <dd className="order-1 font-display text-2xl text-white lining-nums md:text-3xl lg:w-20">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-
-        {/* Stats */}
-        <div className="hero-stats grid grid-cols-3 gap-3 sm:gap-6 max-w-sm sm:max-w-lg mx-auto animate-hero-fade-in [animation-delay:600ms]">
-          <div className="text-center">
-            <p className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-white">
-              24h
-            </p>
-            <p className="text-[10px] sm:text-xs text-white/40 mt-1">Ativos para você</p>
-          </div>
-          <div className="text-center border-x border-white/10">
-            <p className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-white">
-              100%
-            </p>
-            <p className="text-[10px] sm:text-xs text-white/40 mt-1">Foco em odontologia</p>
-          </div>
-          <div className="text-center">
-            <p className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-white">
-              Zero
-            </p>
-            <p className="text-[10px] sm:text-xs text-white/40 mt-1">Gestão da sua parte</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 text-white/30">
-        <span className="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
-        <div className="w-[1px] h-8 bg-gradient-to-b from-white/30 to-transparent" />
-      </div>
+      </Container>
     </section>
   );
 }

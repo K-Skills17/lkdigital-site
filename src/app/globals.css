@@ -31,6 +31,10 @@
   --accent: #c5a368;
   --accent-dark: #a8894f;
   --accent-light: #d4b87a;
+  /* Derived (2026-11 refine): brand gold darkened in hue for text on light
+     surfaces. #c5a368 is 2.3:1 on #fafafa; this is 5.1-5.6:1 on every light
+     surface. Use the brand gold for fills, rules and text on dark only. */
+  --accent-ink: #7a6540;
 
   /* Surfaces */
   --background: #fafafa;
@@ -134,21 +138,6 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
-/* ── Marquee ── */
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 40s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-.cities-marquee-track:hover {
-  animation-play-state: paused;
-}
-
 /* ── FAQ Accordion ── */
 .faq-content {
   display: grid;
@@ -171,14 +160,6 @@ h1, h2, h3, h4, h5, h6 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .marquee-track {
-    animation: none;
-  }
-
-  .cities-marquee-track {
-    animation: none;
   }
 }
 

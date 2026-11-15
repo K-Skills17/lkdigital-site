@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Container, SectionLabel } from "@/components/home/primitives";
 
 const faqs = [
   {
@@ -48,64 +49,58 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-muted" id="faq">
-      <div className="max-w-narrow mx-auto px-4 sm:px-6">
-        <div className="text-center mb-14">
-          <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
-            Suas dúvidas, respondidas
-          </p>
-          <h2 className="font-display text-display-md text-foreground text-balance">
-            Perguntas Frequentes
-          </h2>
-        </div>
+    <section className="border-t border-border bg-muted py-section" id="faq">
+      <Container>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-4">
+            <SectionLabel>Suas dúvidas, respondidas</SectionLabel>
+            <h2 className="mt-6 font-display text-display-lg text-foreground text-balance">Perguntas Frequentes</h2>
+          </div>
 
-        <div className="max-w-3xl mx-auto space-y-3" role="list">
-          {faqs.map((faq, i) => (
-            <div
-              key={i}
-              className="bg-card rounded-lg border border-border/60 overflow-hidden"
-              role="listitem"
-            >
-              <button
-                onClick={() => toggle(i)}
-                className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left group"
-                aria-expanded={openIndex === i}
-                aria-controls={`faq-answer-${i}`}
-              >
-                <span className="font-display text-base font-medium text-foreground group-hover:text-accent transition-colors">
-                  {faq.question}
-                </span>
-                <svg
-                  className={`w-5 h-5 flex-shrink-0 text-muted-foreground transition-transform duration-300 ${
-                    openIndex === i ? "rotate-45" : ""
-                  }`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
+          <ul className="border-t border-foreground/80 lg:col-span-8">
+            {faqs.map((faq, i) => (
+              <li key={i} className="border-b border-foreground/15">
+                <h3>
+                  <button
+                    onClick={() => toggle(i)}
+                    className="group flex w-full items-start justify-between gap-6 py-6 text-left"
+                    aria-expanded={openIndex === i}
+                    aria-controls={`faq-answer-${i}`}
+                    id={`faq-question-${i}`}
+                  >
+                    <span className="font-display text-xl font-medium text-foreground transition-colors group-hover:text-accent-ink md:text-2xl">
+                      {faq.question}
+                    </span>
+                    <svg
+                      aria-hidden="true"
+                      className={`mt-1.5 h-5 w-5 flex-shrink-0 text-accent-ink transition-transform duration-300 ${
+                        openIndex === i ? "rotate-45" : ""
+                      }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                  </button>
+                </h3>
+                <div
+                  id={`faq-answer-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${i}`}
+                  className="faq-content"
+                  data-open={openIndex === i}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
-                  />
-                </svg>
-              </button>
-              <div
-                id={`faq-answer-${i}`}
-                className="faq-content"
-                data-open={openIndex === i}
-              >
-                <div>
-                  <p className="px-5 md:px-6 pb-5 md:pb-6 text-sm text-muted-foreground leading-relaxed">
-                    {faq.answer}
-                  </p>
+                  <div>
+                    <p className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">{faq.answer}</p>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

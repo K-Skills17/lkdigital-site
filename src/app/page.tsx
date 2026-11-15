@@ -57,7 +57,7 @@ export default function Home() {
       <FAQSchema faqs={homeFaqs} />
       <Navbar />
       <ScrollAnimations />
-      <main>
+      <main id="main-content">
         <Hero />
         <SocialProof />
         <Problem />

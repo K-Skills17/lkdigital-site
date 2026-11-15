@@ -16,6 +16,7 @@ const config: Config = {
           DEFAULT: "var(--accent)",
           dark: "var(--accent-dark)",
           light: "var(--accent-light)",
+          ink: "var(--accent-ink)",
         },
         muted: "var(--muted)",
         "muted-foreground": "var(--muted-foreground)",
@@ -45,26 +46,21 @@ const config: Config = {
         "display-md": ["clamp(1.5rem, 3vw, 2.5rem)", { lineHeight: "1.2", letterSpacing: "-0.01em" }],
         "display-sm": ["clamp(1.25rem, 2vw, 1.75rem)", { lineHeight: "1.3", letterSpacing: "-0.01em" }],
       },
+      spacing: {
+        gutter: "clamp(1.25rem, 0.5rem + 3vw, 3.5rem)",
+        section: "clamp(5rem, 3rem + 6vw, 9rem)",
+      },
       maxWidth: {
+        "page": "80rem",
         "content": "72rem",
         "narrow": "56rem",
         "prose": "42rem",
       },
       animation: {
-        "marquee": "marquee 40s linear infinite",
-        "marquee-scroll": "marquee-scroll 60s linear infinite",
         "fade-up": "fadeUp 0.6s ease-out forwards",
         "fade-in": "fadeIn 0.6s ease-out forwards",
       },
       keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        "marquee-scroll": {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
         fadeUp: {
           "0%": { opacity: "0", transform: "translateY(24px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },

@@ -1,10 +1,10 @@
 // src/components/sections/CitiesMarquee.tsx
 //
-// Homepage section: horizontal marquee of all 15 cities LK Digital serves.
-// Tier 1 (easiest to rank) cards are largest; Tier 3 (hardest) are most compact.
-// Order in the array is left-to-right flow order before the marquee animates.
+// Homepage section: index of all 15 cities LK Digital serves.
+// `tier` is kept as SEO planning data (1 = easiest to rank); it is not displayed.
 
 import Link from "next/link";
+import { Container, SectionLabel } from "@/components/home/primitives";
 
 type CityTier = 1 | 2 | 3;
 
@@ -36,107 +36,64 @@ const CITIES: CityEntry[] = [
   { slug: "sao-paulo", name: "São Paulo", state: "SP", tier: 3 },
 ];
 
-const TIER_STYLES: Record<CityTier, { card: string; name: string }> = {
-  1: { card: "min-w-[280px] py-10 px-8", name: "text-3xl" },
-  2: { card: "min-w-[220px] py-8 px-7", name: "text-2xl" },
-  3: { card: "min-w-[180px] py-7 px-6", name: "text-xl" },
-};
-
-function CityCard({ city }: { city: CityEntry }) {
-  const t = TIER_STYLES[city.tier];
+function CityLink({ city }: { city: CityEntry }) {
   return (
     <Link
       href={`/cidades/${city.slug}`}
-      className={`group flex-shrink-0 ${t.card} border border-[#2a241c] hover:border-[#c5a368] bg-[#161310] hover:bg-[#1c1814] rounded-sm transition-all duration-300 flex flex-col justify-between`}
+      className="group flex min-h-16 items-baseline justify-between gap-4 border-b border-white/15 py-5"
     >
-      <div className="flex items-center justify-between mb-6">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#c5a368]/80">
-          {city.state}
-        </span>
-        {city.tier === 1 && (
-          <span
-            className="h-1.5 w-1.5 rounded-full bg-[#c5a368]"
-            aria-hidden="true"
-          />
-        )}
-      </div>
-      <div
-        className={`font-serif font-normal text-white group-hover:text-[#c5a368] transition-colors leading-tight ${t.name}`}
-      >
+      <span className="font-display text-2xl text-white transition-colors group-hover:text-accent md:text-3xl">
         {city.name}
-      </div>
-      <div className="mt-4 text-[11px] font-light text-[#d8d2c4]/60 flex items-center gap-2 group-hover:text-[#c5a368] transition-colors">
-        <span>ver cidade</span>
-        <span
-          className="opacity-0 group-hover:opacity-100 transition-opacity"
-          aria-hidden="true"
-        >
-          →
-        </span>
-      </div>
+      </span>
+      <span className="flex items-baseline gap-3 text-[11px] uppercase tracking-[0.2em] text-white/60">
+        <span className="text-accent">{city.state}</span>
+        <span className="hidden transition-colors group-hover:text-accent sm:inline">ver cidade →</span>
+      </span>
     </Link>
   );
 }
 
+/**
+ * Static index of the cities served. Was a continuously scrolling marquee
+ * (moving links, each rendered twice); now every city is one readable link.
+ * Component name kept so the homepage import stays the same.
+ */
 export default function CitiesMarquee() {
-  // Duplicate the array so the loop seam is invisible
-  const doubled = [...CITIES, ...CITIES];
-
   return (
-    <section
-      className="bg-[#0f0f0f] py-24 md:py-32 overflow-hidden border-t border-[#2a241c]/40"
-      aria-labelledby="cities-marquee-heading"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 mb-16">
-        <div className="flex items-center gap-3 mb-6">
-          <span className="h-px w-12 bg-[#c5a368]" aria-hidden="true" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#c5a368] font-medium">
-            Atendemos · 15 capitais
-          </span>
+    <section className="bg-hero-bg py-section" aria-labelledby="cities-marquee-heading">
+      <Container>
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-4">
+            <SectionLabel tone="dark" as="span">Atendemos · 15 capitais</SectionLabel>
+            <h2
+              id="cities-marquee-heading"
+              className="mt-6 font-display text-4xl font-normal leading-[1.05] tracking-tight text-white md:text-6xl"
+            >
+              Onde estamos hoje.
+            </h2>
+            <p className="mt-6 max-w-md text-lg font-light leading-relaxed text-white/70">
+              Sistema dental-only operando em quinze capitais brasileiras — dos
+              grandes centros aos polos regionais.
+            </p>
+            <Link
+              href="/cidades"
+              className="mt-10 inline-flex min-h-11 items-center gap-3 text-[11px] font-medium uppercase tracking-[0.22em] text-accent transition-colors hover:text-accent-light"
+            >
+              <span className="h-px w-8 bg-accent" aria-hidden="true" />
+              <span>Ver todas as cidades</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <ul className="border-t border-white/15 sm:grid sm:grid-cols-2 sm:gap-x-10 lg:col-span-8">
+            {CITIES.map((city) => (
+              <li key={city.slug}>
+                <CityLink city={city} />
+              </li>
+            ))}
+          </ul>
         </div>
-        <h2
-          id="cities-marquee-heading"
-          className="font-serif font-normal text-4xl md:text-6xl text-white leading-[1.05] tracking-tight max-w-3xl"
-        >
-          Onde estamos hoje.
-        </h2>
-        <p className="mt-6 text-[#d8d2c4]/75 max-w-2xl text-lg font-light leading-relaxed">
-          Sistema dental-only operando em quinze capitais brasileiras — dos
-          grandes centros aos polos regionais.
-        </p>
-      </div>
-
-      <div className="relative cities-marquee">
-        <div
-          className="cities-marquee-track flex gap-4 items-stretch animate-marquee-scroll"
-          style={{ width: "max-content" }}
-        >
-          {doubled.map((city, i) => (
-            <CityCard key={`${city.slug}-${i}`} city={city} />
-          ))}
-        </div>
-
-        {/* Edge fades */}
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-32 bg-gradient-to-r from-[#0f0f0f] to-transparent"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-32 bg-gradient-to-l from-[#0f0f0f] to-transparent"
-          aria-hidden="true"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 mt-12 text-center">
-        <Link
-          href="/cidades"
-          className="inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[#c5a368] hover:text-[#d4b87a] transition-colors"
-        >
-          <span className="h-px w-8 bg-[#c5a368]" aria-hidden="true" />
-          <span>Ver todas as cidades</span>
-          <span aria-hidden="true">→</span>
-        </Link>
-      </div>
+      </Container>
     </section>
   );
 }
