@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
+import { buttonClass } from "@/components/ui/primitives";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -120,7 +121,7 @@ export default function Sobre() {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="p-6 bg-card rounded-xl border border-border/60"
+                  className="p-6 bg-card border border-border/60"
                 >
                   <h3 className="font-display text-lg font-medium text-foreground mb-2">
                     {item.title}
@@ -139,7 +140,7 @@ export default function Sobre() {
           <div className="max-w-narrow mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="relative w-full max-w-sm mx-auto md:mx-0">
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-border/60">
+                <div className="relative aspect-[3/4] overflow-hidden border-2 border-border/60">
                   <Image
                     src="/images/team/stephen-komando-founder.jpg"
                     alt="Stephen Komando — Fundador da LK Digital"
@@ -148,12 +149,12 @@ export default function Sobre() {
                     sizes="(max-width: 768px) 100vw, 384px"
                   />
                 </div>
-                <div className="absolute -bottom-4 -right-4 bg-accent text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg">
+                <div className="absolute -bottom-4 -right-4 bg-accent text-[#1a1a1a] px-4 py-2 text-sm font-medium">
                   Fundador & CEO
                 </div>
               </div>
               <div>
-                <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
+                <p className="text-xs font-medium text-accent-ink uppercase tracking-[0.25em] mb-3">
                   Quem Está Por Trás
                 </p>
                 <h2 className="font-display text-display-sm text-foreground mb-6">
@@ -186,7 +187,7 @@ export default function Sobre() {
                     <p className="font-display text-lg font-medium text-foreground">
                       Stephen Komando
                     </p>
-                    <p className="text-sm text-accent">
+                    <p className="text-sm text-accent-ink">
                       CEO & Diretor Comercial — LK Digital
                     </p>
                   </div>
@@ -200,7 +201,7 @@ export default function Sobre() {
         <section className="py-20 md:py-28">
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div className="text-center mb-14">
-              <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
+              <p className="text-xs font-medium text-accent-ink uppercase tracking-[0.25em] mb-3">
                 Equipe
               </p>
               <h2 className="font-display text-display-md text-foreground">
@@ -243,7 +244,7 @@ export default function Sobre() {
                   key={i}
                   className="group text-center"
                 >
-                  <div className="relative w-48 h-48 mx-auto mb-5 rounded-2xl overflow-hidden border-2 border-border/60 group-hover:border-accent/40 transition-colors duration-300">
+                  <div className="relative w-48 h-48 mx-auto mb-5 overflow-hidden border-2 border-border/60 group-hover:border-accent/40 transition-colors duration-300">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -255,7 +256,7 @@ export default function Sobre() {
                   <h3 className="font-display text-lg font-medium text-foreground">
                     {member.name}
                   </h3>
-                  <p className="text-xs font-medium text-accent uppercase tracking-wider mt-1 mb-2">
+                  <p className="text-xs font-medium text-accent-ink uppercase tracking-wider mt-1 mb-2">
                     {member.role}
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
@@ -280,7 +281,7 @@ export default function Sobre() {
             </p>
             <Link
               href="/contato"
-              className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
+              className={buttonClass()}
             >
               Agendar Diagnóstico Gratuito
             </Link>

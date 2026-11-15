@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import { BreadcrumbSchema } from "@/components/StructuredData";
 import { cities } from "@/data/cities";
+import { buttonClass } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
   title: { absolute: "Dentistas por Cidade | LK Digital" },
@@ -22,10 +23,12 @@ export const metadata: Metadata = {
   },
 };
 
+// The level is written out ("Competição alta"); colour would only repeat it,
+// and the old red/yellow/green failed contrast on white.
 const competitionBadge = {
-  alta: "bg-red-500/10 text-red-400",
-  média: "bg-yellow-500/10 text-yellow-400",
-  baixa: "bg-green-500/10 text-green-400",
+  alta: "border border-foreground/30 text-foreground",
+  média: "border border-foreground/30 text-foreground",
+  baixa: "border border-foreground/30 text-foreground",
 };
 
 export default function Cidades() {
@@ -55,7 +58,7 @@ export default function Cidades() {
             <div className="max-w-content mx-auto px-4 sm:px-6">
               <div className="flex items-center gap-3 mb-8">
                 <span className="w-6 h-px bg-accent" />
-                <h2 className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
+                <h2 className="text-xs font-medium text-accent-ink uppercase tracking-[0.25em]">
                   {region}
                 </h2>
                 <span className="w-6 h-px bg-accent" />
@@ -68,10 +71,10 @@ export default function Cidades() {
                     <Link
                       key={city.slug}
                       href={`/cidades/${city.slug}`}
-                      className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 flex flex-col"
+                      className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all duration-300 flex flex-col"
                     >
                       <div className="flex items-center justify-between mb-3">
-                        <h3 className="font-display text-xl font-medium text-foreground group-hover:text-accent transition-colors">
+                        <h3 className="font-display text-xl font-medium text-foreground group-hover:text-accent-ink transition-colors">
                           {city.name}
                         </h3>
                         <span className="text-sm text-muted-foreground">{city.stateAbbr}</span>
@@ -79,7 +82,7 @@ export default function Cidades() {
 
                       <div className="flex items-center gap-2 mb-4">
                         <span
-                          className={`px-2 py-0.5 text-[10px] font-medium rounded ${competitionBadge[city.competitionLevel]}`}
+                          className={`px-2 py-0.5 text-[10px] font-medium ${competitionBadge[city.competitionLevel]}`}
                         >
                           Competição {city.competitionLevel}
                         </span>
@@ -94,7 +97,7 @@ export default function Cidades() {
 
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <span className="text-[10px]">{city.estimatedDentists} dentistas</span>
-                        <span className="ml-auto inline-flex items-center gap-1 text-xs font-medium text-accent group-hover:gap-2 transition-all">
+                        <span className="ml-auto inline-flex items-center gap-1 text-xs font-medium text-accent-ink group-hover:gap-2 transition-all">
                           Ver detalhes
                           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -120,7 +123,7 @@ export default function Cidades() {
             </p>
             <Link
               href="/contato"
-              className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
+              className={buttonClass()}
             >
               Consultar Minha Cidade
             </Link>
