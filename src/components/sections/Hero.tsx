@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { ButtonLink, Container, SectionLabel } from "@/components/home/primitives";
+import { ButtonLink, Container, SectionLabel } from "@/components/ui/primitives";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
 

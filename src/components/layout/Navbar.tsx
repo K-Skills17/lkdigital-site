@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { buttonClass } from "@/components/ui/primitives";
 import Logo from "@/components/ui/Logo";
 
 
@@ -30,6 +31,7 @@ export default function Navbar({
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const scrolledRef = useRef(false);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     let ticking = false;
@@ -52,16 +54,23 @@ export default function Navbar({
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!mobileOpen) return () => { document.body.style.overflow = ""; };
+    firstLinkRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
   }, [mobileOpen]);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#0f0f0f]/95 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/10"
-            : "bg-[#0f0f0f]/80 backdrop-blur-md"
+        className={`fixed left-0 right-0 top-0 z-50 border-b bg-hero-bg transition-colors duration-300 ${
+          scrolled ? "border-white/15" : "border-transparent"
         }`}
       >
         <nav className="max-w-content mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-20">
@@ -84,7 +93,7 @@ export default function Navbar({
           <div className="hidden md:flex items-center gap-3">
             <Link
               href={ctaHref}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-lg hover:shadow-accent/20"
+              className={buttonClass("primary", "dark", undefined, "compact")}
             >
               {ctaLabel}
             </Link>
@@ -96,6 +105,7 @@ export default function Navbar({
               className="relative w-11 h-11 flex flex-col items-center justify-center gap-1.5"
               aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={mobileOpen}
+              aria-controls="menu-mobile"
             >
               <span
                 className={`w-5 h-[1.5px] bg-white transition-all duration-300 ${
@@ -112,49 +122,34 @@ export default function Navbar({
         </nav>
       </header>
 
-      {/* Mobile Menu — CSS animations only, no Framer Motion */}
+      {/* Mobile menu: ruled list on the brand black. Escape closes it; focus moves in on open. */}
       <div
-        className={`fixed inset-0 z-40 bg-[#0f0f0f] flex flex-col items-center justify-center gap-8 transition-all duration-300 ${
-          mobileOpen
-            ? "opacity-100 visible"
-            : "opacity-0 invisible pointer-events-none"
+        id="menu-mobile"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        className={`fixed inset-0 z-40 flex flex-col bg-hero-bg px-6 pb-10 pt-24 transition-opacity duration-200 ${
+          mobileOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"
         }`}
       >
-        {navLinks.map((link, i) => (
-          <div
-            key={link.href}
-            className={`transition-all duration-300 ${
-              mobileOpen
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4"
-            }`}
-            style={{ transitionDelay: mobileOpen ? `${i * 50 + 100}ms` : "0ms" }}
-          >
-            <Link
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="text-2xl font-display text-white/80 hover:text-white transition-colors"
-            >
-              {link.label}
-            </Link>
-          </div>
-        ))}
-        <div
-          className={`transition-all duration-300 ${
-            mobileOpen
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-4"
-          }`}
-          style={{ transitionDelay: mobileOpen ? "400ms" : "0ms" }}
-        >
-          <Link
-            href={ctaHref}
-            onClick={() => setMobileOpen(false)}
-            className="mt-4 inline-flex px-8 py-3 bg-accent text-white rounded-md font-medium"
-          >
-            {ctaLabel}
-          </Link>
-        </div>
+        <ul className="border-t border-white/15">
+          {navLinks.map((link, i) => (
+            <li key={link.href} className="border-b border-white/15">
+              <Link
+                ref={i === 0 ? firstLinkRef : undefined}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="flex min-h-14 items-center justify-between font-display text-2xl text-white"
+              >
+                {link.label}
+                <span aria-hidden="true" className="font-body text-sm text-accent">→</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link href={ctaHref} onClick={() => setMobileOpen(false)} className={buttonClass("primary", "dark", "mt-8 w-full")}>
+          {ctaLabel}
+        </Link>
       </div>
     </>
   );

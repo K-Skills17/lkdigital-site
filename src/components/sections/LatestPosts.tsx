@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getAllListItems } from "@/lib/blog";
-import { Container, SectionLabel, arrow } from "@/components/home/primitives";
+import { Container, SectionLabel, arrow } from "@/components/ui/primitives";
 
 export default async function LatestPosts() {
   const posts = (await getAllListItems()).slice(0, 3);

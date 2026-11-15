@@ -4,7 +4,7 @@
 // `tier` is kept as SEO planning data (1 = easiest to rank); it is not displayed.
 
 import Link from "next/link";
-import { Container, SectionLabel } from "@/components/home/primitives";
+import { Container, SectionLabel } from "@/components/ui/primitives";
 
 type CityTier = 1 | 2 | 3;
 

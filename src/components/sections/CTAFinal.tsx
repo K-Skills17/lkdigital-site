@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { trackEvent } from "@/lib/events";
 import { submitLead } from "@/tools/shared/backbone-client";
-import { Container, SectionLabel, buttonClass } from "@/components/home/primitives";
+import { Container, SectionLabel, buttonClass } from "@/components/ui/primitives";
 
 export default function CTAFinal() {
   const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");

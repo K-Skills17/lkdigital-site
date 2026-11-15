@@ -1,4 +1,4 @@
-// Shared building blocks for the homepage refine (docs/redesign/HOMEPAGE.md).
+// Shared building blocks of the editorial refine (docs/redesign/), used site-wide.
 // One button implementation, one section label, one page container.
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -7,14 +7,15 @@ const cx = (...c: Array<string | false | undefined>) => c.filter(Boolean).join("
 
 export type ButtonVariant = "primary" | "secondary";
 export type Tone = "light" | "dark";
+export type Size = "default" | "compact";
 
 /**
  * Gold fill with near-black label (7.3:1). The previous white-on-gold label
  * was 2.4:1. Square edges; no lift, glow or scale on hover.
  */
-export function buttonClass(variant: ButtonVariant = "primary", tone: Tone = "light", extra?: string) {
-  const base =
-    "inline-flex min-h-12 items-center justify-center gap-3 px-7 text-center sm:whitespace-nowrap text-sm font-medium tracking-[0.04em] transition-colors duration-200";
+export function buttonClass(variant: ButtonVariant = "primary", tone: Tone = "light", extra?: string, size: Size = "default") {
+  const sizes: Record<Size, string> = { default: "min-h-12 px-7", compact: "min-h-11 px-5" };
+  const base = `inline-flex ${sizes[size]} items-center justify-center gap-3 text-center sm:whitespace-nowrap text-sm font-medium tracking-[0.04em] transition-colors duration-200`;
   const variants: Record<ButtonVariant, Record<Tone, string>> = {
     primary: {
       light: "bg-accent text-[#1a1a1a] hover:bg-accent-dark",

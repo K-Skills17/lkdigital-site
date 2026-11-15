@@ -1,4 +1,4 @@
-import { Container, SpecGrid } from "@/components/home/primitives";
+import { Container, SpecGrid } from "@/components/ui/primitives";
 
 export default function Manifesto() {
   const trilogy = [

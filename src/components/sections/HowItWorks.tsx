@@ -1,4 +1,4 @@
-import { ButtonLink, Container, SectionLabel, arrow } from "@/components/home/primitives";
+import { ButtonLink, Container, SectionLabel, arrow } from "@/components/ui/primitives";
 
 export default function HowItWorks() {
   const steps = [

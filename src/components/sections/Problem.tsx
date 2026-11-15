@@ -1,4 +1,4 @@
-import { Container, SectionLabel, SpecGrid } from "@/components/home/primitives";
+import { Container, SectionLabel, SpecGrid } from "@/components/ui/primitives";
 
 export default function Problem() {
   const painPoints = [

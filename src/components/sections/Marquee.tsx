@@ -1,4 +1,4 @@
-import { Container } from "@/components/home/primitives";
+import { Container } from "@/components/ui/primitives";
 
 /**
  * Service index on the brand black. Was a continuously scrolling marquee;

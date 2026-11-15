@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Container, SectionLabel } from "@/components/home/primitives";
+import { Container, SectionLabel } from "@/components/ui/primitives";
 
 const faqs = [
   {
