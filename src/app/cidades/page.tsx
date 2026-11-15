@@ -10,13 +10,13 @@ import { buttonClass } from "@/components/ui/primitives";
 export const metadata: Metadata = {
   title: { absolute: "Dentistas por Cidade | LK Digital" },
   description:
-    "Captação de pacientes qualificados para dentistas nas principais cidades do Brasil. São Paulo, Rio, Curitiba, Salvador e mais.",
+    "Captação de pacientes qualificados para dentistas em todo o Brasil, com análises detalhadas de São Paulo, Rio, Curitiba, Salvador e outras capitais.",
   alternates: {
     canonical: "/cidades",
   },
   openGraph: {
     title: "Marketing para Dentistas por Cidade | LK Digital",
-    description: "Captação de pacientes qualificados para dentistas nas principais cidades do Brasil. Exclusividade territorial.",
+    description: "Captação de pacientes qualificados para dentistas em todo o Brasil. Exclusividade territorial.",
     url: "https://lkdigital.odo.br/cidades",
     type: "website",
     images: [{ url: "https://lkdigital.odo.br/og-default.jpg", width: 1200, height: 630 }],
@@ -49,7 +49,7 @@ export default function Cidades() {
           eyebrow="Cidades"
           title="Marketing para Dentistas na"
           titleAccent="Sua Cidade."
-          subtitle="Atuamos nas principais metrópoles do Brasil com exclusividade territorial. Encontre sua cidade e verifique se a sua especialidade ainda está disponível na sua região."
+          subtitle="Atendemos consultórios em todo o Brasil, com exclusividade territorial. Abaixo, as capitais que já analisamos em detalhe; se a sua cidade não está na lista, atendemos do mesmo jeito."
           pageNumber="15"
         />
 
