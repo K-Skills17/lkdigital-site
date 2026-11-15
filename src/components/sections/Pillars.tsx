@@ -7,7 +7,7 @@ export default function Pillars() {
       title: "Visibilidade de Precisão",
       subtitle: "Apareça onde seus pacientes procuram",
       description:
-        "Google, Google Maps, Instagram, ChatGPT — seu consultório aparece como a primeira opção quando alguém na sua região busca por um dentista. Não é achismo: é posicionamento estratégico baseado em dados.",
+        "Google, Google Maps, Instagram, Facebook, TikTok, ChatGPT — seu consultório aparece como a primeira opção quando alguém na sua região busca por um dentista. Não é achismo: é posicionamento estratégico baseado em dados.",
       benefits: [
         "Primeira página do Google para buscas da sua especialidade",
         "Perfil otimizado no Google Maps com avaliações reais",

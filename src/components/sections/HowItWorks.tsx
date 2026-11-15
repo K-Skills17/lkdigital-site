@@ -12,7 +12,7 @@ export default function HowItWorks() {
       number: "02",
       title: "Implementação Sob Medida",
       description:
-        "Montamos e ativamos toda a estratégia: Google, Maps, redes sociais, conteúdo, campanhas pagas. Tudo personalizado para a sua especialidade e cidade. Você não precisa fazer nada.",
+        "Montamos e ativamos toda a estratégia: Google, Maps, Meta (Instagram e Facebook), TikTok, conteúdo, campanhas pagas. Tudo personalizado para a sua especialidade e cidade. Você não precisa fazer nada.",
     },
     {
       number: "03",

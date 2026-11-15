@@ -22,14 +22,14 @@ import { OrganizationSchema, WebSiteSchema, FAQSchema } from "@/components/Struc
 export const metadata: Metadata = {
   title: "Agência de Marketing para Dentistas | LK Digital",
   description:
-    "Especialistas em marketing odontológico. Enchemos a agenda de dentistas e clínicas com pacientes qualificados via Google, Instagram e IA. Exclusividade por região.",
+    "Especialistas em marketing odontológico. Enchemos a agenda de dentistas e clínicas com pacientes qualificados via Google, Meta (Instagram e Facebook), TikTok e IA. Exclusividade por região.",
   alternates: {
     canonical: "https://lkdigital.odo.br",
   },
   openGraph: {
     title: "LK Digital — Marketing que Enche a Agenda do Dentista",
     description:
-      "Especialistas em marketing odontológico. Enchemos a agenda de dentistas e clínicas com pacientes qualificados via Google, Instagram e IA. Exclusividade por região.",
+      "Especialistas em marketing odontológico. Enchemos a agenda de dentistas e clínicas com pacientes qualificados via Google, Meta (Instagram e Facebook), TikTok e IA. Exclusividade por região.",
     url: "https://lkdigital.odo.br",
     siteName: "LK Digital",
     locale: "pt_BR",

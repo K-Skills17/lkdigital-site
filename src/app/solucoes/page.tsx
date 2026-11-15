@@ -9,7 +9,7 @@ import { buttonClass } from "@/components/ui/primitives";
 export const metadata: Metadata = {
   title: "Soluções — O Que Fazemos Pelo Consultório",
   description:
-    "Visibilidade no Google e Maps, gestão completa de marketing, exclusividade territorial. Conheça os três pilares que enchem a agenda de dentistas.",
+    "Visibilidade no Google e Maps, anúncios no Google, Meta (Instagram e Facebook) e TikTok, gestão completa de marketing e exclusividade territorial para dentistas.",
   alternates: {
     canonical: "/solucoes",
   },
@@ -53,6 +53,11 @@ const services = [
         title: "Meta Ads (Instagram & Facebook)",
         desc: "Anúncios segmentados para o público da sua região. Criativos que respeitam as regras do CFO e convertem curiosos em pacientes agendados.",
         result: "Fluxo previsível de novos pacientes via redes sociais",
+      },
+      {
+        title: "TikTok Ads",
+        desc: "Vídeos curtos e anúncios para quem descobre tratamentos pelo TikTok — estética dental, alinhadores, clareamento. Criativos dentro das regras do CFO e segmentados para a sua região.",
+        result: "Presença onde o público mais jovem da sua região descobre tratamentos",
       },
       {
         title: "Landing Pages de Conversão",
@@ -111,7 +116,7 @@ export default function Solucoes() {
               <h2 className="font-display text-display-sm text-foreground mb-10">
                 {category.category}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className={`grid grid-cols-1 gap-8 ${category.items.length === 4 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
                 {category.items.map((service, si) => (
                   <div
                     key={si}

@@ -12,6 +12,8 @@ export default function Marquee() {
     "Google Maps",
     "Instagram Ads",
     "Meta Ads",
+    "Facebook Ads",
+    "TikTok Ads",
     "GEO & AEO",
     "Conteúdo",
     "Landing Pages",

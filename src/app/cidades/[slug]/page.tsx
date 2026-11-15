@@ -24,7 +24,7 @@ export async function generateMetadata({
     title: {
       absolute: `Marketing para Dentistas em ${city.name} ${city.stateAbbr}`,
     },
-    description: `Marketing digital para dentistas em ${city.name}. Sites, Google Ads e SEO para lotar sua agenda. Resultados em 90 dias.`,
+    description: `Marketing digital para dentistas em ${city.name}. Sites, Google Ads, Meta Ads, TikTok Ads e SEO para lotar sua agenda. Resultados em 90 dias.`,
     alternates: {
       canonical: `/cidades/${city.slug}`,
     },
@@ -79,7 +79,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       <CityServiceSchema
         cityName={city.name}
         stateAbbr={city.stateAbbr}
-        description={`Marketing digital especializado para dentistas em ${city.name}, ${city.stateAbbr}. Captação de pacientes qualificados com SEO local, Google Ads e presença em IA.`}
+        description={`Marketing digital especializado para dentistas em ${city.name}, ${city.stateAbbr}. Captação de pacientes qualificados com SEO local, Google Ads, Meta Ads, TikTok Ads e presença em IA.`}
       />
       <FAQSchema faqs={cityFaqs} />
 
@@ -273,7 +273,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
                 {
                   number: "02",
                   title: "Implementação Sob Medida",
-                  desc: `Ativamos a estratégia completa para ${city.name}: SEO local por bairro, Google Maps, campanhas de Google Ads segmentadas para ${city.stateAbbr} e conteúdo focado em ${city.topSpecialties[0].toLowerCase()}. Você não precisa fazer nada.`,
+                  desc: `Ativamos a estratégia completa para ${city.name}: SEO local por bairro, Google Maps, campanhas de Google Ads, Meta Ads e TikTok Ads segmentadas para ${city.stateAbbr} e conteúdo focado em ${city.topSpecialties[0].toLowerCase()}. Você não precisa fazer nada.`,
                 },
                 {
                   number: "03",
