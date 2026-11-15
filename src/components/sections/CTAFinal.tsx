@@ -2,15 +2,18 @@
 
 import { useState } from "react";
 import { trackEvent } from "@/lib/events";
+import { submitLead } from "@/tools/shared/backbone-client";
 import { Container, SectionLabel, buttonClass } from "@/components/home/primitives";
 
 export default function CTAFinal() {
-  const [formState, setFormState] = useState<"idle" | "loading" | "success">("idle");
+  const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",
     clinic: "",
     email: "",
     challenge: "",
+    consent: false,
+    website: "", // honeypot, hidden from people
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,15 +25,20 @@ export default function CTAFinal() {
       challenge: formData.challenge,
     });
 
-    // Simulate submission — replace with real endpoint
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // Stored in tool_leads and alerted to the team on Telegram via the backbone
+    // (src/lib/backbone/tools/diagnostico-gratuito.ts). The visitor only sees
+    // "received" when the server returns a stored lead id.
+    const result = (await submitLead("diagnostico-gratuito", formData)) as { success?: boolean; leadId?: string | null };
 
-    trackEvent("generate_lead", {
-      form: "diagnostico_gratuito",
-      challenge: formData.challenge,
-    });
-
-    setFormState("success");
+    if (result?.success && result.leadId) {
+      trackEvent("generate_lead", {
+        form: "diagnostico_gratuito",
+        challenge: formData.challenge,
+      });
+      setFormState("success");
+    } else {
+      setFormState("error");
+    }
   };
 
   const inputClass = "w-full rounded-[2px] border border-foreground/25 bg-white px-4 py-3 text-base text-foreground outline-none transition-colors focus:border-foreground focus:ring-1 focus:ring-foreground";
@@ -102,7 +110,7 @@ export default function CTAFinal() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="relative space-y-6">
                 <div>
                   <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
                     Seu nome
@@ -167,6 +175,43 @@ export default function CTAFinal() {
                     <option value="gestao">Não tenho tempo para cuidar do marketing</option>
                   </select>
                 </div>
+                {/* Honeypot: hidden from people and assistive tech; bots fill it in. */}
+                <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+                  <label htmlFor="website">Site</label>
+                  <input
+                    type="text"
+                    id="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                  />
+                </div>
+                <label htmlFor="consent" className="flex items-start gap-3 text-sm text-foreground">
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    required
+                    checked={formData.consent}
+                    onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                    className="mt-1 h-4 w-4 shrink-0 accent-[#7a6540]"
+                  />
+                  <span>Concordo em receber este material e contatos da LK Digital pelo WhatsApp e e-mail. Posso cancelar a qualquer momento.</span>
+                </label>
+                {formState === "error" && (
+                  <p role="alert" className="border-l-2 border-[#9a3412] pl-4 text-sm text-foreground">
+                    Não conseguimos registrar seu pedido agora. Tente de novo em instantes ou fale direto pelo{" "}
+                    <a
+                      href="https://wa.me/5511946851028?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20diagn%C3%B3stico%20gratuito%20para%20meu%20consult%C3%B3rio."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline"
+                    >
+                      WhatsApp
+                    </a>
+                    .
+                  </p>
+                )}
                 <button
                   type="submit"
                   disabled={formState === "loading"}

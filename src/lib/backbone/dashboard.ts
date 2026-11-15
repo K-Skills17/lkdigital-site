@@ -16,6 +16,8 @@ export const SOURCE_LABELS: Record<string, string> = {
   "simulador-convenios": "Simulador de Convênios",
   "calculadora-precificacao": "Calculadora de Precificação",
   "calculadora-agenda": "Calculadora de Agenda",
+  // Site forms
+  "diagnostico-gratuito": "Diagnóstico Gratuito (site)",
   // Retired funnels (rows kept in tool_leads)
   "diagnostico-google": "Diagnóstico Google (antigo)",
   "diagnostico-clinica": "Diagnóstico de Clínica (antigo)",
