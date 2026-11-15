@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
+import { buttonClass } from "@/components/ui/primitives";
 import {
   BreadcrumbSchema,
   BlogCollectionSchema,
@@ -82,10 +83,10 @@ export default async function Blog({
         <section className="py-8 md:py-12">
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div
-              className="answer-box p-6 rounded-lg bg-accent/5 border border-accent/20"
+              className="answer-box p-6 bg-accent/5 border border-accent/20"
               data-speakable
             >
-              <p className="text-xs font-medium text-accent uppercase tracking-wider mb-2">
+              <p className="text-xs font-medium text-accent-ink uppercase tracking-wider mb-2">
                 Sobre este blog
               </p>
               <p className="text-sm text-foreground leading-relaxed">
@@ -108,23 +109,23 @@ export default async function Blog({
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 overflow-hidden flex flex-col"
+                  className="group bg-card border border-border/60 hover:border-accent/30 transition-all duration-300 overflow-hidden flex flex-col"
                 >
-                  <div className="aspect-[16/9] bg-gradient-to-br from-accent/5 to-accent/10 flex items-center justify-center">
+                  <div className="aspect-[16/9] flex items-center justify-center bg-muted">
                     <span className="text-xs text-accent/40 uppercase tracking-[0.25em] font-medium">
                       {post.category}
                     </span>
                   </div>
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="px-2 py-0.5 text-[10px] font-medium text-accent bg-accent/10 rounded">
+                      <span className="px-2 py-0.5 text-[10px] font-medium text-accent-ink bg-accent/10">
                         {post.category}
                       </span>
                       <span className="text-xs text-muted-foreground">
                         {post.readTime} de leitura
                       </span>
                     </div>
-                    <h2 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-3 line-clamp-2">
+                    <h2 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-3 line-clamp-2">
                       {post.title}
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed flex-1">
@@ -134,7 +135,7 @@ export default async function Blog({
                       <span className="text-xs text-muted-foreground">
                         {formatDate(post.datePublished)}
                       </span>
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-accent group-hover:gap-2 transition-all">
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-accent-ink group-hover:gap-2 transition-all">
                         Ler artigo
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -148,11 +149,11 @@ export default async function Blog({
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <nav aria-label="Paginação do blog" className="mt-16 flex items-center justify-center gap-2">
+              <nav aria-label="Paginação do blog" className="mt-16 flex flex-wrap items-center justify-center gap-2">
                 {currentPage > 1 && (
                   <Link
                     href={currentPage === 2 ? "/blog" : `/blog?page=${currentPage - 1}`}
-                    className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-border/60 rounded-md hover:border-accent/40 hover:text-accent transition-colors"
+                    className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-border/60 hover:border-accent/40 hover:text-accent-ink transition-colors"
                   >
                     ← Anterior
                   </Link>
@@ -161,10 +162,10 @@ export default async function Blog({
                   <Link
                     key={page}
                     href={page === 1 ? "/blog" : `/blog?page=${page}`}
-                    className={`px-4 py-2 text-sm font-medium rounded-md border transition-colors ${
+                    className={`px-4 py-2 text-sm font-medium border transition-colors ${
                       page === currentPage
-                        ? "bg-accent text-white border-accent"
-                        : "text-muted-foreground bg-card border-border/60 hover:border-accent/40 hover:text-accent"
+                        ? "bg-accent text-[#1a1a1a] border-accent"
+                        : "text-muted-foreground bg-card border-border/60 hover:border-accent/40 hover:text-accent-ink"
                     }`}
                   >
                     {page}
@@ -173,7 +174,7 @@ export default async function Blog({
                 {currentPage < totalPages && (
                   <Link
                     href={`/blog?page=${currentPage + 1}`}
-                    className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-border/60 rounded-md hover:border-accent/40 hover:text-accent transition-colors"
+                    className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-border/60 hover:border-accent/40 hover:text-accent-ink transition-colors"
                   >
                     Próxima →
                   </Link>
@@ -187,16 +188,16 @@ export default async function Blog({
         <section className="py-16 md:py-20 border-t border-border">
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Link href="/solucoes" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Soluções</h3>
+              <Link href="/solucoes" className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-2">Soluções</h3>
                 <p className="text-sm text-muted-foreground">Conheça os serviços que executam as estratégias dos nossos artigos.</p>
               </Link>
-              <Link href="/ferramentas" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Ferramentas Gratuitas</h3>
+              <Link href="/ferramentas" className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-2">Ferramentas Gratuitas</h3>
                 <p className="text-sm text-muted-foreground">Diagnostique seu consultório com nossas calculadoras e auditorias.</p>
               </Link>
-              <Link href="/segmentos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Especialidades</h3>
+              <Link href="/segmentos" className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-2">Especialidades</h3>
                 <p className="text-sm text-muted-foreground">Marketing sob medida para sua especialidade odontológica.</p>
               </Link>
             </div>
@@ -215,7 +216,7 @@ export default async function Blog({
             </p>
             <Link
               href="/contato"
-              className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
+              className={buttonClass()}
             >
               Quero Receber os Artigos
             </Link>

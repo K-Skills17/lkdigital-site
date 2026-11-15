@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
 import { ServiceSchema, BreadcrumbSchema } from "@/components/StructuredData";
+import { buttonClass } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
   title: "Soluções — O Que Fazemos Pelo Consultório",
@@ -114,16 +115,16 @@ export default function Solucoes() {
                 {category.items.map((service, si) => (
                   <div
                     key={si}
-                    className="group p-6 md:p-8 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 flex flex-col"
+                    className="group p-6 md:p-8 bg-card border border-border/60 hover:border-accent/30 transition-all duration-300 flex flex-col"
                   >
-                    <h3 className="font-display text-lg font-medium text-foreground mb-3 group-hover:text-accent transition-colors">
+                    <h3 className="font-display text-lg font-medium text-foreground mb-3 group-hover:text-accent-ink transition-colors">
                       {service.title}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
                       {service.desc}
                     </p>
                     <div className="pt-4 border-t border-border/60">
-                      <p className="text-sm font-medium text-accent flex items-center gap-2">
+                      <p className="text-sm font-medium text-accent-ink flex items-center gap-2">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>
@@ -143,17 +144,13 @@ export default function Solucoes() {
             <h2 className="font-display text-display-sm text-foreground mb-8">
               Explore Mais
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Link href="/segmentos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Especialidades</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Link href="/segmentos" className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-2">Especialidades</h3>
                 <p className="text-sm text-muted-foreground">Estratégias sob medida para implantodontia, ortodontia, estética e mais.</p>
               </Link>
-              <Link href="/casos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Casos de Sucesso</h3>
-                <p className="text-sm text-muted-foreground">Veja os resultados reais que entregamos para dentistas como você.</p>
-              </Link>
-              <Link href="/blog" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Blog</h3>
+              <Link href="/blog" className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-2">Blog</h3>
                 <p className="text-sm text-muted-foreground">Artigos práticos sobre marketing digital para consultórios odontológicos.</p>
               </Link>
             </div>
@@ -172,7 +169,7 @@ export default function Solucoes() {
             </p>
             <Link
               href="/contato"
-              className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
+              className={buttonClass()}
             >
               Solicitar Diagnóstico Gratuito
             </Link>

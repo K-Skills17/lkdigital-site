@@ -1,5 +1,21 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Brand colours live in CSS variables (src/app/globals.css). A plain
+ * "var(--x)" gives Tailwind no channels, so opacity modifiers such as
+ * border-foreground/15 or bg-accent/10 silently generated no CSS. This
+ * returns color-mix() when an opacity is requested.
+ */
+const v = (name: string): string => {
+  const color = ({ opacityValue }: { opacityValue?: string }) =>
+    opacityValue === undefined || opacityValue === "1"
+      ? `var(${name})`
+      : `color-mix(in srgb, var(${name}) calc(${opacityValue} * 100%), transparent)`;
+  // Function colours are supported by Tailwind 3 at runtime, but its Config
+  // type only declares strings; this cast bridges that typing gap.
+  return color as unknown as string;
+};
+
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,20 +26,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: v("--background"),
+        foreground: v("--foreground"),
         accent: {
-          DEFAULT: "var(--accent)",
-          dark: "var(--accent-dark)",
-          light: "var(--accent-light)",
+          DEFAULT: v("--accent"),
+          dark: v("--accent-dark"),
+          light: v("--accent-light"),
+          ink: v("--accent-ink"),
         },
-        muted: "var(--muted)",
-        "muted-foreground": "var(--muted-foreground)",
-        border: "var(--border)",
-        card: "var(--card)",
-        "card-foreground": "var(--card-foreground)",
-        "hero-bg": "var(--hero-bg)",
-        "trust-bg": "var(--trust-bg)",
+        muted: v("--muted"),
+        "muted-foreground": v("--muted-foreground"),
+        border: v("--border"),
+        card: v("--card"),
+        "card-foreground": v("--card-foreground"),
+        "hero-bg": v("--hero-bg"),
+        "trust-bg": v("--trust-bg"),
         // Free tools palette (src/tools/simulador-convenios)
         brand: {
           gold: "#C4A265",
@@ -45,26 +62,21 @@ const config: Config = {
         "display-md": ["clamp(1.5rem, 3vw, 2.5rem)", { lineHeight: "1.2", letterSpacing: "-0.01em" }],
         "display-sm": ["clamp(1.25rem, 2vw, 1.75rem)", { lineHeight: "1.3", letterSpacing: "-0.01em" }],
       },
+      spacing: {
+        gutter: "clamp(1.25rem, 0.5rem + 3vw, 3.5rem)",
+        section: "clamp(5rem, 3rem + 6vw, 9rem)",
+      },
       maxWidth: {
+        "page": "80rem",
         "content": "72rem",
         "narrow": "56rem",
         "prose": "42rem",
       },
       animation: {
-        "marquee": "marquee 40s linear infinite",
-        "marquee-scroll": "marquee-scroll 60s linear infinite",
         "fade-up": "fadeUp 0.6s ease-out forwards",
         "fade-in": "fadeIn 0.6s ease-out forwards",
       },
       keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        "marquee-scroll": {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
         fadeUp: {
           "0%": { opacity: "0", transform: "translateY(24px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },

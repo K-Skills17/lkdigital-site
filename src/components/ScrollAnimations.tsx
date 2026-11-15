@@ -45,9 +45,10 @@ export default function ScrollAnimations() {
           gsap.ticker.lagSmoothing(0);
         }
 
-        // Batch all scroll-triggered animations with a single observer approach
+        // A few deliberate reveals only (docs/redesign/HOMEPAGE.md): the
+        // pillar rows, the three steps and the form. Text elsewhere is static.
         const revealElements = document.querySelectorAll(
-          ".social-proof-card, .problem-card, .pillar-card, .how-step, .cta-form"
+          ".pillar-card, .how-step, .cta-form"
         );
 
         revealElements.forEach((el) => {
@@ -67,84 +68,6 @@ export default function ScrollAnimations() {
             }
           );
         });
-
-        // Pillar asymmetric (only on desktop)
-        if (!isMobile) {
-          document.querySelectorAll(".pillar-card").forEach((card, i) => {
-            const xStart = i === 0 ? -30 : i === 2 ? 30 : 0;
-            gsap.fromTo(
-              card,
-              { x: xStart },
-              {
-                x: 0,
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 80%",
-                  toggleActions: "play none none none",
-                },
-              }
-            );
-          });
-        }
-
-        // Manifesto
-        const manifestoQuote = document.querySelector(".manifesto-quote");
-        if (manifestoQuote) {
-          gsap.fromTo(
-            manifestoQuote,
-            { opacity: 0, scale: 0.8 },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.6,
-              ease: "back.out(1.4)",
-              scrollTrigger: {
-                trigger: manifestoQuote,
-                start: "top 75%",
-                toggleActions: "play none none none",
-              },
-            }
-          );
-        }
-
-        const manifestoText = document.querySelector(".manifesto-text");
-        if (manifestoText) {
-          gsap.fromTo(
-            manifestoText,
-            { opacity: 0 },
-            {
-              opacity: 1,
-              duration: 0.7,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: manifestoText,
-                start: "top 75%",
-                toggleActions: "play none none none",
-              },
-            }
-          );
-        }
-
-        const manifestoTrilogy = document.querySelector(".manifesto-trilogy");
-        if (manifestoTrilogy) {
-          gsap.fromTo(
-            manifestoTrilogy,
-            { opacity: 0, y: 16 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: manifestoTrilogy,
-                start: "top 80%",
-                toggleActions: "play none none none",
-              },
-            }
-          );
-        }
 
         // Hero canvas fade — only on desktop (no scrub overhead on mobile)
         if (!isMobile) {

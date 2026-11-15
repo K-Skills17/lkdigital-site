@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import { BreadcrumbSchema, FAQSchema, CityServiceSchema } from "@/components/StructuredData";
 import { cities, getCityBySlug } from "@/data/cities";
 import { TrackedCTAButton, TrackedNearbyCityLink } from "@/components/TrackedCityButton";
+import { Container, SectionLabel, SpecGrid, arrow, buttonClass } from "@/components/ui/primitives";
 
 export async function generateStaticParams() {
   return cities.map((city) => ({ slug: city.slug }));
@@ -42,12 +43,6 @@ export default function CityPage({ params }: { params: { slug: string } }) {
   const nearbyCity = city.nearbyCity
     ? cities.find((c) => c.slug === city.nearbyCity)
     : null;
-
-  const competitionColors = {
-    alta: "bg-red-500/10 text-red-400 border-red-500/20",
-    média: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
-    baixa: "bg-green-500/10 text-green-400 border-green-500/20",
-  };
 
   const cityFaqs = [
     {
@@ -89,232 +84,186 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       <FAQSchema faqs={cityFaqs} />
 
       <Navbar />
-      <main>
+      <main id="main-content">
         {/* Hero */}
-        <section className="relative bg-hero-bg pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0f0f0f] via-[#1a1510] to-[#0f0f0f]" />
-          <div className="absolute inset-0 grain-overlay z-[1]" />
-          <div className="relative z-10 max-w-narrow mx-auto px-4 sm:px-6 text-center">
-            {/* Breadcrumb */}
-            <nav className="flex items-center justify-center gap-2 text-xs text-white/40 mb-6">
-              <Link href="/" className="hover:text-accent transition-colors">Início</Link>
-              <span>/</span>
-              <Link href="/cidades" className="hover:text-accent transition-colors">Cidades</Link>
-              <span>/</span>
-              <span className="text-white/60">{city.name}</span>
+        <section className="bg-hero-bg pb-16 pt-28 md:pb-24 md:pt-40">
+          <Container>
+            <nav aria-label="Trilha" className="mb-10 flex items-center gap-2 text-xs text-white/60">
+              <Link href="/" className="hover:text-accent">Início</Link>
+              <span aria-hidden="true">/</span>
+              <Link href="/cidades" className="hover:text-accent">Cidades</Link>
+              <span aria-hidden="true">/</span>
+              <span className="text-white/80">{city.name}</span>
             </nav>
 
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <span
-                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-medium uppercase tracking-wider ${competitionColors[city.competitionLevel]}`}
-              >
-                Competição {city.competitionLevel}
-              </span>
-              <span className="px-3 py-1 rounded-full border border-white/10 text-[10px] font-medium text-white/50 uppercase tracking-wider">
-                {city.region}
-              </span>
-            </div>
-
-            <h1 className="font-display text-[clamp(1.5rem,4vw,3.5rem)] leading-[1.1] text-white text-balance max-w-4xl mx-auto mb-4 md:mb-6">
-              Marketing Digital para Dentistas em{" "}
-              <span className="text-accent">{city.name}, {city.stateAbbr}</span>
-            </h1>
-
-            <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto mb-8 leading-relaxed">
-              Captação de pacientes qualificados para consultórios odontológicos em {city.name}.
-              Exclusividade territorial — apenas 1 consultório por especialidade na sua região.
+            <p className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium uppercase tracking-[0.25em] text-accent">
+              <span aria-hidden="true" className="h-px w-8 bg-accent" />
+              <span>Competição {city.competitionLevel}</span>
+              <span aria-hidden="true" className="text-white/40">·</span>
+              <span className="text-white/70">{city.region}</span>
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-              <TrackedCTAButton
-                href="/contato"
-                label={`Verificar Disponibilidade em ${city.name}`}
-                cityName={city.name}
-                className="w-full sm:w-auto px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25 text-center"
-              />
-            </div>
+            <h1 className="mt-8 max-w-5xl font-display text-[clamp(2.25rem,1.3rem+4.2vw,5rem)] leading-[1.04] text-white text-balance">
+              Marketing Digital para Dentistas em{" "}
+              <span className="italic text-accent">{city.name}, {city.stateAbbr}</span>
+            </h1>
 
-            {/* City Stats */}
-            <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
-              <div className="text-center">
-                <p className="font-display text-xl sm:text-2xl font-semibold text-white">{city.population}</p>
-                <p className="text-[10px] sm:text-xs text-white/40 mt-1">Habitantes (região metropolitana)</p>
+            <div className="mt-12 grid gap-10 border-t border-white/15 pt-10 lg:grid-cols-12 lg:gap-8">
+              <div className="lg:col-span-6">
+                <p className="text-lg leading-relaxed text-white/70">
+                  Captação de pacientes qualificados para consultórios odontológicos em {city.name}.
+                  Exclusividade territorial — apenas 1 consultório por especialidade na sua região.
+                </p>
+                <TrackedCTAButton
+                  href="/contato"
+                  label={`Verificar Disponibilidade em ${city.name}`}
+                  cityName={city.name}
+                  className={buttonClass("primary", "dark", "mt-8 w-full sm:w-auto")}
+                />
               </div>
-              <div className="text-center border-x border-white/10">
-                <p className="font-display text-xl sm:text-2xl font-semibold text-white">{city.estimatedDentists}</p>
-                <p className="text-[10px] sm:text-xs text-white/40 mt-1">Dentistas ({city.croCode})</p>
-              </div>
-              <div className="text-center">
-                <p className="font-display text-xl sm:text-2xl font-semibold text-accent">1</p>
-                <p className="text-[10px] sm:text-xs text-white/40 mt-1">Vaga por especialidade</p>
-              </div>
+              <dl className="grid grid-cols-3 lg:col-span-5 lg:col-start-8 lg:grid-cols-1 lg:gap-5">
+                {[
+                  { value: city.population, label: "Habitantes (região metropolitana)" },
+                  { value: city.estimatedDentists, label: `Dentistas (${city.croCode})` },
+                  { value: "1", label: "Vaga por especialidade" },
+                ].map((stat, i) => (
+                  <div
+                    key={stat.label}
+                    className={`flex flex-col gap-1 lg:flex-row lg:items-baseline lg:gap-5 ${i > 0 ? "border-l border-white/15 pl-4 lg:border-l-0 lg:pl-0" : ""}`}
+                  >
+                    <dd className="font-display text-2xl text-white lining-nums md:text-3xl lg:w-32">{stat.value}</dd>
+                    <dt className="text-xs text-white/60">{stat.label}</dt>
+                  </div>
+                ))}
+              </dl>
             </div>
-          </div>
+          </Container>
         </section>
 
         {/* Market Insight */}
-        <section className="py-20 md:py-28">
-          <div className="max-w-prose mx-auto px-4 sm:px-6">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-6 h-px bg-accent" />
-              <p className="text-xs font-medium text-accent uppercase tracking-[0.25em]">
-                Mercado Odontológico
-              </p>
-              <span className="w-6 h-px bg-accent" />
-            </div>
-            <h2 className="font-display text-display-sm text-foreground mb-6">
-              O Cenário em {city.name}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed text-base mb-10">
-              {city.marketInsight}
-            </p>
-
-            {/* Highlights */}
-            <div className="space-y-4">
-              {city.highlights.map((highlight, i) => (
-                <div key={i} className="flex items-start gap-3 p-4 bg-muted rounded-lg border-l-2 border-accent/30">
-                  <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                  <p className="text-sm text-card-foreground">{highlight}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <section className="py-section">
+          <Container>
+            <SpecGrid label={<SectionLabel>Mercado Odontológico</SectionLabel>}>
+              <h2 className="font-display text-display-lg text-foreground">O Cenário em {city.name}</h2>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">{city.marketInsight}</p>
+              <ul className="mt-10 max-w-3xl border-t border-foreground/80">
+                {city.highlights.map((highlight, i) => (
+                  <li key={i} className="flex gap-5 border-b border-foreground/15 py-4 text-base text-foreground">
+                    <span aria-hidden="true" className="mt-[0.7rem] h-px w-4 shrink-0 bg-accent-ink" />
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+            </SpecGrid>
+          </Container>
         </section>
 
         {/* Local Context — UNIQUE per city */}
-        <section className="py-16 md:py-24 bg-muted">
-          <div className="max-w-prose mx-auto px-4 sm:px-6">
-            <h2 className="font-display text-display-sm text-foreground mb-6">
-              Bairros e Regiões de {city.name}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed text-base mb-8">
-              {city.localContext}
-            </p>
+        <section className="border-t border-border bg-muted py-section">
+          <Container>
+            <SpecGrid label={<SectionLabel>Regiões</SectionLabel>}>
+              <h2 className="font-display text-display-lg text-foreground">Bairros e Regiões de {city.name}</h2>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">{city.localContext}</p>
 
-            {/* Neighborhood tags */}
-            <div className="mb-8">
-              <p className="text-xs text-muted-foreground uppercase tracking-[0.25em] mb-3">
+              <p className="mt-10 text-xs uppercase tracking-[0.25em] text-muted-foreground">
                 Regiões que atendemos em {city.name}:
               </p>
-              <div className="flex flex-wrap gap-2">
-                {city.neighborhoods.map((n) => (
-                  <span
-                    key={n}
-                    className="px-3 py-1.5 text-sm bg-card rounded-lg border border-border/60 text-foreground"
-                  >
+              <p className="mt-4 max-w-3xl font-display text-2xl leading-snug text-foreground">
+                {city.neighborhoods.map((n, i) => (
+                  <span key={n}>
                     {n}
+                    {i < city.neighborhoods.length - 1 && <span aria-hidden="true" className="mx-3 text-accent-ink">/</span>}
                   </span>
                 ))}
-              </div>
-            </div>
+              </p>
 
-            {/* Market data cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 bg-card rounded-lg border border-border/60">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Ticket Médio</p>
-                <p className="font-display text-lg font-medium text-foreground">{city.avgTicket}</p>
-              </div>
-              <div className="p-4 bg-card rounded-lg border border-border/60">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Conselho Regional</p>
-                <p className="font-display text-lg font-medium text-foreground">{city.croCode}</p>
-              </div>
-              <div className="p-4 bg-card rounded-lg border border-border/60">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Maturidade Digital</p>
-                <p className="text-sm text-foreground leading-snug">{city.digitalMaturity}</p>
-              </div>
-            </div>
-          </div>
+              <dl className="mt-12 grid border-t border-foreground/80 sm:grid-cols-3">
+                {[
+                  { label: "Ticket Médio", value: city.avgTicket, display: true },
+                  { label: "Conselho Regional", value: city.croCode, display: true },
+                  { label: "Maturidade Digital", value: city.digitalMaturity, display: false },
+                ].map((item, i) => (
+                  <div key={item.label} className={`border-b border-foreground/15 py-5 sm:border-b-0 ${i > 0 ? "sm:border-l sm:pl-6" : ""} ${i < 2 ? "sm:pr-6" : ""}`}>
+                    <dt className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{item.label}</dt>
+                    <dd className={item.display ? "mt-2 font-display text-2xl text-foreground lining-nums" : "mt-2 text-sm leading-snug text-foreground"}>
+                      {item.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </SpecGrid>
+          </Container>
         </section>
 
         {/* Top Searches */}
-        <section className="py-16">
-          <div className="max-w-content mx-auto px-4 sm:px-6 text-center">
-            <h2 className="font-display text-display-sm text-foreground mb-3">
-              O Que Pacientes em {city.name} Buscam no Google
-            </h2>
-            <p className="text-sm text-muted-foreground mb-8 max-w-xl mx-auto">
-              Estas são as buscas reais que captamos para consultórios odontológicos em {city.name}:
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {city.topSearches.map((search) => (
-                <span
-                  key={search}
-                  className="px-4 py-2 bg-card rounded-full border border-border/60 text-sm text-foreground"
-                >
-                  &ldquo;{search}&rdquo;
-                </span>
-              ))}
-            </div>
-          </div>
+        <section className="py-section">
+          <Container>
+            <SpecGrid label={<SectionLabel>Buscas</SectionLabel>}>
+              <h2 className="font-display text-display-lg text-foreground">O Que Pacientes em {city.name} Buscam no Google</h2>
+              <p className="mt-4 max-w-xl text-base text-muted-foreground">
+                Estas são as buscas reais que captamos para consultórios odontológicos em {city.name}:
+              </p>
+              <ul className="mt-10 grid border-t border-foreground/80 sm:grid-cols-2 sm:gap-x-10">
+                {city.topSearches.map((search) => (
+                  <li key={search} className="border-b border-foreground/15 py-4 font-display text-xl italic text-foreground">
+                    &ldquo;{search}&rdquo;
+                  </li>
+                ))}
+              </ul>
+            </SpecGrid>
+          </Container>
         </section>
 
         {/* Top Specialties for this city */}
-        <section className="py-20 md:py-28 bg-muted">
-          <div className="max-w-content mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
-              <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
-                Mais buscadas em {city.name}
-              </p>
-              <h2 className="font-display text-display-md text-foreground text-balance">
-                Especialidades em Alta em {city.name}
-              </h2>
-              <p className="text-sm text-muted-foreground mt-3 max-w-xl mx-auto">
+        <section className="border-t border-border bg-muted py-section">
+          <Container>
+            <div className="max-w-3xl">
+              <SectionLabel>Mais buscadas em {city.name}</SectionLabel>
+              <h2 className="mt-6 font-display text-display-lg text-foreground text-balance">Especialidades em Alta em {city.name}</h2>
+              <p className="mt-4 text-base text-muted-foreground">
                 Estas são as especialidades com maior volume de buscas na região de {city.name}. Aceitamos apenas 1 consultório por especialidade.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <ol className="mt-14 border-t border-foreground/80">
               {city.topSpecialties.map((specName, i) => (
-                <div
-                  key={specName}
-                  className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 flex flex-col"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-medium text-accent/60 uppercase tracking-wider">
-                      #{i + 1} mais buscada
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 text-[10px] font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                      Verificar
-                    </span>
-                  </div>
-                  <h3 className="font-display text-xl font-medium text-foreground group-hover:text-accent transition-colors mb-3">
+                <li key={specName} className="grid gap-4 border-b border-foreground/15 py-8 lg:grid-cols-12 lg:gap-8">
+                  <p className="text-xs font-medium uppercase tracking-wider text-accent-ink lg:col-span-3 lg:pt-2">
+                    #{i + 1} mais buscada
+                  </p>
+                  <h3 className="font-display text-3xl font-medium text-foreground lg:col-span-4">
                     {specName} em {city.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-                    {specName === "Implantodontia" && `Pacientes em ${city.name} pesquisam por semanas antes de decidir sobre implantes. Posicionamos seu consultório como referência em implantes na região de ${city.neighborhoods[0]} e arredores.`}
-                    {specName === "Ortodontia" && `Alinhadores invisíveis e aparelhos estéticos lideram as buscas em ${city.name}. Diferenciamos seu consultório pela expertise, atraindo pacientes que valorizam resultado acima de preço.`}
-                    {specName === "Estética Dental" && `Lentes de contato dental, clareamento e facetas são os procedimentos mais buscados em ${city.name}. Atraímos pacientes de ${city.neighborhoods.slice(0, 2).join(" e ")} que investem em qualidade.`}
-                    {specName === "Endodontia" && `Buscas de urgência por tratamento de canal em ${city.name} exigem presença digital imediata. Quando alguém busca às 22h, seu consultório precisa aparecer.`}
-                    {specName === "Periodontia" && `Conteúdo educativo sobre saúde gengival transforma buscas informacionais em ${city.name} em consultas agendadas. Posicionamos você como autoridade regional.`}
-                    {specName === "Odontopediatria" && `Pais em ${city.name} são extremamente criteriosos ao escolher dentista para os filhos. Construímos autoridade com conteúdo que responde às preocupações dos responsáveis.`}
-                  </p>
-                  <TrackedCTAButton
-                    href="/contato"
-                    label={`Verificar disponibilidade em ${city.name}`}
-                    cityName={city.name}
-                    className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-dark transition-colors"
-                  />
-                </div>
+                  <div className="lg:col-span-5">
+                    <p className="text-base leading-relaxed text-muted-foreground">
+                      {specName === "Implantodontia" && `Pacientes em ${city.name} pesquisam por semanas antes de decidir sobre implantes. Posicionamos seu consultório como referência em implantes na região de ${city.neighborhoods[0]} e arredores.`}
+                      {specName === "Ortodontia" && `Alinhadores invisíveis e aparelhos estéticos lideram as buscas em ${city.name}. Diferenciamos seu consultório pela expertise, atraindo pacientes que valorizam resultado acima de preço.`}
+                      {specName === "Estética Dental" && `Lentes de contato dental, clareamento e facetas são os procedimentos mais buscados em ${city.name}. Atraímos pacientes de ${city.neighborhoods.slice(0, 2).join(" e ")} que investem em qualidade.`}
+                      {specName === "Endodontia" && `Buscas de urgência por tratamento de canal em ${city.name} exigem presença digital imediata. Quando alguém busca às 22h, seu consultório precisa aparecer.`}
+                      {specName === "Periodontia" && `Conteúdo educativo sobre saúde gengival transforma buscas informacionais em ${city.name} em consultas agendadas. Posicionamos você como autoridade regional.`}
+                      {specName === "Odontopediatria" && `Pais em ${city.name} são extremamente criteriosos ao escolher dentista para os filhos. Construímos autoridade com conteúdo que responde às preocupações dos responsáveis.`}
+                    </p>
+                    <TrackedCTAButton
+                      href="/contato"
+                      label={`Verificar disponibilidade em ${city.name}`}
+                      cityName={city.name}
+                      className="mt-4 inline-flex min-h-11 items-center gap-1 border-b border-foreground/30 text-sm font-medium text-foreground hover:border-foreground"
+                    />
+                  </div>
+                </li>
               ))}
-            </div>
-          </div>
+            </ol>
+          </Container>
         </section>
 
         {/* How It Works — localized */}
-        <section className="py-20 md:py-28">
-          <div className="max-w-narrow mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
-              <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
-                Como funciona em {city.name}
-              </p>
-              <h2 className="font-display text-display-md text-foreground text-balance">
-                Da Análise à Agenda Cheia em 3 Passos
-              </h2>
+        <section className="py-section">
+          <Container>
+            <div className="max-w-3xl">
+              <SectionLabel>Como funciona em {city.name}</SectionLabel>
+              <h2 className="mt-6 font-display text-display-lg text-foreground text-balance">Da Análise à Agenda Cheia em 3 Passos</h2>
             </div>
-            <div className="space-y-8">
+            <ol className="mt-14 grid md:grid-cols-3 md:gap-10">
               {[
                 {
                   number: "01",
@@ -331,111 +280,98 @@ export default function CityPage({ params }: { params: { slug: string } }) {
                   title: "Pacientes + Otimização Contínua",
                   desc: `Em semanas, os primeiros pacientes de ${city.name} começam a aparecer. Otimizamos com dados do ${city.croCode} e métricas da região para aumentar volume e qualidade dos agendamentos.`,
                 },
-              ].map((step, i) => (
-                <div key={i} className="flex items-start gap-6 p-6 bg-card rounded-xl border border-border/60">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center">
-                    <span className="font-display text-sm font-semibold text-accent">{step.number}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg font-medium text-foreground mb-2">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
-                  </div>
-                </div>
+              ].map((step) => (
+                <li key={step.number} className="border-t-2 border-accent pb-10 pt-6 md:pb-0">
+                  <span aria-hidden="true" className="font-display text-5xl font-light leading-none text-foreground lining-nums">{step.number}</span>
+                  <h3 className="mt-6 font-display text-2xl font-medium text-foreground">{step.title}</h3>
+                  <p className="mt-3 text-base leading-relaxed text-muted-foreground">{step.desc}</p>
+                </li>
               ))}
-            </div>
-          </div>
+            </ol>
+          </Container>
         </section>
 
         {/* FAQ */}
-        <section className="py-20 md:py-28 bg-muted">
-          <div className="max-w-narrow mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
-              <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
-                Dúvidas frequentes
-              </p>
-              <h2 className="font-display text-display-md text-foreground text-balance">
+        <section className="border-t border-border bg-muted py-section">
+          <Container className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+            <div className="lg:col-span-4">
+              <SectionLabel>Dúvidas frequentes</SectionLabel>
+              <h2 className="mt-6 font-display text-display-md text-foreground text-balance">
                 Perguntas Sobre Marketing para Dentistas em {city.name}
               </h2>
             </div>
-            <div className="space-y-4">
+            <div className="border-t border-foreground/80 lg:col-span-8">
               {cityFaqs.map((faq, i) => (
-                <details
-                  key={i}
-                  className="group bg-card rounded-xl border border-border/60 overflow-hidden"
-                >
-                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                    <h3 className="font-display text-base font-medium text-foreground pr-4">{faq.question}</h3>
+                <details key={i} className="group border-b border-foreground/15">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6">
+                    <h3 className="font-display text-xl font-medium text-foreground md:text-2xl">{faq.question}</h3>
                     <svg
-                      className="w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform group-open:rotate-45"
+                      aria-hidden="true"
+                      className="mt-1.5 h-5 w-5 flex-shrink-0 text-accent-ink transition-transform group-open:rotate-45"
                       fill="none"
                       viewBox="0 0 24 24"
-                      strokeWidth={2}
+                      strokeWidth={1.5}
                       stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                   </summary>
-                  <div className="px-6 pb-6">
-                    <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
-                  </div>
+                  <p className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">{faq.answer}</p>
                 </details>
               ))}
             </div>
-          </div>
+          </Container>
         </section>
 
         {/* Nearby city cross-link */}
         {nearbyCity && (
-          <section className="py-12 border-t border-border">
-            <div className="max-w-narrow mx-auto px-4 sm:px-6">
-              <div className="flex items-center justify-between p-6 bg-card rounded-xl border border-border/60">
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Também atendemos</p>
-                  <p className="font-display text-lg font-medium text-foreground">
-                    Dentistas em {nearbyCity.name}, {nearbyCity.stateAbbr}
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {nearbyCity.estimatedDentists} dentistas · Competição {nearbyCity.competitionLevel}
-                  </p>
-                </div>
-                <TrackedNearbyCityLink
-                  href={`/cidades/${nearbyCity.slug}`}
-                  label={`Ver ${nearbyCity.name}`}
-                  fromCity={city.name}
-                  toCity={nearbyCity.name}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent/10 hover:bg-accent/20 text-accent text-sm font-medium rounded-md transition-colors"
-                >
-                  Ver {nearbyCity.name}
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                  </svg>
-                </TrackedNearbyCityLink>
+          <section className="border-t border-border py-12">
+            <Container className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Também atendemos</p>
+                <p className="mt-2 font-display text-3xl text-foreground">
+                  Dentistas em {nearbyCity.name}, {nearbyCity.stateAbbr}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {nearbyCity.estimatedDentists} dentistas · Competição {nearbyCity.competitionLevel}
+                </p>
               </div>
-            </div>
+              <TrackedNearbyCityLink
+                href={`/cidades/${nearbyCity.slug}`}
+                label={`Ver ${nearbyCity.name}`}
+                fromCity={city.name}
+                toCity={nearbyCity.name}
+                className={buttonClass("secondary", "light")}
+              >
+                Ver {nearbyCity.name}
+                {arrow}
+              </TrackedNearbyCityLink>
+            </Container>
           </section>
         )}
 
         {/* CTA */}
-        <section className="py-20 md:py-28 bg-muted text-center">
-          <div className="max-w-narrow mx-auto px-4 sm:px-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/20 bg-accent/5 text-accent text-xs font-medium mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              Vagas limitadas em {city.name}
+        <section className="bg-hero-bg py-section">
+          <Container className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-8">
+            <div className="lg:col-span-7">
+              <SectionLabel tone="dark">Vagas limitadas em {city.name}</SectionLabel>
+              <h2 className="mt-6 font-display text-display-lg text-white text-balance">
+                Pronto Para Encher Sua Agenda em {city.name}?
+              </h2>
+              <p className="mt-6 max-w-xl text-lg text-white/70">
+                O diagnóstico é gratuito, sem compromisso, e mostra exatamente onde estão os pacientes
+                em {city.name} que você não está alcançando.
+              </p>
             </div>
-            <h2 className="font-display text-display-md text-foreground mb-4 text-balance">
-              Pronto Para Encher Sua Agenda em {city.name}?
-            </h2>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              O diagnóstico é gratuito, sem compromisso, e mostra exatamente onde estão os pacientes
-              em {city.name} que você não está alcançando.
-            </p>
-            <TrackedCTAButton
-              href="/contato"
-              label={`Agendar Diagnóstico Gratuito em ${city.name}`}
-              cityName={city.name}
-              className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
-            />
-          </div>
+            <div className="lg:col-span-5 lg:justify-self-end">
+              <TrackedCTAButton
+                href="/contato"
+                label={`Agendar Diagnóstico Gratuito em ${city.name}`}
+                cityName={city.name}
+                className={buttonClass("primary", "dark", "w-full sm:w-auto")}
+              />
+            </div>
+          </Container>
         </section>
       </main>
       <Footer />

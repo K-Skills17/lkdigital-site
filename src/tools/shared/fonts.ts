@@ -1,6 +1,5 @@
 // Self-hosted fonts for the free tools, exposed as --tool-font-* on each tool
-// wrapper. (The site's globals.css pins --font-display/--font-body to literal
-// family names on :root, which bypasses next/font, so the tools don't rely on it.)
+// wrapper so tool CSS (scoped by postcss-tool-scope) has its own variables.
 import { Cormorant_Garamond, Inter } from "next/font/google";
 
 const display = Cormorant_Garamond({

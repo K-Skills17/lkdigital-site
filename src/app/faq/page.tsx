@@ -5,6 +5,7 @@ import PageHero from "@/components/ui/PageHero";
 import FAQ from "@/components/sections/FAQ";
 import Link from "next/link";
 import { BreadcrumbSchema, FAQSchema } from "@/components/StructuredData";
+import { buttonClass } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
   title: { absolute: "Perguntas Frequentes | LK Digital" },
@@ -37,7 +38,7 @@ export default function FAQPage() {
         { question: "Vocês respeitam as regras do CFO para publicidade odontológica?", answer: "Toda a nossa estratégia é desenvolvida em conformidade com as resoluções do Conselho Federal de Odontologia." },
       ]} />
       <Navbar />
-      <main>
+      <main id="main-content">
         <PageHero
           variant="minimal"
           eyebrow="FAQ"
@@ -62,7 +63,7 @@ export default function FAQPage() {
             </p>
             <Link
               href="/contato"
-              className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
+              className={buttonClass()}
             >
               Falar Com a Equipe
             </Link>

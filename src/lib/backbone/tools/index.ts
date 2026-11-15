@@ -6,13 +6,14 @@ import { calculadoraCac } from "./calculadora-cac";
 import { calculadoraPrecificacao } from "./calculadora-precificacao";
 import { checklistGoogle } from "./checklist-google";
 import { dashboardClinica } from "./dashboard-clinica";
+import { diagnosticoGratuito } from "./diagnostico-gratuito";
 import { raioX } from "./raio-x";
 import { scriptsWhatsapp } from "./scripts-whatsapp";
 import { simuladorConvenios } from "./simulador-convenios";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TOOL_ADAPTERS: Record<string, ToolAdapter<any>> = Object.fromEntries(
-  [raioX, checklistGoogle, calculadoraCac, dashboardClinica, scriptsWhatsapp, auditoriaSite, simuladorConvenios, calculadoraPrecificacao, calculadoraAgenda].map(
+  [raioX, checklistGoogle, calculadoraCac, dashboardClinica, scriptsWhatsapp, auditoriaSite, simuladorConvenios, calculadoraPrecificacao, calculadoraAgenda, diagnosticoGratuito].map(
     (a) => [a.id, a]
   )
 );

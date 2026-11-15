@@ -47,6 +47,9 @@ const RAIOX_ANSWERS = { especialidade: "Implantes/Prótese", particular: "50–8
   q1: 1, q2: 0, q3: 1, q4: 0, q5: 1, q6: 0, q7: 2, q8: 2, q9: 1, q10: 0, q11: 0, q12: 1 };
 
 const PAYLOADS: Record<string, unknown> = {
+  "diagnostico-gratuito": {
+    name: "Dra. Carla", clinic: "Clínica Sorriso", email: "carla@clinica.com.br", challenge: "agenda", consent: true,
+  },
   "raio-x": { ...LEAD_MAGNET, data: { total: 99, answers: RAIOX_ANSWERS, answer_labels: { q1: "Aparece, mas abaixo dos 3 primeiros" } } },
   "calculadora-agenda": {
     name: "Ana", phone: "(11) 94685-1028", clinicName: "Sorriso", email: "a@x.com", city: "SP", score: 23,
@@ -301,5 +304,28 @@ describe("dashboard aggregate", () => {
     expect(d.daily).toHaveLength(30);
     expect(d.daily.reduce((s, x) => s + x.count, 0)).toBe(5);
     expect(d.ai.costUsd).toBeCloseTo(1.5);
+  });
+});
+
+describe("diagnostico-gratuito adapter", () => {
+  const adapter = TOOL_ADAPTERS["diagnostico-gratuito"];
+  const ok = PAYLOADS["diagnostico-gratuito"] as Record<string, unknown>;
+
+  it("does not require a phone and skips the AI plan", () => {
+    const r = adapter.parse(ok);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(adapter.requiresPhone).toBe(false);
+    expect(adapter.prompt(r.lead, r.data)).toBeNull();
+    expect(r.lead.headline).toContain("Agenda com muitos horários vazios");
+  });
+
+  it.each([
+    ["missing consent", { ...ok, consent: false }],
+    ["invalid e-mail", { ...ok, email: "carla@" }],
+    ["unknown challenge", { ...ok, challenge: "outro" }],
+    ["honeypot filled", { ...ok, website: "http://spam.example" }],
+  ])("rejects %s", (_label, body) => {
+    expect(adapter.parse(body).ok).toBe(false);
   });
 });

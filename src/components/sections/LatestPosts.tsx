@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllListItems } from "@/lib/blog";
+import { Container, SectionLabel, arrow } from "@/components/ui/primitives";
 
 export default async function LatestPosts() {
   const posts = (await getAllListItems()).slice(0, 3);
@@ -7,110 +8,52 @@ export default async function LatestPosts() {
   if (posts.length === 0) return null;
 
   return (
-    <section className="py-20 md:py-28 bg-muted">
-      <div className="max-w-content mx-auto px-4 sm:px-6">
-        <div className="flex items-end justify-between mb-12">
+    <section className="border-t border-border bg-muted py-section">
+      <Container>
+        <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-3">
-              Blog
-            </p>
-            <h2 className="font-display text-display-md text-foreground">
-              Artigos Recentes
-            </h2>
+            <SectionLabel>Blog</SectionLabel>
+            <h2 className="mt-6 font-display text-display-lg text-foreground">Artigos Recentes</h2>
           </div>
           <Link
             href="/blog"
-            className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-accent hover:gap-2 transition-all"
+            className="hidden min-h-11 items-center gap-2 border-b border-foreground/30 text-sm font-medium text-foreground transition-colors hover:border-foreground sm:inline-flex"
           >
             Ver todos
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              />
-            </svg>
+            {arrow}
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <ul className="mt-14 grid md:grid-cols-3 md:gap-10">
           {posts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 overflow-hidden flex flex-col"
-            >
-              <div className="aspect-[16/9] bg-gradient-to-br from-accent/5 to-accent/10 flex items-center justify-center">
-                <span className="text-xs text-accent/40 uppercase tracking-[0.25em] font-medium">
-                  {post.category}
-                </span>
-              </div>
-              <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="px-2 py-0.5 text-[10px] font-medium text-accent bg-accent/10 rounded">
-                    {post.category}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {post.readTime} de leitura
-                  </span>
-                </div>
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-3 line-clamp-2">
+            <li key={post.slug} className="border-t border-foreground/80">
+              <Link href={`/blog/${post.slug}`} className="group flex h-full flex-col py-6">
+                <p className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <span className="font-medium uppercase tracking-[0.15em] text-accent-ink">{post.category}</span>
+                  <span aria-hidden="true">·</span>
+                  {post.readTime} de leitura
+                </p>
+                <h3 className="mt-4 font-display text-2xl font-medium leading-snug text-foreground line-clamp-3 group-hover:text-accent-ink">
                   {post.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1 line-clamp-3">
-                  {post.excerpt}
-                </p>
-                <div className="mt-4 pt-4 border-t border-border/60">
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-accent group-hover:gap-2 transition-all">
-                    Ler artigo
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-            </Link>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">{post.excerpt}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-foreground">
+                  Ler artigo
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">{arrow}</span>
+                </span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        <div className="mt-8 text-center sm:hidden">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1 text-sm font-medium text-accent"
-          >
-            Ver todos os artigos
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </Link>
-        </div>
-      </div>
+        <Link
+          href="/blog"
+          className="mt-4 inline-flex min-h-11 items-center gap-2 border-b border-foreground/30 text-sm font-medium text-foreground sm:hidden"
+        >
+          Ver todos os artigos
+          {arrow}
+        </Link>
+      </Container>
     </section>
   );
 }

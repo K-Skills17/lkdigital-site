@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
+import { buttonClass } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
   title: { absolute: "Ferramentas Gratuitas | LK Digital" },
@@ -166,7 +167,7 @@ const categoryColors: Record<string, string> = {
   Financeiro: "bg-amber-500/10 text-amber-400 border-amber-500/20",
   "Gestão": "bg-purple-500/10 text-purple-400 border-purple-500/20",
   Produtividade: "bg-rose-500/10 text-rose-400 border-rose-500/20",
-  "Diagnóstico": "bg-accent/10 text-accent border-accent/20",
+  "Diagnóstico": "bg-accent/10 text-accent-ink border-accent/20",
   Atendimento: "bg-teal-500/10 text-teal-400 border-teal-500/20",
 };
 
@@ -229,7 +230,7 @@ export default function FerramentasPage() {
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div className="flex items-center gap-3 mb-4">
               <span className="w-8 h-px bg-accent" />
-              <p className="text-[11px] sm:text-xs font-medium text-accent uppercase tracking-[0.25em]">
+              <p className="text-[11px] sm:text-xs font-medium text-accent-ink uppercase tracking-[0.25em]">
                 Todas as Ferramentas
               </p>
             </div>
@@ -245,24 +246,24 @@ export default function FerramentasPage() {
               {tools.map((tool) => (
                 <article
                   key={tool.href}
-                  className="group relative flex flex-col p-6 md:p-8 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/5"
+                  className="group relative flex flex-col p-6 md:p-8 bg-card border border-border/60 hover:border-accent/30 transition-all duration-300 hover:-translate-y-1"
                 >
                   {/* Category Badge */}
                   <div className="flex items-center justify-between mb-5">
                     <span
-                      className={`inline-flex items-center px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] rounded-full border ${
+                      className={`inline-flex items-center px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] border ${
                         categoryColors[tool.category] || "bg-accent/10 text-accent border-accent/20"
                       }`}
                     >
                       {tool.category}
                     </span>
-                    <span className="text-muted-foreground/40 group-hover:text-accent transition-colors duration-300">
+                    <span className="text-muted-foreground/40 group-hover:text-accent-ink transition-colors duration-300">
                       {tool.icon}
                     </span>
                   </div>
 
                   {/* Tool Name */}
-                  <h3 className="font-display text-lg md:text-xl font-medium text-foreground mb-3 group-hover:text-accent transition-colors duration-300">
+                  <h3 className="font-display text-lg md:text-xl font-medium text-foreground mb-3 group-hover:text-accent-ink transition-colors duration-300">
                     {tool.name}
                   </h3>
 
@@ -272,8 +273,8 @@ export default function FerramentasPage() {
                   </p>
 
                   {/* Benefit Highlight */}
-                  <div className="mb-6 p-3 rounded-lg bg-accent/5 border border-accent/10">
-                    <p className="text-sm text-accent leading-relaxed flex items-start gap-2">
+                  <div className="mb-6 p-3 bg-accent/5 border border-accent/10">
+                    <p className="text-sm text-accent-ink leading-relaxed flex items-start gap-2">
                       <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                       </svg>
@@ -284,7 +285,7 @@ export default function FerramentasPage() {
                   {/* CTA Button */}
                   <Link
                     href={tool.href}
-                    className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-md transition-all duration-200 hover:shadow-lg hover:shadow-accent/20"
+                    className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 bg-accent hover:bg-accent-dark text-[#1a1a1a] text-sm font-medium transition-all duration-200"
                   >
                     Usar Ferramenta Gratis
                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -330,12 +331,12 @@ export default function FerramentasPage() {
               Aprenda a Usar Seus Dados
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Link href="/blog" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Blog</h3>
+              <Link href="/blog" className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-2">Blog</h3>
                 <p className="text-sm text-muted-foreground">Artigos práticos que complementam as ferramentas com estratégias aplicáveis.</p>
               </Link>
-              <Link href="/solucoes" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Soluções</h3>
+              <Link href="/solucoes" className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-2">Soluções</h3>
                 <p className="text-sm text-muted-foreground">Conheça os serviços profissionais que transformam diagnósticos em resultados.</p>
               </Link>
             </div>
@@ -356,15 +357,9 @@ export default function FerramentasPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contato"
-                className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
+                className={buttonClass()}
               >
                 Agendar Diagnóstico Gratuito
-              </Link>
-              <Link
-                href="/casos"
-                className="inline-flex px-8 py-4 border border-border text-foreground font-medium rounded-md transition-all duration-200 hover:border-accent/40 hover:-translate-y-[1px]"
-              >
-                Ver Casos de Sucesso
               </Link>
             </div>
           </div>

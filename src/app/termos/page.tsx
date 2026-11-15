@@ -189,9 +189,8 @@ export default function Termos() {
                   Todo o conteúdo publicitário produzido pela LK Digital para
                   dentistas e clínicas odontológicas segue as resoluções do
                   Conselho Federal de Odontologia (CFO) aplicáveis à publicidade
-                  odontológica. Casos de sucesso e depoimentos apresentados no
-                  site são baseados em resultados reais, mas resultados individuais
-                  podem variar conforme a região, especialidade e outros fatores.
+                  odontológica. Resultados de marketing variam conforme a região,
+                  especialidade e outros fatores.
                 </p>
               </div>
 

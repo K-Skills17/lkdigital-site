@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/ui/PageHero";
 import Link from "next/link";
 import { ServiceSchema, BreadcrumbSchema } from "@/components/StructuredData";
+import { buttonClass } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
   title: { absolute: "Marketing para Implantodontia, Ortodontia e Estética Dental | LK Digital" },
@@ -131,7 +132,7 @@ export default function Segmentos() {
                 }`}
               >
                 <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                  <p className="text-xs font-medium text-accent uppercase tracking-[0.25em] mb-2">
+                  <p className="text-xs font-medium text-accent-ink uppercase tracking-[0.25em] mb-2">
                     {spec.name}
                   </p>
                   <h2 className="font-display text-display-sm text-foreground mb-3">
@@ -148,7 +149,7 @@ export default function Segmentos() {
                       {spec.keywords.map((kw) => (
                         <span
                           key={kw}
-                          className="px-3 py-1 text-xs bg-accent/10 text-accent rounded-full"
+                          className="px-3 py-1 text-xs bg-accent/10 text-accent-ink"
                         >
                           {kw}
                         </span>
@@ -157,7 +158,7 @@ export default function Segmentos() {
                   </div>
                   <Link
                     href="/contato"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-dark transition-colors"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-accent-ink hover:text-foreground transition-colors"
                   >
                     Verificar disponibilidade na sua região
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -166,7 +167,7 @@ export default function Segmentos() {
                   </Link>
                 </div>
                 <div
-                  className={`aspect-[4/3] rounded-xl bg-gradient-to-br from-accent/5 to-accent/10 border border-border/60 flex items-center justify-center ${
+                  className={`aspect-[4/3] border border-border/60 flex items-center justify-center bg-muted ${
                     i % 2 === 1 ? "lg:order-1" : ""
                   }`}
                 >
@@ -183,13 +184,9 @@ export default function Segmentos() {
         <section className="py-16 md:py-20">
           <div className="max-w-content mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Link href="/cidades" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Atuação por Cidade</h3>
+              <Link href="/cidades" className="group p-6 bg-card border border-border/60 hover:border-accent/30 transition-all">
+                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent-ink transition-colors mb-2">Atuação por Cidade</h3>
                 <p className="text-sm text-muted-foreground">Veja como operamos nas principais cidades do Brasil com exclusividade territorial.</p>
-              </Link>
-              <Link href="/casos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Casos de Sucesso</h3>
-                <p className="text-sm text-muted-foreground">Resultados reais de dentistas que usam o sistema LK Digital.</p>
               </Link>
             </div>
           </div>
@@ -198,8 +195,7 @@ export default function Segmentos() {
         {/* Exclusivity CTA */}
         <section className="py-20 md:py-28 bg-muted text-center">
           <div className="max-w-narrow mx-auto px-4 sm:px-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/20 bg-accent/5 text-accent text-xs font-medium mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-accent/20 bg-accent/5 text-accent-ink text-xs font-medium mb-6">
               Vagas limitadas por região
             </div>
             <h2 className="font-display text-display-md text-foreground mb-4 text-balance">
@@ -211,7 +207,7 @@ export default function Segmentos() {
             </p>
             <Link
               href="/contato"
-              className="inline-flex px-8 py-4 bg-accent hover:bg-accent-dark text-white font-medium rounded-md transition-all duration-200 hover:-translate-y-[1px] hover:shadow-xl hover:shadow-accent/25"
+              className={buttonClass()}
             >
               Verificar Disponibilidade
             </Link>

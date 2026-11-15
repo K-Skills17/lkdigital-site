@@ -35,7 +35,7 @@ export default function Contato() {
         "description": "Solicite seu diagnóstico digital gratuito para dentistas."
       }) }} />
       <Navbar />
-      <main>
+      <main id="main-content">
         <PageHero
           variant="dramatic"
           eyebrow="Próximo passo"

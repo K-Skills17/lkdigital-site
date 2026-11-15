@@ -7,7 +7,6 @@ const footerSections = [
     links: [
       { label: "Sobre", href: "/sobre" },
       { label: "Soluções", href: "/solucoes" },
-      { label: "Casos de Sucesso", href: "/casos" },
       { label: "Cidades", href: "/cidades" },
       { label: "Blog", href: "/blog" },
     ],
