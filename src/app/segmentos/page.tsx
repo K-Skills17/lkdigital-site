@@ -187,10 +187,6 @@ export default function Segmentos() {
                 <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Atuação por Cidade</h3>
                 <p className="text-sm text-muted-foreground">Veja como operamos nas principais cidades do Brasil com exclusividade territorial.</p>
               </Link>
-              <Link href="/casos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Casos de Sucesso</h3>
-                <p className="text-sm text-muted-foreground">Resultados reais de dentistas que usam o sistema LK Digital.</p>
-              </Link>
             </div>
           </div>
         </section>

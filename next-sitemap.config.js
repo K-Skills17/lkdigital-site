@@ -6,7 +6,6 @@ const staticPages = [
   { loc: "/sobre", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/solucoes", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/segmentos", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
-  { loc: "/casos", changefreq: "monthly", priority: 0.7, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/contato", changefreq: "monthly", priority: 0.8, lastmod: "2026-06-05T12:00:00-03:00" },
   { loc: "/ferramentas", changefreq: "monthly", priority: 0.9, lastmod: "2026-10-06T12:00:00-03:00" },
   // Lead magnets of the series "O Sistema Operacional da Clínica Odontológica" + free tools

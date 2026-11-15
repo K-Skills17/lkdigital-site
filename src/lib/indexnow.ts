@@ -44,7 +44,6 @@ export async function getAllSiteUrls(): Promise<string[]> {
     "/sobre",
     "/solucoes",
     "/segmentos",
-    "/casos",
     "/contato",
     "/ferramentas",
     "/blog",

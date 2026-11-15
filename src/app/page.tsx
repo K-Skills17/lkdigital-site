@@ -6,7 +6,6 @@ export const revalidate = 300;
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
-import SocialProof from "@/components/sections/SocialProof";
 import Problem from "@/components/sections/Problem";
 import Pillars from "@/components/sections/Pillars";
 import HowItWorks from "@/components/sections/HowItWorks";
@@ -59,7 +58,6 @@ export default function Home() {
       <ScrollAnimations />
       <main id="main-content">
         <Hero />
-        <SocialProof />
         <Problem />
         <Pillars />
         <HowItWorks />

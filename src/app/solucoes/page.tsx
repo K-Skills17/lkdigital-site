@@ -143,14 +143,10 @@ export default function Solucoes() {
             <h2 className="font-display text-display-sm text-foreground mb-8">
               Explore Mais
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Link href="/segmentos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
                 <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Especialidades</h3>
                 <p className="text-sm text-muted-foreground">Estratégias sob medida para implantodontia, ortodontia, estética e mais.</p>
-              </Link>
-              <Link href="/casos" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
-                <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Casos de Sucesso</h3>
-                <p className="text-sm text-muted-foreground">Veja os resultados reais que entregamos para dentistas como você.</p>
               </Link>
               <Link href="/blog" className="group p-6 bg-card rounded-xl border border-border/60 hover:border-accent/30 transition-all">
                 <h3 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors mb-2">Blog</h3>

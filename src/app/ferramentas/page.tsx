@@ -360,12 +360,6 @@ export default function FerramentasPage() {
               >
                 Agendar Diagnóstico Gratuito
               </Link>
-              <Link
-                href="/casos"
-                className="inline-flex px-8 py-4 border border-border text-foreground font-medium rounded-md transition-all duration-200 hover:border-accent/40 hover:-translate-y-[1px]"
-              >
-                Ver Casos de Sucesso
-              </Link>
             </div>
           </div>
         </section>

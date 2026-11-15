@@ -10,7 +10,6 @@ const defaultNavLinks = [
   { href: "/solucoes", label: "Soluções" },
   { href: "/segmentos", label: "Segmentos" },
   { href: "/cidades", label: "Cidades" },
-  { href: "/casos", label: "Casos" },
   { href: "/blog", label: "Blog" },
   { href: "/ferramentas", label: "Ferramentas" },
   { href: "/faq", label: "FAQ" },

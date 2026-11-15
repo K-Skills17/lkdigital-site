@@ -29,6 +29,9 @@ const nextConfig = {
       { source: "/raio-x/privacidade", destination: "/privacidade", permanent: true },
       { source: "/ferramentas/diagnostico-google", destination: "/ferramentas/checklist-google", permanent: true },
       { source: "/ferramentas/diagnostico-clinica", destination: "/raio-x", permanent: true },
+      // Case studies page removed (2026-11): its clients and results were not real.
+      // Temporary so the URL can return when there are real, consented cases.
+      { source: "/casos", destination: "/solucoes", permanent: false },
       // Legacy /insights → /blog redirects
       {
         source: "/insights",

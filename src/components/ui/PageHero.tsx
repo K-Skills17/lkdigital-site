@@ -153,18 +153,6 @@ export default function PageHero({
                 <span className="absolute inset-0 bg-accent-dark translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </a>
               <a
-                href="/casos"
-                className="group relative overflow-hidden px-6 py-4 border border-border bg-card text-foreground font-medium rounded-md transition-all duration-300 hover:border-accent/40 hover:-translate-y-[2px]"
-              >
-                <span className="relative z-10 flex items-center justify-between gap-3">
-                  Ver Resultados
-                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                  </svg>
-                </span>
-                <span className="absolute inset-0 bg-accent/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              </a>
-              <a
                 href="/segmentos"
                 className="group relative overflow-hidden px-6 py-4 border border-border bg-card text-foreground font-medium rounded-md transition-all duration-300 hover:border-accent/40 hover:-translate-y-[2px]"
               >
@@ -189,12 +177,6 @@ export default function PageHero({
               className="flex-1 px-5 py-3 bg-accent text-white text-sm font-medium rounded-md text-center"
             >
               Diagnóstico Gratuito
-            </a>
-            <a
-              href="/casos"
-              className="flex-1 px-5 py-3 border border-border text-foreground text-sm font-medium rounded-md text-center"
-            >
-              Ver Resultados
             </a>
           </div>
 
