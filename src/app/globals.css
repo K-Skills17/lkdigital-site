@@ -45,9 +45,10 @@
   --muted-foreground: #6b6b6b;
   --border: #e5e5e5;
 
-  /* Font families (set by next/font) */
-  --font-display: "Cormorant Garamond", serif;
-  --font-body: "Inter", sans-serif;
+  /* Font families: --font-display and --font-body are set by next/font on
+     <html> (src/app/layout.tsx). Do not redeclare them here: a literal family
+     name on :root overrides next/font's self-hosted faces, and the browser
+     falls back to system fonts. */
 }
 
 /* ── Base ── */
